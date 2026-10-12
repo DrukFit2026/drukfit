@@ -346,9 +346,36 @@ details.rw[open] > summary::after{ content:'−'; }
   body.printing details.rw{ display:block; } body.printing details.rw > *{ display:block; }
 }
 
+
+/* ---- Accounts ---- */
+a.btn, button.btn{ color:var(--ink); text-decoration:none; }
+a.btn.primary, button.btn.primary{ color:var(--accent-ink); }
+label.row{ flex-wrap:nowrap; }
+.authwrap{ max-width:460px; margin:0 auto; padding-block:6vh 40px; }
+.authcard{ background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:22px 18px; box-shadow:var(--shadow); }
+@media (min-width:600px){ .authcard{ padding:30px 28px; } }
+.authhead{ display:flex; align-items:center; gap:14px; }
+.authhead h1{ font-size:1.8rem; }
+.pw{ position:relative; display:block; }
+.pw .in{ padding-right:68px; }
+.pw-t{ position:absolute; right:6px; top:50%; transform:translateY(-50%); min-height:34px; padding:0 10px; border-radius:8px; border:0; background:var(--raised); color:var(--ink); font-weight:600; font-size:.8rem; cursor:pointer; }
+.ferr{ background:var(--bad-soft); color:var(--bad); border-radius:11px; padding:10px 12px; font-size:.9rem; font-weight:600; }
+.in[aria-invalid="true"]{ border-color:var(--bad); }
+.spin.sm{ width:16px; height:16px; border-width:2px; display:inline-block; vertical-align:-3px; }
+.welcome{ max-width:980px; margin:0 auto; padding-block:4vh 30px; display:flex; flex-direction:column; gap:26px; }
+.welcome-hero{ position:relative; overflow:hidden; border-radius:26px; padding:28px 22px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
+  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--orange) 30%, transparent) 0%, transparent 55%), radial-gradient(90% 90% at 0% 100%, color-mix(in srgb, var(--teal) 22%, transparent) 0%, transparent 60%), var(--surface);
+  border:1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); box-shadow:var(--shadow); }
+.welcome-title{ font-size:clamp(1.9rem, 6vw, 2.9rem); text-transform:uppercase; max-width:18ch; }
+.welcome-cta{ display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; max-width:380px; margin-top:6px; }
+.welcome-feats{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr)); }
+.wfeat{ display:flex; gap:12px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px; }
+.legal h1{ margin:10px 0 2px; } .legal h3{ margin:18px 0 6px; } .legal ul{ padding-left:18px; display:flex; flex-direction:column; gap:6px; font-size:.95rem; } .legal p{ font-size:.95rem; }
+.sync.offline i{ background:var(--warn); } .sync.error i{ background:var(--bad); } .sync.error{ color:var(--bad); border-color:color-mix(in srgb,var(--bad) 45%,transparent); }
+
 @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
 </style>
-</head><body><div id="app"></div>
+<script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-"};</script></head><body><div id="app"></div>
 <script>
 "use strict";
 /* ===== Libraries: exercises, foods, meals ===== */
@@ -1282,11 +1309,11 @@ if (typeof module !== 'undefined') Object.assign(module.exports, { buildWeekRepo
 /* ===== Store: on-device copy + private cloud sync through the db capability ===== */
 const LS = 'ironlog:';
 const Store = {
-  docs: {}, db: null, uid: null, status: 'local', ready: false, pending: new Set(), inflight: new Set(), timer: null, photoCache: {},
-  lsGet(k){ try { const v = localStorage.getItem(LS + k); return v ? JSON.parse(v) : null; } catch(e){ return null; } },
-  lsSet(k, v){ try { localStorage.setItem(LS + k, JSON.stringify(v)); return true; } catch(e){ return false; } },
-  lsDel(k){ try { localStorage.removeItem(LS + k); } catch(e){} },
-  lsKeys(){ const out = []; try { for (let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if (k && k.startsWith(LS)) out.push(k.slice(LS.length)); } } catch(e){} return out; },
+  ns: LS, docs: {}, db: null, uid: null, status: 'local', ready: false, pending: new Set(), inflight: new Set(), timer: null, photoCache: {},
+  lsGet(k){ try { const v = localStorage.getItem(this.ns + k); return v ? JSON.parse(v) : null; } catch(e){ return null; } },
+  lsSet(k, v){ try { localStorage.setItem(this.ns + k, JSON.stringify(v)); return true; } catch(e){ return false; } },
+  lsDel(k){ try { localStorage.removeItem(this.ns + k); } catch(e){} },
+  lsKeys(){ const out = []; try { for (let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if (k && k.startsWith(this.ns)) out.push(k.slice(this.ns.length)); } } catch(e){} return out; },
   loadLocal(){
     const idx = this.lsGet('_index') || this.lsKeys().filter(k => !k.startsWith('_') && !k.startsWith('photo-'));
     idx.forEach(k => { const v = this.lsGet(k); if (v) this.docs[k] = v; });
@@ -1359,7 +1386,8 @@ const Store = {
     this.docs = {};
   }
 };
-function setSync(s){ Store.status = s; const el = document.getElementById('sync'); if (el){ el.className = 'sync ' + s; el.querySelector('span').textContent = s === 'ok' ? 'Saved' : s === 'busy' ? 'Saving…' : 'This device'; } }
+const SYNC_LABEL = { ok:'Saved', busy:'Saving…', local:'This device', offline:'Offline · on device', error:'Not saved · retry' };
+function setSync(s){ Store.status = s; const el = document.getElementById('sync'); if (el){ el.className = 'sync ' + s; el.querySelector('span').textContent = SYNC_LABEL[s] || s; } }
 
 /* ===== Derived state ===== */
 const S = { profile:null, settings:{}, plan:null, sched:{}, active:null, sessions:[], body:{entries:[],photos:[]}, food:{}, habits:{}, mealplan:null, coach:{msgs:[]}, custom:{} };
@@ -1384,10 +1412,10 @@ function saveSession(sess){
   const i = doc.list.findIndex(s => s.id === sess.id); if (i >= 0) doc.list[i] = sess; else doc.list.push(sess);
   saveDoc(k, doc);
 }
-function deleteSession(sess){ const k = monthKey('sess-', sess.date); const doc = Store.get(k); if (!doc) return; doc.list = doc.list.filter(s => s.id !== sess.id); saveDoc(k, doc); }
+function deleteSession(sess){ const k = monthKey('sess-', sess.date); const doc = Store.get(k); if (!doc) return; doc.list = doc.list.filter(s => s.id !== sess.id); doc.del = (doc.del || []).concat(sess.id); saveDoc(k, doc); }
 function getFoodDay(date){ return S.food[date] || { entries:[], water:0 }; }
-function saveFoodDay(date, day){ const k = monthKey('food-', date); const doc = Store.get(k) || { days:{} }; doc.days[date] = day; saveDoc(k, doc); }
-function saveHabit(date, patch){ const k = monthKey('habit-', date); const doc = Store.get(k) || { days:{} }; doc.days[date] = { ...(doc.days[date] || {}), ...patch }; saveDoc(k, doc); }
+function saveFoodDay(date, day){ const k = monthKey('food-', date); const doc = Store.get(k) || { days:{} }; day._u = Date.now(); doc.days[date] = day; saveDoc(k, doc); }
+function saveHabit(date, patch){ const k = monthKey('habit-', date); const doc = Store.get(k) || { days:{} }; doc.days[date] = { ...(doc.days[date] || {}), ...patch, _u: Date.now() }; saveDoc(k, doc); }
 function saveActive(sess){ saveDoc('active', { session: sess }); }
 function patchSettings(p){ saveDoc('settings', { ...S.settings, ...p }); }
 
@@ -1524,12 +1552,14 @@ function shell(){
 }
 function topbar(title, extra){
   const initials = (S.profile && S.profile.name ? S.profile.name : 'Me').split(' ').map(x => x[0]).join('').slice(0,2).toUpperCase();
-  return `<header class="topbar"><h1>${esc(title)}</h1>${extra || ''}<button id="sync" class="sync ${Store.status}" data-act="sync-info" aria-label="Storage status"><i></i><span>${Store.status === 'ok' ? 'Saved' : Store.status === 'busy' ? 'Saving…' : 'This device'}</span></button><a class="avatar" href="#settings" aria-label="Profile and settings">${esc(initials)}</a></header>`;
+  return `<header class="topbar"><h1>${esc(title)}</h1>${extra || ''}<button id="sync" class="sync ${Store.status}" data-act="sync-info" aria-label="Storage status"><i></i><span>${SYNC_LABEL[Store.status] || ''}</span></button><a class="avatar" href="#settings" aria-label="Profile and settings">${esc(initials)}</a></header>`;
 }
 function render(){
   if (!document.getElementById('main')) shell();
   const main = document.getElementById('main');
-  if (!S.profile && !Store.ready){ document.querySelector('.tabbar').hidden = true; document.querySelector('.side').hidden = true; main.innerHTML = `<div class="boot"><div class="brandmark">Iron<b>log</b></div><div class="spin" aria-hidden="true"></div><p class="muted">Loading your data…</p></div>`; return; }
+  if (typeof cloudGate === 'function' && cloudGate(main)) { afterRender(); return; }
+  if (!S.profile && !Store.ready){ document.querySelector('.tabbar').hidden = true; document.querySelector('.side').hidden = true; main.innerHTML = `<div class="boot">${logoSvg(110)}<div class="brandmark">Druk<b>Fit</b></div><div class="spin" aria-hidden="true"></div><p class="muted">Loading your data…</p></div>`; return; }
+  if (S.profile && S.profile.onboarded && !S.plan && typeof generatePlan === 'function') saveDoc('plan', generatePlan(S.profile)); // self-heal: profile without a plan
   if (!S.profile || !S.profile.onboarded){ document.querySelector('.tabbar').hidden = true; document.querySelector('.side').hidden = true; main.innerHTML = VIEWS.onboarding(); afterRender(); return; }
   document.querySelector('.tabbar').hidden = false; document.querySelector('.side').hidden = false;
   const [r, arg] = route.split('/');
@@ -1587,9 +1617,9 @@ ACTIONS['ob-opt'] = el => {
 };
 ACTIONS['ob-day'] = el => { const p = obDraft(); const d = +el.dataset.d; let t = p.trainDays || DEFAULT_TRAIN_DAYS[p.daysPerWeek].slice(); t = t.includes(d) ? t.filter(x => x !== d) : t.concat(d).sort(); p.trainDays = t; p.daysPerWeek = Math.max(1, t.length); obSave(); render(); };
 ACTIONS['ob-next'] = () => { const err = obValidate(OB.step); if (err){ toast(err); return; } OB.step++; render(); window.scrollTo(0,0); };
-ACTIONS['ob-back'] = () => { if (route.startsWith('settings/edit') && OB.step <= 1) { OB.p = null; OB.step = 0; go('settings'); return; } OB.step = Math.max(0, OB.step - 1); render(); };
+ACTIONS['ob-back'] = () => { if (typeof CLOUD !== 'undefined' && CLOUD && OB.step <= 1 && !route.startsWith('settings/edit')) return; if (route.startsWith('settings/edit') && OB.step <= 1) { OB.p = null; OB.step = 0; go('settings'); return; } OB.step = Math.max(0, OB.step - 1); render(); };
 ACTIONS['ob-finish'] = () => { const err = obValidate(OB.step); if (err){ toast(err); return; } finishOnboarding(false); };
-ACTIONS['ob-demo'] = () => loadDemo();
+ACTIONS['ob-demo'] = () => { if (typeof CLOUD !== 'undefined' && CLOUD) return; loadDemo(); };
 function obValidate(step){
   const p = obDraft();
   const chk = (v, lo, hi, name) => v != null && (v < lo || v > hi) ? `${name} should be between ${lo} and ${hi}.` : null;
@@ -1617,7 +1647,7 @@ function finishOnboarding(demo){
 VIEWS.onboarding = () => {
   const p = obDraft(); const st = OB.step; const N = 6;
   const steps = `<div class="steps" aria-hidden="true">${Array.from({length:N}, (_,i) => `<i class="${i < st ? 'on' : ''}"></i>`).join('')}</div>`;
-  const nav = (last) => `<div class="row" style="margin-top:22px">${st > 0 ? `<button class="btn ghost" data-act="ob-back">Back</button>` : ''}<span style="flex:1"></span>${last ? `<button class="btn primary big" data-act="ob-finish">Build my plan</button>` : `<button class="btn ghost" data-act="ob-next">Skip</button><button class="btn primary" data-act="ob-next">Continue</button>`}</div>`;
+  const nav = (last) => `<div class="row" style="margin-top:22px">${st > ((typeof CLOUD !== 'undefined' && CLOUD && !route.startsWith('settings/edit')) ? 1 : 0) ? `<button class="btn ghost" data-act="ob-back">Back</button>` : ''}<span style="flex:1"></span>${last ? `<button class="btn primary big" data-act="ob-finish">Build my plan</button>` : `<button class="btn ghost" data-act="ob-next">Skip</button><button class="btn primary" data-act="ob-next">Continue</button>`}</div>`;
   if (st === 0) return `<div class="ob stack" style="gap:22px;padding-top:6vh">
     ${logoFull(200)}<div class="eyebrow">Train with the strength of the Thunder Dragon</div>
     <p style="font-size:1.15rem;max-width:34em">Your training plan, set-by-set logging, nutrition targets and progress tracking in one place. It adjusts every session from what you actually lift.</p>
@@ -1760,7 +1790,7 @@ ACTIONS['deload-on'] = () => { saveDoc('sched', { ...S.sched, deloadWeek: weekSt
 ACTIONS['quick-weigh'] = () => openSheet(`<form class="stack" id="qw"><h2>Log body weight</h2><div class="grid-2"><label class="f" for="qw-w">Weight (kg)<input id="qw-w" class="in num" type="number" inputmode="decimal" step="0.1" required min="30" max="300" value="${latestWeight(S) || ''}"></label><label class="f" for="qw-d">Date<input id="qw-d" class="in" type="date" value="${isoDate()}" max="${isoDate()}" required></label></div><button class="btn primary" type="submit">Save weight</button></form>`, sh => {
   sh.querySelector('#qw').onsubmit = e => { e.preventDefault(); const w = +sh.querySelector('#qw-w').value, d = sh.querySelector('#qw-d').value; if (!(w >= 30 && w <= 300)) { toast('Enter a weight between 30 and 300 kg'); return; } addBodyEntry({ date:d, weight:w }); closeSheet(); toast('Weight saved'); render(); };
 });
-function addBodyEntry(e){ const b = JSON.parse(JSON.stringify(S.body)); b.entries = b.entries || []; const ex = b.entries.find(x => x.date === e.date); if (ex) Object.assign(ex, Object.fromEntries(Object.entries(e).filter(([,v]) => v != null && v !== ''))); else b.entries.push({ id:uid(), ...e }); b.entries.sort((a,c) => a.date < c.date ? -1 : 1); saveDoc('body', b); }
+function addBodyEntry(e){ const b = JSON.parse(JSON.stringify(S.body)); b.entries = b.entries || []; const ex = b.entries.find(x => x.date === e.date); if (ex) Object.assign(ex, Object.fromEntries(Object.entries(e).filter(([,v]) => v != null && v !== '')), { _u: Date.now() }); else b.entries.push({ id:uid(), ...e, _u: Date.now() }); b.entries.sort((a,c) => a.date < c.date ? -1 : 1); saveDoc('body', b); }
 /* ===== My Workouts ===== */
 VIEWS.workouts = () => {
   const tab = sub.wk || 'week';
@@ -2096,7 +2126,7 @@ ACTIONS['targets-info'] = () => { const T = nutritionTargets(S.profile); openShe
   <p class="small">Resting energy (Mifflin-St Jeor): about <b class="num">${fmtNum(T.bmr)}</b> kcal. With your activity and ${S.profile.daysPerWeek} training days, maintenance is about <b class="num">${fmtNum(T.tdee)}</b> kcal.</p>
   <p class="small"><b>${esc(T.note)}.</b> Target: <b class="num">${fmtNum(T.kcal)} kcal</b>. Protein ${T.pPerKg} g per kg = <b class="num">${T.p} g</b>, fat ~27% of calories, carbs make up the rest.</p>
   <p class="small muted">Formulas can be 10-15% off for any one person. Watch your weight trend for 2-3 weeks and adjust by 100-200 kcal if it's not moving as expected. Deficits are capped at 500 kcal and calories never go below a safe floor. If you have a medical condition, a dietitian can tailor this.</p><button class="btn" data-act="close-sheet">Got it</button></div>`); };
-ACTIONS['food-del'] = el => { const fd = getFoodDay(el.dataset.d); fd.entries = fd.entries.filter(e => e.id !== el.dataset.id); saveFoodDay(el.dataset.d, fd); render(); };
+ACTIONS['food-del'] = el => { const fd = getFoodDay(el.dataset.d); fd.entries = fd.entries.filter(e => e.id !== el.dataset.id); fd.del = (fd.del || []).concat(el.dataset.id); saveFoodDay(el.dataset.d, fd); render(); };
 ACTIONS['meal-log'] = el => { const di = +el.dataset.di, slot = el.dataset.slot; const m = S.mealplan.days[di][slot]; const meal = MEAL_BY_ID[m.mealId]; const fd = getFoodDay(isoDate()); fd.entries = (fd.entries || []).concat({ id:uid(), slot, name:meal.name, grams: m.items.reduce((s,[,g]) => s + g, 0), ...roundM(m.macros), planned: di + ':' + slot }); saveFoodDay(isoDate(), fd); toast('Logged ' + meal.name); render(); };
 const roundM = m => ({ kcal:Math.round(m.kcal), p:Math.round(m.p), c:Math.round(m.c), f:Math.round(m.f), fib:Math.round(m.fib||0) });
 ACTIONS['meal-fav'] = el => mutMeal(mp => { const f = mp.favourites || []; mp.favourites = f.includes(el.dataset.meal) ? f.filter(x => x !== el.dataset.meal) : f.concat(el.dataset.meal); });
@@ -2189,7 +2219,7 @@ document.addEventListener('submit', e => {
   if (!any) { toast('Fill in at least one measurement'); return; }
   addBodyEntry(entry); toast('Entry saved'); render();
 });
-ACTIONS['body-del'] = el => confirmSheet('Delete this entry?', 'This measurement entry will be removed.', 'Delete', () => { const b = JSON.parse(JSON.stringify(S.body)); b.entries = b.entries.filter(e => e.id !== el.dataset.id); saveDoc('body', b); render(); }, true);
+ACTIONS['body-del'] = el => confirmSheet('Delete this entry?', 'This measurement entry will be removed.', 'Delete', () => { const b = JSON.parse(JSON.stringify(S.body)); b.entries = b.entries.filter(e => e.id !== el.dataset.id); b.del = (b.del || []).concat(el.dataset.id); saveDoc('body', b); render(); }, true);
 function prPhotos(){
   const ph = (S.body.photos || []).slice().sort((a,b) => a.date < b.date ? 1 : -1); const selc = sub.cmp ? sub.cmp.split(',') : [];
   after(() => { document.querySelectorAll('img[data-photo]').forEach(async img => { const src = await Store.getPhoto(img.dataset.photo); if (src) img.src = src; else img.alt = 'Photo unavailable on this device'; }); });
@@ -2200,7 +2230,7 @@ function prPhotos(){
     ${selc.length === 1 ? `<div class="row"><button class="btn sm danger" data-act="photo-del" data-id="${selc[0]}">${I('trash')} Delete selected photo</button></div>` : ''}`;
 }
 ACTIONS['photo-sel'] = el => { let s = sub.cmp ? sub.cmp.split(',') : []; s = s.includes(el.dataset.id) ? s.filter(x => x !== el.dataset.id) : s.concat(el.dataset.id).slice(-2); sub.cmp = s.join(','); render(); };
-ACTIONS['photo-del'] = el => confirmSheet('Delete this photo?', 'It will be permanently removed.', 'Delete photo', async () => { await Store.delPhoto(el.dataset.id); const b = JSON.parse(JSON.stringify(S.body)); b.photos = (b.photos||[]).filter(p => p.id !== el.dataset.id); saveDoc('body', b); sub.cmp = ''; render(); }, true);
+ACTIONS['photo-del'] = el => confirmSheet('Delete this photo?', 'It will be permanently removed.', 'Delete photo', async () => { await Store.delPhoto(el.dataset.id); const b = JSON.parse(JSON.stringify(S.body)); b.photos = (b.photos||[]).filter(p => p.id !== el.dataset.id); b.del = (b.del || []).concat(el.dataset.id); saveDoc('body', b); sub.cmp = ''; render(); }, true);
 CHANGES['photo-up'] = el => {
   const file = el.files && el.files[0]; if (!file) return;
   if (!file.type.startsWith('image/')) { toast('Choose an image file'); return; }
@@ -2329,14 +2359,15 @@ VIEWS.settings = arg => {
   return topbar('Profile & Settings') + `<div class="stack">
     <div class="card"><div class="between"><div><h3 style="margin:0">${esc(P.name || 'Your profile')}</h3><p class="small muted">${[P.age && P.age + ' yrs', P.heightCm && P.heightCm + ' cm', P.weightKg && 'started at ' + P.weightKg + ' kg'].filter(Boolean).join(' · ')}</p></div><button class="btn sm primary" data-act="edit-profile">${I('edit')} Edit profile & goals</button></div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:12px;gap:10px">${[['Goal', (GOALS.find(g => g[0]===P.goal)||[])[1]], ['Target', P.targetWeight ? P.targetWeight + ' kg' + (P.targetDate ? ' by ' + fmtDate(P.targetDate) : '') : '–'], ['Experience', P.experience], ['Schedule', `${P.daysPerWeek} days · ${P.duration} min`], ['Equipment', { full:'Full gym', dumbbell:'Dumbbells at home', bodyweight:'Bodyweight' }[P.equipment]], ['Protecting', (P.limitations||[]).map(l => (LIMITS.find(x => x[0]===l)||[0,l])[1]).join(', ') || 'Nothing'], ['Diet', (P.diet||{}).pref === 'none' ? 'No restrictions' : (P.diet||{}).pref], ['Daily targets', T ? `${fmtNum(T.kcal)} kcal · ${T.p} g protein` : 'Add body details']].map(([k,v]) => `<div><div class="eyebrow">${k}</div><div class="small" style="text-transform:${k==='Experience'||k==='Diet'?'capitalize':'none'}">${esc(v)}</div></div>`).join('')}</div></div>
+    ${typeof accountCard === 'function' ? accountCard() : ''}
     <div class="card"><h3>Appearance</h3><div class="seg">${[['dark','Dark'],['light','Light'],['system','Match device']].map(([k,l]) => `<button class="${(S.settings.theme||'dark')===k?'on':''}" data-act="set-theme" data-v="${k}">${l}</button>`).join('')}</div></div>
     <div class="card"><h3>Workout & coach</h3><div class="list">${tog('sound','Rest timer sound', S.settings.sound !== false, 'Plays when rest ends (phone must not be on silent)')}${tog('useAI','Use Claude for coach answers', S.settings.useAI !== false, 'Uses your own Claude account. Off = built-in rules only')}</div></div>
     <div class="card"><h3>Reminders</h3><p class="small muted" style="margin-bottom:6px">Reminders appear on your Today screen when you open the app. Pages pinned from Claude can't send phone notifications.</p><div class="list">${tog('r.workout','Scheduled workouts', R.workout !== false)}${tog('r.weighin','Weekly weigh-in', R.weighin !== false)}${tog('r.water','Water intake (after 2 pm)', R.water !== false)}${tog('r.meals','Weekly meal planning', R.meals !== false)}${tog('r.review','Sunday weekly review', R.review !== false)}</div></div>
     <div class="card"><h3>Your data</h3><div class="list">
-      <div class="li"><div class="grow"><div class="t">Storage</div><div class="small muted">${Store.status === 'local' ? 'This device only. Open from your Claude link while signed in to sync.' : 'Private to your Claude account, with an offline copy on this device.'}</div></div></div>
+      <div class="li"><div class="grow"><div class="t">Storage</div><div class="small muted">${typeof CLOUD !== 'undefined' && CLOUD ? 'Private to your DrukFit account, with an offline copy on this device.' : Store.status === 'local' ? 'This device only. Open from your Claude link while signed in to sync.' : 'Private to your Claude account, with an offline copy on this device.'}</div></div></div>
       <div class="li"><div class="grow"><div class="t">Export everything</div><div class="small muted">JSON file with workouts, food, measurements and settings (photos not included)</div></div><button class="btn sm" data-act="export">Export</button></div>
       <div class="li"><div class="grow"><div class="t">Import a backup</div><div class="small muted">Restores an export. Newer data in the file replaces current data.</div></div><label class="btn sm" style="cursor:pointer">Import<input type="file" accept="application/json,.json" hidden data-chg="import"></label></div>
-      <div class="li"><div class="grow"><div class="t" style="color:var(--bad)">Delete all my data</div><div class="small muted">Removes everything from this device and your account, including photos</div></div><button class="btn sm danger" data-act="wipe">Delete</button></div></div></div>
+      <div class="li"><div class="grow"><div class="t" style="color:var(--bad)">${typeof CLOUD !== 'undefined' && CLOUD ? 'Delete account' : 'Delete all my data'}</div><div class="small muted">${typeof CLOUD !== 'undefined' && CLOUD ? 'Permanently deletes your account, records and photos' : 'Removes everything from this device and your account, including photos'}</div></div><button class="btn sm danger" data-act="wipe">Delete</button></div></div></div>
     <div class="card"><h3>Safety</h3><p class="small muted">DrukFit gives general fitness and nutrition guidance, not medical advice. Starting weights and calorie targets are estimates. Stop any exercise that causes pain, and talk to a doctor, physio or dietitian if you have an injury, a medical condition, are pregnant, or have a history of disordered eating.</p></div>
     <p class="tiny faint" style="text-align:center">DrukFit · your data stays yours</p></div>`;
 };
@@ -2345,6 +2376,7 @@ ACTIONS['set-theme'] = el => { patchSettings({ theme: el.dataset.v }); render();
 CHANGES['set-tog'] = el => { const k = el.dataset.key; if (k.startsWith('r.')) patchSettings({ reminders: { ...(S.settings.reminders || {}), [k.slice(2)]: el.checked } }); else patchSettings({ [k]: el.checked }); toast('Saved'); };
 ACTIONS['export'] = async () => {
   const data = JSON.stringify({ app:'drukfit', version:1, exportedAt: new Date().toISOString(), docs: Store.docs }, null, 1);
+  if (!framedView){ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type:'application/json' })); a.download = `drukfit-backup-${isoDate()}.json`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); toast('Backup downloaded'); return; }
   const dl = window.claude && window.claude.use ? await window.claude.use('downloads').catch(() => null) : null;
   if (!dl){ openSheet(`<div class="stack"><h2>Export</h2><p class="small muted">Downloads aren't available in this view. Copy the text below and save it in a note or file.</p><textarea class="in num" style="min-height:220px;font-size:11px" readonly id="exp-t">${esc(data)}</textarea><button class="btn primary" id="exp-c">Copy</button></div>`, sh => sh.querySelector('#exp-c').onclick = () => { const t = sh.querySelector('#exp-t'); navigator.clipboard.writeText(t.value).then(() => toast('Copied'), () => { t.select(); toast('Selected. Use Copy from the menu.'); }); }); return; }
   try { await dl.save({ filename: `drukfit-backup-${isoDate()}.json`, data: new Blob([data], { type:'application/json' }) }); toast('Export ready'); } catch(e){ if (e && e.code !== 'declined') toast('Export failed: ' + (e.message || 'try again')); }
@@ -2691,6 +2723,484 @@ function renderCompare(a, b){
     <div class="hscroll" style="margin-top:10px"><table class="t"><thead><tr><th>Metric</th><th>${fa}</th><th>${fb}</th><th>Change</th></tr></thead><tbody>${rows.map(r => { const d = r.a != null && r.b != null ? r1(r.b - r.a) : null; return `<tr><td>${r.label}</td><td class="num">${r.a == null ? '–' : (r.key === 'volume' ? fmtNum(r.a) : r.a) + r.unit}</td><td class="num">${r.b == null ? '–' : (r.key === 'volume' ? fmtNum(r.b) : r.b) + r.unit}</td><td class="num" style="color:${d > 0 && !lowerBetter.includes(r.key) ? 'var(--good)' : d < 0 ? 'var(--muted)' : ''}">${d == null ? '–' : (d > 0 ? '+' : '') + (r.key === 'volume' ? fmtNum(d) : d)}</td></tr>`; }).join('')}</tbody></table></div>
     ${items.length ? groupedBars(items.map(r => ({ label:r.label, a:r.a || 0, b:r.b || 0 }))) + `<div class="legend"><span><i style="background:var(--faint)"></i>${fa}</span><span><i style="background:var(--accent)"></i>${fb}</span></div>` : ''}</section>`;
 }
+/* ===== DrukFit accounts: Supabase Auth + Postgres (row-level security) + private Storage =====
+   Active only when the page defines window.DRUKFIT_CONFIG = { url, key } (the website build).
+   The key is Supabase's public "anon"/"publishable" key; access control is enforced by the
+   database (RLS policies keyed on auth.uid() from the signed login token), never by this code. */
+const CLOUD = (window.DRUKFIT_CONFIG && window.DRUKFIT_CONFIG.url && window.DRUKFIT_CONFIG.key) ? window.DRUKFIT_CONFIG : null;
+const TERMS_VERSION = '2026-10';
+const AUTH_KEY = 'drukfit:auth';
+const LEGACY_NS = 'ironlog:';
+
+class ApiError extends Error {
+  constructor(status, body, fallback){
+    const b = body || {}; super(b.msg || b.message || b.error_description || b.error || fallback || ('Request failed (' + status + ')'));
+    this.status = status; this.code = b.error_code || b.code || b.error || ''; this.body = b;
+  }
+}
+function friendlyAuthError(e){
+  if (!e) return 'Something went wrong. Please try again.';
+  if (e.offline) return 'Can\'t reach DrukFit. Check your internet connection and try again.';
+  const c = String(e.code || ''), m = String(e.message || '').toLowerCase();
+  if (c === 'invalid_credentials' || c === 'invalid_grant' && m.includes('invalid login') || m.includes('invalid login credentials')) return 'Email or password is incorrect.';
+  if (c === 'email_not_confirmed' || m.includes('email not confirmed')) return 'Please confirm your email address first. Check your inbox (and spam folder) for the link.';
+  if (c === 'weak_password' || m.includes('password should')) return 'Choose a stronger password: at least 8 characters with letters and numbers.';
+  if (c === 'same_password') return 'Your new password must be different from your current one.';
+  if (e.status === 429 || c.includes('rate_limit')) return 'Too many attempts. Please wait a minute and try again.';
+  if (c === 'email_address_invalid' || m.includes('invalid format') || m.includes('email address') && m.includes('invalid')) return 'Enter a valid email address.';
+  if (c === 'signup_disabled') return 'New sign-ups are currently turned off.';
+  if (c === 'otp_expired' || m.includes('expired')) return 'That link has expired. Request a new one.';
+  if (e.status >= 500) return 'DrukFit\'s server had a problem. Please try again shortly.';
+  return e.message || 'Something went wrong. Please try again.';
+}
+
+/* ---------- Auth (Supabase GoTrue REST) ---------- */
+const Auth = {
+  session: null, refreshing: null,
+  load(){ try { this.session = JSON.parse(localStorage.getItem(AUTH_KEY) || 'null'); } catch(e){ this.session = null; } return this.session; },
+  persist(s){ this.session = s; try { if (s) localStorage.setItem(AUTH_KEY, JSON.stringify(s)); else localStorage.removeItem(AUTH_KEY); } catch(e){} },
+  get user(){ return this.session && this.session.user; },
+  redirectTo(){ return location.origin + location.pathname; },
+  async raw(path, opts){
+    opts = opts || {}; const h = { apikey: CLOUD.key, ...(opts.headers || {}) };
+    if (opts.json !== undefined){ h['Content-Type'] = 'application/json'; }
+    if (!h.Authorization) h.Authorization = 'Bearer ' + (opts.token || CLOUD.key);
+    let res;
+    try { res = await fetch(CLOUD.url + path, { method: opts.method || 'GET', headers: h, body: opts.json !== undefined ? JSON.stringify(opts.json) : opts.body }); }
+    catch(e){ const err = new Error('offline'); err.offline = true; throw err; }
+    const text = res.status === 204 ? '' : await res.text(); let body = null; try { body = text ? JSON.parse(text) : null; } catch(e){ body = { message: text }; }
+    if (!res.ok) throw new ApiError(res.status, body);
+    return body;
+  },
+  sessionFrom(b){ if (!b || !b.access_token) return null; return { access_token: b.access_token, refresh_token: b.refresh_token, expires_at: b.expires_at || Math.floor(Date.now() / 1000) + (b.expires_in || 3600), user: b.user || null }; },
+  async signUp(email, password, displayName){
+    const b = await this.raw('/auth/v1/signup?redirect_to=' + encodeURIComponent(this.redirectTo()), { method:'POST', json:{ email, password, data:{ display_name: displayName, terms_version: TERMS_VERSION } } });
+    const s = this.sessionFrom(b); if (s){ if (!s.user) s.user = (await this.raw('/auth/v1/user', { token: s.access_token })); this.persist(s); return { session: s }; }
+    const user = b && (b.user || b); return { session: null, user, maybeExisting: !!(user && Array.isArray(user.identities) && user.identities.length === 0) };
+  },
+  async signIn(email, password){ const s = this.sessionFrom(await this.raw('/auth/v1/token?grant_type=password', { method:'POST', json:{ email, password } })); this.persist(s); return s; },
+  async verifyPassword(password){ const s = this.sessionFrom(await this.raw('/auth/v1/token?grant_type=password', { method:'POST', json:{ email: this.user.email, password } })); this.persist(s); return true; },
+  async refresh(){
+    if (this.refreshing) return this.refreshing;
+    const rt = this.session && this.session.refresh_token; if (!rt) throw new ApiError(401, { message:'Not signed in' });
+    this.refreshing = (async () => {
+      try { const b = await this.raw('/auth/v1/token?grant_type=refresh_token', { method:'POST', json:{ refresh_token: rt } }); const s = this.sessionFrom(b); if (!s.user) s.user = this.user; this.persist(s); return s; }
+      catch(e){ if (!e.offline && e.status >= 400 && e.status < 500) { Cloud.sessionExpired(); } throw e; }
+      finally { this.refreshing = null; }
+    })();
+    return this.refreshing;
+  },
+  async token(){ if (!this.session) throw new ApiError(401, { message:'Not signed in' }); if (this.session.expires_at - 60 < Date.now() / 1000) await this.refresh(); return this.session.access_token; },
+  async api(path, opts){ // authenticated call with one refresh-and-retry on 401
+    opts = opts || {}; let t = await this.token();
+    try { return await this.raw(path, { ...opts, token: t }); }
+    catch(e){ if (e.status === 401 && !opts._retried){ await this.refresh(); return this.raw(path, { ...opts, token: this.session.access_token, _retried: true }); } throw e; }
+  },
+  async getUser(){ const u = await this.api('/auth/v1/user'); if (this.session){ this.session.user = u; this.persist(this.session); } return u; },
+  async updateUser(attrs){ const u = await this.api('/auth/v1/user' + (attrs.email ? '?redirect_to=' + encodeURIComponent(this.redirectTo()) : ''), { method:'PUT', json: attrs }); if (this.session && u && u.id){ this.session.user = u; this.persist(this.session); } return u; },
+  async recover(email){ await this.raw('/auth/v1/recover?redirect_to=' + encodeURIComponent(this.redirectTo()), { method:'POST', json:{ email } }); },
+  async resend(email){ await this.raw('/auth/v1/resend?redirect_to=' + encodeURIComponent(this.redirectTo()), { method:'POST', json:{ type:'signup', email } }); },
+  async signOut(){ const t = this.session && this.session.access_token; this.persist(null); if (t){ try { await this.raw('/auth/v1/logout', { method:'POST', token: t }); } catch(e){} } },
+  // Email links (confirm, reset, email change) return here with tokens in the URL hash.
+  async handleRedirect(){
+    const h = location.hash.slice(1); if (!/(^|&)(access_token|error_code|error)=/.test(h)) return null;
+    const p = new URLSearchParams(h); history.replaceState(null, '', location.pathname + location.search + '#dashboard');
+    if (p.get('error') || p.get('error_code')) return { error: friendlyAuthError(new ApiError(400, { error_code: p.get('error_code'), msg: (p.get('error_description') || '').replace(/\+/g, ' ') })) };
+    const s = this.sessionFrom({ access_token: p.get('access_token'), refresh_token: p.get('refresh_token'), expires_at: +p.get('expires_at') || undefined, expires_in: +p.get('expires_in') || 3600 });
+    this.persist(s);
+    try { await this.getUser(); } catch(e){ if (!e.offline){ this.persist(null); return { error: friendlyAuthError(e) }; } }
+    return { type: p.get('type') || 'signup' };
+  },
+};
+
+/* ---------- Merging when two devices changed the same document ---------- */
+function unionById(a, b, del, preferA){ const out = new Map(); (b || []).forEach(x => out.set(x.id, x)); (a || []).forEach(x => { const o = out.get(x.id); if (!o || preferA || (x._u || 0) >= (o._u || 0)) out.set(x.id, x); }); return [...out.values()].filter(x => !del.has(x.id)); }
+function mergeDoc(key, a, b){ // a = this device, b = account copy
+  if (!a) return b; if (!b) return a;
+  const _u = Math.max(a._u || 0, b._u || 0);
+  if (/^sess-/.test(key)){ const del = new Set([...(a.del || []), ...(b.del || [])]); const list = unionById(a.list, b.list, del, true).sort((x, y) => x.start - y.start); return { ...b, ...a, list, del:[...del], _u }; }
+  if (/^(food|habit)-/.test(key)){
+    const days = { ...(b.days || {}) };
+    Object.entries(a.days || {}).forEach(([d, da]) => {
+      const db = days[d]; if (!db){ days[d] = da; return; }
+      const [older, newer] = (da._u || 0) >= (db._u || 0) ? [db, da] : [da, db];
+      const m = { ...older, ...newer };
+      if (da.entries || db.entries){ const del = new Set([...(da.del || []), ...(db.del || [])]); m.entries = unionById(newer.entries, older.entries, del, true); m.del = [...del]; }
+      days[d] = m;
+    });
+    return { ...b, ...a, days, _u };
+  }
+  if (key === 'body'){ const del = new Set([...(a.del || []), ...(b.del || [])]); const newer = (a._u || 0) >= (b._u || 0) ? a : b; return { ...newer, entries: unionById(a.entries, b.entries, del).sort((x, y) => x.date < y.date ? -1 : 1), photos: unionById(a.photos, b.photos, del, true), del:[...del], _u }; }
+  if (key === 'reports'){ return { ...b, ...a, ai:{ ...(b.ai || {}), ...(a.ai || {}) }, saved:{ ...(b.saved || {}), ...(a.saved || {}) }, _u }; }
+  if (key === 'coach'){ const seen = new Set(); const msgs = [...(b.msgs || []), ...(a.msgs || [])].sort((x, y) => (x.t || 0) - (y.t || 0)).filter(m => { const k = m.t + m.role + m.text; if (seen.has(k)) return false; seen.add(k); return true; }).slice(-40); return { ...a, msgs, _u }; }
+  if (key === 'custom'){ return { foods:{ ...(b.foods || {}), ...(a.foods || {}) }, _u }; }
+  return (a._u || 0) >= (b._u || 0) ? a : b;
+}
+
+/* ---------- Cloud sync ---------- */
+const Cloud = {
+  phase: 'boot', flow: null, notice: null, meta: { revs:{}, pending:[], photoQueue:[], lastSync:0 }, timer: null, backoff: 0, pulling: false, renderDeferred: false, failToastAt: 0,
+  get uid(){ return Auth.user && Auth.user.id; },
+  saveMeta(){ this.meta.pending = [...Store.pending]; Store.lsSet('_sync', this.meta); },
+  loadMeta(){ const m = Store.lsGet('_sync') || {}; this.meta = { revs: m.revs || {}, pending: m.pending || [], photoQueue: m.photoQueue || [], lastSync: m.lastSync || 0 }; Store.pending = new Set(this.meta.pending); },
+  async startUser(user){
+    Store.ns = 'drukfit:u:' + user.id + ':'; Store.docs = {}; Store.photoCache = {}; Store.inflight = new Set();
+    Store.loadLocal(); this.loadMeta(); rebuild();
+    const cached = !!Store.docs.profile;
+    this.phase = cached ? 'ready' : 'loading'; Store.ready = cached; render();
+    const ok = await this.pull();
+    if (!ok && !cached){ this.phase = 'loadfail'; render(); return; }
+    if (ok && !this.dismissedMigration() && legacyData()) this.phase = 'migrate';
+    else this.phase = 'ready';
+    Store.ready = true; rebuild(); render();
+    this.flush();
+  },
+  dismissedMigration(){ return !!Store.lsGet('_migrateDone'); },
+  async pull(){
+    if (!this.uid || this.pulling) return false; this.pulling = true;
+    try {
+      const rows = await Auth.api('/rest/v1/user_documents?select=doc_key,data,rev');
+      let changed = false;
+      rows.forEach(r => {
+        const k = r.doc_key, local = Store.docs[k], localRev = this.meta.revs[k] || 0;
+        if (Store.pending.has(k)){ if (r.rev !== localRev){ Store.docs[k] = mergeDoc(k, local, r.data); this.meta.revs[k] = r.rev; Store.lsSet(k, Store.docs[k]); changed = true; } }
+        else if (!local || r.rev !== localRev){ Store.docs[k] = r.data; this.meta.revs[k] = r.rev; Store.lsSet(k, r.data); changed = true; }
+      });
+      this.meta.lastSync = Date.now(); Store.saveIndex(); this.saveMeta();
+      if (Store.status !== 'busy' && Store.status !== 'error') setSync(Store.pending.size ? 'busy' : 'ok');
+      if (changed && this.phase === 'ready'){ rebuild(); this.safeRender(); }
+      return true;
+    } catch(e){ console.warn('DrukFit pull failed', e && (e.status || ''), e && (e.code || e.message)); this.netFail(e); return false; }
+    finally { this.pulling = false; }
+  },
+  safeRender(){ const a = document.activeElement; if (a && a.closest && a.closest('#main') && /INPUT|TEXTAREA|SELECT/.test(a.tagName)){ this.renderDeferred = true; return; } render(); },
+  queue(k){ Store.pending.add(k); this.saveMeta(); clearTimeout(this.timer); this.timer = setTimeout(() => this.flush(), 700); if (Store.status !== 'offline') setSync('busy'); },
+  async flush(){
+    if (!this.uid || this.phase === 'migrate') return;
+    clearTimeout(this.timer);
+    if (this.meta.photoQueue.length) await this.flushPhotos();
+    const keys = [...Store.pending].filter(k => !Store.inflight.has(k));
+    if (!keys.length){ if (!Store.inflight.size && !this.meta.photoQueue.length) setSync('ok'); return; }
+    setSync('busy');
+    for (const k of keys){
+      Store.inflight.add(k);
+      try {
+        let attempt = 0;
+        while (true){
+          const data = JSON.parse(JSON.stringify(Store.docs[k]));
+          const [res] = await Auth.api('/rest/v1/rpc/save_doc', { method:'POST', json:{ p_key:k, p_data:data, p_base_rev: this.meta.revs[k] || 0 } });
+          if (!res.conflict){ this.meta.revs[k] = res.rev; if (JSON.stringify(Store.docs[k]) === JSON.stringify(data)) Store.pending.delete(k); break; }
+          // Another device saved first: merge both copies, then save the merged version.
+          Store.docs[k] = mergeDoc(k, Store.docs[k], res.data); this.meta.revs[k] = res.rev; Store.lsSet(k, Store.docs[k]);
+          if (++attempt > 3) throw new Error('conflict loop');
+          rebuild(); this.safeRender();
+        }
+        this.saveMeta(); this.backoff = 0;
+      } catch(e){ Store.inflight.delete(k); this.netFail(e); return; }
+      Store.inflight.delete(k);
+    }
+    if (Store.pending.size) this.timer = setTimeout(() => this.flush(), 400);
+    else { setSync('ok'); }
+  },
+  netFail(e){
+    const offline = e && e.offline || !navigator.onLine;
+    if (e && e.status === 401 && !Auth.session){ return; }
+    setSync(offline ? 'offline' : 'error');
+    if (!offline && Date.now() - this.failToastAt > 30000){ this.failToastAt = Date.now(); toast('Couldn\'t save to your account. Your changes are safe on this device and will retry.'); console.warn('DrukFit sync', e && (e.code || e.message)); }
+    this.backoff = Math.min(60000, (this.backoff || 2000) * 2);
+    clearTimeout(this.timer); this.timer = setTimeout(() => { this.pull().then(() => this.flush()); }, this.backoff);
+  },
+  sessionExpired(){ this.notice = 'Your login has expired. Log in again to keep syncing. Nothing on this device has been lost.'; this.phase = 'expired'; setSync('error'); render(); },
+  /* photos: <uid>/<id>.jpg in the private bucket + an index row */
+  async uploadPhoto(id, date, dataUrl){
+    const path = this.uid + '/' + id + '.jpg'; const blob = await (await fetch(dataUrl)).blob();
+    await Auth.api('/storage/v1/object/progress-photos/' + path, { method:'POST', body: blob, headers:{ 'Content-Type':'image/jpeg', 'x-upsert':'true' } });
+    await Auth.api('/rest/v1/progress_photos?on_conflict=user_id,id', { method:'POST', json:{ id, user_id: this.uid, taken_on: date, path }, headers:{ Prefer:'resolution=merge-duplicates,return=minimal' } });
+  },
+  async flushPhotos(){
+    for (const p of [...this.meta.photoQueue]){
+      const d = Store.lsGet('photo-' + p.id) || Store.photoCache[p.id]; if (!d){ this.meta.photoQueue = this.meta.photoQueue.filter(x => x.id !== p.id); continue; }
+      try { await this.uploadPhoto(p.id, p.date, d); this.meta.photoQueue = this.meta.photoQueue.filter(x => x.id !== p.id); this.saveMeta(); } catch(e){ this.netFail(e); return; }
+    }
+  },
+};
+function legacyData(){ // DrukFit data saved on this device before accounts existed
+  try { const raw = localStorage.getItem(LEGACY_NS + 'profile'); if (!raw) return null; const p = JSON.parse(raw); if (!p || !p.onboarded) return null;
+    const keys = []; for (let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if (k && k.startsWith(LEGACY_NS) && !k.startsWith(LEGACY_NS + '_')) keys.push(k.slice(LEGACY_NS.length)); }
+    const docs = {}; keys.filter(k => !k.startsWith('photo-')).forEach(k => { try { docs[k] = JSON.parse(localStorage.getItem(LEGACY_NS + k)); } catch(e){} });
+    const sessions = Object.keys(docs).filter(k => k.startsWith('sess-')).reduce((n, k) => n + ((docs[k] || {}).list || []).filter(s => !s.demo).length, 0);
+    return { docs, name: p.name || '', demo: !!(docs.settings && docs.settings.demo), sessions, weighIns: ((docs.body || {}).entries || []).length, foodDays: Object.keys(docs).filter(k => k.startsWith('food-')).reduce((n, k) => n + Object.keys((docs[k] || {}).days || {}).length, 0), photos: keys.filter(k => k.startsWith('photo-')).map(k => k.slice(6)) };
+  } catch(e){ return null; }
+}
+
+/* ---------- Store overrides for the website build ---------- */
+if (CLOUD){
+  Store.loadLocal = function(){ if (this.ns === LS) return; const idx = this.lsGet('_index') || this.lsKeys().filter(k => !k.startsWith('_') && !k.startsWith('photo-')); idx.forEach(k => { const v = this.lsGet(k); if (v) this.docs[k] = v; }); };
+  Store.queue = function(k){ if (Cloud.uid) Cloud.queue(k); };
+  Store.flush = function(){ return Cloud.flush(); };
+  Store.connect = async function(){ await cloudBoot(); };
+  Store.putPhoto = async function(id, dataUrl){
+    this.photoCache[id] = dataUrl; this.lsSet('photo-' + id, dataUrl);
+    try { await Cloud.uploadPhoto(id, isoDate(), dataUrl); return true; }
+    catch(e){ Cloud.meta.photoQueue.push({ id, date: isoDate() }); Cloud.saveMeta(); Cloud.netFail(e); toast('Photo saved on this device. It will upload when you\'re back online.'); return true; }
+  };
+  Store.getPhoto = async function(id){
+    if (this.photoCache[id]) return this.photoCache[id]; const l = this.lsGet('photo-' + id); if (l){ this.photoCache[id] = l; return l; }
+    try { const t = await Auth.token(); const res = await fetch(CLOUD.url + '/storage/v1/object/authenticated/progress-photos/' + Cloud.uid + '/' + id + '.jpg', { headers:{ apikey: CLOUD.key, Authorization:'Bearer ' + t } }); if (!res.ok) return null;
+      const b = await res.blob(); const url = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }); this.photoCache[id] = url; this.lsSet('photo-' + id, url); return url; } catch(e){ return null; }
+  };
+  Store.delPhoto = async function(id){
+    delete this.photoCache[id]; this.lsDel('photo-' + id); Cloud.meta.photoQueue = Cloud.meta.photoQueue.filter(p => p.id !== id); Cloud.saveMeta();
+    try { await Auth.api('/storage/v1/object/progress-photos', { method:'DELETE', json:{ prefixes:[Cloud.uid + '/' + id + '.jpg'] } }); await Auth.api('/rest/v1/progress_photos?id=eq.' + encodeURIComponent(id), { method:'DELETE' }); } catch(e){ Cloud.netFail(e); }
+  };
+  Store.clearLocal = function(){ this.lsKeys().forEach(k => this.lsDel(k)); this.docs = {}; this.pending = new Set(); this.photoCache = {}; this.ns = LS; };
+  window.addEventListener('online', () => { Cloud.pull().then(() => Cloud.flush()); });
+  window.addEventListener('offline', () => setSync('offline'));
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && Cloud.uid) Cloud.pull().then(() => Cloud.flush()); });
+  document.addEventListener('focusout', () => setTimeout(() => { if (Cloud.renderDeferred && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))){ Cloud.renderDeferred = false; render(); } }, 50));
+  setInterval(() => { if (Cloud.uid && Cloud.phase === 'ready' && document.visibilityState === 'visible' && navigator.onLine) Cloud.pull(); }, 60000);
+}
+async function cloudBoot(){
+  const r = await Auth.handleRedirect();
+  if (r && r.error){ Cloud.notice = r.error; route = 'login'; }
+  if (r && r.type === 'recovery') Cloud.flow = 'recovery';
+  else if (r && (r.type === 'signup' || r.type === 'magiclink')) Cloud.notice = 'Email confirmed. Welcome to DrukFit!';
+  else if (r && r.type === 'email_change') Cloud.notice = 'Your email address has been updated.';
+  Auth.load();
+  if (!Auth.session){ Cloud.phase = 'out'; Store.ready = true; render(); return; }
+  if (!Auth.user){ try { await Auth.getUser(); } catch(e){ if (!e.offline){ Auth.persist(null); Cloud.phase = 'out'; Store.ready = true; render(); return; } } }
+  await Cloud.startUser(Auth.user);
+  if (Cloud.notice && Cloud.phase === 'ready'){ toast(Cloud.notice); Cloud.notice = null; }
+}
+
+/* ---------- Gate: what to show before the main app ---------- */
+const PUBLIC_ROUTES = ['welcome','login','signup','forgot','check-email','privacy','terms'];
+function cloudGate(main){
+  if (!CLOUD) return false;
+  // keep anything typed into the account forms when the screen is redrawn in the background
+  const keep = {}; let focusId = document.activeElement && document.activeElement.id;
+  main.querySelectorAll('input[id]').forEach(el => { if (/^(li|su|fg|rp)-/.test(el.id)) keep[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
+  const handled = cloudGateInner(main);
+  Object.entries(keep).forEach(([id, v]) => { const el = document.getElementById(id); if (el && !el.readOnly){ if (el.type === 'checkbox') el.checked = v; else if (v) el.value = v; } });
+  if (focusId && keep[focusId] !== undefined){ const f = document.getElementById(focusId); if (f) f.focus(); }
+  return handled;
+}
+function cloudGateInner(main){
+  const r = route.split('/')[0];
+  const hideNav = () => { document.querySelector('.tabbar').hidden = true; document.querySelector('.side').hidden = true; };
+  if (/(^|&)(access_token|error_code|error)=/.test(location.hash.slice(1))){ // email link opened in a tab that already had DrukFit open
+    hideNav(); main.innerHTML = `<div class="boot">${logoSvg(110)}<div class="spin" aria-hidden="true"></div><p class="muted">Signing you in…</p></div>`;
+    if (!Cloud.redirecting){ Cloud.redirecting = true; clearTimeout(Cloud.timer); cloudBoot().finally(() => { Cloud.redirecting = false; }); }
+    return true;
+  }
+  if (r === 'privacy' || r === 'terms'){ hideNav(); main.innerHTML = legalView(r); return true; }
+  if (Cloud.phase === 'boot'){ hideNav(); main.innerHTML = `<div class="boot">${logoSvg(110)}<div class="brandmark">Druk<b>Fit</b></div><div class="spin" aria-hidden="true"></div></div>`; return true; }
+  if (Cloud.flow === 'recovery' && Auth.session){ hideNav(); main.innerHTML = authShell(resetPasswordForm()); return true; }
+  if (!Auth.session || Cloud.phase === 'out'){ hideNav(); main.innerHTML = authView(PUBLIC_ROUTES.includes(r) ? r : 'welcome'); return true; }
+  if (Cloud.phase === 'expired'){ hideNav(); main.innerHTML = authShell(loginForm(true)); return true; }
+  if (Cloud.phase === 'loading'){ hideNav(); main.innerHTML = `<div class="boot">${logoSvg(110)}<div class="brandmark">Druk<b>Fit</b></div><div class="spin" aria-hidden="true"></div><p class="muted">Loading your account…</p></div>`; return true; }
+  if (Cloud.phase === 'loadfail'){ hideNav(); main.innerHTML = authShell(`<div class="stack"><h1>Can't load your data</h1><p class="muted">You're signed in as <b>${esc(Auth.user.email)}</b>, but DrukFit couldn't reach your account. Nothing has been changed or lost.</p><button class="btn primary big" data-act="cloud-retry">Try again</button><button class="btn ghost" data-act="cloud-logout">Log out</button></div>`); return true; }
+  if (Cloud.phase === 'migrate'){ hideNav(); main.innerHTML = authShell(migrationView()); return true; }
+  if (PUBLIC_ROUTES.includes(r)){ location.replace('#dashboard'); return true; }
+  if (!S.profile || !S.profile.onboarded){ // first sign-in: fitness onboarding (skip the anonymous intro screen)
+    if (OB.step < 1) OB.step = 1;
+    const d = obDraft(); if (!d.name && Auth.user) d.name = (Auth.user.user_metadata || {}).display_name || '';
+  }
+  return false;
+}
+function authShell(inner){ return `<div class="authwrap"><div class="authcard">${inner}</div><p class="tiny faint" style="text-align:center;margin-top:14px"><a href="#privacy" class="link">Privacy policy</a> · <a href="#terms" class="link">Terms of use</a></p></div>`; }
+function pwField(id, label, ac, hint){ return `<label class="f" for="${id}">${label}<span class="pw"><input class="in" id="${id}" type="password" autocomplete="${ac}" required minlength="${ac === 'current-password' ? 1 : 8}" maxlength="72"${hint ? ` aria-describedby="${id}-h"` : ''}><button type="button" class="pw-t" data-act="pw-toggle" data-for="${id}" aria-label="Show password" aria-pressed="false">Show</button></span>${hint ? `<span class="tiny faint" id="${id}-h" style="font-weight:400">${hint}</span>` : ''}</label>`; }
+const formErr = () => `<div class="ferr" id="f-err" role="alert" hidden></div>`;
+function loginForm(expired){
+  return `<form class="stack" id="login-f" novalidate><div class="authhead">${logoSvg(64)}<div><h1>${expired ? 'Log in again' : 'Welcome back'}</h1><p class="muted small">${expired ? esc(Cloud.notice || '') : 'Log in to continue your training.'}</p></div></div>
+    ${Cloud.notice && !expired ? `<div class="note warn small">${esc(Cloud.notice)}</div>` : ''}${formErr()}
+    <label class="f" for="li-email">Email<input class="in" id="li-email" type="email" autocomplete="email" inputmode="email" required value="${esc(expired && Auth.user ? Auth.user.email : (sub.authEmail || ''))}"${expired ? ' readonly' : ''}></label>
+    ${pwField('li-pw', 'Password', 'current-password')}
+    <div class="between"><a href="#forgot" class="small link">Forgot password?</a></div>
+    <button class="btn primary big" type="submit" id="li-go">Log in</button>
+    ${expired ? `<button type="button" class="btn ghost" data-act="cloud-logout">Log out instead</button>` : `<p class="small muted" style="text-align:center">New to DrukFit? <a href="#signup" class="link">Create an account</a></p>`}
+    <div id="li-resend" hidden><button type="button" class="btn sm" data-act="resend-confirm">Resend confirmation email</button></div></form>`;
+}
+function signupForm(){
+  return `<form class="stack" id="signup-f" novalidate><div class="authhead">${logoSvg(64)}<div><h1>Create your account</h1><p class="muted small">Free. Your records stay private to you.</p></div></div>${formErr()}
+    <label class="f" for="su-name">Your name<input class="in" id="su-name" autocomplete="nickname" required maxlength="60" placeholder="What should we call you?"></label>
+    <label class="f" for="su-email">Email<input class="in" id="su-email" type="email" autocomplete="email" inputmode="email" required></label>
+    ${pwField('su-pw', 'Password', 'new-password', 'At least 8 characters, with letters and numbers.')}
+    ${pwField('su-pw2', 'Confirm password', 'new-password')}
+    <label class="row small" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="su-terms" style="width:22px;height:22px;flex:none;margin-top:1px"><span>I agree to the <a href="#terms" class="link">Terms of use</a> and <a href="#privacy" class="link">Privacy policy</a>.</span></label>
+    <button class="btn primary big" type="submit" id="su-go">Create account</button>
+    <p class="small muted" style="text-align:center">Already a member? <a href="#login" class="link">Log in</a></p></form>`;
+}
+function resetPasswordForm(){
+  return `<form class="stack" id="reset-f" novalidate><div class="authhead">${logoSvg(64)}<div><h1>Choose a new password</h1><p class="muted small">For ${esc(Auth.user ? Auth.user.email : 'your account')}</p></div></div>${formErr()}
+    ${pwField('rp-pw', 'New password', 'new-password', 'At least 8 characters, with letters and numbers.')}${pwField('rp-pw2', 'Confirm new password', 'new-password')}
+    <button class="btn primary big" type="submit" id="rp-go">Save new password</button></form>`;
+}
+function authView(r){
+  if (r === 'login') return authShell(loginForm(false));
+  if (r === 'signup') return authShell(signupForm());
+  if (r === 'forgot') return authShell(`<form class="stack" id="forgot-f" novalidate><div class="authhead">${logoSvg(64)}<div><h1>Reset your password</h1><p class="muted small">We'll email you a link to choose a new one.</p></div></div>${formErr()}
+    <div id="fg-done" class="note good small" hidden role="status"></div>
+    <label class="f" for="fg-email">Email<input class="in" id="fg-email" type="email" autocomplete="email" inputmode="email" required value="${esc(sub.authEmail || '')}"></label>
+    <button class="btn primary big" type="submit" id="fg-go">Send reset link</button><a href="#login" class="btn ghost">Back to log in</a></form>`);
+  if (r === 'check-email') return authShell(`<div class="stack"><div class="authhead">${logoSvg(64)}<div><h1>Check your email</h1></div></div>
+    <p>We've sent a confirmation link to <b>${esc(sub.authEmail || 'your email')}</b>. Open it on this device to activate your account and continue to your fitness profile.</p>
+    <p class="small muted">${sub.maybeExisting ? 'If you already have a DrukFit account with this email, no new account was created. Log in or reset your password instead. ' : ''}No email after a few minutes? Check your spam folder or resend it.</p>
+    <button class="btn" data-act="resend-confirm">Resend confirmation email</button><a href="#login" class="btn primary">I've confirmed, log in</a></div>`);
+  return `<div class="welcome"><div class="welcome-hero">${logoFull(210)}<h1 class="welcome-title">Train with the strength of the Thunder Dragon</h1>
+      <p class="muted" style="max-width:34em">Your personal training plan, set-by-set workout logging, nutrition targets and progress reports, saved to your own private account on every device.</p>
+      <div class="welcome-cta"><a class="btn primary big" href="#signup">Sign up</a><a class="btn big" href="#login">Log in</a></div></div>
+    <div class="welcome-feats">${[['dumbbell','Plans that adapt','Weights and reps adjust from what you actually lift.'],['food','Nutrition that fits','Calorie and protein targets with meal plans in grams.'],['chart','Progress you can see','Charts, personal records and weekly reports.'],['check','Private by design','Only you can see your records. Export or delete anytime.']].map(([ic, t, d]) => `<div class="wfeat"><span class="medal">${I(ic)}</span><div><b>${t}</b><div class="small muted">${d}</div></div></div>`).join('')}</div>
+    <p class="tiny faint" style="text-align:center"><a href="#privacy" class="link">Privacy policy</a> · <a href="#terms" class="link">Terms of use</a> · General fitness guidance, not medical advice.</p></div>`;
+}
+function setBusy(btn, busy, label){ if (!btn) return; if (busy){ btn.dataset.label = btn.textContent; btn.innerHTML = `<span class="spin sm" aria-hidden="true"></span> ${label || 'Please wait…'}`; btn.disabled = true; } else { btn.textContent = btn.dataset.label || label || 'Continue'; btn.disabled = false; } }
+function showErr(msg, focusId){ const el = document.getElementById('f-err'); if (el){ el.textContent = msg; el.hidden = !msg; } if (focusId){ const f = document.getElementById(focusId); if (f){ f.focus(); f.setAttribute('aria-invalid', 'true'); } } }
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function pwProblem(pw){ if (pw.length < 8) return 'Password must be at least 8 characters.'; if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return 'Password needs at least one letter and one number.'; if (pw.length > 72) return 'Password must be 72 characters or fewer.'; return null; }
+ACTIONS['pw-toggle'] = el => { const i = document.getElementById(el.dataset.for); const show = i.type === 'password'; i.type = show ? 'text' : 'password'; el.textContent = show ? 'Hide' : 'Show'; el.setAttribute('aria-pressed', String(show)); el.setAttribute('aria-label', show ? 'Hide password' : 'Show password'); };
+document.addEventListener('submit', async e => {
+  const id = e.target.id; if (!['login-f','signup-f','forgot-f','reset-f'].includes(id)) return; e.preventDefault(); showErr('');
+  const v = x => (document.getElementById(x) || {}).value || '';
+  if (id === 'login-f'){
+    const email = v('li-email').trim(), pw = v('li-pw'); sub.authEmail = email;
+    if (!EMAIL_RE.test(email)) return showErr('Enter a valid email address.', 'li-email'); if (!pw) return showErr('Enter your password.', 'li-pw');
+    const b = document.getElementById('li-go'); setBusy(b, true, 'Logging in…');
+    try {
+      const prevUid = Cloud.uid; await Auth.signIn(email, pw); Cloud.notice = null; Cloud.flow = null;
+      if (Cloud.phase === 'expired' && prevUid === Cloud.uid){ Cloud.phase = 'ready'; render(); Cloud.pull().then(() => Cloud.flush()); toast('Logged in. Syncing your changes…'); return; }
+      location.hash = 'dashboard'; await Cloud.startUser(Auth.user);
+    } catch(err){ setBusy(b, false, 'Log in'); showErr(friendlyAuthError(err)); const rs = document.getElementById('li-resend'); if (rs) rs.hidden = !(err.code === 'email_not_confirmed' || /not confirmed/i.test(err.message || '')); }
+  }
+  if (id === 'signup-f'){
+    const name = v('su-name').trim(), email = v('su-email').trim(), pw = v('su-pw'), pw2 = v('su-pw2');
+    if (!name) return showErr('Enter your name.', 'su-name'); if (!EMAIL_RE.test(email)) return showErr('Enter a valid email address.', 'su-email');
+    const pp = pwProblem(pw); if (pp) return showErr(pp, 'su-pw'); if (pw !== pw2) return showErr('Passwords don\'t match.', 'su-pw2');
+    if (!document.getElementById('su-terms').checked) return showErr('Please accept the Terms of use and Privacy policy to continue.', 'su-terms');
+    const b = document.getElementById('su-go'); setBusy(b, true, 'Creating account…');
+    try {
+      const r = await Auth.signUp(email, pw, name); sub.authEmail = email;
+      if (r.session){ location.hash = 'dashboard'; await Cloud.startUser(Auth.user); toast('Account created'); }
+      else { sub.maybeExisting = r.maybeExisting; location.hash = 'check-email'; }
+    } catch(err){ setBusy(b, false, 'Create account'); showErr(err.code === 'user_already_exists' || /already registered/i.test(err.message || '') ? 'Couldn\'t create an account with that email. If you already have one, log in or reset your password.' : friendlyAuthError(err)); }
+  }
+  if (id === 'forgot-f'){
+    const email = v('fg-email').trim(); sub.authEmail = email; if (!EMAIL_RE.test(email)) return showErr('Enter a valid email address.', 'fg-email');
+    const b = document.getElementById('fg-go'); setBusy(b, true, 'Sending…');
+    try { await Auth.recover(email); } catch(err){ if (err.offline || err.status === 429){ setBusy(b, false, 'Send reset link'); return showErr(friendlyAuthError(err)); } }
+    setBusy(b, false, 'Send again'); const d = document.getElementById('fg-done'); d.hidden = false; d.textContent = `If an account exists for ${email}, a password reset link is on its way. Open it on this device.`;
+  }
+  if (id === 'reset-f'){
+    const pw = v('rp-pw'), pw2 = v('rp-pw2'); const pp = pwProblem(pw); if (pp) return showErr(pp, 'rp-pw'); if (pw !== pw2) return showErr('Passwords don\'t match.', 'rp-pw2');
+    const b = document.getElementById('rp-go'); setBusy(b, true, 'Saving…');
+    try { await Auth.updateUser({ password: pw }); Cloud.flow = null; toast('Password updated'); location.hash = 'dashboard'; if (Cloud.phase !== 'ready') await Cloud.startUser(Auth.user); else render(); }
+    catch(err){ setBusy(b, false, 'Save new password'); showErr(friendlyAuthError(err)); }
+  }
+});
+ACTIONS['resend-confirm'] = async el => { const email = sub.authEmail || ((document.getElementById('li-email') || {}).value || '').trim(); if (!EMAIL_RE.test(email)){ toast('Enter your email first'); return; } el.disabled = true; try { await Auth.resend(email); toast('Confirmation email sent'); } catch(e){ toast(friendlyAuthError(e)); } setTimeout(() => el.disabled = false, 20000); };
+ACTIONS['cloud-retry'] = async () => { Cloud.phase = 'loading'; render(); await Cloud.startUser(Auth.user); };
+ACTIONS['cloud-logout'] = () => cloudLogout(false);
+
+/* ---------- Device data → account (explicit, never automatic) ---------- */
+function migrationView(){
+  const L = legacyData(); const accountHasData = !!Store.docs.profile;
+  if (!L) return '';
+  return `<div class="stack"><div class="authhead">${logoSvg(64)}<div><h1>DrukFit data found on this device</h1><p class="muted small">Saved here before accounts existed. It isn't linked to any account.</p></div></div>
+    <div class="rtiles">${[['Profile', esc(L.name || 'Unnamed')], ['Workouts', L.sessions], ['Weigh-ins', L.weighIns], ['Food days', L.foodDays], ['Photos', L.photos.length]].map(([l, v]) => `<div class="rtile"><span class="eyebrow">${l}</span><b class="num">${v}</b></div>`).join('')}</div>
+    ${L.demo ? `<div class="note warn small">This looks like the demo data, not real training records.</div>` : ''}
+    <p class="small">Is this your data? If so, ${accountHasData ? 'merge it into your account. Records from both are kept, and where the same item exists in both, the newer one wins.' : 'add it to your account so it\'s saved permanently and available on every device.'} Only do this on your own phone.</p>
+    <button class="btn primary big" data-act="migrate-go">${accountHasData ? 'Merge into my account' : 'Add to my account'}</button>
+    <button class="btn ghost" data-act="migrate-skip">Not mine, leave it on this device</button>
+    <p class="tiny faint">Signed in as ${esc(Auth.user.email)}. The device copy isn't deleted unless you choose to remove it afterwards.</p></div>`;
+}
+ACTIONS['migrate-skip'] = () => { Store.lsSet('_migrateDone', { at: Date.now(), action: 'skipped' }); Cloud.phase = 'ready'; render(); Cloud.flush(); };
+ACTIONS['migrate-go'] = async el => {
+  const L = legacyData(); if (!L) return; setBusy(el, true, 'Adding to your account…');
+  Object.entries(L.docs).forEach(([k, v]) => { if (!v || k.startsWith('_')) return; if (L.demo && k === 'settings') delete v.demo; Store.docs[k] = Store.docs[k] ? mergeDoc(k, Store.docs[k], v) : v; Store.docs[k]._u = Math.max(Store.docs[k]._u || 0, v._u || 0) || Date.now(); Store.lsSet(k, Store.docs[k]); Store.pending.add(k); });
+  L.photos.forEach(id => { const d = localStorage.getItem(LEGACY_NS + 'photo-' + id); if (d){ try { Store.lsSet('photo-' + id, JSON.parse(d)); } catch(e){} const ph = ((L.docs.body || {}).photos || []).find(p => p.id === id); Cloud.meta.photoQueue.push({ id, date: ph ? ph.date : isoDate() }); } });
+  Store.saveIndex(); Cloud.saveMeta(); Cloud.phase = 'ready'; rebuild();
+  await Cloud.flush();
+  if (Store.pending.size || Cloud.meta.photoQueue.length){ setBusy(el, false, 'Try again'); Cloud.phase = 'migrate'; toast('Couldn\'t finish saving to your account. Nothing was lost; try again when you\'re online.'); return; }
+  Store.lsSet('_migrateDone', { at: Date.now(), action: 'imported' });
+  render();
+  openSheet(`<div class="stack"><h2>Added to your account</h2><p class="small">Your records are now saved to <b>${esc(Auth.user.email)}</b>. You can remove the old device-only copy, or keep it as a backup.</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-act="close-sheet">Keep it</button><button class="btn danger" data-act="legacy-remove">Remove device-only copy</button></div></div>`);
+};
+ACTIONS['legacy-remove'] = () => { const ks = []; for (let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if (k && k.startsWith(LEGACY_NS)) ks.push(k); } ks.forEach(k => { try { localStorage.removeItem(k); } catch(e){} }); closeSheet(); toast('Device-only copy removed'); };
+
+/* ---------- Account settings ---------- */
+function accountCard(){
+  if (!CLOUD || !Auth.user) return '';
+  const u = Auth.user; const verified = !!(u.email_confirmed_at || u.confirmed_at); const pendingEmail = u.new_email;
+  const name = (u.user_metadata || {}).display_name || (S.profile && S.profile.name) || '';
+  return `<div class="card" id="account"><div class="between"><h3 style="margin:0">Account</h3><span class="chip ${Store.status === 'ok' ? 'good' : Store.status === 'error' ? 'bad' : ''}">${esc(SYNC_LABEL[Store.status] || '')}</span></div><div class="list" style="margin-top:6px">
+    <div class="li"><div class="grow"><div class="t">${esc(name || 'No display name')}</div><div class="small muted">Display name</div></div><button class="btn sm" data-act="acct-name">Edit</button></div>
+    <div class="li"><div class="grow"><div class="t" style="overflow-wrap:anywhere">${esc(u.email)} ${verified ? '<span class="chip good">Verified</span>' : '<span class="chip bad">Not verified</span>'}</div><div class="small muted">${pendingEmail ? 'Change to ' + esc(pendingEmail) + ' is waiting for confirmation' : 'Email address'}</div></div><button class="btn sm" data-act="acct-email">Change</button></div>
+    <div class="li"><div class="grow"><div class="t">Password</div><div class="small muted">Change your password</div></div><button class="btn sm" data-act="acct-pw">Change</button></div>
+    <div class="li"><div class="grow"><div class="t">Sync</div><div class="small muted">${Cloud.meta.lastSync ? 'Last synced ' + new Date(Cloud.meta.lastSync).toLocaleString('en-AU', { dateStyle:'medium', timeStyle:'short' }) : 'Not synced yet'}${Store.pending.size ? ' · ' + Store.pending.size + ' change' + (Store.pending.size > 1 ? 's' : '') + ' waiting' : ''}</div></div><button class="btn sm" data-act="sync-now">Sync now</button></div>
+    <div class="li"><div class="grow"><div class="t">Log out</div><div class="small muted">Your records stay saved in your account</div></div><button class="btn sm" data-act="acct-logout">Log out</button></div></div></div>`;
+}
+ACTIONS['sync-now'] = async () => { setSync('busy'); const ok = await Cloud.pull(); await Cloud.flush(); if (ok && !Store.pending.size){ toast('Everything is saved to your account'); } render(); };
+ACTIONS['acct-name'] = () => { const cur = (Auth.user.user_metadata || {}).display_name || (S.profile && S.profile.name) || '';
+  openSheet(`<form class="stack" id="an-f"><h2>Display name</h2>${formErr()}<label class="f" for="an-n">Name<input class="in" id="an-n" maxlength="60" required value="${esc(cur)}"></label><button class="btn primary" type="submit" id="an-go">Save</button></form>`, sh => sh.querySelector('#an-f').onsubmit = async e => {
+    e.preventDefault(); const n = sh.querySelector('#an-n').value.trim(); if (!n) return showErr('Enter a name.'); const b = sh.querySelector('#an-go'); setBusy(b, true, 'Saving…');
+    try { await Auth.updateUser({ data:{ ...(Auth.user.user_metadata || {}), display_name: n } }); await Auth.api('/rest/v1/profiles?id=eq.' + Cloud.uid, { method:'PATCH', json:{ display_name: n, updated_at: new Date().toISOString() }, headers:{ Prefer:'return=minimal' } }); if (S.profile) saveDoc('profile', { ...S.profile, name: n }); closeSheet(); toast('Name saved'); render(); }
+    catch(err){ setBusy(b, false, 'Save'); showErr(friendlyAuthError(err)); } }); };
+ACTIONS['acct-email'] = () => openSheet(`<form class="stack" id="ae-f"><h2>Change email</h2><p class="small muted">We'll send confirmation links${' '}to your new address (and, depending on your settings, your current one). The change happens once you open them.</p>${formErr()}
+  <label class="f" for="ae-e">New email<input class="in" id="ae-e" type="email" autocomplete="email" required></label><button class="btn primary" type="submit" id="ae-go">Send confirmation</button></form>`, sh => sh.querySelector('#ae-f').onsubmit = async e => {
+    e.preventDefault(); const em = sh.querySelector('#ae-e').value.trim(); if (!EMAIL_RE.test(em)) return showErr('Enter a valid email address.'); if (em.toLowerCase() === Auth.user.email.toLowerCase()) return showErr('That\'s already your email.');
+    const b = sh.querySelector('#ae-go'); setBusy(b, true, 'Sending…'); try { await Auth.updateUser({ email: em }); closeSheet(); toast('Check your email to confirm the change'); render(); } catch(err){ setBusy(b, false, 'Send confirmation'); showErr(friendlyAuthError(err)); } });
+ACTIONS['acct-pw'] = () => openSheet(`<form class="stack" id="ap-f" novalidate><h2>Change password</h2>${formErr()}${pwField('ap-cur', 'Current password', 'current-password')}${pwField('ap-new', 'New password', 'new-password', 'At least 8 characters, with letters and numbers.')}${pwField('ap-new2', 'Confirm new password', 'new-password')}<button class="btn primary" type="submit" id="ap-go">Update password</button><a class="small link" href="#forgot" data-act="close-sheet">Forgot your current password?</a></form>`, sh => sh.querySelector('#ap-f').onsubmit = async e => {
+    e.preventDefault(); const cur = sh.querySelector('#ap-cur').value, n = sh.querySelector('#ap-new').value, n2 = sh.querySelector('#ap-new2').value;
+    if (!cur) return showErr('Enter your current password.', 'ap-cur'); const pp = pwProblem(n); if (pp) return showErr(pp, 'ap-new'); if (n !== n2) return showErr('New passwords don\'t match.', 'ap-new2');
+    const b = sh.querySelector('#ap-go'); setBusy(b, true, 'Updating…');
+    try { await Auth.verifyPassword(cur); } catch(err){ setBusy(b, false, 'Update password'); return showErr(err.offline ? friendlyAuthError(err) : 'Your current password is incorrect.', 'ap-cur'); }
+    try { await Auth.updateUser({ password: n }); closeSheet(); toast('Password updated'); } catch(err){ setBusy(b, false, 'Update password'); showErr(friendlyAuthError(err)); } });
+ACTIONS['acct-logout'] = () => cloudLogout(false);
+async function cloudLogout(force){
+  if (!force && Auth.session){ setSync('busy'); await Cloud.flush(); }
+  const unsaved = Store.pending.size + Cloud.meta.photoQueue.length;
+  if (!force && unsaved){
+    openSheet(`<div class="stack"><h2>Some changes aren't saved yet</h2><p class="small">${unsaved} change${unsaved > 1 ? 's' : ''} on this device haven't reached your account, usually because you're offline. If you log out now, they'll be lost.</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-act="close-sheet">Stay logged in</button><button class="btn danger" data-act="acct-logout-force">Log out anyway</button></div></div>`);
+    return;
+  }
+  closeSheet(); clearTimeout(Cloud.timer); await Auth.signOut(); Store.clearLocal(); Cloud.phase = 'out'; Cloud.flow = null; Cloud.meta = { revs:{}, pending:[], photoQueue:[], lastSync:0 };
+  OB.p = null; OB.step = 0; rebuild(); setSync('local'); location.hash = 'welcome'; render(); toast('Logged out');
+}
+ACTIONS['acct-logout-force'] = () => cloudLogout(true);
+if (CLOUD){
+  ACTIONS['wipe'] = () => openSheet(`<form class="stack" id="del-f" novalidate><h2>Delete account permanently?</h2><p class="small">This deletes your DrukFit account, profile, plans, every workout, food log, measurement, report and progress photo. It can't be undone. <a href="#settings" class="link" data-act="export">Export your data first</a> if you want a copy.</p>${formErr()}
+    ${pwField('del-pw', 'Password', 'current-password')}<label class="f" for="del-t">Type DELETE to confirm<input class="in" id="del-t" autocomplete="off" required></label>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-act="close-sheet">Cancel</button><button class="btn danger" type="submit" id="del-go">Delete my account</button></div></form>`, sh => sh.querySelector('#del-f').onsubmit = async e => {
+      e.preventDefault(); if (sh.querySelector('#del-t').value.trim().toUpperCase() !== 'DELETE') return showErr('Type DELETE to confirm.', 'del-t');
+      const b = sh.querySelector('#del-go'); setBusy(b, true, 'Deleting…');
+      try { await Auth.verifyPassword(sh.querySelector('#del-pw').value); } catch(err){ setBusy(b, false, 'Delete my account'); return showErr(err.offline ? friendlyAuthError(err) : 'Password is incorrect.', 'del-pw'); }
+      try {
+        const files = await Auth.api('/storage/v1/object/list/progress-photos', { method:'POST', json:{ prefix: Cloud.uid, limit: 1000, offset: 0 } });
+        const paths = (files || []).filter(f => f.name).map(f => Cloud.uid + '/' + f.name);
+        if (paths.length) await Auth.api('/storage/v1/object/progress-photos', { method:'DELETE', json:{ prefixes: paths } });
+        await Auth.api('/rest/v1/rpc/delete_my_account', { method:'POST', json:{} });
+      } catch(err){ setBusy(b, false, 'Delete my account'); return showErr('Couldn\'t delete your account: ' + friendlyAuthError(err) + ' Nothing has been deleted from this device.'); }
+      closeSheet(); Store.clearLocal(); Auth.persist(null); Cloud.phase = 'out'; Cloud.meta = { revs:{}, pending:[], photoQueue:[], lastSync:0 }; rebuild(); location.hash = 'welcome'; render(); toast('Your account and data have been deleted');
+    });
+  ACTIONS['sync-info'] = () => openSheet(`<div class="stack"><h2>Your data</h2>
+    ${Store.status === 'error' ? `<div class="note bad">${I('info')}<div class="small">Some changes couldn't be saved to your account yet. They're safe on this device and DrukFit keeps retrying.</div></div>` : Store.status === 'offline' ? `<div class="note warn">${I('info')}<div class="small">You're offline. Changes are saved on this device and sync automatically when you reconnect.</div></div>` : `<div class="note good">${I('check')}<div class="small">Saved to your private DrukFit account (${esc(Auth.user ? Auth.user.email : '')}) and available on any device you log in on.</div></div>`}
+    <p class="small muted">${Cloud.meta.lastSync ? 'Last synced ' + new Date(Cloud.meta.lastSync).toLocaleTimeString('en-AU', { hour:'numeric', minute:'2-digit' }) + '. ' : ''}${Store.pending.size ? Store.pending.size + ' change(s) waiting to upload.' : 'Nothing waiting to upload.'}</p>
+    <div class="row"><button class="btn primary" data-act="sync-now">Sync now</button><button class="btn ghost" data-act="close-sheet">Close</button></div></div>`);
+}
+
+/* ---------- Privacy policy & terms ---------- */
+function legalView(which){
+  const back = Auth.session ? '#settings' : '#welcome';
+  const P = which === 'privacy' ? `<h1>Privacy policy</h1><p class="small muted">Version ${TERMS_VERSION} · DrukFit (drukfit.app)</p>
+    <h3>What we collect</h3><ul><li><b>Account:</b> your email address, display name and a securely hashed password (we never see or store your actual password).</li><li><b>Fitness data you enter:</b> profile and goals, training plans, workouts (exercises, sets, reps, weights, rest), personal records, nutrition plans and food logs, body weight and measurements, progress photos, sleep and recovery logs, weekly reports and app settings.</li><li>Only what you choose to enter. Age, sex, measurements and photos are optional.</li></ul>
+    <h3>How it's stored and protected</h3><ul><li>Data is stored with Supabase (hosted PostgreSQL and file storage), sent over HTTPS and encrypted at rest by the provider.</li><li>Database row-level security means each member can read and change only their own records. Progress photos are kept in a private storage folder that only your account can access.</li><li>A copy is kept on your device so the app works offline. Logging out removes it from that device.</li></ul>
+    <h3>How it's used</h3><ul><li>Only to run DrukFit for you: your plan, suggestions, charts and reports. All suggestions are calculated in the app.</li><li>Your data is not sold, shared with advertisers or used for advertising. There are no third-party trackers.</li><li>Emails are sent only for your account (confirmation, password reset, email change).</li></ul>
+    <h3>Your choices</h3><ul><li><b>Export:</b> Profile &amp; Settings → Export downloads all your records.</li><li><b>Delete:</b> Profile &amp; Settings → Delete account permanently removes your account, records and photos.</li><li>You can edit or delete individual records at any time.</li></ul>
+    <h3>Health information</h3><p>DrukFit is a general fitness tool, not a medical service. Measurements and nutrition logs are treated as private personal data.</p>
+    <h3>Contact</h3><p>Questions or requests about your data: contact the DrukFit operator at the email address you received your account emails from.</p>`
+  : `<h1>Terms of use</h1><p class="small muted">Version ${TERMS_VERSION} · DrukFit (drukfit.app)</p>
+    <ul><li>DrukFit provides general fitness and nutrition guidance for healthy adults. It is <b>not medical advice</b> and doesn't replace a doctor, physiotherapist or dietitian.</li><li>Check with a health professional before starting if you have an injury, a medical condition, are pregnant or have a history of disordered eating. Stop any exercise that causes pain.</li><li>Weights, calorie and macro targets are estimates. Use your judgement and train safely.</li><li>Keep your password private. You're responsible for activity on your account.</li><li>Don't misuse the service, attempt to access other members' data, or upload unlawful content.</li><li>The service is provided as is. We may update features or these terms; continued use means you accept the current version.</li><li>You can stop using DrukFit and delete your account at any time.</li></ul>`;
+  return `<div class="authwrap" style="max-width:720px"><div class="authcard legal"><a href="${back}" class="small link">← Back</a>${P}</div></div>`;
+}
 /* ===== Boot ===== */
 (function boot(){
   Store.loadLocal(); rebuild();
@@ -2702,7 +3212,7 @@ function renderCompare(a, b){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "bebb5e71c8";
+window.DRUKFIT_VERSION = "a2e2f407c8";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
@@ -2713,7 +3223,8 @@ if ('serviceWorker' in navigator) {
       reg.addEventListener('updatefound', () => { const w = reg.installing; w && w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) offer(w); }); });
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
     }).catch(e => console.warn('SW registration failed', e));
-    let reloading = false; navigator.serviceWorker.addEventListener('controllerchange', () => { if (!reloading) { reloading = true; location.reload(); } });
+    const hadController = !!navigator.serviceWorker.controller; // first install must not reload the page
+    let reloading = false; navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadController && !reloading) { reloading = true; location.reload(); } });
   });
 }
 </script>
