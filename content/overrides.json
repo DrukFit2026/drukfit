@@ -1,0 +1,7 @@
+{
+  "_help": "Admin quality controls. hide: article ids to remove from the feed. reviewed: article ids you have checked (shows 'Reviewed by DrukFit'). notes: optional editor note per id. manual: verified articles to publish by hand (all fields required). Article ids are shown in feed.json.",
+  "hide": [],
+  "reviewed": [],
+  "notes": {},
+  "manual": []
+}

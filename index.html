@@ -393,6 +393,114 @@ button.avatar[aria-expanded="true"]{ border-color:var(--accent); }
 .logout-btn{ color:var(--bad) !important; border-color:color-mix(in srgb,var(--bad) 35%,var(--line)); }
 
 @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
+
+/* ---- DrukFit Daily ---- */
+.dtabs button{ display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+.dtabs button svg{ width:17px; height:17px; }
+.dtabs button.on svg{ color:var(--accent); }
+@media (max-width:440px){ .dtabs button{ padding:0 6px; gap:5px; font-size:.9rem; } .dtabs button svg{ width:15px; height:15px; } }
+@media (max-width:360px){ .dtabs button svg{ display:none; } }
+.btnlink{ background:none; border:0; padding:6px 0; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font-size:.85rem; }
+.btnlink svg{ width:15px; height:15px; }
+.dcheck-grid, .dch-grid{ display:grid; gap:14px; grid-template-columns:1fr; align-items:start; }
+@media (min-width:1000px){ .dcheck-grid{ grid-template-columns:1.35fr 1fr; } .dch-grid{ grid-template-columns:1.2fr 1fr; } }
+.dhero{ display:flex; flex-direction:column; gap:10px; background:radial-gradient(110% 120% at 100% 0%, color-mix(in srgb,var(--accent) 16%, transparent), transparent 60%), var(--surface); }
+.dhero-top{ display:flex; gap:14px; justify-content:space-between; align-items:center; }
+.dhero h2{ font-size:1.7rem; text-transform:uppercase; margin:4px 0 6px; }
+.dgoal{ align-items:flex-start; transition:background .3s; }
+.dgoal .t{ font-weight:600; }
+.dgoal.done .t{ color:var(--muted); text-decoration:line-through; text-decoration-color:color-mix(in srgb,var(--good) 60%,transparent); }
+.dgoal-r{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:none; }
+.dtick{ width:36px; height:36px; flex:none; border-radius:50%; border:2px solid var(--line); background:transparent; color:transparent; display:grid; place-items:center; cursor:pointer; transition:background .2s, border-color .2s, transform .15s; }
+.dtick svg{ width:18px; height:18px; }
+span.dtick{ cursor:default; }
+span.dtick.locked{ color:var(--faint); border-style:dashed; }
+.dgoal.done .dtick{ background:var(--good); border-color:var(--good); color:#06261a; }
+.dgoal.pop .dtick{ animation:dpop .45s ease-out; }
+@keyframes dpop{ 0%{ transform:scale(.6); } 60%{ transform:scale(1.18); } 100%{ transform:scale(1); } }
+.dsug{ margin-top:6px; color:var(--ink); background:var(--accent-soft); border-radius:9px; padding:7px 9px; display:flex; gap:6px; align-items:flex-start; }
+.dsug svg{ width:15px; height:15px; flex:none; margin-top:2px; color:var(--accent); }
+.dul{ margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px; }
+.dtip-t{ font-size:1.05rem; margin:10px 0; line-height:1.5; }
+.dmini{ display:flex; gap:12px; align-items:center; color:inherit; text-decoration:none; }
+.dmini .t{ font-weight:700; line-height:1.25; }
+.dmini .dart.thumb{ width:76px; height:56px; border-radius:10px; flex:none; }
+.dweek{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; height:110px; margin-top:10px; }
+.dweek > div{ display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:3px; font-size:.7rem; color:var(--muted); }
+.dweek i{ width:70%; max-width:26px; border-radius:6px 6px 3px 3px; background:color-mix(in srgb,var(--accent) 55%,var(--raised)); }
+.dweek i.full{ background:var(--good); }
+.dweek .today span{ color:var(--accent); font-weight:700; }
+.dstatus{ font-size:.82rem; color:var(--muted); display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
+.dstatus svg{ width:15px; height:15px; color:var(--good); }
+.dstatus.warn svg{ color:var(--accent); }
+.dsearch{ display:flex; gap:8px; }
+.dsearch .in{ flex:1; }
+.dchips{ display:flex; gap:7px; overflow-x:auto; scrollbar-width:none; margin-inline:-16px; padding:2px 16px 4px; scroll-snap-type:x proximity; }
+.dchips::-webkit-scrollbar{ display:none; }
+.dchip{ flex:none; scroll-snap-align:start; display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:0 14px; border-radius:99px; border:1px solid var(--line); background:var(--surface); color:var(--muted); font-weight:600; font-size:.85rem; cursor:pointer; }
+.dchip svg{ width:14px; height:14px; }
+.dchip.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.dgrid{ display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr)); }
+.dcard{ background:var(--surface); border:1px solid var(--line); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease; animation:rise .4s ease-out both; }
+.dcard:hover{ transform:translateY(-2px); }
+.dcard-art{ display:block; padding:0; border:0; background:none; cursor:pointer; aspect-ratio:16/8.5; overflow:hidden; }
+.dart{ display:block; width:100%; height:100%; }
+.dart.wide{ border-radius:16px; aspect-ratio:16/7; height:auto; }
+.dcard-b{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.dcard h3{ font-size:1.32rem; line-height:1.15; }
+.dtitle{ background:none; border:0; padding:0; text-align:left; cursor:pointer; color:inherit; font:inherit; }
+.dtitle:hover{ color:var(--accent); }
+.dsum{ color:var(--muted); font-size:.92rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.dmeta{ gap:8px; }
+.dmeta svg{ width:13px; height:13px; vertical-align:-2px; }
+.dcat{ font-family:var(--f-display); text-transform:uppercase; letter-spacing:.1em; font-size:.74rem; font-weight:600; color:var(--dc, var(--accent)); }
+.dbadge{ font-size:.7rem; font-weight:700; letter-spacing:.03em; padding:3px 8px; border-radius:6px; background:var(--raised); color:var(--ink); text-transform:uppercase; }
+.dbadge.r{ background:var(--blue-soft); color:var(--blue); } .dbadge.g{ background:var(--good-soft); color:var(--good); } .dbadge.e{ background:var(--accent-soft); color:var(--accent); }
+.dbadge.n{ background:color-mix(in srgb,var(--teal) 16%,transparent); color:var(--teal); } .dbadge.m{ background:color-mix(in srgb,var(--orange) 16%,transparent); color:var(--orange); }
+.dreason{ color:var(--accent); display:flex; gap:5px; align-items:center; } .dreason svg{ width:12px; height:12px; }
+.dsrc{ margin-top:auto; padding-top:6px; border-top:1px dashed var(--line); }
+.dact{ gap:6px; } .dact .btn svg{ width:16px; height:16px; }
+.dsave.on{ color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%,var(--line)); } .dsave.on svg{ fill:currentColor; }
+@media (min-width:760px){
+  .dcard.feat{ grid-column:1 / -1; flex-direction:row; }
+  .dcard.feat .dcard-art{ flex:1.15; aspect-ratio:auto; min-height:300px; }
+  .dcard.feat .dcard-b{ flex:1; padding:24px 26px; justify-content:center; }
+  .dcard.feat h3{ font-size:2rem; }
+  .dcard.feat .dsum{ -webkit-line-clamp:5; font-size:1rem; }
+}
+.skel .sk{ height:12px; border-radius:6px; background:linear-gradient(90deg,var(--raised) 25%,color-mix(in srgb,var(--raised) 50%,var(--surface)) 50%,var(--raised) 75%); background-size:200% 100%; animation:shim 1.3s linear infinite; }
+.skel .sk-art{ height:auto; aspect-ratio:16/8.5; border-radius:0; } .skel .sk-h{ height:22px; width:85%; }
+@keyframes shim{ to{ background-position:-200% 0; } }
+.ddisc{ display:flex; gap:6px; align-items:flex-start; } .ddisc svg{ width:14px; height:14px; flex:none; margin-top:2px; }
+.dsheet h2{ font-size:1.7rem; }
+.dquote{ margin:0; padding:10px 14px; border-left:3px solid var(--dc, var(--accent)); background:var(--raised); border-radius:0 10px 10px 0; font-style:italic; }
+.dquote cite{ display:block; font-style:normal; font-size:.75rem; color:var(--muted); margin-top:6px; }
+.dlim{ background:var(--accent-soft); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; }
+.dfacts{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; background:var(--raised); border-radius:12px; padding:12px; }
+.dfacts > div{ display:flex; flex-direction:column; gap:2px; min-width:0; overflow-wrap:anywhere; }
+.dapply{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; border:1px solid color-mix(in srgb,var(--good) 35%,var(--line)); background:var(--good-soft); border-radius:14px; padding:12px 14px; }
+.ddot{ width:12px; height:12px; border-radius:50%; flex:none; }
+.dseg{ flex:none; padding:3px; } .dseg button{ min-height:32px; padding:0 9px; font-size:.8rem; }
+.dswitch{ width:22px; height:22px; accent-color:var(--accent); flex:none; }
+.dchal{ display:flex; flex-direction:column; gap:10px; background:radial-gradient(120% 120% at 100% 0%, color-mix(in srgb,var(--orange) 18%, transparent), transparent 60%), var(--surface); }
+.dchal.done{ background:radial-gradient(120% 120% at 100% 0%, var(--good-soft), transparent 60%), var(--surface); }
+.dchal h2{ font-size:1.8rem; text-transform:uppercase; }
+.dsteps{ margin:0; padding-left:22px; display:flex; flex-direction:column; gap:6px; }
+.chip.big{ padding:8px 14px; font-size:.9rem; }
+.dstats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
+.dstats > div{ display:flex; flex-direction:column; gap:2px; align-items:center; }
+.dstats b{ font-size:2rem; font-family:var(--f-display); }
+.dstreak{ display:grid; grid-template-columns:repeat(14,1fr); gap:4px; margin-top:12px; }
+.dstreak i{ height:12px; border-radius:4px; background:var(--raised); }
+.dstreak i.on{ background:var(--accent); } .dstreak i.today{ outline:2px solid var(--muted); outline-offset:1px; }
+.dbadges{ display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-top:10px; }
+.dbadge2{ display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; padding:12px 8px; border-radius:14px; border:1px solid var(--line); opacity:.55; }
+.dbadge2.on{ opacity:1; border-color:color-mix(in srgb,var(--accent) 45%,var(--line)); background:var(--accent-soft); }
+.dbadge2 .medal{ width:42px; height:42px; } .dbadge2:not(.on) .medal{ background:var(--raised); color:var(--faint); }
+.tiny.good{ color:var(--good); font-weight:700; }
+.ddash{ display:flex; gap:14px; align-items:center; color:inherit; text-decoration:none; border-color:color-mix(in srgb,var(--accent) 30%,var(--line)); background:linear-gradient(120deg, var(--accent-soft), var(--surface) 65%); }
+.ddash .t{ font-weight:700; } .ddash .eyebrow svg{ width:15px; height:15px; vertical-align:-3px; color:var(--accent); }
+@media (prefers-reduced-motion: reduce){ .dcard, .dgoal.pop .dtick, .skel .sk{ animation:none !important; } .dcard:hover{ transform:none; } }
 </style>
 <script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-"};</script></head><body><div id="app"></div>
 <script>
@@ -1325,6 +1433,214 @@ function compareWeeks(S, wsA, wsB){
   return COMPARE_ROWS.map(([k, label, unit]) => ({ key:k, label, unit, a: a[k] == null ? null : (k === 'avgRpe' ? r1(a[k]) : a[k]), b: b[k] == null ? null : (k === 'avgRpe' ? r1(b[k]) : b[k]) }));
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { buildWeekReport, weekMetrics, compareWeeks, weeksWithData, exerciseProgression, nextWeekPlan });
+/* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
+   Completion is only ever derived from what the member actually recorded, or from an explicit
+   tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
+
+const DAILY_CATEGORIES = {
+  strength:   { label:'Strength & muscle',   short:'Strength' },
+  technique:  { label:'Workout technique',   short:'Technique' },
+  research:   { label:'Sports science',      short:'Research' },
+  nutrition:  { label:'Nutrition',           short:'Nutrition' },
+  recovery:   { label:'Recovery & sleep',    short:'Recovery' },
+  tech:       { label:'Fitness technology',  short:'Tech' },
+  motivation: { label:'Motivation & habits', short:'Motivation' },
+  beginner:   { label:'Beginner basics',     short:'Basics' },
+};
+const DAILY_GOAL_DEFS = {
+  workout:  { label:'Complete today\'s workout',        icon:'dumbbell', route:'train' },
+  sets:     { label:'Log all your working sets',         icon:'check',    route:'train' },
+  protein:  { label:'Reach your protein target',         icon:'food',     route:'nutrition' },
+  calories: { label:'Stay within your calorie range',    icon:'flame',    route:'nutrition' },
+  water:    { label:'Reach your water target',           icon:'drop',     route:'dashboard' },
+  move:     { label:'Cardio, walk or mobility',          icon:'trend',    route:'train' },
+  sleep:    { label:'Record last night\'s sleep',        icon:'moon',     route:'dashboard' },
+  tip:      { label:'Read today\'s coaching tip',        icon:'info',     route:'daily' },
+  challenge:{ label:'Complete today\'s challenge',       icon:'star',     route:'daily/challenges' },
+};
+const NO_MANUAL = ['tip', 'challenge']; // these have their own explicit actions
+
+function dailyHash(s){ let h = 2166136261; for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function dailyRecord(S, date){ return ((S.daily || {})[date]) || {}; }
+function dailyCfg(S){ return S.dailycfg || {}; }
+
+/* What did the member record on this date? */
+function dayContext(S, date){
+  const today = isoDate();
+  const sess = sessionsOn(S, date);
+  const lifting = sess.filter(s => s.workoutId !== 'mobility' && (s.exercises || []).some(e => (e.sets || []).length));
+  let plannedId = null;
+  if (date === today){ const tp = todayPlan(S); plannedId = tp && tp.workoutId; }
+  else if (date > today){ const p = projectSchedule(S, today, daysBetween(today, date) + 1).find(x => x.date === date); plannedId = p && p.workoutId; }
+  const training = !!plannedId || lifting.length > 0 || (date < today && isTrainingDay(S, date));
+  const planned = plannedId ? workoutById(S, plannedId) : (lifting[0] && workoutById(S, lifting[0].workoutId));
+  const P = S.profile || {}; const T = S.profile ? nutritionTargets(P) : null;
+  const fd = (S.food || {})[date] || {}; const ft = foodDayTotals(fd); const entries = (fd.entries || []).length;
+  const hab = (S.habits || {})[date] || {};
+  const allSets = lifting.length > 0 && lifting.every(s => s.exercises.length && s.exercises.every(e => (e.sets || []).length >= ((e.plan && e.plan.sets) || 1)));
+  const setsLogged = sum(lifting.map(s => s.exercises.reduce((n, e) => n + (e.sets || []).length, 0)));
+  const setsPlanned = sum(lifting.map(s => s.exercises.reduce((n, e) => n + ((e.plan && e.plan.sets) || (e.sets || []).length), 0)));
+  const mobilityDone = sess.some(s => s.workoutId === 'mobility');
+  const moved = mobilityDone || sess.some(s => s.cardio && s.cardio.done) || (hab.steps || 0) >= 6000;
+  const rep = (S.reportsDoc && S.reportsDoc.saved) || {};
+  const reviewed = Object.values(rep).some(r => r && r.savedAt && isoDate(new Date(r.savedAt)) === date);
+  return { date, today, training, planned, plannedCardio: !!(planned && planned.cardio), lifting, workoutDone: lifting.length > 0, allSets, setsLogged, setsPlanned,
+    T, ft, entries, water: fd.water || 0, hab, moved, mobilityDone, reviewed, goal: P.goal, limitations: P.limitations || [] };
+}
+
+/* ---------- Challenges ---------- */
+const DAILY_CHALLENGES = [
+  { id:'plan-workout', when:'train', mins:'45-75', title:'Complete your planned workout', purpose:'Consistency with the plan drives progress more than any single hard session.',
+    steps:['Start today\'s workout from the Train tab','Warm up, then work through each exercise','Tap Finish to save it'], criteria:'Completes automatically when you finish and save today\'s scheduled workout.', auto: c => c.workoutDone },
+  { id:'all-sets', when:'train', mins:'during your workout', title:'Record every working set', purpose:'Accurate logs are what make next session\'s weight suggestions reliable.',
+    steps:['Enter weight and reps for each set','Tick each set as you finish it','Finish and save the workout'], criteria:'Completes automatically when every planned set in today\'s saved workout is ticked.', auto: c => c.allSets },
+  { id:'learn-technique', when:'any', mins:'5', title:'Learn one exercise technique', purpose:'Good technique keeps the right muscles working and lowers injury risk.', self:true,
+    steps:['Open an exercise from today\'s plan or the Exercises library','Read the technique cues and watch a demonstration','Practise a few slow reps with little or no load'], criteria:'Tap "I did this" once you have reviewed the cues. This is self-reported.' },
+  { id:'balanced-meal', when:'any', mins:'20-30', title:'Prepare a balanced meal', purpose:'A plate with vegetables, a protein food and a whole-grain or starchy carb makes daily targets easier to reach.', self:true,
+    steps:['Fill about half the plate with vegetables or fruit','Add a palm-sized protein food','Add a portion of whole grains or starchy carbs','Log it in your food diary'], criteria:'Tap "I did this" after preparing it. This is self-reported.', source:{ name:'USDA MyPlate', url:'https://www.myplate.gov/' } },
+  { id:'recovery-walk', when:'rest', mins:'20', title:'Take a 20-minute recovery walk', purpose:'Easy movement on rest days supports recovery without adding training stress.',
+    steps:['Walk at a pace where you can still talk','Aim for about 20 minutes','Log today\'s steps on the dashboard'], criteria:'Completes automatically when you log 6,000+ steps, or tap "I did this".', auto: c => (c.hab.steps || 0) >= 6000, self:true },
+  { id:'mobility', when:'rest', mins:'10-15', title:'Do a short mobility routine', purpose:'Regular mobility work helps you reach good positions in your lifts.',
+    steps:['Start "Mobility & Recovery" from the Train tab','Move slowly and stay in a pain-free range','Finish to save it'], criteria:'Completes automatically when you finish the mobility session.', auto: c => c.mobilityDone, gentle:['knee','hip','back'] },
+  { id:'hydrate', when:'any', mins:'all day', title:'Reach your water target', purpose:'Steady hydration through the day supports training and recovery.', needsTargets:true,
+    steps:['Keep a water bottle nearby','Log water as you drink','Spread it through the day rather than all at once'], criteria:'Completes automatically when your logged water reaches your daily target.', auto: c => c.T && c.water >= c.T.water },
+  { id:'protein', when:'any', mins:'all day', title:'Hit your protein target', purpose:'Enough daily protein supports muscle repair and growth from your training.', needsTargets:true,
+    steps:['Include a protein food at each meal','Log meals as you eat them','Check the Nutrition tab in the afternoon and close any gap'], criteria:'Completes automatically when logged protein reaches 90% of your target.', auto: c => c.T && c.ft.p >= c.T.p * 0.9 },
+  { id:'sleep-log', when:'any', mins:'1', title:'Log last night\'s sleep', purpose:'Sleep is one of the biggest drivers of recovery, and tracking it shows patterns.',
+    steps:['Open "More for today" on the dashboard','Enter how many hours you slept'], criteria:'Completes automatically when you record last night\'s sleep.', auto: c => c.hab.sleep != null },
+  { id:'review-week', when:'any', mins:'5', title:'Review your weekly progress', purpose:'A quick weekly review shows what is working and what to adjust.',
+    steps:['Open Weekly Reports','Generate this week\'s report and read the coach review','Tap Save report'], criteria:'Completes automatically when you save a weekly report today.', auto: c => c.reviewed },
+];
+const WEEKLY_CHALLENGES = [
+  { id:'all-sessions', title:'Complete every planned session this week', purpose:'Showing up for the whole plan is the foundation of progress.', check: (S, ws) => { const w = weekStats(S, ws); return { done: w.done >= w.target && w.target > 0, progress: Math.min(w.done, w.target), target: w.target }; } },
+  { id:'food-4', title:'Log your food on 4 days this week', purpose:'A few days of logs make nutrition advice accurate.', check: (S, ws) => { let n = 0; for (let i = 0; i < 7; i++){ const fd = (S.food || {})[addDays(ws, i)]; if (fd && (fd.entries || []).length) n++; } return { done: n >= 4, progress: Math.min(n, 4), target: 4 }; } },
+  { id:'sleep-5', title:'Log your sleep on 5 nights this week', purpose:'Five nights of data is enough to spot a sleep pattern.', check: (S, ws) => { let n = 0; for (let i = 0; i < 7; i++){ const h = (S.habits || {})[addDays(ws, i)]; if (h && h.sleep != null) n++; } return { done: n >= 5, progress: Math.min(n, 5), target: 5 }; } },
+];
+function eligibleChallenges(S, c){
+  return DAILY_CHALLENGES.filter(ch => (ch.when === 'any' || (ch.when === 'train') === c.training) && (!ch.needsTargets || c.T));
+}
+function dailyChallenge(S, date, uidSeed){
+  const c = dayContext(S, date); const rec = dailyRecord(S, date);
+  let ch = rec.ch && DAILY_CHALLENGES.find(x => x.id === rec.ch.id);
+  if (!ch){ const pool = eligibleChallenges(S, c); ch = pool[dailyHash(date + ':' + (uidSeed || '')) % pool.length]; }
+  const autoDone = !!(ch.auto && ch.auto(c));
+  const selfDone = !!(rec.ch && rec.ch.id === ch.id && rec.ch.self);
+  const gentle = ch.gentle && ch.gentle.some(l => c.limitations.includes(l));
+  return { ...ch, done: autoDone || selfDone, how: autoDone ? 'auto' : selfDone ? 'self' : null, gentleNote: gentle ? 'You have marked an area to protect. Skip any position that is uncomfortable and keep every movement pain-free.' : null };
+}
+function weeklyChallenge(S, ws){ const n = WEEKLY_CHALLENGES.length; const k = ((Math.floor(daysBetween('2026-01-05', ws) / 7) % n) + n) % n; const w = WEEKLY_CHALLENGES[k]; return { ...w, ...w.check(S, ws), ws }; }
+
+/* ---------- Daily goals ---------- */
+function dailyGoals(S, date, uidSeed){
+  const c = dayContext(S, date); const rec = dailyRecord(S, date); const manual = rec.manual || {}; const disabled = dailyCfg(S).disabled || {};
+  const g = [];
+  const add = (id, applicable, autoDone, detail, notApplicableWhy) => { if (!applicable || disabled[id]) return; const m = !!manual[id] && !NO_MANUAL.includes(id); g.push({ id, ...DAILY_GOAL_DEFS[id], detail, done: !!autoDone || m, how: autoDone ? 'auto' : m ? 'manual' : null }); };
+  add('workout', c.training, c.workoutDone, c.workoutDone ? 'Saved' : c.planned ? c.planned.name : 'Scheduled');
+  add('sets', c.training, c.allSets, c.setsPlanned ? `${c.setsLogged} of ${c.setsPlanned} planned sets` : 'Tick each set as you go');
+  add('protein', !!c.T, c.T && c.ft.p >= c.T.p * 0.9, c.T ? `${Math.round(c.ft.p)} / ${c.T.p} g` : '');
+  add('calories', !!c.T && ['fat_loss','recomp','muscle_gain'].includes(c.goal), c.T && c.entries >= 2 && Math.abs(c.ft.kcal - c.T.kcal) <= c.T.kcal * 0.1, c.T ? `${Math.round(c.ft.kcal)} of ${c.T.kcal} kcal (±10%)` : '');
+  add('water', !!c.T, c.T && c.water >= c.T.water, c.T ? `${c.water} / ${c.T.water} ml` : '');
+  add('move', c.plannedCardio || !c.training, c.moved, c.training ? 'Optional cardio finisher' : 'Rest day: 20-min walk or mobility');
+  add('sleep', true, c.hab.sleep != null, c.hab.sleep != null ? `${c.hab.sleep} h recorded` : 'Not recorded yet');
+  add('tip', true, !!rec.tipRead, rec.tipRead ? 'Read' : 'One minute');
+  const ch = dailyChallenge(S, date, uidSeed); add('challenge', true, ch.done, ch.title);
+  const done = g.filter(x => x.done).length;
+  return { date, training: c.training, goals: g, done, total: g.length, pct: g.length ? Math.round(done / g.length * 100) : 0, challenge: ch, ctx: c };
+}
+function goalSuggestion(id, c){
+  const T = c.T;
+  return ({
+    workout: c.date === c.today ? 'If today got away from you, that\'s fine: the session moves to your next training day automatically. No need to double up.' : 'Missed sessions roll forward, so just pick up the next one.',
+    sets: 'Next time, tick each set as you finish it. Even rough numbers make tomorrow\'s weight suggestions better.',
+    protein: T ? `You're about ${Math.max(0, Math.round(T.p - c.ft.p))} g short. A Greek yoghurt (~20 g), a whey shake (~23 g) or 150 g chicken (~46 g) would close most of it.` : '',
+    calories: 'Close is good enough. Aim for most days near target rather than a perfect day.',
+    water: 'Keep a bottle in sight and log a glass with each meal.',
+    move: 'Even a 10-minute walk after a meal counts as movement.',
+    sleep: 'Log it in "More for today" on the dashboard. It takes ten seconds.',
+    tip: 'Today\'s tip takes about a minute to read.',
+    challenge: 'Challenges are optional. Pick it up tomorrow if today is busy.',
+  })[id] || '';
+}
+
+/* ---------- History, streaks, points, badges (all derived from records) ---------- */
+function dailyHistory(S, uidSeed, days){
+  const out = []; const today = isoDate(); const start = S.profile && S.profile.createdAt ? S.profile.createdAt : addDays(today, -(days || 60));
+  for (let i = 0; i < (days || 60); i++){ const d = addDays(today, -i); if (d < start) break; out.push(dailyGoals(S, d, uidSeed)); }
+  return out; // newest first
+}
+function dailyStats(S, uidSeed){
+  const h = dailyHistory(S, uidSeed, 120);
+  let streak = 0; for (let i = 0; i < h.length; i++){ if (h[i].challenge.done) streak++; else if (i === 0) continue; else break; }
+  let best = 0, run = 0; [...h].reverse().forEach(x => { if (x.challenge.done){ run++; best = Math.max(best, run); } else run = 0; });
+  const tipsRead = h.filter(x => x.goals.some(g => g.id === 'tip' && g.done)).length;
+  const challenges = h.filter(x => x.challenge.done).length;
+  const points = sum(h.map(x => (x.challenge.done ? 10 : 0) + x.goals.filter(g => g.done && g.id !== 'challenge').length * 2));
+  const fullDays = h.filter(x => x.total > 0 && x.done === x.total).length;
+  const weeklyDone = (() => { let n = 0; for (let k = 1; k <= 8; k++){ const ws = addDays(weekStart(isoDate()), -7 * k); if (S.profile && S.profile.createdAt && addDays(ws, 6) < S.profile.createdAt) break; if (weeklyChallenge(S, ws).done) n++; } return n + (weeklyChallenge(S, weekStart(isoDate())).done ? 1 : 0); })();
+  const badges = [
+    { id:'first', label:'First challenge', earned: challenges >= 1, icon:'star' },
+    { id:'streak3', label:'3-day streak', earned: best >= 3, icon:'flame' },
+    { id:'streak7', label:'7-day streak', earned: best >= 7, icon:'flame' },
+    { id:'streak14', label:'14-day streak', earned: best >= 14, icon:'trophy' },
+    { id:'learner', label:'Curious mind · 5 tips read', earned: tipsRead >= 5, icon:'info' },
+    { id:'fullday', label:'Full house · every goal in a day', earned: fullDays >= 1, icon:'check' },
+    { id:'weekly', label:'Weekly challenge complete', earned: weeklyDone >= 1, icon:'cal' },
+  ];
+  return { streak, best, points, tipsRead, challenges, fullDays, badges, history: h };
+}
+
+/* ---------- Coaching tips (educational tips cite checked sources) ---------- */
+const DAILY_TIPS = [
+  { id:'t-cdc', cat:'beginner', text:'Adults are advised to get about 150 minutes of moderate activity a week plus muscle-strengthening on at least 2 days. Your lifting days count toward the second part.', source:{ name:'CDC: Adult Activity: An Overview', url:'https://www.cdc.gov/physical-activity-basics/guidelines/adults.html' } },
+  { id:'t-sleep', cat:'recovery', text:'Experts recommend 7 to 9 hours of sleep a night for adults. Consistent bed and wake times make that easier to hit.', source:{ name:'NHLBI, NIH: How Much Sleep Is Enough?', url:'https://www.nhlbi.nih.gov/health/sleep/how-much-sleep' } },
+  { id:'t-protein', cat:'nutrition', goals:['muscle_gain','recomp','strength','fat_loss'], text:'In a large 2018 meta-analysis, extra protein added to resistance training gains, but the benefit levelled off at around 1.6 g per kg of body weight a day for most people.', source:{ name:'Morton et al., Br J Sports Med 2018', url:'https://doi.org/10.1136/bjsports-2017-097608' } },
+  { id:'t-volume', cat:'strength', goals:['muscle_gain','recomp','strength'], text:'A 2017 meta-analysis found a dose-response pattern: more weekly sets per muscle tended to bring more muscle growth. Add sets gradually rather than all at once.', source:{ name:'Schoenfeld, Ogborn & Krieger, J Sports Sci 2017', url:'https://doi.org/10.1080/02640414.2016.1210197' } },
+  { id:'t-rir', cat:'technique', text:'Leaving one to three reps "in the tank" on most sets lets you train hard while keeping technique clean. Your RPE log tracks this.' },
+  { id:'t-warmup', cat:'technique', text:'Ramp-up sets on your first lift (light, then about half, then about three-quarters of your working weight) prepare you without tiring you out.' },
+  { id:'t-overload', cat:'strength', text:'Progress doesn\'t have to mean more weight. One more rep at the same weight is progress too, and it\'s how DrukFit decides when to add load.' },
+  { id:'t-walk', cat:'recovery', text:'Easy walking on rest days adds activity without the fatigue of another hard session.' },
+  { id:'t-plate', cat:'nutrition', text:'A simple plate check: half vegetables or fruit, a quarter protein, a quarter grains or starchy carbs.', source:{ name:'USDA MyPlate', url:'https://www.myplate.gov/' } },
+  { id:'t-habit', cat:'motivation', text:'Missed a day? Don\'t try to make it up. Just do the next planned session. Consistency over weeks beats any single workout.' },
+  { id:'t-who', cat:'beginner', text:'The WHO notes that muscle strengthening benefits everyone, at any age. Starting light and building up is how every strong lifter began.', source:{ name:'WHO: Physical activity fact sheet', url:'https://www.who.int/news-room/fact-sheets/detail/physical-activity' } },
+  { id:'t-pain', cat:'technique', text:'Muscle effort and joint pain are different. Burning in the muscle is normal; sharp or joint pain means stop and swap the exercise.' },
+];
+function dailyTip(S, date, uidSeed){
+  const goal = (S.profile || {}).goal; const pool = DAILY_TIPS.filter(t => !t.goals || t.goals.includes(goal));
+  const t = pool[dailyHash('tip:' + date + ':' + (uidSeed || '')) % pool.length];
+  let personal = null;
+  try { const wr = weeklyReport(S, date); personal = wr.recs && wr.recs[0]; } catch(e){}
+  return { ...t, personal };
+}
+
+/* ---------- Feed ranking ---------- */
+const GOAL_TOPICS = {
+  muscle_gain: { strength:2, nutrition:1.5, recovery:1, technique:1 }, fat_loss: { nutrition:2, motivation:1.5, beginner:0.5, recovery:0.5 },
+  strength: { strength:2, technique:1.5, research:1 }, recomp: { strength:1.5, nutrition:1.5, recovery:0.5 },
+  endurance: { research:1, recovery:1, tech:1 }, general: { beginner:1, motivation:1, recovery:1 },
+};
+const GOAL_WORDS = { muscle_gain:'building muscle', fat_loss:'losing fat', strength:'getting stronger', recomp:'recomposition', endurance:'endurance', general:'general fitness' };
+function rankFeed(items, profile, prefs, now){
+  profile = profile || {}; prefs = prefs || {}; now = now || isoDate();
+  const gw = GOAL_TOPICS[profile.goal] || {};
+  return items.filter(a => prefs[a.category] !== 'hide' && !a.hidden).map(a => {
+    let score = 1, reason = null, best = 0;
+    const g = gw[a.category] || 0; if (g){ score += g; if (g > best){ best = g; reason = `Because you're focusing on ${GOAL_WORDS[profile.goal]}`; } }
+    if (profile.experience === 'beginner' && (a.category === 'beginner' || a.category === 'technique')){ score += 2; if (2 > best){ best = 2; reason = 'Good for building your foundations'; } }
+    if (profile.experience === 'advanced' && (a.category === 'research' || a.kind === 'research')){ score += 1.5; if (1.5 > best){ best = 1.5; reason = 'Recent research for experienced lifters'; } }
+    if (prefs[a.category] === 'more'){ score += 2.5; if (2.5 > best){ best = 2.5; reason = 'A topic you follow'; } }
+    const age = a.published ? daysBetween(a.published.slice(0, 10), now) : 9999;
+    if (a.kind === 'research' || a.kind === 'news'){ const fresh = Math.max(0, 1.5 - age / 40); score += fresh; if (age <= 14 && fresh > best){ best = fresh; reason = 'New in the last two weeks'; } }
+    else score += 0.4;
+    if (a.reviewed) score += 0.3;
+    return { ...a, score: Math.round(score * 100) / 100, reason };
+  }).sort((x, y) => y.score - x.score || (y.published || '').localeCompare(x.published || ''));
+}
+function articleBadge(a, now){
+  now = now || isoDate();
+  if (a.kind === 'research'){ const age = a.published ? daysBetween(a.published.slice(0, 10), now) : 9999; return age <= 90 ? 'New research' : 'Research'; }
+  return { guidance:'Established guidance', news:'Health news', editorial:'Editorial', motivation:'Motivation' }[a.kind] || 'Article';
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { dailyGoals, dailyChallenge, weeklyChallenge, dailyStats, dailyTip, rankFeed, articleBadge, dayContext, DAILY_CHALLENGES, DAILY_TIPS, goalSuggestion, eligibleChallenges });
 /* ===== Store: on-device copy + private cloud sync through the db capability ===== */
 const LS = 'ironlog:';
 const Store = {
@@ -1409,17 +1725,18 @@ const SYNC_LABEL = { ok:'Saved', busy:'Saving…', local:'This device', offline:
 function setSync(s){ Store.status = s; const el = document.getElementById('sync'); if (el){ el.className = 'sync ' + s; el.querySelector('span').textContent = SYNC_LABEL[s] || s; } }
 
 /* ===== Derived state ===== */
-const S = { profile:null, settings:{}, plan:null, sched:{}, active:null, sessions:[], body:{entries:[],photos:[]}, food:{}, habits:{}, mealplan:null, coach:{msgs:[]}, custom:{} };
+const S = { daily:{}, dailycfg:{}, bookmarks:{ items:{} }, reportsDoc:{}, profile:null, settings:{}, plan:null, sched:{}, active:null, sessions:[], body:{entries:[],photos:[]}, food:{}, habits:{}, mealplan:null, coach:{msgs:[]}, custom:{} };
 function rebuild(){
   const D = Store.docs;
   S.profile = D.profile || null; S.settings = D.settings || { theme:'dark', sound:true, useAI:true, reminders:{ weighin:true, water:true, review:true, meals:true, workout:true } };
   S.plan = D.plan || null; S.sched = D.sched || {}; S.active = D.active && D.active.session ? D.active.session : null;
   S.body = D.body || { entries:[], photos:[] }; S.mealplan = D.mealplan || null; S.coach = D.coach || { msgs:[] }; S.custom = (D.custom || {}).foods || {};
-  S.sessions = []; S.food = {}; S.habits = {};
+  S.sessions = []; S.food = {}; S.habits = {}; S.daily = {}; S.dailycfg = D.dailycfg || {}; S.bookmarks = D.bookmarks || { items:{} }; S.reportsDoc = D.reports || {};
   Object.keys(D).forEach(k => {
     if (k.startsWith('sess-')) S.sessions.push(...(D[k].list || []));
     else if (k.startsWith('food-')) Object.assign(S.food, D[k].days || {});
     else if (k.startsWith('habit-')) Object.assign(S.habits, D[k].days || {});
+    else if (k.startsWith('daily-')) Object.assign(S.daily, D[k].days || {});
   });
   S.sessions.sort((a,b) => a.start - b.start);
   applyTheme();
@@ -1468,7 +1785,7 @@ const ICON_PATHS = {
   edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>', star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', scale:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 9a5 5 0 018 0l-3 3"/>',
   pause:'<path d="M8 5v14M16 5v14"/>', flame:'<path d="M12 3c1 4 6 6 6 11a6 6 0 01-12 0c0-3 2-4 3-7 1 2 2 3 3 3 0-3-1-5 0-7z"/>',
-  bolt:'<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', link:'<path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/>',
+  bolt:'<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>', daily:'<path d="M2 20h20"/><path d="M4 20l5.5-8 3 4 2.5-3 5 7"/><circle cx="16.5" cy="6.5" r="2.5"/><path d="M16.5 1.5v1M21.5 6.5h-1M20 3l-.7.7"/>', link:'<path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/>',
 };
 const I = (n, cls) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i ${cls||''}">${ICON_PATHS[n]||''}</svg>`;
 
@@ -1550,15 +1867,15 @@ function confirmSheet(title, body, okLabel, onOk, danger){
 
 /* ===== Router & shell ===== */
 const NAV = [
-  ['dashboard','Dashboard','home'], ['workouts','My Workouts','dumbbell'], ['train','Start Workout','play'], ['nutrition','Nutrition','food'],
+  ['dashboard','Dashboard','home'], ['daily','DrukFit Daily','daily'], ['workouts','My Workouts','dumbbell'], ['train','Start Workout','play'], ['nutrition','Nutrition','food'],
   ['progress','Progress','trend'], ['reports','Weekly Reports','cal'], ['analytics','Analytics','chart'], ['coach','AI Coach','bot'], ['settings','Profile & Settings','user'],
 ];
-const TABS = [['dashboard','Today','home'], ['workouts','Plan','dumbbell'], ['train','Train','play'], ['nutrition','Food','food'], ['progress','Progress','trend'], ['more','More','dots']];
+const TABS = [['dashboard','Today','home'], ['daily','Daily','daily'], ['train','Train','play'], ['nutrition','Food','food'], ['progress','Progress','trend'], ['more','More','dots']];
 let route = 'dashboard', sub = {};
 function go(r){ if (location.hash !== '#' + r) location.hash = r; else { route = r; render(); } }
 window.addEventListener('hashchange', () => { route = (location.hash || '#dashboard').slice(1) || 'dashboard'; closeSheet(); render(); window.scrollTo(0,0); });
 const VIEWS = {};
-const TITLES = { dashboard:'Today', workouts:'My Workouts', train:'Workout', nutrition:'Nutrition', progress:'Progress', analytics:'Analytics', coach:'AI Coach', settings:'Profile & Settings', summary:'Workout complete', reports:'Weekly Reports' };
+const TITLES = { dashboard:'Today', workouts:'My Workouts', train:'Workout', nutrition:'Nutrition', progress:'Progress', analytics:'Analytics', coach:'AI Coach', settings:'Profile & Settings', summary:'Workout complete', reports:'Weekly Reports', daily:'DrukFit Daily' };
 function shell(){
   const app = document.getElementById('app'); app.className = 'app';
   const live = !!S.active;
@@ -1585,7 +1902,7 @@ function render(){
   document.querySelector('.tabbar').hidden = false; document.querySelector('.side').hidden = false;
   const [r, arg] = route.split('/');
   const view = VIEWS[r] || VIEWS.dashboard;
-  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === r || (['reports','analytics','coach','settings','more'].includes(r) && a.dataset.nav === 'more') || (r === 'summary' && a.dataset.nav === 'train')));
+  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === r || (['reports','analytics','coach','settings','more','workouts'].includes(r) && a.dataset.nav === 'more' && !a.closest('.side')) || (r === 'summary' && a.dataset.nav === 'train')));
   const live = !!S.active; const goEl = document.querySelector('.tabbar .go');
   if (goEl){ goEl.classList.toggle('live', live); goEl.querySelector('.dot').innerHTML = I(live ? 'clock' : 'play'); goEl.lastElementChild.textContent = live ? 'Live' : 'Train'; }
   main.innerHTML = view(arg);
@@ -2463,6 +2780,7 @@ VIEWS.dashboard = () => {
         <button class="qa-b" data-act="quick-weigh">${I('scale')}<span>Log weight</span></button>
         <a class="qa-b" href="#reports">${I('cal')}<span>Weekly report</span></a>
       </div></div>
+    ${typeof dailyDashCard === 'function' ? dailyDashCard() : ''}
     ${dl.suggest ? `<div class="note warn">${I('bolt')}<div class="grow"><b>A lighter week would help.</b> <span class="small">${esc(dl.reasons.join(' '))}</span></div>${S.sched.deloadWeek === weekStart(isoDate()) ? '<span class="chip accent">Active</span>' : `<button class="btn sm" data-act="deload-on">Start deload week</button>`}</div>` : ''}
     <section aria-label="This week"><div class="section-h"><h3>This week</h3><a class="small link" href="#workouts">Schedule</a></div>
       <div class="daystrip" style="margin-top:8px">${strip.map(d => { const w = d.workoutId ? workoutById(S, d.workoutId) : null; const done = d.done && d.done.length; const missed = d.past && d.training && !done && P.createdAt && d.date >= P.createdAt; return `<div class="d ${d.date === isoDate() ? 'today' : ''} ${done ? 'done' : ''} ${w ? 'train' : ''}"><span class="faint">${DAY_NAMES[dowOf(d.date)]}</span><b>${parseISO(d.date).getDate()}</b><span class="w">${done ? '✓ ' + esc(d.done[0].name.split(' ')[0]) : w ? esc(w.name.replace('Full Body', 'FB')) : missed ? '<span style="color:var(--bad)">missed</span>' : 'rest'}</span></div>`; }).join('')}</div></section>
@@ -2512,7 +2830,7 @@ function dashChart(k){
 }
 
 /* ===== More (mobile) ===== */
-VIEWS.more = () => topbar('More') + `<div class="stack"><div class="card"><div class="list">${[['reports','Weekly Reports','cal','Generate, save, compare and export reports'],['analytics','Analytics','chart','Trends for volume, consistency, weight, protein and sleep'],['coach','AI Coach','bot','Ask about your training, food and progress'],['settings','Profile & Settings','user','Goals, theme, reminders, your data']].map(([r, l, ic, d]) => `<a class="li" href="#${r}" style="color:inherit;text-decoration:none"><span class="medal">${I(ic)}</span><div class="grow"><div class="t">${l}</div><div class="small muted">${d}</div></div>${I('down', 'faint rot')}</a>`).join('')}${typeof CLOUD !== 'undefined' && CLOUD ? `<button class="li li-btn" data-act="logout-ask"><span class="medal out">${I('logout')}</span><div class="grow"><div class="t">Log out</div><div class="small muted">${esc(Auth.user ? Auth.user.email : '')}</div></div></button>` : ''}</div></div>
+VIEWS.more = () => topbar('More') + `<div class="stack"><div class="card"><div class="list">${[['workouts','My Workouts','dumbbell','Your plan, schedule, history and exercise library'],['reports','Weekly Reports','cal','Generate, save, compare and export reports'],['analytics','Analytics','chart','Trends for volume, consistency, weight, protein and sleep'],['coach','AI Coach','bot','Ask about your training, food and progress'],['settings','Profile & Settings','user','Goals, theme, reminders, your data']].map(([r, l, ic, d]) => `<a class="li" href="#${r}" style="color:inherit;text-decoration:none"><span class="medal">${I(ic)}</span><div class="grow"><div class="t">${l}</div><div class="small muted">${d}</div></div>${I('down', 'faint rot')}</a>`).join('')}${typeof CLOUD !== 'undefined' && CLOUD ? `<button class="li li-btn" data-act="logout-ask"><span class="medal out">${I('logout')}</span><div class="grow"><div class="t">Log out</div><div class="small muted">${esc(Auth.user ? Auth.user.email : '')}</div></div></button>` : ''}</div></div>
   <div class="card row" style="gap:16px;align-items:center">${logoFull(110)}<div><b>DrukFit</b><div class="small muted">Train with the strength of the Thunder Dragon.</div></div></div></div>`;
 /* ===== Minimal PDF writer (no dependencies; Helvetica; vector shapes) ===== */
 const WINANSI = { '–':150, '—':151, '‘':145, '’':146, '“':147, '”':148, '•':149, '·':183, '°':176, '±':177, '×':215, '…':133, 'é':233, '½':189 };
@@ -2745,6 +3063,343 @@ function renderCompare(a, b){
     <div class="hscroll" style="margin-top:10px"><table class="t"><thead><tr><th>Metric</th><th>${fa}</th><th>${fb}</th><th>Change</th></tr></thead><tbody>${rows.map(r => { const d = r.a != null && r.b != null ? r1(r.b - r.a) : null; return `<tr><td>${r.label}</td><td class="num">${r.a == null ? '–' : (r.key === 'volume' ? fmtNum(r.a) : r.a) + r.unit}</td><td class="num">${r.b == null ? '–' : (r.key === 'volume' ? fmtNum(r.b) : r.b) + r.unit}</td><td class="num" style="color:${d > 0 && !lowerBetter.includes(r.key) ? 'var(--good)' : d < 0 ? 'var(--muted)' : ''}">${d == null ? '–' : (d > 0 ? '+' : '') + (r.key === 'volume' ? fmtNum(d) : d)}</td></tr>`; }).join('')}</tbody></table></div>
     ${items.length ? groupedBars(items.map(r => ({ label:r.label, a:r.a || 0, b:r.b || 0 }))) + `<div class="legend"><span><i style="background:var(--faint)"></i>${fa}</span><span><i style="background:var(--accent)"></i>${fb}</span></div>` : ''}</section>`;
 }
+/* ===== DrukFit Daily: Daily Check · Discover · Challenges ===== */
+const FEED_FALLBACK = {"items": [{"id": "ev-cdc-adult-activity", "kind": "guidance", "category": "beginner", "title": "How much activity do adults need?", "source": "Centers for Disease Control and Prevention (CDC)", "source_title": "Adult Activity: An Overview", "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html", "last_reviewed": "2023-12-20", "checked_on": "2026-10-13", "summary": "CDC's guidance for adults is about 150 minutes of moderate-intensity activity each week, plus muscle-strengthening activity on at least 2 days a week.", "why": "Your DrukFit lifting days cover the strength part. Walks, cardio finishers and active rest days help with the rest.", "apply": "workouts"}, {"id": "ev-nhlbi-sleep", "kind": "guidance", "category": "recovery", "title": "How much sleep is enough?", "source": "National Heart, Lung, and Blood Institute (NHLBI), NIH", "source_title": "How Much Sleep Is Enough?", "url": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep", "last_reviewed": "2022-03-24", "checked_on": "2026-10-13", "summary": "NHLBI says experts recommend that adults sleep between 7 and 9 hours a night, and notes that adults who regularly sleep less than 7 hours may have more health problems.", "why": "Sleep is when your body recovers from training. Logging it in DrukFit shows how it relates to how your sessions feel.", "apply": "recovery"}, {"id": "ev-who-activity", "kind": "guidance", "category": "motivation", "title": "Why regular physical activity matters", "source": "World Health Organization (WHO)", "source_title": "Physical activity (fact sheet)", "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity", "published": "2024-06-26", "checked_on": "2026-10-13", "summary": "WHO's fact sheet sets out the health benefits of regular physical activity and the risks of inactivity, and notes that muscle strengthening benefits everyone.", "why": "A useful reminder of why showing up for your plan matters beyond how you look.", "apply": "workouts"}, {"id": "ev-morton-2018-protein", "kind": "research", "category": "nutrition", "established": true, "title": "Does extra protein add to the gains from lifting?", "source": "British Journal of Sports Medicine", "source_title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults", "authors": "Morton RW, et al.", "study_type": "Systematic review and meta-analysis", "url": "https://doi.org/10.1136/bjsports-2017-097608", "doi": "10.1136/bjsports-2017-097608", "pubmed": "https://pubmed.ncbi.nlm.nih.gov/28698222/", "published_year": 2018, "checked_on": "2026-10-13", "summary": "This meta-analysis pooled randomised trials in healthy adults doing resistance training. Protein supplementation produced modestly larger gains in muscle mass and strength, and the extra benefit levelled off at around 1.6 g of protein per kg of body weight per day.", "limitations": ["Pools many smaller trials with different protocols, so individual results vary.", "The ~1.6 g/kg/day figure is an average; the confidence interval extended higher, so some people may benefit from more."], "why": "Your DrukFit protein target is set within this range for muscle-focused goals.", "apply": "nutrition"}, {"id": "ev-schoenfeld-2017-volume", "kind": "research", "category": "strength", "established": true, "title": "More weekly sets, more muscle? What the 2017 volume meta-analysis found", "source": "Journal of Sports Sciences", "source_title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis", "authors": "Schoenfeld BJ, Ogborn D, Krieger JW", "study_type": "Systematic review and meta-analysis", "url": "https://doi.org/10.1080/02640414.2016.1210197", "doi": "10.1080/02640414.2016.1210197", "published_year": 2017, "checked_on": "2026-10-13", "summary": "Pooling earlier studies, the authors found a graded dose-response: performing more weekly sets per muscle group tended to be associated with greater increases in muscle size.", "limitations": ["Based on a limited number of studies, many with small samples.", "Shows how results trended across studies; it doesn't set an exact best number of sets for any one person."], "why": "DrukFit adds load and reps before sets. If you plateau, adding a set to a lagging muscle is a reasonable next step.", "apply": "history"}, {"id": "ed-reps-before-weight", "kind": "editorial", "category": "technique", "title": "Why DrukFit adds reps before it adds weight", "source": "DrukFit editorial", "source_title": "How DrukFit's progression rules work", "url": "https://doi.org/10.1080/02640414.2016.1210197", "source_note": "Supporting research: Schoenfeld, Ogborn & Krieger, J Sports Sci 2017", "checked_on": "2026-10-13", "summary": "DrukFit suggests a heavier weight only once you hit the top of your rep range on every set at a manageable effort. Until then it asks for one more rep. Each small step is progress, and technique stays clean.", "why": "Knowing the rule makes the suggestions on your workout screen easier to trust.", "apply": "history"}, {"id": "mo-missed-session", "kind": "motivation", "category": "motivation", "title": "Missed a workout? Do the next one, not two", "source": "DrukFit editorial", "source_title": "Consistency over perfection", "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html", "source_note": "Weekly activity targets: CDC", "checked_on": "2026-10-13", "summary": "Weekly targets matter more than any single day. If a session slips, DrukFit moves it to your next training day, so you never need to cram two into one.", "why": "Guilt-free consistency is what keeps a plan going for months.", "apply": "workouts"}]}; // hand-checked evergreen library, embedded at build time
+const FEED_KEY = 'drukfit:feed';
+const DAILY_ACCENT = { strength:'#f5b83d', technique:'#3cc2b6', research:'#64a3ff', nutrition:'#41d39a', recovery:'#9d8cff', tech:'#4cc9f0', motivation:'#ff7a1a', beginner:'#e8c26a' };
+const safeUrl = u => /^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : null;
+function dailySeed(){ return (typeof CLOUD !== 'undefined' && CLOUD && Auth.user && Auth.user.id) || 'local'; }
+function relTime(ts){
+  if (!ts) return ''; const t = typeof ts === 'number' ? ts : Date.parse(ts); if (!t) return '';
+  const m = Math.round((Date.now() - t) / 60000);
+  if (m < 2) return 'just now'; if (m < 60) return m + ' minutes ago'; const h = Math.round(m / 60); if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago');
+  const d = Math.round(h / 24); return d === 1 ? 'yesterday' : d + ' days ago';
+}
+const fmtLong = d => { try { return parseISO(d.slice(0, 10)).toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric' }); } catch(e){ return d; } };
+
+/* ---------- Feed: fetched from feed.json (built by the scheduled pipeline), cached on device ---------- */
+const Feed = {
+  data:null, at:0, state:'idle', err:null, loaded:false,
+  init(){
+    if (this.loaded) return; this.loaded = true;
+    try { const c = JSON.parse(localStorage.getItem(FEED_KEY) || 'null'); if (c && c.feed && Array.isArray(c.feed.items)){ this.data = c.feed; this.at = c.at || 0; } } catch(e){}
+  },
+  load(force){
+    this.init();
+    if (this.state === 'loading') return;
+    if (!force && this.data && Date.now() - this.at < 20 * 60000) return;
+    if (!force && this.state === 'error' && Date.now() - (this.errAt || 0) < 60000) return;
+    this.state = 'loading';
+    const url = 'feed.json?v=' + Math.floor(Date.now() / 300000);
+    fetch(url, { cache:'no-store' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(f => {
+      if (!f || !Array.isArray(f.items) || !f.items.length) throw new Error('empty feed');
+      this.data = f; this.at = Date.now(); this.state = 'ok'; this.err = null;
+      try { localStorage.setItem(FEED_KEY, JSON.stringify({ at:this.at, feed:f })); } catch(e){}
+      dailyRerender();
+    }).catch(e => { this.state = 'error'; this.errAt = Date.now(); this.err = (typeof navigator !== 'undefined' && navigator.onLine === false) ? 'offline' : 'unavailable'; dailyRerender(); });
+  },
+  live(){ return !!(this.data && this.data.items && this.data.items.length); },
+  items(){ return this.live() ? this.data.items : ((FEED_FALLBACK && FEED_FALLBACK.items) || []).map(x => ({ ...x, evergreen:true, reviewed:true, status:'reviewed' })); },
+  loading(){ return this.state === 'loading' && !this.live(); },
+  find(id){ return this.items().find(x => x.id === id) || (((S.bookmarks || {}).items || {})[id] || {}).a || null; },
+};
+function dailyRerender(){
+  const [r] = route.split('/'); if (r !== 'daily' && r !== 'dashboard') return;
+  if (document.getElementById('scrim')) return; // don't disturb an open sheet
+  const a = document.activeElement; const keep = a && a.id === 'dq' ? [a.selectionStart, a.selectionEnd] : null;
+  render();
+  if (keep){ const n = document.getElementById('dq'); if (n){ n.focus(); try { n.setSelectionRange(keep[0], keep[1]); } catch(e){} } }
+}
+
+/* ---------- Saving (each member's own documents, synced through their account) ---------- */
+function saveDaily(date, patch){
+  const k = monthKey('daily-', date); const doc = JSON.parse(JSON.stringify(Store.get(k) || { days:{} })); doc.days = doc.days || {};
+  const cur = doc.days[date] || {};
+  doc.days[date] = { ...cur, ...patch, manual:{ ...(cur.manual || {}), ...(patch.manual || {}) }, _u: Date.now() };
+  saveDoc(k, doc);
+}
+function saveDailyCfg(patch){ saveDoc('dailycfg', { ...JSON.parse(JSON.stringify(S.dailycfg || {})), ...patch }); }
+function bookmarked(id){ return !!(((S.bookmarks || {}).items || {})[id]); }
+function toggleBookmark(id){
+  const doc = JSON.parse(JSON.stringify(Store.get('bookmarks') || { items:{} })); doc.items = doc.items || {}; doc.del = doc.del || []; doc.delT = doc.delT || {};
+  if (doc.items[id]){ delete doc.items[id]; if (!doc.del.includes(id)) doc.del.push(id); doc.delT[id] = Date.now(); saveDoc('bookmarks', doc); return false; }
+  const a = Feed.find(id); if (!a) return false;
+  const keep = ['id','kind','category','title','summary','source','source_title','url','published','published_year','last_reviewed','doi','study_type','participants','limitations','why','quote','quote_from','apply','evergreen','reviewed','status','authors','record_url','source_note','checked_on','link_checked'];
+  const snap = {}; keep.forEach(k => { if (a[k] != null) snap[k] = a[k]; });
+  doc.items[id] = { t: Date.now(), a: snap }; saveDoc('bookmarks', doc); return true;
+}
+
+/* ---------- Original illustrations (drawn in the app: no third-party images, no data shown) ---------- */
+const ART_ALT = {
+  strength:'Illustration: a barbell above Himalayan peaks, for strength and muscle-building articles',
+  technique:'Illustration: a kettlebell with a curved movement path over mountains, for exercise technique articles',
+  research:'Illustration: an open book and stars over mountain ridges, for sports science research',
+  nutrition:'Illustration: a balanced plate over green hills, for nutrition articles',
+  recovery:'Illustration: a crescent moon and stars over night-time mountains, for sleep and recovery articles',
+  tech:'Illustration: a fitness watch above mountain ridges, for fitness technology articles',
+  motivation:'Illustration: a rising sun and prayer flags over the mountains, for motivation and consistency',
+  beginner:'Illustration: a winding path to a flag on a summit, for beginner fitness basics',
+};
+function dArt(a, cls){
+  const cat = DAILY_ACCENT[a.category] ? a.category : 'beginner'; const col = DAILY_ACCENT[cat];
+  let s = dailyHash(a.id || a.title || cat) || 7; const rnd = () => { s = (Math.imul(s ^ (s >>> 15), 2246822507) + 0x9e3779b9) >>> 0; return s / 4294967296; };
+  const ridge = (base, amp, n) => { let d = `M0 240 L0 ${base - rnd() * amp * .5}`; for (let i = 1; i <= n; i++){ const x = i * 400 / n; const peak = i % 2 ? base - amp * (.55 + rnd() * .45) : base - amp * rnd() * .35; d += ` L${x.toFixed(0)} ${peak.toFixed(0)}`; } return d + ' L400 240 Z'; };
+  const night = cat === 'recovery';
+  const sky = night ? ['#141a3a', '#2b2f63'] : [col, '#1a2028'];
+  const motif = {
+    strength:`<g stroke="#fff8e6" stroke-width="7" stroke-linecap="round" opacity=".92"><line x1="252" y1="70" x2="368" y2="70"/></g><g fill="#fff8e6" opacity=".92"><rect x="262" y="46" width="11" height="48" rx="3"/><rect x="276" y="54" width="8" height="32" rx="3"/><rect x="347" y="46" width="11" height="48" rx="3"/><rect x="336" y="54" width="8" height="32" rx="3"/></g>`,
+    technique:`<path d="M240 104 C 262 30, 344 26, 368 92" fill="none" stroke="#e6fffb" stroke-width="3" stroke-dasharray="6 7" opacity=".8"/><path d="M362 80 l7 13 l-14 1" fill="none" stroke="#e6fffb" stroke-width="3" stroke-linejoin="round" opacity=".8"/><g fill="#e6fffb" opacity=".95"><path d="M286 64 a18 16 0 1 1 36 0 l-6 0 a12 10 0 1 0 -24 0z"/><circle cx="304" cy="88" r="24"/></g>`,
+    research:`<g fill="none" stroke="#eaf2ff" stroke-width="4" stroke-linejoin="round" opacity=".92"><path d="M250 58 q30 -12 55 2 v54 q-25 -14 -55 -2z"/><path d="M360 58 q-30 -12 -55 2 v54 q25 -14 55 -2z"/></g><g fill="#eaf2ff">${[0,1,2,3,4].map(() => `<circle cx="${(230 + rnd() * 160).toFixed(0)}" cy="${(16 + rnd() * 34).toFixed(0)}" r="${(1.5 + rnd() * 2).toFixed(1)}" opacity=".8"/>`).join('')}</g>`,
+    nutrition:`<g opacity=".95"><circle cx="306" cy="74" r="44" fill="#f4fff9"/><circle cx="306" cy="74" r="35" fill="none" stroke="#41d39a" stroke-width="2" opacity=".5"/><path d="M306 39 v70 M306 74 h35" stroke="#41d39a" stroke-width="3" opacity=".55"/><circle cx="288" cy="62" r="7" fill="#41d39a" opacity=".55"/><circle cx="283" cy="86" r="6" fill="#41d39a" opacity=".45"/><circle cx="324" cy="58" r="6" fill="#f5b83d" opacity=".6"/><rect x="316" y="82" width="16" height="10" rx="4" fill="#ff7a1a" opacity=".5"/></g>`,
+    recovery:`<path d="M330 32 a34 34 0 1 0 32 50 a27 27 0 1 1 -32 -50z" fill="#f2efff" opacity=".95"/><g fill="#f2efff">${[0,1,2,3,4,5].map(() => `<circle cx="${(20 + rnd() * 250).toFixed(0)}" cy="${(14 + rnd() * 60).toFixed(0)}" r="${(1 + rnd() * 1.6).toFixed(1)}" opacity=".7"/>`).join('')}</g>`,
+    tech:`<g fill="none" stroke="#e8fbff" stroke-width="4" opacity=".92"><rect x="282" y="40" width="48" height="58" rx="14"/><path d="M292 40 l4 -18 h20 l4 18 M292 98 l4 18 h20 l4 -18"/><circle cx="306" cy="69" r="13" stroke-width="3"/></g><g fill="none" stroke="#e8fbff" stroke-width="2" opacity=".35"><circle cx="306" cy="69" r="40"/><circle cx="306" cy="69" r="56"/></g>`,
+    motivation:`<circle cx="312" cy="96" r="38" fill="#fff1e0" opacity=".9"/><path d="M0 70 Q 200 120 400 64" fill="none" stroke="#fff1e0" stroke-width="1.5" opacity=".7"/>${['#2f6fd6','#fff1e0','#d93a2b','#41a35c','#f5b83d','#2f6fd6','#fff1e0','#d93a2b','#41a35c','#f5b83d'].map((c, i) => { const x = 22 + i * 38; const y = 70 + Math.sin(i / 9 * Math.PI) * 22 - i * .6; return `<path d="M${x} ${y.toFixed(0)} l16 1 l-2 18 l-14 -1z" fill="${c}" opacity=".85"/>`; }).join('')}`,
+    beginner:`<path d="M60 230 C 140 200, 120 160, 210 150 S 300 110, 318 70" fill="none" stroke="#fff8e6" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" opacity=".85"/><path d="M318 70 v-38" stroke="#fff8e6" stroke-width="3"/><path d="M318 32 l26 8 l-26 9z" fill="#ff7a1a"/>`,
+  }[cat];
+  const gid = 'g' + (a.id || cat).replace(/[^a-z0-9]/gi, '').slice(-10);
+  return `<svg class="dart ${cls || ''}" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(ART_ALT[cat])}"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}" stop-opacity="${night ? 1 : .55}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs>
+    <rect width="400" height="220" fill="#1a2028"/><rect width="400" height="220" fill="url(#${gid})"/>${motif}
+    <path d="${ridge(150, 70, 7)}" fill="${night ? '#3a3f7a' : col}" opacity=".35"/><path d="${ridge(178, 60, 9)}" fill="${night ? '#262a55' : col}" opacity=".55"/><path d="${ridge(205, 40, 11)}" fill="#11151b" opacity=".75"/></svg>`;
+}
+
+/* ---------- Shared bits ---------- */
+const KIND_CLASS = { research:'r', guidance:'g', news:'n', editorial:'e', motivation:'m' };
+function dBadge(a){ const b = a.kind === 'research' && a.established ? 'Landmark research' : articleBadge(a); return `<span class="dbadge ${KIND_CLASS[a.kind] || ''}">${esc(b)}</span>`; }
+function dDate(a){
+  if (a.published) return 'Published ' + fmtLong(a.published);
+  if (a.published_year) return 'Published ' + a.published_year;
+  if (a.last_reviewed) return 'Last reviewed ' + fmtLong(a.last_reviewed);
+  return '';
+}
+function dTabs(tab){
+  const tabs = [['check','Daily Check','check'],['discover','Discover','daily'],['challenges','Challenges','star']];
+  return `<div class="seg dtabs" role="tablist" aria-label="DrukFit Daily sections">${tabs.map(([k, l, ic]) => `<button role="tab" aria-selected="${tab === k}" class="${tab === k ? 'on' : ''}" data-act="go" data-to="daily${k === 'check' ? '' : '/' + k}">${I(ic)} ${l}</button>`).join('')}</div>`;
+}
+const DISCLAIMER = 'DrukFit Daily is general education, not individual medical advice. Talk to a doctor or qualified professional about your own health, injuries or medical conditions.';
+
+VIEWS.daily = arg => {
+  const tab = ['discover','challenges'].includes(arg) ? arg : 'check';
+  Feed.load();
+  const body = tab === 'discover' ? dDiscover() : tab === 'challenges' ? dChallenges() : dCheck();
+  return topbar('DrukFit Daily') + `<div class="stack daily">${dTabs(tab)}${body}</div>`;
+};
+
+/* ---------- Daily Check ---------- */
+let dPop = null;
+function dCheck(){
+  const today = isoDate(); const dg = dailyGoals(S, today, dailySeed()); const P = S.profile; const tip = dailyTip(S, today, dailySeed());
+  const rec = (S.daily || {})[today] || {}; const evening = new Date().getHours() >= 17;
+  const snapIds = dg.goals.filter(g => g.done).map(g => g.id).join(',');
+  if (!rec.snap || rec.snap.ids !== snapIds || rec.snap.total !== dg.total) after(() => setTimeout(() => saveDaily(today, { snap:{ done: dg.done, total: dg.total, ids: snapIds } }), 0)); // record today's score for history (no completion is created here)
+  const ranked = rankFeed(Feed.items(), P, (S.dailycfg || {}).topics || {}); const feat = ranked[0];
+  const hist = dailyHistory(S, dailySeed(), 7).slice().reverse();
+  const goalRow = g => {
+    const canTick = !NO_MANUAL.includes(g.id) && g.how !== 'auto';
+    const how = g.how === 'auto' ? '<span class="chip good">Auto · from your log</span>' : g.how === 'manual' ? '<span class="chip">Ticked by you</span>' : '';
+    const sug = !g.done && evening ? goalSuggestion(g.id, dg.ctx) : '';
+    return `<div class="li dgoal ${g.done ? 'done' : ''} ${dPop === g.id ? 'pop' : ''}">
+      ${canTick ? `<button class="dtick" data-act="dg-toggle" data-id="${g.id}" aria-pressed="${g.done}" aria-label="${g.done ? 'Untick' : 'Tick'}: ${esc(g.label)}">${I('check')}</button>` : `<span class="dtick ${g.done ? '' : 'locked'}" aria-hidden="true">${I(g.done ? 'check' : g.icon)}</span>`}
+      <div class="grow"><div class="t">${esc(g.label)}</div><div class="small muted">${esc(g.detail || '')}</div>${sug ? `<div class="small dsug">${I('info')} ${esc(sug)}</div>` : ''}</div>
+      <div class="dgoal-r">${how}${!g.done && g.route && g.id !== 'tip' ? `<a class="btn sm ghost" href="#${g.route}">${g.id === 'challenge' ? 'View' : 'Go'}</a>` : ''}</div></div>`;
+  };
+  dPop = null;
+  const tipSrc = tip.source && safeUrl(tip.source.url);
+  return `<div class="dcheck-grid">
+    <section class="card dhero" aria-label="Your DrukFit Daily Check">
+      <div class="dhero-top"><div><div class="eyebrow">${fmtDate(today, { weekday:'long', day:'numeric', month:'long' })}</div><h2>Your DrukFit Daily Check</h2>
+        <p class="muted">${greeting()}${P.name ? ', ' + esc(P.name.split(' ')[0]) : ''}. ${dg.training ? 'It\'s a training day.' : 'It\'s a rest day, so recovery goals take the place of training today.'}</p></div>
+        ${ringSvg(dg.pct, dg.pct === 100 ? 'var(--good)' : 'var(--accent)', 96, 'of ' + dg.total, dg.done)}</div>
+      <div class="between small"><button class="link btnlink" data-act="dg-score">${I('info')} How is this scored?</button><button class="link btnlink" data-act="dg-edit">${I('edit')} Edit goals</button></div>
+      ${dg.pct === 100 ? `<div class="note good">${I('trophy')}<div><b>Every goal done today.</b> Well played. Rest well tonight.</div></div>` : ''}
+      <div class="list">${dg.goals.map(goalRow).join('')}</div>
+      ${dg.goals.length ? '' : `<div class="empty small">All goals are turned off. <button class="btn sm" data-act="dg-edit">Choose goals</button></div>`}
+    </section>
+    <div class="stack">
+      <section class="card dtip" aria-label="Today's coaching tip"><div class="kc-h"><span class="eyebrow">${I('info')} Today's coaching tip</span>${rec.tipRead ? '<span class="chip good">Read</span>' : ''}</div>
+        <p class="dtip-t">${esc(tip.text)}</p>
+        ${tipSrc ? `<a class="small link" href="${esc(tipSrc)}" target="_blank" rel="noopener">${I('link')} Source: ${esc(tip.source.name)}</a>` : `<div class="tiny faint">DrukFit coaching guidance</div>`}
+        ${tip.personal ? `<div class="note" style="margin-top:12px">${I('bot')}<div><b>For you this week</b><div class="small">${esc(tip.personal.text || tip.personal)}</div></div></div>` : ''}
+        ${rec.tipRead ? '' : `<button class="btn sm" style="margin-top:12px" data-act="tip-read">${I('check')} Mark as read</button>`}</section>
+      <a class="card dmini" href="#daily/challenges"><span class="medal">${I('star')}</span><div class="grow"><div class="eyebrow">Today's challenge</div><div class="t">${esc(dg.challenge.title)}</div><div class="small muted">${dg.challenge.done ? 'Done ✓' : esc(dg.challenge.mins) + (/\d/.test(dg.challenge.mins) ? ' min' : '')}</div></div>${I('down', 'faint rot')}</a>
+      ${feat ? `<a class="card dmini" href="#daily/discover" data-act="art-open" data-id="${esc(feat.id)}">${dArt(feat, 'thumb')}<div class="grow"><div class="eyebrow">Worth reading</div><div class="t">${esc(feat.title)}</div><div class="small muted">${esc(feat.source)}</div></div></a>` : ''}
+      <section class="card" aria-label="Last 7 days"><div class="kc-h"><span class="eyebrow">Last 7 days</span></div>
+        <div class="dweek">${hist.map(h => `<div class="${h.date === today ? 'today' : ''}"><i style="height:${Math.max(6, h.total ? h.done / h.total * 100 : 0)}%" class="${h.total && h.done === h.total ? 'full' : ''}"></i><span>${DAY_NAMES[dowOf(h.date)].slice(0, 2)}</span><b class="num tiny">${h.done}/${h.total}</b></div>`).join('')}</div>
+        <p class="tiny faint" style="margin-top:8px">Earlier days stay in your history. A new checklist starts at midnight on your device.</p></section>
+    </div></div>`;
+}
+ACTIONS['dg-toggle'] = el => {
+  const id = el.dataset.id; const today = isoDate(); const rec = (S.daily || {})[today] || {}; const on = !((rec.manual || {})[id]);
+  saveDaily(today, { manual:{ [id]: on } }); if (on){ dPop = id; if (navigator.vibrate) try { navigator.vibrate(12); } catch(e){} } render();
+};
+ACTIONS['tip-read'] = () => { saveDaily(isoDate(), { tipRead:true }); dPop = 'tip'; toast('Nice, tip read'); render(); };
+ACTIONS['dg-score'] = () => openSheet(`<div class="stack"><h2>How your Daily Check is scored</h2>
+  <p class="small">Your score is simply <b>goals done ÷ goals shown today</b>. Every goal counts the same.</p>
+  <ul class="small dul"><li>Only goals that fit today appear. On rest days there are no workout goals, so rest never lowers your score.</li>
+  <li>Goals marked <span class="chip good">Auto</span> complete themselves from what you actually record: a saved workout, food, water, sleep or steps.</li>
+  <li>You can tick most goals yourself (shown as <span class="chip">Ticked by you</span>). The coaching tip and challenge have their own buttons.</li>
+  <li>Opening a page never completes anything.</li><li>Goals you turn off are left out of the score completely.</li></ul>
+  <button class="btn primary" data-act="close-sheet">Got it</button></div>`);
+ACTIONS['dg-edit'] = () => {
+  const dis = (S.dailycfg || {}).disabled || {};
+  openSheet(`<div class="stack"><h2>Edit your daily goals</h2><p class="small muted">Turn off anything that doesn't suit you. Goals that don't fit a given day (like workouts on rest days) are hidden automatically.</p>
+    <div class="list">${Object.entries(DAILY_GOAL_DEFS).map(([id, d]) => `<label class="li" style="cursor:pointer"><span class="medal">${I(d.icon)}</span><span class="grow t">${esc(d.label)}</span><input type="checkbox" class="dswitch" data-chg="dg-enable" data-id="${id}" ${dis[id] ? '' : 'checked'} aria-label="${esc(d.label)}"></label>`).join('')}</div>
+    <button class="btn primary" data-act="close-sheet">Done</button></div>`);
+};
+CHANGES['dg-enable'] = el => { const dis = { ...(((S.dailycfg || {}).disabled) || {}) }; if (el.checked) delete dis[el.dataset.id]; else dis[el.dataset.id] = true; saveDailyCfg({ disabled: dis }); render(); };
+
+/* ---------- Discover ---------- */
+function dStatus(){
+  const live = Feed.live(); const d = Feed.data || {};
+  if (Feed.loading()) return '';
+  if (live){
+    let msg = `${I('check')} Updated ${relTime(d.generated)} · ${d.items.length} articles`;
+    if (Feed.state === 'error') msg = `${I('info')} ${Feed.err === 'offline' ? 'You\'re offline.' : 'Couldn\'t refresh just now.'} Showing the articles saved ${relTime(Feed.at) || 'earlier'}.`;
+    else if (d.last_run_ok === false) msg += ' · some sources didn\'t respond at the last refresh, so earlier verified articles are shown';
+    return `<div class="dstatus ${Feed.state === 'error' ? 'warn' : ''}">${msg}</div>`;
+  }
+  if (typeof CLOUD !== 'undefined' && CLOUD) return `<div class="dstatus warn">${I('info')} New articles couldn't load right now. Showing DrukFit's hand-checked guidance library. <button class="link btnlink" data-act="feed-retry">Try again</button></div>`;
+  return `<div class="dstatus">${I('info')} Showing DrukFit's hand-checked guidance library. The live research feed refreshes twice a day on drukfit.app.</div>`;
+}
+function dCard(a, featured){
+  const src = safeUrl(a.url); const saved = bookmarked(a.id); const cat = DAILY_CATEGORIES[a.category] || { label:'Fitness' };
+  return `<article class="dcard ${featured ? 'feat' : ''}" style="--dc:${DAILY_ACCENT[a.category] || 'var(--accent)'}">
+    <button class="dcard-art" data-act="art-open" data-id="${esc(a.id)}" aria-label="Open: ${esc(a.title)}">${dArt(a)}</button>
+    <div class="dcard-b">
+      <div class="row dmeta">${dBadge(a)}<span class="dcat">${esc(cat.label)}</span>${a.reviewed ? `<span class="tiny faint" title="Checked by a DrukFit editor">${I('check')} Reviewed</span>` : ''}</div>
+      <h3><button class="dtitle" data-act="art-open" data-id="${esc(a.id)}">${esc(a.title)}</button></h3>
+      <p class="dsum">${esc(a.summary)}</p>
+      ${a.reason ? `<div class="tiny dreason">${I('star')} ${esc(a.reason)}</div>` : ''}
+      <div class="dsrc small"><b>${esc(a.source)}</b><span class="muted"> · ${esc(dDate(a))}</span></div>
+      <div class="row dact">${src ? `<a class="btn sm" href="${esc(src)}" target="_blank" rel="noopener">${I('link')} Read original source</a>` : ''}
+        <button class="btn sm ghost dsave ${saved ? 'on' : ''}" data-act="art-save" data-id="${esc(a.id)}" aria-pressed="${saved}" aria-label="${saved ? 'Remove from saved' : 'Save article'}">${I('star')}<span>${saved ? 'Saved' : 'Save'}</span></button>
+        <button class="btn sm ghost" data-act="art-share" data-id="${esc(a.id)}" aria-label="Share">${I('share')}</button></div>
+    </div></article>`;
+}
+function dSkeleton(){ return `<div class="dgrid" aria-busy="true" aria-label="Loading articles">${[0,1,2,3].map(i => `<div class="dcard skel ${i === 0 ? 'feat' : ''}"><div class="sk sk-art"></div><div class="dcard-b"><div class="sk" style="width:40%"></div><div class="sk sk-h"></div><div class="sk"></div><div class="sk" style="width:80%"></div></div></div>`).join('')}</div>`; }
+function dDiscover(){
+  const cat = sub.dcat || 'all'; const q = (sub.dq || '').trim().toLowerCase(); const topics = (S.dailycfg || {}).topics || {};
+  const savedItems = Object.entries(((S.bookmarks || {}).items) || {}).sort((x, y) => y[1].t - x[1].t).map(([id, b]) => ({ ...(Feed.items().find(x => x.id === id) || b.a || {}), id }));
+  let list = cat === 'saved' ? savedItems : rankFeed(Feed.items(), S.profile, cat === 'all' ? topics : {});
+  if (cat !== 'all' && cat !== 'saved') list = list.filter(a => a.category === cat);
+  if (q) list = list.filter(a => [a.title, a.summary, a.source, a.source_title, (DAILY_CATEGORIES[a.category] || {}).label, a.authors].join(' ').toLowerCase().includes(q));
+  const chips = [['all','For you'],['saved','Saved' + (savedItems.length ? ' · ' + savedItems.length : '')], ...Object.entries(DAILY_CATEGORIES).filter(([k]) => topics[k] !== 'hide').map(([k, v]) => [k, v.short])];
+  const show = list.slice(0, sub.dmore ? 200 : 13);
+  let body;
+  if (Feed.loading() && cat !== 'saved') body = dSkeleton();
+  else if (!list.length) body = `<div class="card empty">${I(cat === 'saved' ? 'star' : 'info')}<div>${cat === 'saved' ? 'Nothing saved yet. Tap Save on any article to keep it here, on all your devices.' : q ? 'No articles match that search.' : 'No articles in this topic yet. New research is checked twice a day.'}</div>${q ? `<button class="btn sm" data-act="dq-clear">Clear search</button>` : ''}</div>`;
+  else body = `<div class="dgrid">${show.map((a, i) => dCard(a, i === 0 && cat === 'all' && !q)).join('')}</div>${list.length > show.length ? `<button class="btn block ghost" data-act="sub" data-key="dmore" data-val="1">Show ${list.length - show.length} more</button>` : ''}`;
+  return `${dStatus()}
+    <div class="dsearch"><input class="in" type="search" id="dq" placeholder="Search articles, topics or sources" aria-label="Search articles" value="${esc(sub.dq || '')}" data-inp="dq"><button class="btn ghost" data-act="dtopics">${I('edit')} Topics</button></div>
+    <div class="dchips" role="tablist" aria-label="Filter by topic">${chips.map(([k, l]) => `<button role="tab" aria-selected="${cat === k}" class="dchip ${cat === k ? 'on' : ''}" data-act="dcat" data-val="${k}">${k === 'saved' ? I('star') : ''}${esc(l)}</button>`).join('')}</div>
+    ${body}
+    <p class="tiny faint ddisc">${I('info')} ${esc(DISCLAIMER)} Summaries are written by DrukFit from each source's published details; quotes are attributed. Illustrations are drawn by DrukFit and show no study data.</p>`;
+}
+INPUTS['dq'] = el => { sub.dq = el.value; sub.dmore = ''; const pos = el.selectionStart; render(); const n = document.getElementById('dq'); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch(e){} } };
+ACTIONS['dq-clear'] = () => { sub.dq = ''; render(); };
+ACTIONS['dcat'] = el => { sub.dcat = el.dataset.val; sub.dmore = ''; render(); };
+ACTIONS['feed-retry'] = () => { Feed.load(true); render(); };
+ACTIONS['art-save'] = el => { const on = toggleBookmark(el.dataset.id); toast(on ? 'Saved to your articles' : 'Removed from saved'); if (document.getElementById('scrim')) ACTIONS['art-open'](el); else render(); };
+ACTIONS['art-share'] = async el => {
+  const a = Feed.find(el.dataset.id); const u = a && safeUrl(a.url); if (!u) return;
+  const text = `${a.title} (${a.source})`; // only the public article link is shared, never your data
+  if (navigator.share){ try { await navigator.share({ title: a.title, text, url: u }); return; } catch(e){ if (e && e.name === 'AbortError') return; } }
+  try { await navigator.clipboard.writeText(text + ' ' + u); toast('Link copied'); } catch(e){ toast('Copy the link from Read original source'); }
+};
+ACTIONS['dtopics'] = () => {
+  const t = (S.dailycfg || {}).topics || {};
+  openSheet(`<div class="stack"><h2>Your topics</h2><p class="small muted">Choose what you'd like more of, and hide what isn't useful. This only changes the order of your feed. Nothing about you is sent to any publisher.</p>
+    <div class="list">${Object.entries(DAILY_CATEGORIES).map(([k, v]) => `<div class="li"><span class="ddot" style="background:${DAILY_ACCENT[k]}"></span><span class="grow t">${esc(v.label)}</span><div class="seg dseg" role="radiogroup" aria-label="${esc(v.label)}">${[['more','More'],['','Normal'],['hide','Hide']].map(([val, l]) => `<button role="radio" aria-checked="${(t[k] || '') === val}" class="${(t[k] || '') === val ? 'on' : ''}" data-act="dtopic" data-k="${k}" data-val="${val}">${l}</button>`).join('')}</div></div>`).join('')}</div>
+    <button class="btn primary" data-act="close-sheet">Done</button></div>`);
+};
+ACTIONS['dtopic'] = el => { const t = { ...(((S.dailycfg || {}).topics) || {}) }; if (el.dataset.val) t[el.dataset.k] = el.dataset.val; else delete t[el.dataset.k]; saveDailyCfg({ topics: t }); if (sub.dcat === el.dataset.k && el.dataset.val === 'hide') sub.dcat = 'all'; render(); ACTIONS['dtopics'](); };
+
+const APPLY_TO = {
+  workouts:{ label:'Open my training plan', route:'workouts', key:'wk', val:'week', text:'See this week\'s sessions and how your plan is laid out.' },
+  technique:{ label:'Open the exercise library', route:'workouts', key:'wk', val:'lib', text:'Look up technique cues and demonstrations for the exercises in your plan.' },
+  history:{ label:'Open my strength history', route:'progress', key:'pr', val:'strength', text:'See how your lifts have progressed, exercise by exercise.' },
+  nutrition:{ label:'Open my meal planner', route:'nutrition', key:'nu', val:'week', text:'Review your weekly meal plan and targets.' },
+  recovery:{ label:'Open sleep & recovery tracking', route:'progress', key:'pr', val:'habits', text:'Review your sleep, energy and soreness records.' },
+};
+const CAT_APPLY = { strength:'history', technique:'technique', research:'workouts', nutrition:'nutrition', recovery:'recovery', tech:'recovery', motivation:'workouts', beginner:'technique' };
+ACTIONS['art-open'] = el => {
+  const a = Feed.find(el.dataset.id); if (!a){ toast('This article is no longer available'); return; }
+  const src = safeUrl(a.url); const cat = DAILY_CATEGORIES[a.category] || { label:'Fitness' }; const saved = bookmarked(a.id);
+  const ap = APPLY_TO[a.apply] || APPLY_TO[CAT_APPLY[a.category]];
+  const facts = [a.study_type && ['Study type', a.study_type.charAt(0).toUpperCase() + a.study_type.slice(1)], a.participants && !/meta|review/.test(a.study_type || '') && ['Participants', a.participants], ['Source', a.source], a.authors && ['Authors', a.authors],
+    (a.published || a.published_year) && ['Published', a.published ? fmtLong(a.published) : a.published_year], a.last_reviewed && ['Last reviewed by source', fmtLong(a.last_reviewed)],
+    (a.link_checked || a.checked_on) && ['Link checked', fmtLong(a.link_checked || a.checked_on)]].filter(Boolean);
+  openSheet(`<div class="stack dsheet" style="--dc:${DAILY_ACCENT[a.category] || 'var(--accent)'}">
+    ${dArt(a, 'wide')}
+    <div class="row dmeta">${dBadge(a)}<span class="dcat">${esc(cat.label)}</span>${a.reviewed ? `<span class="chip good">${I('check')} Reviewed by DrukFit</span>` : `<span class="chip" title="Link and date verified automatically">Auto-checked source</span>`}</div>
+    <h2>${esc(a.title)}</h2>
+    ${a.source_title && a.source_title !== a.title ? `<div class="small muted">Original title: <i>${esc(a.source_title)}</i></div>` : ''}
+    <p>${esc(a.summary)}</p>
+    ${a.quote ? `<blockquote class="dquote">“${esc(a.quote)}”<cite>From ${esc(a.quote_from || a.source)}</cite></blockquote>` : ''}
+    ${a.why ? `<div class="note">${I('star')}<div><b>Why it matters</b><div class="small">${esc(a.why)}</div></div></div>` : ''}
+    ${(a.limitations || []).length ? `<div class="dlim"><b class="small">Keep in mind</b><ul class="small dul">${a.limitations.map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>` : ''}
+    ${a.editor_note ? `<div class="note good">${I('check')}<div class="small"><b>Editor's note:</b> ${esc(a.editor_note)}</div></div>` : ''}
+    <div class="dfacts">${facts.map(([k, v]) => `<div><span class="tiny faint">${esc(k)}</span><b class="small">${esc(v)}</b></div>`).join('')}</div>
+    ${a.doi ? `<div class="small">DOI: <a class="link" href="https://doi.org/${esc(a.doi)}" target="_blank" rel="noopener">${esc(a.doi)}</a>${safeUrl(a.record_url) ? ` · <a class="link" href="${esc(a.record_url)}" target="_blank" rel="noopener">Europe PMC record</a>` : ''}${safeUrl(a.pubmed) ? ` · <a class="link" href="${esc(a.pubmed)}" target="_blank" rel="noopener">PubMed</a>` : ''}</div>` : ''}
+    ${a.source_note ? `<div class="small muted">${esc(a.source_note)}</div>` : ''}
+    <div class="row">${src ? `<a class="btn primary" href="${esc(src)}" target="_blank" rel="noopener">${I('link')} Read original source</a>` : ''}
+      <button class="btn dsave ${saved ? 'on' : ''}" data-act="art-save" data-id="${esc(a.id)}" aria-pressed="${saved}">${I('star')} ${saved ? 'Saved' : 'Save'}</button>
+      <button class="btn ghost" data-act="art-share" data-id="${esc(a.id)}">${I('share')} Share</button></div>
+    ${ap ? `<div class="dapply"><div class="grow"><b>Apply to my training</b><div class="small muted">${esc(ap.text)} Nothing in your plan or targets changes unless you edit it yourself.</div></div><button class="btn" data-act="art-apply" data-k="${ap.key}" data-v="${ap.val}" data-to="${ap.route}">${esc(ap.label)}</button></div>` : ''}
+    <p class="tiny faint">${esc(DISCLAIMER)}</p></div>`);
+};
+ACTIONS['art-apply'] = el => { sub[el.dataset.k] = el.dataset.v; closeSheet(); go(el.dataset.to); };
+
+/* ---------- Challenges ---------- */
+function weekStreak(){
+  let n = 0; const cur = weekStart(isoDate()); if (weeklyChallenge(S, cur).done) n++;
+  for (let k = 1; k <= 52; k++){ const ws = addDays(cur, -7 * k); if (S.profile && S.profile.createdAt && addDays(ws, 6) < S.profile.createdAt) break; if (weeklyChallenge(S, ws).done) n++; else break; }
+  return n;
+}
+function dChallenges(){
+  const today = isoDate(); const ch = dailyChallenge(S, today, dailySeed()); const wk = weeklyChallenge(S, weekStart(isoDate())); const st = dailyStats(S, dailySeed());
+  const src = ch.source && safeUrl(ch.source.url); const last14 = st.history.slice(0, 14).reverse();
+  return `<div class="dch-grid">
+    <section class="card dchal ${ch.done ? 'done' : ''}" aria-label="Today's challenge">
+      <div class="kc-h"><span class="eyebrow">${I('star')} Today's challenge</span><span class="chip">${I('clock')} ${esc(ch.mins)}${/\d/.test(ch.mins) && !/during/.test(ch.mins) ? ' min' : ''}</span></div>
+      <h2>${esc(ch.title)}</h2><p class="muted">${esc(ch.purpose)}</p>
+      ${ch.gentleNote ? `<div class="note warn">${I('info')}<div class="small">${esc(ch.gentleNote)}</div></div>` : ''}
+      <ol class="dsteps">${ch.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>
+      <div class="small"><b>How it completes:</b> ${esc(ch.criteria)}</div>
+      ${src ? `<a class="small link" href="${esc(src)}" target="_blank" rel="noopener">${I('link')} Guidance: ${esc(ch.source.name)}</a>` : ''}
+      <div class="row" style="margin-top:4px">
+        ${ch.done ? `<span class="chip good big">${I('check')} ${ch.how === 'auto' ? 'Completed from your log' : 'Done (self-reported)'}</span>${ch.how === 'self' ? `<button class="btn sm ghost" data-act="ch-undo" data-id="${ch.id}">Undo</button>` : ''}`
+          : `${ch.self ? `<button class="btn primary" data-act="ch-self" data-id="${ch.id}">${I('check')} I did this</button>` : ''}<button class="btn ghost" data-act="ch-swap">${I('swap')} Choose a different one</button>`}
+      </div></section>
+    <div class="stack">
+      <section class="card" aria-label="Streak and points"><div class="dstats">
+        <div><span class="eyebrow">Day streak</span><b class="num">${st.streak}</b><span class="tiny muted">best ${st.best}</span></div>
+        <div><span class="eyebrow">Week streak</span><b class="num">${weekStreak()}</b><span class="tiny muted">weekly challenges</span></div>
+        <div><span class="eyebrow">Points</span><b class="num">${st.points}</b><span class="tiny muted">${st.challenges} challenge${st.challenges === 1 ? '' : 's'}</span></div></div>
+        <div class="dstreak" aria-label="Challenges, last 14 days">${last14.map(h => `<i class="${h.challenge.done ? 'on' : ''} ${h.date === today ? 'today' : ''}" title="${fmtDate(h.date)}: ${h.challenge.done ? 'challenge done' : 'not done'}"></i>`).join('')}</div>
+        <p class="tiny faint" style="margin-top:8px">Points: 10 per completed challenge and 2 per completed daily goal, counted only from what you actually did. Today in progress never breaks a streak.</p></section>
+      <section class="card" aria-label="Weekly challenge"><div class="kc-h"><span class="eyebrow">${I('cal')} This week</span>${wk.done ? '<span class="chip good">Complete</span>' : ''}</div>
+        <div class="t" style="font-weight:700">${esc(wk.title)}</div><div class="small muted">${esc(wk.purpose)}</div>
+        <div class="between small" style="margin-top:10px"><span>Progress</span><b class="num">${wk.progress} / ${wk.target}</b></div><div class="bar ${wk.done ? 'good' : ''}" style="margin-top:5px"><i style="width:${wk.target ? Math.min(100, wk.progress / wk.target * 100) : 0}%"></i></div>
+        <div class="tiny faint" style="margin-top:6px">Updates automatically from your saved records.</div></section>
+    </div></div>
+    <section class="card" aria-label="Badges"><h3>Badges</h3><div class="dbadges">${st.badges.map(b => `<div class="dbadge2 ${b.earned ? 'on' : ''}"><span class="medal">${I(b.icon)}</span><span class="small">${esc(b.label)}</span><span class="tiny ${b.earned ? 'good' : 'faint'}">${b.earned ? 'Earned' : 'Not yet'}</span></div>`).join('')}</div>
+      <p class="tiny faint" style="margin-top:10px">Challenges are designed to be safe and achievable: no max-effort lifting, extreme dieting or dehydration. Skip anything that doesn't feel right for your body.</p></section>`;
+}
+ACTIONS['ch-self'] = el => { saveDaily(isoDate(), { ch:{ id: el.dataset.id, self:true, at: Date.now() } }); toast('Challenge complete. +10 points'); render(); };
+ACTIONS['ch-undo'] = el => { saveDaily(isoDate(), { ch:{ id: el.dataset.id, self:false } }); render(); };
+ACTIONS['ch-swap'] = () => {
+  const c = dayContext(S, isoDate()); const cur = dailyChallenge(S, isoDate(), dailySeed());
+  openSheet(`<div class="stack"><h2>Choose today's challenge</h2><p class="small muted">Only challenges that suit today's plan are shown.</p><div class="list">${eligibleChallenges(S, c).map(ch => `<button class="li li-btn" data-act="ch-pick" data-id="${ch.id}"><span class="medal">${I(ch.id === cur.id ? 'check' : 'star')}</span><div class="grow"><div class="t">${esc(ch.title)}</div><div class="small muted">${esc(ch.purpose)}</div></div></button>`).join('')}</div><button class="btn ghost" data-act="close-sheet">Cancel</button></div>`);
+};
+ACTIONS['ch-pick'] = el => { saveDaily(isoDate(), { ch:{ id: el.dataset.id } }); closeSheet(); render(); };
+
+/* ---------- Compact card on the dashboard ---------- */
+function dailyDashCard(){
+  const dg = dailyGoals(S, isoDate(), dailySeed()); const next = dg.goals.find(g => !g.done);
+  return `<a class="card ddash" href="#daily" aria-label="DrukFit Daily: ${dg.done} of ${dg.total} goals done">
+    ${ringSvg(dg.pct, dg.pct === 100 ? 'var(--good)' : 'var(--accent)', 70, '', dg.done + '/' + dg.total)}
+    <div class="grow"><div class="eyebrow">${I('daily')} DrukFit Daily</div><div class="t">${dg.pct === 100 ? 'Every goal done today' : next ? 'Next: ' + esc(next.label) : 'Your daily check'}</div><div class="small muted">Challenge: ${esc(dg.challenge.title)}${dg.challenge.done ? ' ✓' : ''}</div></div>${I('down', 'faint rot')}</a>`;
+}
 /* ===== DrukFit accounts: Supabase Auth + Postgres (row-level security) + private Storage =====
    Active only when the page defines window.DRUKFIT_CONFIG = { url, key } (the website build).
    The key is Supabase's public "anon"/"publishable" key; access control is enforced by the
@@ -2841,6 +3496,12 @@ function mergeDoc(key, a, b){ // a = this device, b = account copy
   if (!a) return b; if (!b) return a;
   const _u = Math.max(a._u || 0, b._u || 0);
   if (/^sess-/.test(key)){ const del = new Set([...(a.del || []), ...(b.del || [])]); const list = unionById(a.list, b.list, del, true).sort((x, y) => x.start - y.start); return { ...b, ...a, list, del:[...del], _u }; }
+  if (/^daily-/.test(key)){
+    const days = { ...(b.days || {}) };
+    Object.entries(a.days || {}).forEach(([d, da]) => { const db = days[d]; if (!db){ days[d] = da; return; } const [o, n] = (da._u || 0) >= (db._u || 0) ? [db, da] : [da, db]; days[d] = { ...o, ...n, manual:{ ...(o.manual || {}), ...(n.manual || {}) }, tipRead: !!(o.tipRead || n.tipRead), ch: n.ch || o.ch }; });
+    return { ...b, ...a, days, _u };
+  }
+  if (key === 'bookmarks'){ const del = new Set([...(a.del || []), ...(b.del || [])]); const items = { ...(b.items || {}), ...(a.items || {}) }; [...del].forEach(id => { const ia = (a.items || {})[id], ib = (b.items || {})[id]; const latest = Math.max((ia && ia.t) || 0, (ib && ib.t) || 0); if (!(latest > ((a.delT || {})[id] || (b.delT || {})[id] || 0))) delete items[id]; }); return { items, del:[...del], delT:{ ...(b.delT || {}), ...(a.delT || {}) }, _u }; }
   if (/^(food|habit)-/.test(key)){
     const days = { ...(b.days || {}) };
     Object.entries(a.days || {}).forEach(([d, da]) => {
@@ -3279,7 +3940,7 @@ function legalView(which){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "5489454e9c";
+window.DRUKFIT_VERSION = "40cb66f7c7";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {

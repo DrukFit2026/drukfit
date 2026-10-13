@@ -1,0 +1,228 @@
+{
+ "version": 1,
+ "generated": "2026-10-13T05:07:38Z",
+ "checked": "2026-10-13T05:07:38Z",
+ "last_run_ok": false,
+ "sources": {
+  "epmc-strength": {
+   "name": "Europe PMC",
+   "category": "strength",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-technique": {
+   "name": "Europe PMC",
+   "category": "technique",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-nutrition": {
+   "name": "Europe PMC",
+   "category": "nutrition",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-recovery": {
+   "name": "Europe PMC",
+   "category": "recovery",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-research": {
+   "name": "Europe PMC",
+   "category": "research",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-tech": {
+   "name": "Europe PMC",
+   "category": "tech",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "epmc-motivation": {
+   "name": "Europe PMC",
+   "category": "motivation",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  },
+  "nih-newsinhealth": {
+   "name": "NIH News in Health",
+   "category": "beginner",
+   "enabled": true,
+   "status": "error",
+   "last_error": "OSError: first scheduled refresh has not run yet",
+   "last_error_at": "2026-10-13T05:07:38Z"
+  }
+ },
+ "items": [
+  {
+   "id": "ev-cdc-adult-activity",
+   "kind": "guidance",
+   "category": "beginner",
+   "title": "How much activity do adults need?",
+   "source": "Centers for Disease Control and Prevention (CDC)",
+   "source_title": "Adult Activity: An Overview",
+   "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+   "last_reviewed": "2023-12-20",
+   "checked_on": "2026-10-13",
+   "summary": "CDC's guidance for adults is about 150 minutes of moderate-intensity activity each week, plus muscle-strengthening activity on at least 2 days a week.",
+   "why": "Your DrukFit lifting days cover the strength part. Walks, cardio finishers and active rest days help with the rest.",
+   "apply": "workouts",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "ev-nhlbi-sleep",
+   "kind": "guidance",
+   "category": "recovery",
+   "title": "How much sleep is enough?",
+   "source": "National Heart, Lung, and Blood Institute (NHLBI), NIH",
+   "source_title": "How Much Sleep Is Enough?",
+   "url": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep",
+   "last_reviewed": "2022-03-24",
+   "checked_on": "2026-10-13",
+   "summary": "NHLBI says experts recommend that adults sleep between 7 and 9 hours a night, and notes that adults who regularly sleep less than 7 hours may have more health problems.",
+   "why": "Sleep is when your body recovers from training. Logging it in DrukFit shows how it relates to how your sessions feel.",
+   "apply": "recovery",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "ev-who-activity",
+   "kind": "guidance",
+   "category": "motivation",
+   "title": "Why regular physical activity matters",
+   "source": "World Health Organization (WHO)",
+   "source_title": "Physical activity (fact sheet)",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity",
+   "published": "2024-06-26",
+   "checked_on": "2026-10-13",
+   "summary": "WHO's fact sheet sets out the health benefits of regular physical activity and the risks of inactivity, and notes that muscle strengthening benefits everyone.",
+   "why": "A useful reminder of why showing up for your plan matters beyond how you look.",
+   "apply": "workouts",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "ev-morton-2018-protein",
+   "kind": "research",
+   "category": "nutrition",
+   "established": true,
+   "title": "Does extra protein add to the gains from lifting?",
+   "source": "British Journal of Sports Medicine",
+   "source_title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults",
+   "authors": "Morton RW, et al.",
+   "study_type": "Systematic review and meta-analysis",
+   "url": "https://doi.org/10.1136/bjsports-2017-097608",
+   "doi": "10.1136/bjsports-2017-097608",
+   "pubmed": "https://pubmed.ncbi.nlm.nih.gov/28698222/",
+   "published_year": 2018,
+   "checked_on": "2026-10-13",
+   "summary": "This meta-analysis pooled randomised trials in healthy adults doing resistance training. Protein supplementation produced modestly larger gains in muscle mass and strength, and the extra benefit levelled off at around 1.6 g of protein per kg of body weight per day.",
+   "limitations": [
+    "Pools many smaller trials with different protocols, so individual results vary.",
+    "The ~1.6 g/kg/day figure is an average; the confidence interval extended higher, so some people may benefit from more."
+   ],
+   "why": "Your DrukFit protein target is set within this range for muscle-focused goals.",
+   "apply": "nutrition",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "ev-schoenfeld-2017-volume",
+   "kind": "research",
+   "category": "strength",
+   "established": true,
+   "title": "More weekly sets, more muscle? What the 2017 volume meta-analysis found",
+   "source": "Journal of Sports Sciences",
+   "source_title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis",
+   "authors": "Schoenfeld BJ, Ogborn D, Krieger JW",
+   "study_type": "Systematic review and meta-analysis",
+   "url": "https://doi.org/10.1080/02640414.2016.1210197",
+   "doi": "10.1080/02640414.2016.1210197",
+   "published_year": 2017,
+   "checked_on": "2026-10-13",
+   "summary": "Pooling earlier studies, the authors found a graded dose-response: performing more weekly sets per muscle group tended to be associated with greater increases in muscle size.",
+   "limitations": [
+    "Based on a limited number of studies, many with small samples.",
+    "Shows how results trended across studies; it doesn't set an exact best number of sets for any one person."
+   ],
+   "why": "DrukFit adds load and reps before sets. If you plateau, adding a set to a lagging muscle is a reasonable next step.",
+   "apply": "history",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "ed-reps-before-weight",
+   "kind": "editorial",
+   "category": "technique",
+   "title": "Why DrukFit adds reps before it adds weight",
+   "source": "DrukFit editorial",
+   "source_title": "How DrukFit's progression rules work",
+   "url": "https://doi.org/10.1080/02640414.2016.1210197",
+   "source_note": "Supporting research: Schoenfeld, Ogborn & Krieger, J Sports Sci 2017",
+   "checked_on": "2026-10-13",
+   "summary": "DrukFit suggests a heavier weight only once you hit the top of your rep range on every set at a manageable effort. Until then it asks for one more rep. Each small step is progress, and technique stays clean.",
+   "why": "Knowing the rule makes the suggestions on your workout screen easier to trust.",
+   "apply": "history",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  },
+  {
+   "id": "mo-missed-session",
+   "kind": "motivation",
+   "category": "motivation",
+   "title": "Missed a workout? Do the next one, not two",
+   "source": "DrukFit editorial",
+   "source_title": "Consistency over perfection",
+   "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+   "source_note": "Weekly activity targets: CDC",
+   "checked_on": "2026-10-13",
+   "summary": "Weekly targets matter more than any single day. If a session slips, DrukFit moves it to your next training day, so you never need to cram two into one.",
+   "why": "Guilt-free consistency is what keeps a plan going for months.",
+   "apply": "workouts",
+   "evergreen": true,
+   "status": "reviewed",
+   "reviewed": true
+  }
+ ],
+ "log": [
+  {
+   "at": "2026-10-13T05:07:38Z",
+   "sources": {
+    "epmc-strength": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-technique": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-nutrition": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-recovery": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-research": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-tech": "error: OSError: first scheduled refresh has not run yet",
+    "epmc-motivation": "error: OSError: first scheduled refresh has not run yet",
+    "nih-newsinhealth": "error: OSError: first scheduled refresh has not run yet"
+   },
+   "added": 0,
+   "notes": []
+  }
+ ],
+ "disclaimer": "General educational content, not individual medical advice. Summaries are written by DrukFit from each source's metadata; quotes are attributed. Always read the original source."
+}

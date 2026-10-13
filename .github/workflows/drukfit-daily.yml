@@ -1,0 +1,44 @@
+name: DrukFit Daily content
+
+# Refreshes feed.json twice a day: 20:00 and 08:00 UTC (about 7am and 7pm in Melbourne).
+# To change the schedule, edit the cron lines. To refresh now: Actions → DrukFit Daily content → Run workflow.
+on:
+  schedule:
+    - cron: '0 20 * * *'
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: drukfit-daily
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch, verify and publish content
+        run: python3 content/ingest.py
+      - name: Commit feed.json if it changed
+        run: |
+          if git diff --quiet -- feed.json && git ls-files --error-unmatch feed.json >/dev/null 2>&1; then
+            echo "No content changes."
+            exit 0
+          fi
+          git config user.name "drukfit-daily-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feed.json
+          git commit -m "DrukFit Daily: content refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+      - name: Ask GitHub Pages to republish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages will rebuild on its own."
