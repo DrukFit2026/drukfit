@@ -97,6 +97,7 @@ def limitations(abstract, stype, n):
     return out
 def conclusion_quote(abstract):
     a = strip_html(abstract)
+    a = re.split(r'\b(?:trial registration|systematic review registration|registration(?: number)?\s*:|prospero\b|clinicaltrials\.gov|funding\s*:)', a, flags=re.I)[0].strip()
     m = re.search(r'(?:\bconclusions?\s*[:.]|\bin conclusion,?|\bpractical applications\s*[:.])\s*(.+)$', a, re.I)
     text = m.group(1) if m else ''
     if len(text.split()) < 3:
