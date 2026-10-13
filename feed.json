@@ -1,7 +1,7 @@
 {
  "version": 5,
- "generated": "2026-10-13T05:17:05Z",
- "checked": "2026-10-13T05:17:05Z",
+ "generated": "2026-10-13T08:09:23Z",
+ "checked": "2026-10-13T08:09:23Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,9 +11,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 5,
-   "last_added": 5
+   "last_added": 1
   },
   "epmc-technique": {
    "name": "Europe PMC",
@@ -22,9 +22,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 5,
-   "last_added": 5
+   "last_added": 0
   },
   "epmc-nutrition": {
    "name": "Europe PMC",
@@ -33,9 +33,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 6,
-   "last_added": 5
+   "last_added": 0
   },
   "epmc-recovery": {
    "name": "Europe PMC",
@@ -44,9 +44,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 6,
-   "last_added": 6
+   "last_added": 0
   },
   "epmc-research": {
    "name": "Europe PMC",
@@ -55,9 +55,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 5,
-   "last_added": 4
+   "last_added": 0
   },
   "epmc-tech": {
    "name": "Europe PMC",
@@ -66,9 +66,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 3,
-   "last_added": 3
+   "last_added": 0
   },
   "epmc-motivation": {
    "name": "Europe PMC",
@@ -77,9 +77,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
-   "last_found": 4,
-   "last_added": 4
+   "last_success": "2026-10-13T08:09:23Z",
+   "last_found": 3,
+   "last_added": 0
   },
   "nih-newsinhealth": {
    "name": "NIH News in Health",
@@ -88,9 +88,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:17:05Z",
+   "last_success": "2026-10-13T08:09:23Z",
    "last_found": 1,
-   "last_added": 1
+   "last_added": 0
   }
  },
  "items": [
@@ -535,6 +535,35 @@
     "Pools earlier studies: it is only as strong as the studies it includes."
    ],
    "why": "New training research is how coaching advice gets refined over time.",
+   "open_access": true,
+   "imported": "2026-10-13",
+   "link_checked": "2026-10-13",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3390-nu18172815",
+   "kind": "research",
+   "category": "strength",
+   "title": "Adjunctive Ashwagandha (<i>Withania somnifera</i>) Supplementation and Resistance-Training Adaptations in Healthy Adults: A Systematic Review and Random-Effects Meta-Analysis of Muscular Strength, Chest Circumference, and Body Composition",
+   "source": "Nutrients",
+   "source_title": "Adjunctive Ashwagandha (<i>Withania somnifera</i>) Supplementation and Resistance-Training Adaptations in Healthy Adults: A Systematic Review and Random-Effects Meta-Analysis of Muscular Strength, Chest Circumference, and Body Composition",
+   "via": "Europe PMC",
+   "authors": "Lee JC, Heo AS.",
+   "study_type": "meta-analysis",
+   "participants": 161,
+   "url": "https://doi.org/10.3390/nu18172815",
+   "record_url": "https://europepmc.org/article/MED/42738987",
+   "doi": "10.3390/nu18172815",
+   "pmid": "42738987",
+   "published": "2026-08-27",
+   "summary": "Meta-analysis, published in Nutrients in August 2026. The study's title: \"Adjunctive Ashwagandha (<i>Withania somnifera</i>) Supplementation and Resistance-Training Adaptations in Healthy Adults: A Systematic Review and Random-Effects Meta-Analysis of Muscular Strength, Chest Circumference, and Body Composition.\" Read the source for its methods and full results.",
+   "quote": "Current evidence does not establish that adjunctive ashwagandha meaningfully enhances resistance-training adaptations; it indicates possible benefits for maximal strength and, indirectly, upper-body girth, but the evidence base is small, statistically fragile and of low to very low certainty, with no…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Research like this shapes how training plans balance load, sets and reps.",
    "open_access": true,
    "imported": "2026-10-13",
    "link_checked": "2026-10-13",
@@ -1161,6 +1190,31 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-13T08:09:23Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 1 new",
+    "epmc-technique": "ok: 5 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 3 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new"
+   },
+   "added": 1,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
+    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P"
+   ]
+  },
   {
    "at": "2026-10-13T05:17:05Z",
    "sources": {
