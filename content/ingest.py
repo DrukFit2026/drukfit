@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content')
-FEED_VERSION = 4
+FEED_VERSION = 5
 UA = 'DrukFitDaily/1.0 (+https://drukfit.app; content refresh bot)'
 
 def now_utc():
@@ -96,13 +96,18 @@ def limitations(abstract, stype, n):
     if not out: out.append('A single study: one result is a data point, not a final answer.')
     return out
 REG_CUT = re.compile(r'\b(?:trial registration|systematic review registration|registration(?: number)?\s*:|prospero\b|clinicaltrials\.gov|funding\s*:)', re.I)
+CONC = re.compile(r'\b(?:[Cc]onclusions?|CONCLUSIONS?|[Ii]n conclusion,?|[Pp]ractical [Aa]pplications|PRACTICAL APPLICATIONS)\s*[:.]?\s+(?=[A-Z])')
+def trim_tail(text):
+    """Drop a trailing registration/funding note (only near the end, so Methods mentions are kept out of the decision)."""
+    ms = list(REG_CUT.finditer(text))
+    if ms and ms[-1].start() > len(text) * 0.6: return text[:ms[-1].start()].strip()
+    return text
 def conclusion_quote(abstract):
     a = strip_html(abstract)
-    m = re.search(r'(?:\bconclusions?\s*[:.]|\bin conclusion,?|\bpractical applications\s*[:.])\s*(.+)$', a, re.I)
-    text = REG_CUT.split(m.group(1))[0].strip() if m else ''
+    ms = list(CONC.finditer(a))
+    text = trim_tail(a[ms[-1].end():]) if ms else ''
     if len(text.split()) < 3:
-        body = REG_CUT.split(a)[0].strip()
-        sents = re.split(r'(?<=[.!?])\s+', body); text = re.sub(r'^(?:conclusions?|results?)\s*:\s*', '', sents[-1], flags=re.I) if sents else ''
+        sents = re.split(r'(?<=[.!?])\s+', trim_tail(a)); text = sents[-1] if sents else ''
     return words(text.strip(), 40)
 WHY = {
     'strength': 'Research like this shapes how training plans balance load, sets and reps.',
