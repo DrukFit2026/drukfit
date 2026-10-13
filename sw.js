@@ -1,5 +1,5 @@
-/* DrukFit service worker: offline-first app shell. Version a2e2f407c8 */
-const CACHE = 'drukfit-a2e2f407c8';
+/* DrukFit service worker: offline-first app shell. Version 5489454e9c */
+const CACHE = 'drukfit-5489454e9c';
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/favicon-32.png", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/maskable-512.png"];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL.map(u => new Request(u, { cache:'reload' }))))); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('drukfit-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
