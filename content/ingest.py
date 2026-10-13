@@ -18,6 +18,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content')
+FEED_VERSION = 2
 UA = 'DrukFitDaily/1.0 (+https://drukfit.app; content refresh bot)'
 
 def now_utc():
@@ -96,10 +97,10 @@ def limitations(abstract, stype, n):
     return out
 def conclusion_quote(abstract):
     a = strip_html(abstract)
-    m = re.search(r'(?:conclusions?|in conclusion|practical applications)\s*[:.]?\s*(.+)$', a, re.I)
+    m = re.search(r'(?:\bconclusions?\s*[:.]|\bin conclusion,?|\bpractical applications\s*[:.])\s*(.+)$', a, re.I)
     text = m.group(1) if m else ''
-    if not text:
-        sents = re.split(r'(?<=[.!?])\s+', a); text = sents[-1] if sents else ''
+    if len(text.split()) < 3:
+        sents = re.split(r'(?<=[.!?])\s+', a); text = re.sub(r'^(?:conclusions?|results?)\s*:\s*', '', sents[-1], flags=re.I) if sents else ''
     return words(text.strip(), 40)
 WHY = {
     'strength': 'Research like this shapes how training plans balance load, sets and reps.',
@@ -128,7 +129,10 @@ def europepmc(src, fetch, settings, log):
         if not title or not abstract or not date_ok(pub) or not (doi or pmid): log.append(f'{src["id"]}: skipped a record with missing title/abstract/date/identifier'); continue
         types = ((r.get('pubTypeList') or {}).get('pubType')) or []
         stype = study_type(types, abstract); n = sample_size(abstract)
-        summary = f'A {stype} published in {journal or "a peer-reviewed journal"}' + (f' involving {n} participants' if n and 'meta' not in stype and 'review' not in stype else '') + f' looked at: {title[0].lower() + title[1:] if title else ""}.'
+        if OFF_TOPIC.search(title): log.append(f'{src["id"]}: skipped clinical or off-topic study: {title[:70]}'); continue
+        month = datetime.date.fromisoformat(pub).strftime('%B %Y')
+        who = f' with {n} participants' if n and 'meta' not in stype and 'review' not in stype else ''
+        summary = f'{stype[0].upper() + stype[1:]}{who}, published in {journal or "a peer-reviewed journal"} in {month}. The study\'s title: "{title}." Read the source for its methods and full results.'
         out.append({
             'id': 'doi-' + re.sub(r'[^a-z0-9]+', '-', doi.lower()).strip('-') if doi else 'pmid-' + pmid,
             'kind': 'research', 'category': src['category'], 'title': title,
@@ -157,6 +161,7 @@ class LinkParser(HTMLParser):
     def handle_data(self, data):
         if self._in_title: self.title += data
 
+OFF_TOPIC = re.compile(r'\b(stroke|cancer|tumou?r|heart failure|copd|dementia|alzheimer|parkinson|multiple sclerosis|rehabilitation|telerehabilitation|surgery|surgical|postoperative|patients?|hospitali[sz]ed|pregnan\\w*|children|adolescents?|paediatric|pediatric|rats?|mice|mouse|dialysis|hiv|covid)\b', re.I)
 FITNESS_WORDS = re.compile(r'exercis|physical activit|fitness|muscle|strength|sleep|diet|nutrition|eating|\bfood|weight|heart|walk|active|bone|injur|stretch|protein|hydrat|posture|balance|aging well', re.I)
 def nih_category(text):
     t = text.lower()
@@ -187,7 +192,7 @@ def nih_news_in_health(src, fetch, settings, log):
             ap = LinkParser(); ap.feed(apage)
             title = strip_html(ap.meta.get('og:title') or ap.title).split('|')[0].strip()
             desc = strip_html(ap.meta.get('og:description') or ap.meta.get('description') or '')
-            if not title or not FITNESS_WORDS.search(title + ' ' + desc): continue
+            if not title or not (FITNESS_WORDS.search(title) or len(FITNESS_WORDS.findall(desc)) >= 2): continue
             month = datetime.date.fromisoformat(issue_date).strftime('%B %Y') if issue_date else 'a recent'
             out.append({ 'id': sid('nih', url), 'kind': 'news', 'category': nih_category(title + ' ' + desc), 'title': title,
                 'source': 'NIH News in Health', 'source_title': title, 'url': url, 'published': issue_date,
@@ -221,7 +226,7 @@ def run(root=ROOT, fetch=None, now=None):
     overrides = load_json(os.path.join(content, 'overrides.json'), {}); evergreen = load_json(os.path.join(content, 'evergreen.json'), {'items': []})
     prev = load_json(os.path.join(root, 'feed.json'), {'items': [], 'log': [], 'sources': {}})
     fetch = fetch or Fetcher(settings); stamp = (now or now_utc()).strftime('%Y-%m-%dT%H:%M:%SZ')
-    items = {i['id']: i for i in prev.get('items', []) if not i.get('evergreen') and not i.get('manual')}
+    items = {i['id']: i for i in prev.get('items', []) if not i.get('evergreen') and not i.get('manual')} if prev.get('version') == FEED_VERSION else {}  # new pipeline version: rebuild summaries
     titles = {norm_title(i['title']): i['id'] for i in items.values()}
     run_log = {'at': stamp, 'sources': {}, 'added': 0, 'notes': []}
     source_state = prev.get('sources', {})
@@ -267,7 +272,7 @@ def run(root=ROOT, fetch=None, now=None):
         final.append(i)
     ok_any = any(v.startswith('ok') for v in run_log['sources'].values())
     feed = {
-        'version': 1, 'generated': stamp if ok_any else prev.get('generated', stamp), 'checked': stamp,
+        'version': FEED_VERSION, 'generated': stamp if ok_any else prev.get('generated', stamp), 'checked': stamp,
         'last_run_ok': all(not v.startswith('error') for v in run_log['sources'].values()),
         'sources': source_state, 'items': final,
         'log': ([run_log] + prev.get('log', []))[:30],
