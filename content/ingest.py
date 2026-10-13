@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content')
-FEED_VERSION = 3
+FEED_VERSION = 4
 UA = 'DrukFitDaily/1.0 (+https://drukfit.app; content refresh bot)'
 
 def now_utc():
@@ -95,13 +95,14 @@ def limitations(abstract, stype, n):
     if 'meta' in stype or 'review' in stype: out.append('Pools earlier studies: it is only as strong as the studies it includes.')
     if not out: out.append('A single study: one result is a data point, not a final answer.')
     return out
+REG_CUT = re.compile(r'\b(?:trial registration|systematic review registration|registration(?: number)?\s*:|prospero\b|clinicaltrials\.gov|funding\s*:)', re.I)
 def conclusion_quote(abstract):
     a = strip_html(abstract)
-    a = re.split(r'\b(?:trial registration|systematic review registration|registration(?: number)?\s*:|prospero\b|clinicaltrials\.gov|funding\s*:)', a, flags=re.I)[0].strip()
     m = re.search(r'(?:\bconclusions?\s*[:.]|\bin conclusion,?|\bpractical applications\s*[:.])\s*(.+)$', a, re.I)
-    text = m.group(1) if m else ''
+    text = REG_CUT.split(m.group(1))[0].strip() if m else ''
     if len(text.split()) < 3:
-        sents = re.split(r'(?<=[.!?])\s+', a); text = re.sub(r'^(?:conclusions?|results?)\s*:\s*', '', sents[-1], flags=re.I) if sents else ''
+        body = REG_CUT.split(a)[0].strip()
+        sents = re.split(r'(?<=[.!?])\s+', body); text = re.sub(r'^(?:conclusions?|results?)\s*:\s*', '', sents[-1], flags=re.I) if sents else ''
     return words(text.strip(), 40)
 WHY = {
     'strength': 'Research like this shapes how training plans balance load, sets and reps.',
