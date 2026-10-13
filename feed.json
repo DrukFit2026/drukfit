@@ -1,7 +1,7 @@
 {
- "version": 4,
- "generated": "2026-10-13T05:15:14Z",
- "checked": "2026-10-13T05:15:14Z",
+ "version": 5,
+ "generated": "2026-10-13T05:17:05Z",
+ "checked": "2026-10-13T05:17:05Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 6,
    "last_added": 5
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 6,
    "last_added": 6
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 5,
    "last_added": 4
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 3,
    "last_added": 3
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 4,
    "last_added": 4
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:15:14Z",
+   "last_success": "2026-10-13T05:17:05Z",
    "last_found": 1,
    "last_added": 1
   }
@@ -111,7 +111,7 @@
    "pmid": "42816732",
    "published": "2026-09-30",
    "summary": "Systematic review, published in Sports medicine - open in September 2026. The study's title: \"Strategic Application of Post-exercise Cold-Water Immersion to Enhance Performance Recovery and Adaptation: An Umbrella Review of 15 Published Systematic Reviews with Meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Methodological quality was assessed using AMSTAR 2, and certainty of evidence using GRADE.",
+   "quote": "Post-exercise CWI confers outcome-specific recovery benefits but may impair resistance training adaptations with chronic use. These findings support a periodised, context-driven approach to CWI implementation rather than routine application after all exercise sessions.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -139,7 +139,7 @@
    "pmid": "42803758",
    "published": "2026-09-25",
    "summary": "Review, published in JMIR serious games in September 2026. The study's title: \"Gamification Elements in Physical Activity Interventions: Scoping Review and Taxonomy Based on the Octalysis Framework.\" Read the source for its methods and full results.",
-   "quote": "Methods The review protocol was prospectively registered with the International Prospective Register of Systematic Reviews (",
+   "quote": "This scoping review complements previous effectiveness-focused reviews by examining how gamified PA interventions are designed and which motivational and behavior change functions they target. By developing an Octalysis-based taxonomy of 48 gamification elements and mapping these elements against BCTs, this…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -167,7 +167,7 @@
    "pmid": "42773281",
    "published": "2026-09-22",
    "summary": "Systematic review, published in Sports medicine - open in September 2026. The study's title: \"The Effectiveness of Cluster vs. Rest-Redistribution Set Configurations to Maintain Movement Velocity During Resistance Training: A Systematic Review and Bayesian Network Meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "These findings suggest that alternative set structures can be used to effectively maintain movement velocity during resistance training, with the choice among them best guided by practical considerations and training context.",
+   "quote": "Overall, alternative set structures are generally more effective than TS for preserving mean and peak velocity during resistance training. Although the magnitude of this positive effect varies slightly across the alternative set structures examined, the differences between CS, intraRR and…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -195,7 +195,7 @@
    "pmid": "42765482",
    "published": "2026-09-21",
    "summary": "Meta-analysis, published in Journal of the International Society of Sports Nutrition in September 2026. The study's title: \"Resistance training combined with creatine supplementation: a three-level meta-analysis of multidimensional outcomes from strength enhancement to body composition remodeling.\" Read the source for its methods and full results.",
-   "quote": "These conclusions should also be interpreted within the context of heterogeneous and incompletely reported nutritional intake and training backgrounds across the included trials.",
+   "quote": "Compared with resistance training alone, resistance training combined with creatine supplementation significantly enhanced muscle strength and lean body mass, without a significant effect on fat mass. The modest increase in total body weight was primarily attributable to gains in lean…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -225,7 +225,7 @@
    "pmid": "42797032",
    "published": "2026-09-18",
    "summary": "Systematic review, published in Nutrients in September 2026. The study's title: \"Plant-Derived Whole Foods and Food-Based Supplements on Post-Exercise Recovery in Physically Active Individuals: A Systematic Review of Human Intervention Trials.\" Read the source for its methods and full results.",
-   "quote": "However, current evidence does not establish consistent benefits for muscle-function recovery, subsequent performance, or biochemical outcomes, and no specific intervention, dose, or timing strategy can yet be recommended based on the currently available evidence.",
+   "quote": "Plant-derived whole foods and food-based supplements may support selected aspects of post-exercise recovery, particularly perceived muscle soreness. However, current evidence does not establish consistent benefits for muscle-function recovery, subsequent performance, or biochemical outcomes, and no specific intervention, dose, or timing…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -253,7 +253,7 @@
    "pmid": "42824430",
    "published": "2026-09-17",
    "summary": "Systematic review, published in Frontiers in sports and active living in September 2026. The study's title: \"Rethinking neurophysiology of delayed onset muscle soreness: updated concepts and mechanisms for mitigation across endurance, resistance, and plyometric exercise.\" Read the source for its methods and full results.",
-   "quote": "Methods This systematic review with narrative synthesis followed PRISMA 2020 guidelines and registered with the International Prospective Register of Systematic Reviews (",
+   "quote": "Collectively, the evidence supports the concept that DOMS should be regarded as a multifactorial neurophysiological response rather than simply a consequence of muscle damage. Exercise-specific recovery optimizes DOMS management: active recovery for endurance, compression/photobiomodulation for resistance, foam rolling/acupuncture for plyometric.…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -281,7 +281,7 @@
    "pmid": "42823978",
    "published": "2026-09-17",
    "summary": "Systematic review, published in Frontiers in physiology in September 2026. The study's title: \"Effects of caffeine supplementation on post-exercise recovery: a systematic review and three-level meta-analysis of perceptual, functional performance, physiological, and sleep outcomes.\" Read the source for its methods and full results.",
-   "quote": "Functional and sleep findings should be interpreted cautiously because statistical significance varied in sensitivity analyses and prediction intervals included the null.",
+   "quote": "Caffeine appears to have domain-specific effects on post-exercise recovery. It may modestly improve functional performance during recovery, does not clearly improve perceptual or physiological recovery, and may impair sleep. Functional and sleep findings should be interpreted cautiously because statistical significance…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -311,7 +311,7 @@
    "pmid": "42812234",
    "published": "2026-09-15",
    "summary": "Meta-analysis, published in Frontiers in public health in September 2026. The study's title: \"Effectiveness of injury prevention programmes in female team sports: a systematic review and meta-analysis of hierarchical injury outcomes, training dose-response relationships, and adherence.\" Read the source for its methods and full results.",
-   "quote": "These patterns should be interpreted as exploratory implementation signals rather than definitive thresholds.",
+   "quote": "Exercise-based neuromuscular IPPs appear to reduce overall and lower-limb injury risk in female team sports, with protective effects observed for ACL and ankle injuries and the most consistent estimate for ACL injury. Greater weekly exposure was associated with larger risk…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -341,7 +341,7 @@
    "pmid": "42769539",
    "published": "2026-09-07",
    "summary": "Meta-analysis, published in Frontiers in public health in September 2026. The study's title: \"Effects of exergaming on balance and functional performance in older adults with chronic conditions living in the community: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Further high-quality trials with larger sample sizes and long-term follow-up are needed.",
+   "quote": "Exergaming may be a promising adjunctive approach for improving balance and functional performance in community-dwelling older adults with chronic diseases. Further high-quality trials with larger sample sizes and long-term follow-up are needed. Systematic review registration PROSPERO",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -386,7 +386,7 @@
    "pmid": "42700006",
    "published": "2026-09-01",
    "summary": "Meta-analysis, published in Medicine in September 2026. The study's title: \"Combined effects of strength training, whey protein, and HMB on sarcopenia in older people: A systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "However, the limited number of RCTs, relatively small sample sizes, moderate-to-high risk of bias, and inconsistent subgroup findings indicate that the current evidence should be interpreted cautiously and considered promising rather than definitive.",
+   "quote": "ST combined with WP or HMB supplementation may contribute to improvements in fat-free mass and selected physical performance outcomes in older people with sarcopenia. However, the limited number of RCTs, relatively small sample sizes, moderate-to-high risk of bias, and inconsistent…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -470,7 +470,7 @@
    "pmid": "42678805",
    "published": "2026-08-31",
    "summary": "Meta-analysis, published in The Journal of frailty & aging in August 2026. The study's title: \"Effectiveness of interventions using activity trackers and smartphone applications for increasing physical activity in older adults with health conditions: a systematic review with meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Registration CRD42024622697.",
+   "quote": "Interventions using activity trackers may increase physical activity in the short term, although the evidence is very uncertain, and probably increase physical activity at approximately 12 months. Effects at intermediate-term and 24-month follow-up remain uncertain. Effects on mobility, quality of…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Shows an association, not proof of cause and effect.",
@@ -527,7 +527,7 @@
    "pmid": "42730390",
    "published": "2026-08-28",
    "summary": "Meta-analysis, published in Frontiers in public health in August 2026. The study's title: \"Age-moderating effects and training characteristics of neuromuscular training for preventing knee injuries: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Structured, multicomponent, and standardized programs may have practical advantages, but findings on program structure, components, standardization, and dose should be interpreted cautiously because these analyses were exploratory.",
+   "quote": "NMT significantly reduces knee injury risk in athletes, with no clear evidence of age-related moderation. Structured, multicomponent, and standardized programs may have practical advantages, but findings on program structure, components, standardization, and dose should be interpreted cautiously because these analyses…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -557,7 +557,7 @@
    "pmid": "42712362",
    "published": "2026-08-25",
    "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Comparative effectiveness of protein or protein-related supplementation combined with resistance or functional exercise for sarcopenia in older adults: a systematic review and network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "HMB-, whey protein-, or leucine-based strategies showed potential benefits for specific outcomes; however, given the very low certainty of evidence and sparse comparative networks, no single supplementation strategy can be considered definitively superior.",
+   "quote": "Adding protein or protein-related supplementation to resistance or functional exercise may improve muscle strength and ASMI in older adults with sarcopenia or at high risk. HMB-, whey protein-, or leucine-based strategies showed potential benefits for specific outcomes; however, given the…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -586,7 +586,7 @@
    "pmid": "42712444",
    "published": "2026-08-25",
    "summary": "Systematic review, published in Frontiers in immunology in August 2026. The study's title: \"Exercise modalities for adults with type 2 diabetes mellitus and obesity: comparative effects on visceral fat, metabolism, and inflammatory markers from a network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Importantly, these favorable metabolic improvements are independent of dietary energy restriction, which supports targeted individualized exercise prescriptions as an independent clinical intervention for this vulnerable population.",
+   "quote": "Regular exercise effectively ameliorates glycolipid metabolic disorders and chronic inflammatory status in obese T2DM patients. Combined aerobic-resistance training yields the most comprehensive metabolic benefits among all interventions. Importantly, these favorable metabolic improvements are independent of dietary energy restriction, which supports…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -614,7 +614,7 @@
    "pmid": "42625626",
    "published": "2026-08-06",
    "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Dose-structure-population interactions of protein supplementation combined with resistance training on body composition: a Bayesian network meta-analysis with dose-response modeling.\" Read the source for its methods and full results.",
-   "quote": "The protocol was registered on",
+   "quote": "Systematic review registration Identifier: CRD420261340515.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -644,7 +644,7 @@
    "pmid": "42620771",
    "published": "2026-08-05",
    "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Integrating exercise and nutrition to combat frailty: a systematic review of multidomain interventions in aging populations.\" Read the source for its methods and full results.",
-   "quote": "Multidomain interventions appear promising, though further large-scale standardized trials are needed to determine optimal intervention strategies and long-term effects.",
+   "quote": "Exercise-based interventions, particularly multicomponent resistance and functional training, provide the most consistent benefits for frailty-related outcomes in older adults. Nutritional support may enhance exercise-induced improvements but is insufficient alone to reverse frailty. Multidomain interventions appear promising, though further large-scale standardized…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Shows an association, not proof of cause and effect.",
@@ -673,7 +673,7 @@
    "pmid": "42551773",
    "published": "2026-08-04",
    "summary": "Randomised controlled trial, published in Experimental gerontology in August 2026. The study's title: \"Responsiveness of muscle mass gain to different load intensities of resistance training in older women: A randomized crossover study.\" Read the source for its methods and full results.",
-   "quote": "These findings suggest that both loading schemes can be effectively prescribed to promote SMM gains in older women.",
+   "quote": "Results suggest that both the 10RM and 15RM RT protocols significantly increase estimated SMM in older women, with no significant differences between training conditions. Although substantial interindividual variability in adaptive responses exists, training load intensity does not appear to meaningfully…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Shows an association, not proof of cause and effect."
@@ -729,7 +729,7 @@
    "pmid": "42543255",
    "published": "2026-08-01",
    "summary": "Meta-analysis, published in International journal of nursing practice in August 2026. The study's title: \"The Rehabilitative Effects of Online Pelvic Floor Muscle Exercises on Female Urinary Incontinence Across Various Life Stages: A Systematic Review and Meta-Analysis.\" Read the source for its methods and full results.",
-   "quote": "In postpartum women, it reduces incontinence incidence, alleviates symptom severity and enhances training compliance, whereas in elderly patients, its benefit is limited to improved compliance.",
+   "quote": "Online pelvic floor muscle exercise may improve urinary incontinence outcomes across different life stages. In postpartum women, it reduces incontinence incidence, alleviates symptom severity and enhances training compliance, whereas in elderly patients, its benefit is limited to improved compliance.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -757,7 +757,7 @@
    "pmid": "42597803",
    "published": "2026-07-30",
    "summary": "Study, published in Frontiers in public health in July 2026. The study's title: \"Behavior change pathways by which digital wearable devices support exercise self-management in type 2 diabetes: a scoping review with machine learning-assisted text mining.\" Read the source for its methods and full results.",
-   "quote": "This review identifies recurring patterns in the literature rather than making causal inferences, and may inform the development of personalized digital interventions for exercise self-management based on behavior change theory.",
+   "quote": "Digital wearable devices appear to support exercise self-management in people with type 2 diabetes through multiple, interacting behavior-support pathways rather than through any single function alone. This review identifies recurring patterns in the literature rather than making causal inferences, and…",
    "quote_from": "the study's abstract",
    "limitations": [
     "A single study: one result is a data point, not a final answer."
@@ -785,7 +785,7 @@
    "pmid": "42497167",
    "published": "2026-07-24",
    "summary": "Meta-analysis, published in PloS one in July 2026. The study's title: \"Systematic review and meta-analysis of the acute effects of self-selected rest intervals on exercise performance maintenance, lactate levels, and heart rate.\" Read the source for its methods and full results.",
-   "quote": "These findings should be interpreted with caution due to sensitivity to outliers and study heterogeneity.",
+   "quote": "Self-selected and fixed rest intervals produce comparable effects on exercise performance and physiological responses. However, self-selected rest intervals may confer a small advantage in maintaining performance under specific conditions. These findings should be interpreted with caution due to sensitivity to…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -813,7 +813,7 @@
    "pmid": "42539643",
    "published": "2026-07-17",
    "summary": "Systematic review, published in Frontiers in medicine in July 2026. The study's title: \"Comparative efficacy of early exercise interventions for recovery outcomes after total knee arthroplasty: a systematic review and network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "To optimize patient recovery, clinicians should tailor the selection and combination of these interventions on the basis of the rehabilitation stage and goals.",
+   "quote": "Functional training, intelligence-assisted training, and resistance training appeared to be promising early exercise strategies after TKA. Functional training showed favorable comparative effects on pain relief and functional improvement, while intelligence-assisted training demonstrated potential benefits across all three outcomes. To optimize…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -956,7 +956,7 @@
    "pmid": "42491492",
    "published": "2026-07-03",
    "summary": "Systematic review, published in Frontiers in sports and active living in July 2026. The study's title: \"Effects of post-exercise hot and cold-water immersion on performance recovery and physiological markers in athletes: a systematic review.\" Read the source for its methods and full results.",
-   "quote": "Recovery strategy selection should align with specific athletic goals.",
+   "quote": "The effects of water immersion are temperature and context dependent. HWI may benefit sleep and anaerobic performance, while CWI may hinder immediate power and induce cellular stress adaptations. Recovery strategy selection should align with specific athletic goals. Systematic review registration…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -1012,7 +1012,7 @@
    "pmid": "42454074",
    "published": "2026-06-30",
    "summary": "Systematic review, published in Frontiers in physiology in June 2026. The study's title: \"Effects of standalone plyometric training on vertical jump and linear sprint performance in handball athletes: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Future research should establish standardized handball-specific plyometric protocols to refine evidence-based conditioning guidelines.",
+   "quote": "Standalone plyometric training effectively improves vertical jump performance in handball athletes, particularly in adolescent players, but has no significant benefit for short-to-moderate distance linear sprint performance. Future research should establish standardized handball-specific plyometric protocols to refine evidence-based conditioning guidelines. Systematic…",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -1161,6 +1161,30 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-13T05:17:05Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 5 new",
+    "epmc-technique": "ok: 5 found, 5 new",
+    "epmc-nutrition": "ok: 6 found, 5 new",
+    "epmc-recovery": "ok: 6 found, 6 new",
+    "epmc-research": "ok: 5 found, 4 new",
+    "epmc-tech": "ok: 3 found, 3 new",
+    "epmc-motivation": "ok: 4 found, 4 new",
+    "nih-newsinhealth": "ok: 1 found, 1 new"
+   },
+   "added": 33,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
+   ]
+  },
   {
    "at": "2026-10-13T05:15:14Z",
    "sources": {
