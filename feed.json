@@ -1,7 +1,7 @@
 {
- "version": 2,
- "generated": "2026-10-13T05:11:32Z",
- "checked": "2026-10-13T05:11:32Z",
+ "version": 3,
+ "generated": "2026-10-13T05:13:27Z",
+ "checked": "2026-10-13T05:13:27Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 6,
    "last_added": 5
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 6,
    "last_added": 6
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 5,
    "last_added": 4
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 3,
    "last_added": 3
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 4,
    "last_added": 4
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T05:11:32Z",
+   "last_success": "2026-10-13T05:13:27Z",
    "last_found": 1,
    "last_added": 1
   }
@@ -111,7 +111,7 @@
    "pmid": "42816732",
    "published": "2026-09-30",
    "summary": "Systematic review, published in Sports medicine - open in September 2026. The study's title: \"Strategic Application of Post-exercise Cold-Water Immersion to Enhance Performance Recovery and Adaptation: An Umbrella Review of 15 Published Systematic Reviews with Meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "These findings support a periodised, context-driven approach to CWI implementation rather than routine application after all exercise sessions.",
+   "quote": "Methodological quality was assessed using AMSTAR 2, and certainty of evidence using GRADE.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -139,7 +139,7 @@
    "pmid": "42803758",
    "published": "2026-09-25",
    "summary": "Review, published in JMIR serious games in September 2026. The study's title: \"Gamification Elements in Physical Activity Interventions: Scoping Review and Taxonomy Based on the Octalysis Framework.\" Read the source for its methods and full results.",
-   "quote": "However, they should not be interpreted as evidence of the effectiveness of individual gamification elements, and further research is needed to evaluate how specific design configurations influence engagement and PA outcomes.",
+   "quote": "Methods The review protocol was prospectively registered with the International Prospective Register of Systematic Reviews (",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -167,7 +167,7 @@
    "pmid": "42773281",
    "published": "2026-09-22",
    "summary": "Systematic review, published in Sports medicine - open in September 2026. The study's title: \"The Effectiveness of Cluster vs. Rest-Redistribution Set Configurations to Maintain Movement Velocity During Resistance Training: A Systematic Review and Bayesian Network Meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Trial registration The original protocol was prospectively registered with the Open Science Framework ( https://osf.io/9uqyx ).",
+   "quote": "These findings suggest that alternative set structures can be used to effectively maintain movement velocity during resistance training, with the choice among them best guided by practical considerations and training context.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -253,7 +253,7 @@
    "pmid": "42824430",
    "published": "2026-09-17",
    "summary": "Systematic review, published in Frontiers in sports and active living in September 2026. The study's title: \"Rethinking neurophysiology of delayed onset muscle soreness: updated concepts and mechanisms for mitigation across endurance, resistance, and plyometric exercise.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://www.crd.york.ac.uk/PROSPERO/view/CRD420261294291, PROSPERO CRD420261294291.",
+   "quote": "Methods This systematic review with narrative synthesis followed PRISMA 2020 guidelines and registered with the International Prospective Register of Systematic Reviews (",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -281,7 +281,7 @@
    "pmid": "42823978",
    "published": "2026-09-17",
    "summary": "Systematic review, published in Frontiers in physiology in September 2026. The study's title: \"Effects of caffeine supplementation on post-exercise recovery: a systematic review and three-level meta-analysis of perceptual, functional performance, physiological, and sleep outcomes.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD420261467699, identifier CRD420261467699.",
+   "quote": "Functional and sleep findings should be interpreted cautiously because statistical significance varied in sensitivity analyses and prediction intervals included the null.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -311,7 +311,7 @@
    "pmid": "42812234",
    "published": "2026-09-15",
    "summary": "Meta-analysis, published in Frontiers in public health in September 2026. The study's title: \"Effectiveness of injury prevention programmes in female team sports: a systematic review and meta-analysis of hierarchical injury outcomes, training dose-response relationships, and adherence.\" Read the source for its methods and full results.",
-   "quote": "URL: https://www.crd.york.ac.uk/PROSPERO/view/CRD420251236606.",
+   "quote": "These patterns should be interpreted as exploratory implementation signals rather than definitive thresholds.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -341,7 +341,7 @@
    "pmid": "42769539",
    "published": "2026-09-07",
    "summary": "Meta-analysis, published in Frontiers in public health in September 2026. The study's title: \"Effects of exergaming on balance and functional performance in older adults with chronic conditions living in the community: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration PROSPERO registration number: CRD420261368359.",
+   "quote": "Further high-quality trials with larger sample sizes and long-term follow-up are needed.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -527,7 +527,7 @@
    "pmid": "42730390",
    "published": "2026-08-28",
    "summary": "Meta-analysis, published in Frontiers in public health in August 2026. The study's title: \"Age-moderating effects and training characteristics of neuromuscular training for preventing knee injuries: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration PROSPERO, under registration number CRD420261327352.",
+   "quote": "Structured, multicomponent, and standardized programs may have practical advantages, but findings on program structure, components, standardization, and dose should be interpreted cautiously because these analyses were exploratory.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -557,7 +557,7 @@
    "pmid": "42712362",
    "published": "2026-08-25",
    "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Comparative effectiveness of protein or protein-related supplementation combined with resistance or functional exercise for sarcopenia in older adults: a systematic review and network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration PROSPERO, CRD420261396976.",
+   "quote": "HMB-, whey protein-, or leucine-based strategies showed potential benefits for specific outcomes; however, given the very low certainty of evidence and sparse comparative networks, no single supplementation strategy can be considered definitively superior.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -586,7 +586,7 @@
    "pmid": "42712444",
    "published": "2026-08-25",
    "summary": "Systematic review, published in Frontiers in immunology in August 2026. The study's title: \"Exercise modalities for adults with type 2 diabetes mellitus and obesity: comparative effects on visceral fat, metabolism, and inflammatory markers from a network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://www.crd.york.ac.uk/prospero/CRD420251272031, identifier CRD420251272031.",
+   "quote": "Importantly, these favorable metabolic improvements are independent of dietary energy restriction, which supports targeted individualized exercise prescriptions as an independent clinical intervention for this vulnerable population.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -614,7 +614,7 @@
    "pmid": "42625626",
    "published": "2026-08-06",
    "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Dose-structure-population interactions of protein supplementation combined with resistance training on body composition: a Bayesian network meta-analysis with dose-response modeling.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration Identifier: CRD420261340515.",
+   "quote": "The protocol was registered on",
    "quote_from": "the study's abstract",
    "limitations": [
     "Preliminary or pilot findings: needs confirming in larger studies.",
@@ -757,7 +757,7 @@
    "pmid": "42597803",
    "published": "2026-07-30",
    "summary": "Study, published in Frontiers in public health in July 2026. The study's title: \"Behavior change pathways by which digital wearable devices support exercise self-management in type 2 diabetes: a scoping review with machine learning-assisted text mining.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://doi.org/10.17605/OSF.IO/PBG8W.",
+   "quote": "This review identifies recurring patterns in the literature rather than making causal inferences, and may inform the development of personalized digital interventions for exercise self-management based on behavior change theory.",
    "quote_from": "the study's abstract",
    "limitations": [
     "A single study: one result is a data point, not a final answer."
@@ -813,7 +813,7 @@
    "pmid": "42539643",
    "published": "2026-07-17",
    "summary": "Systematic review, published in Frontiers in medicine in July 2026. The study's title: \"Comparative efficacy of early exercise interventions for recovery outcomes after total knee arthroplasty: a systematic review and network meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration PROSPERO (CRD420251041523).",
+   "quote": "To optimize patient recovery, clinicians should tailor the selection and combination of these interventions on the basis of the rehabilitation stage and goals.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -956,7 +956,7 @@
    "pmid": "42491492",
    "published": "2026-07-03",
    "summary": "Systematic review, published in Frontiers in sports and active living in July 2026. The study's title: \"Effects of post-exercise hot and cold-water immersion on performance recovery and physiological markers in athletes: a systematic review.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD420251156387, CRD420251156387.",
+   "quote": "Recovery strategy selection should align with specific athletic goals.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -1012,7 +1012,7 @@
    "pmid": "42454074",
    "published": "2026-06-30",
    "summary": "Systematic review, published in Frontiers in physiology in June 2026. The study's title: \"Effects of standalone plyometric training on vertical jump and linear sprint performance in handball athletes: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
-   "quote": "Systematic review registration https://www.crd.york.ac.uk/prospero/, identifier CRD420261360294.",
+   "quote": "Future research should establish standardized handball-specific plyometric protocols to refine evidence-based conditioning guidelines.",
    "quote_from": "the study's abstract",
    "limitations": [
     "Pools earlier studies: it is only as strong as the studies it includes."
@@ -1161,6 +1161,30 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-13T05:13:27Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 5 new",
+    "epmc-technique": "ok: 5 found, 5 new",
+    "epmc-nutrition": "ok: 6 found, 5 new",
+    "epmc-recovery": "ok: 6 found, 6 new",
+    "epmc-research": "ok: 5 found, 4 new",
+    "epmc-tech": "ok: 3 found, 3 new",
+    "epmc-motivation": "ok: 4 found, 4 new",
+    "nih-newsinhealth": "ok: 1 found, 1 new"
+   },
+   "added": 33,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
+   ]
+  },
   {
    "at": "2026-10-13T05:11:32Z",
    "sources": {
