@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content')
-FEED_VERSION = 5
+FEED_VERSION = 6
 UA = 'DrukFitDaily/1.0 (+https://drukfit.app; content refresh bot)'
 
 def now_utc():

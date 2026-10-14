@@ -73,7 +73,7 @@
    "name": "Europe PMC",
    "category": "archery",
    "window_days": 1095,
-   "query": "(archery OR archer OR archers) AND (shoulder OR training OR performance OR injury OR strength OR posture)"
+   "query": "TITLE:(archery OR archer OR archers)"
   }
  ],
  "settings": {
