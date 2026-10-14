@@ -73,7 +73,8 @@
    "name": "Europe PMC",
    "category": "archery",
    "window_days": 1095,
-   "query": "TITLE:(archery OR archer OR archers)"
+   "query": "TITLE:(archery OR archer OR archers)",
+   "any_study_type": true
   }
  ],
  "settings": {

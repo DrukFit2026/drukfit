@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content')
-FEED_VERSION = 6
+FEED_VERSION = 7
 UA = 'DrukFitDaily/1.0 (+https://drukfit.app; content refresh bot)'
 
 def now_utc():
@@ -124,7 +124,8 @@ WHY = {
 # --------------------------------------------------------------------------- sources
 def europepmc(src, fetch, settings, log):
     to = now_utc().date(); frm = to - datetime.timedelta(days=src.get('window_days') or settings.get('research_window_days', 120))
-    q = (f'({src["query"]}) AND (PUB_TYPE:"randomized controlled trial" OR PUB_TYPE:"meta-analysis" OR PUB_TYPE:"systematic review" OR PUB_TYPE:"review") '
+    types = '' if src.get('any_study_type') else ' AND (PUB_TYPE:"randomized controlled trial" OR PUB_TYPE:"meta-analysis" OR PUB_TYPE:"systematic review" OR PUB_TYPE:"review")'
+    q = (f'({src["query"]}){types} '
          f'AND HAS_ABSTRACT:y AND LANG:eng AND SRC:MED AND FIRST_PDATE:[{frm.isoformat()} TO {to.isoformat()}]')
     url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?' + urllib.parse.urlencode({'query': q, 'format': 'json', 'resultType': 'core', 'pageSize': settings.get('per_query', 6)})
     status, body = fetch.get(url, 'application/json')
