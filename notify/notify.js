@@ -160,4 +160,4 @@ async function run(opts){
   return stats;
 }
 module.exports = { run, dueReminders, weeklyEmail, localNow, buildState, inWindow };
-if (require.main === module) run().then(s => console.log(JSON.stringify(s))).catch(e => { console.error(e.message); process.exit(1); });
+if (require.main === module) run().then(s => { console.log(JSON.stringify(s)); if (process.env.GITHUB_ACTIONS) console.log(`::notice title=DrukFit reminders::${s.notReady ? 'Waiting for setup' : 'Ready'} | members ${s.members} | sent ${s.pushSent} | emails ${s.emails} | email skipped ${s.emailSkipped} | errors ${s.errors}`); }).catch(e => { console.error(e.message); process.exit(1); });
