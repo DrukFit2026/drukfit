@@ -1,7 +1,7 @@
 {
  "version": 5,
- "generated": "2026-10-13T20:15:55Z",
- "checked": "2026-10-13T20:15:55Z",
+ "generated": "2026-10-14T02:38:02Z",
+ "checked": "2026-10-14T02:38:02Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -88,9 +88,18 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-13T20:15:55Z",
+   "last_success": "2026-10-14T02:38:02Z",
    "last_found": 1,
    "last_added": 0
+  },
+  "epmc-archery": {
+   "name": "Europe PMC",
+   "category": "archery",
+   "enabled": true,
+   "status": "ok",
+   "last_success": "2026-10-14T02:38:02Z",
+   "last_found": 5,
+   "last_added": 5
   }
  },
  "items": [
@@ -292,6 +301,35 @@
    "open_access": true,
    "imported": "2026-10-13",
    "link_checked": "2026-10-13",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3389-fnhum-2026-1901170",
+   "kind": "research",
+   "category": "archery",
+   "title": "Physiological mechanisms and adaptation in high-performance shooting: a biomarker review",
+   "source": "Frontiers in human neuroscience",
+   "source_title": "Physiological mechanisms and adaptation in high-performance shooting: a biomarker review",
+   "via": "Europe PMC",
+   "authors": "Bayova L, Grigorev N, Kazantsev V, Gordleeva S.",
+   "study_type": "review",
+   "participants": null,
+   "url": "https://doi.org/10.3389/fnhum.2026.1901170",
+   "record_url": "https://europepmc.org/article/MED/42824886",
+   "doi": "10.3389/fnhum.2026.1901170",
+   "pmid": "42824886",
+   "published": "2026-09-17",
+   "summary": "Review, published in Frontiers in human neuroscience in September 2026. The study's title: \"Physiological mechanisms and adaptation in high-performance shooting: a biomarker review.\" Read the source for its methods and full results.",
+   "quote": "Therefore, the development of personalized real-time feedback systems that transform raw physiological data into practical recommendations will be essential for optimizing training effectiveness and achieving maximum shooting performance.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
    "status": "auto-checked"
   },
   {
@@ -798,6 +836,35 @@
    "status": "auto-checked"
   },
   {
+   "id": "doi-10-1038-s41598-026-64539-z",
+   "kind": "research",
+   "category": "archery",
+   "title": "Unstable trunk core strength training improves shooting performance and holding stability in elite 10 m air pistol athletes: a pilot randomized controlled trial",
+   "source": "Scientific reports",
+   "source_title": "Unstable trunk core strength training improves shooting performance and holding stability in elite 10 m air pistol athletes: a pilot randomized controlled trial",
+   "via": "Europe PMC",
+   "authors": "Jin R, Niu Z, Chen C, Finlay MJ, Cuenca-Fernández F, Ma Y, Zhong Y, Song X.",
+   "study_type": "randomised controlled trial",
+   "participants": 10,
+   "url": "https://doi.org/10.1038/s41598-026-64539-z",
+   "record_url": "https://europepmc.org/article/MED/42533021",
+   "doi": "10.1038/s41598-026-64539-z",
+   "pmid": "42533021",
+   "published": "2026-07-29",
+   "summary": "Randomised controlled trial with 10 participants, published in Scientific reports in July 2026. The study's title: \"Unstable trunk core strength training improves shooting performance and holding stability in elite 10 m air pistol athletes: a pilot randomized controlled trial.\" Read the source for its methods and full results.",
+   "quote": "In this sample of national-level air pistol athletes, UTCST appeared to produce greater improvements than STCST in both postural control and shooting precision, which may reflect enhanced neuromuscular coordination. Given the small, pilot sample, these preliminary findings require confirmation in…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Small study (10 participants): results may not generalise.",
+    "Preliminary or pilot findings: needs confirming in larger studies."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
    "id": "doi-10-1371-journal-pone-0354594",
    "kind": "research",
    "category": "technique",
@@ -1053,6 +1120,91 @@
    "status": "auto-checked"
   },
   {
+   "id": "doi-10-3389-fspor-2026-1744369",
+   "kind": "research",
+   "category": "archery",
+   "title": "Virtual reality-based interventions targeting sports injury-related risk factors: a systematic review of biomechanical, neuromuscular, and functional outcomes",
+   "source": "Frontiers in sports and active living",
+   "source_title": "Virtual reality-based interventions targeting sports injury-related risk factors: a systematic review of biomechanical, neuromuscular, and functional outcomes",
+   "via": "Europe PMC",
+   "authors": "Mohammad Rahimi GR, Mohammad Rahimi N, Hoppe MW.",
+   "study_type": "systematic review",
+   "participants": null,
+   "url": "https://doi.org/10.3389/fspor.2026.1744369",
+   "record_url": "https://europepmc.org/article/MED/42453617",
+   "doi": "10.3389/fspor.2026.1744369",
+   "pmid": "42453617",
+   "published": "2026-06-30",
+   "summary": "Systematic review, published in Frontiers in sports and active living in June 2026. The study's title: \"Virtual reality-based interventions targeting sports injury-related risk factors: a systematic review of biomechanical, neuromuscular, and functional outcomes.\" Read the source for its methods and full results.",
+   "quote": "VR-based interventions may represent a promising adjunct to conventional neuromuscular and perceptual-cognitive training approaches for modifying surrogate lower-extremity injury-related factors. Nevertheless, substantial heterogeneity, limited longitudinal follow-up, and the absence of injury-incidence outcomes restrict conclusions regarding definitive preventive efficacy. Future adequately…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-1093-rap-rkaf127",
+   "kind": "research",
+   "category": "archery",
+   "title": "Current and future advances in practice: cervical spondylosis and mechanical neck pain",
+   "source": "Rheumatology advances in practice",
+   "source_title": "Current and future advances in practice: cervical spondylosis and mechanical neck pain",
+   "via": "Europe PMC",
+   "authors": "Jull G, Thomas L, Liang Z, Treleaven J.",
+   "study_type": "review",
+   "participants": null,
+   "url": "https://doi.org/10.1093/rap/rkaf127",
+   "record_url": "https://europepmc.org/article/MED/41357853",
+   "doi": "10.1093/rap/rkaf127",
+   "pmid": "41357853",
+   "published": "2025-12-02",
+   "summary": "Review, published in Rheumatology advances in practice in December 2025. The study's title: \"Current and future advances in practice: cervical spondylosis and mechanical neck pain.\" Read the source for its methods and full results.",
+   "quote": "Rehabilitation programmes are patient-specific and include self-management and maintenance programmes in a quest to decrease recurrence rates.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3390-healthcare12040463",
+   "kind": "research",
+   "category": "archery",
+   "title": "Adaptive Shooting Disciplines: A Scoping Review of the Literature with Bibliometric Analysis",
+   "source": "Healthcare (Basel, Switzerland)",
+   "source_title": "Adaptive Shooting Disciplines: A Scoping Review of the Literature with Bibliometric Analysis",
+   "via": "Europe PMC",
+   "authors": "Puce L, Biz C, Ceylan HI, Bragazzi NL, Formica M, Trabelsi K, Szarpak Ł, Trompetto C, Rossin A, Lanciano NA, Ruggieri P.",
+   "study_type": "study",
+   "participants": 9,
+   "url": "https://doi.org/10.3390/healthcare12040463",
+   "record_url": "https://europepmc.org/article/MED/38391838",
+   "doi": "10.3390/healthcare12040463",
+   "pmid": "38391838",
+   "published": "2024-02-12",
+   "summary": "Study with 9 participants, published in Healthcare (Basel, Switzerland) in February 2024. The study's title: \"Adaptive Shooting Disciplines: A Scoping Review of the Literature with Bibliometric Analysis.\" Read the source for its methods and full results.",
+   "quote": "Addressing the imbalance between the two disciplines, along with injury prevention and global participation, can drive the sports towards greater inclusivity and equity for para-athletes worldwide.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Small study (9 participants): results may not generalise."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
    "id": "ev-cdc-adult-activity",
    "kind": "guidance",
    "category": "beginner",
@@ -1190,6 +1342,33 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-14T02:38:02Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 5 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 3 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 5 found, 5 new"
+   },
+   "added": 5,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
+    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P",
+    "epmc-archery: skipped clinical or off-topic study: Interventions that strengthen the patient-clinician relationship impro"
+   ]
+  },
   {
    "at": "2026-10-13T20:15:55Z",
    "sources": {
