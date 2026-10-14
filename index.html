@@ -501,8 +501,24 @@ span.dtick.locked{ color:var(--faint); border-style:dashed; }
 .ddash{ display:flex; gap:14px; align-items:center; color:inherit; text-decoration:none; border-color:color-mix(in srgb,var(--accent) 30%,var(--line)); background:linear-gradient(120deg, var(--accent-soft), var(--surface) 65%); }
 .ddash .t{ font-weight:700; } .ddash .eyebrow svg{ width:15px; height:15px; vertical-align:-3px; color:var(--accent); }
 @media (prefers-reduced-motion: reduce){ .dcard, .dgoal.pop .dtick, .skel .sk{ animation:none !important; } .dcard:hover{ transform:none; } }
+
+/* ---- notifications, shortcut, archery, photo slider ---- */
+.ntrow{ gap:10px; } .ntime{ width:auto !important; min-height:38px !important; padding:6px 8px !important; flex:none; }
+.ntime:disabled{ opacity:.45; }
+.scsteps{ margin:8px 0 12px; padding-left:20px; display:flex; flex-direction:column; gap:6px; }
+.scrow{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.sccode{ flex:1; min-width:0; overflow-wrap:anywhere; font-family:var(--f-mono); font-size:.75rem; background:var(--raised); border-radius:8px; padding:7px 9px; }
+.pslide{ position:relative; aspect-ratio:3/4; max-width:440px; overflow:hidden; border-radius:16px; background:var(--raised); touch-action:pan-y; }
+.pslide img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.pslide-a{ position:absolute; inset:0; clip-path:inset(0 calc(100% - var(--pos)) 0 0); }
+.pslide-line{ position:absolute; top:0; bottom:0; left:var(--pos); width:3px; margin-left:-1.5px; background:#fff; box-shadow:0 0 8px rgba(0,0,0,.5); pointer-events:none; }
+.pslide-tag{ position:absolute; top:10px; font-size:.72rem; font-weight:700; background:rgba(0,0,0,.55); color:#fff; padding:3px 8px; border-radius:99px; pointer-events:none; }
+.pslide-tag.l{ left:10px; } .pslide-tag.r{ right:10px; }
+.pslide input[type=range]{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0; }
+.pstats{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.pstat{ display:flex; flex-direction:column; gap:2px; background:var(--raised); border-radius:12px; padding:9px 12px; min-width:140px; }
 </style>
-<script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-"};</script></head><body><div id="app"></div>
+<script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-", "vapid": "BN6jXYP67cnZzPUrnmgTOTQomzqMLpxBmFCJ5zbWpYo-frDKkHj7jp9XaKhSQWFp9dkR09pYjFedHKgbVLrNpNs"};</script></head><body><div id="app"></div>
 <script>
 "use strict";
 /* ===== Libraries: exercises, foods, meals ===== */
@@ -592,6 +608,12 @@ const EX_RAW = [
   ['row-erg','Rowing Machine','cardio','machine','Conditioning, Back','back',0,0,['Legs, then body, then arms','Reverse on the way back'],['bike','incline-walk'],0],
   ['incline-walk','Incline Treadmill Walk','cardio','machine','Conditioning','',0,0,['Brisk pace you can talk at','Do not hold the rails'],['bike','brisk-walk'],0],
   ['brisk-walk','Brisk Walk / Jog','cardio','bodyweight','Conditioning','',0,0,['Conversational pace','Build duration before speed'],['bike'],0],
+  // Archery support (shoulder health, upper back, both-sides balance)
+  ['band-er','Band External Rotation','prehab','bodyweight','Rotator cuff','',0,0,['Elbow tucked to your side, towel under the arm','Rotate out slowly, keep the elbow still','Equal reps on both arms'],['face-pull','band-pullapart'],0],
+  ['ytw','Prone Y-T-W Raise','prehab','bodyweight','Lower traps, Rear delts','',0,0,['Lie face down on an incline bench or the floor','Thumbs up, lift into a Y, then T, then W','Small, slow and pain-free; no weight needed at first'],['band-pullapart','face-pull'],0],
+  ['band-draw','Band Bow Draw (both sides)','prehab','bodyweight','Rhomboids, Rear delts, Rotator cuff','',0,0,['Hold the band like your bow and draw to your anchor point','Keep the bow shoulder low and the draw elbow in line','Do the same reps on your non-shooting side too'],['band-pullapart','db-row'],0],
+  ['open-book','Open-book Thoracic Rotation','prehab','bodyweight','Thoracic spine, Chest','',0,0,['Lie on your side, knees bent, arms together','Open the top arm across, following it with your eyes','Go only as far as feels comfortable; same reps each side'],['mobility'],0],
+  ['farmer-carry','Farmer Carry','carry','dumbbell','Grip, Upper back, Core','',0.35,2,['Stand tall, shoulders down and back','Short, steady steps','Carry for 30-40 m, then rest','Log the distance in metres as reps'],['db-row'],0],
   ['mobility','Mobility Flow','mobility','bodyweight','Hips, Thoracic spine, Shoulders','',0,0,['World\'s greatest stretch x5 per side','Cat-cow x10','90/90 hip switches x10','Thread the needle x6 per side','Deep squat hold 60 s'],['brisk-walk'],0],
 ];
 const EXERCISES = {};
@@ -1433,6 +1455,37 @@ function compareWeeks(S, wsA, wsB){
   return COMPARE_ROWS.map(([k, label, unit]) => ({ key:k, label, unit, a: a[k] == null ? null : (k === 'avgRpe' ? r1(a[k]) : a[k]), b: b[k] == null ? null : (k === 'avgRpe' ? r1(b[k]) : b[k]) }));
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { buildWeekReport, weekMetrics, compareWeeks, weeksWithData, exerciseProgression, nextWeekPlan });
+/* ===== Archery support: plan additions, warm-up, shooting days (no DOM) =====
+   Additions are tagged { archery:true } so they can be removed again without touching the rest of the plan. */
+const ARCHERY_WARMUP = [
+  { exId:'band-pullapart', dose:'15 reps' }, { exId:'band-er', dose:'12 reps each arm' }, { exId:'ytw', dose:'5 of each letter' },
+  { exId:'open-book', dose:'6 each side' }, { exId:'band-draw', dose:'8 slow draws each side' },
+  { name:'Light practice ends', dose:'2-3 easy ends before full draws' },
+];
+function archeryOn(profile){ return !!(profile && profile.sport && profile.sport.archery); }
+function shootingDay(profile, date){ return archeryOn(profile) && ((profile.sport.days || []).includes(dowOf(date))); }
+function isUpperWorkout(w){ return w.exercises.some(e => { const x = EXERCISES[e.exId]; return x && ['hpull','vpull','hpush','vpush','rear-iso'].includes(x.pattern); }); }
+function applyArchery(plan, profile, on){
+  const p = JSON.parse(JSON.stringify(plan));
+  const gym = profile.equipment === 'full'; const db = gym || profile.equipment === 'dumbbell';
+  p.workouts.forEach(w => {
+    w.exercises = w.exercises.filter(e => !e.archery);
+    if (!on || w.tpl === 'mobility') return;
+    const has = id => w.exercises.some(e => e.exId === id);
+    const add = (exId, sets, repMin, repMax, rest) => { if (!has(exId)) w.exercises.push({ exId, sets, repMin, repMax, rest, start: 0, archery: true }); };
+    if (isUpperWorkout(w)){
+      add(gym ? 'face-pull' : 'band-pullapart', 2, 12, 15, 60);
+      add('band-er', 2, 12, 15, 45);
+      add('band-draw', 2, 8, 10, 45);
+    } else {
+      add('ytw', 2, 5, 8, 45);
+      if (db) add('farmer-carry', 2, 30, 40, 75);
+    }
+  });
+  p.archery = !!on;
+  return p;
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { applyArchery, archeryOn, shootingDay, ARCHERY_WARMUP });
 /* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
    Completion is only ever derived from what the member actually recorded, or from an explicit
    tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
@@ -1446,6 +1499,7 @@ const DAILY_CATEGORIES = {
   tech:       { label:'Fitness technology',  short:'Tech' },
   motivation: { label:'Motivation & habits', short:'Motivation' },
   beginner:   { label:'Beginner basics',     short:'Basics' },
+  archery:    { label:'Archery',             short:'Archery' },
 };
 const DAILY_GOAL_DEFS = {
   workout:  { label:'Complete today\'s workout',        icon:'dumbbell', route:'train' },
@@ -1455,6 +1509,7 @@ const DAILY_GOAL_DEFS = {
   water:    { label:'Reach your water target',           icon:'drop',     route:'dashboard' },
   move:     { label:'Cardio, walk or mobility',          icon:'trend',    route:'train' },
   sleep:    { label:'Record last night\'s sleep',        icon:'moon',     route:'dashboard' },
+  archery:  { label:'Warm up before shooting',          icon:'target',   route:'daily' },
   tip:      { label:'Read today\'s coaching tip',        icon:'info',     route:'daily' },
   challenge:{ label:'Complete today\'s challenge',       icon:'star',     route:'daily/challenges' },
 };
@@ -1484,7 +1539,8 @@ function dayContext(S, date){
   const moved = mobilityDone || sess.some(s => s.cardio && s.cardio.done) || (hab.steps || 0) >= 6000;
   const rep = (S.reportsDoc && S.reportsDoc.saved) || {};
   const reviewed = Object.values(rep).some(r => r && r.savedAt && isoDate(new Date(r.savedAt)) === date);
-  return { date, today, training, planned, plannedCardio: !!(planned && planned.cardio), lifting, workoutDone: lifting.length > 0, allSets, setsLogged, setsPlanned,
+  const rec0 = dailyRecord(S, date);
+  return { shooting: typeof shootingDay === 'function' && shootingDay(S.profile, date), archeryWarm: !!rec0.archeryWarmup, date, today, training, planned, plannedCardio: !!(planned && planned.cardio), lifting, workoutDone: lifting.length > 0, allSets, setsLogged, setsPlanned,
     T, ft, entries, water: fd.water || 0, hab, moved, mobilityDone, reviewed, goal: P.goal, limitations: P.limitations || [] };
 }
 
@@ -1510,6 +1566,8 @@ const DAILY_CHALLENGES = [
     steps:['Open "More for today" on the dashboard','Enter how many hours you slept'], criteria:'Completes automatically when you record last night\'s sleep.', auto: c => c.hab.sleep != null },
   { id:'review-week', when:'any', mins:'5', title:'Review your weekly progress', purpose:'A quick weekly review shows what is working and what to adjust.',
     steps:['Open Weekly Reports','Generate this week\'s report and read the coach review','Tap Save report'], criteria:'Completes automatically when you save a weekly report today.', auto: c => c.reviewed },
+  { id:'archery-warmup', when:'any', archery:true, mins:'10', title:'Warm up before you shoot', purpose:'A short shoulder and upper-back warm-up helps you draw smoothly and evenly from the first end.',
+    steps:['Open DrukFit Daily and tap "Start archery warm-up"','Work through the moves, the same reps on both sides','Shoot two or three easy ends before full draws'], criteria:'Completes automatically when you finish the archery warm-up.', auto: c => c.archeryWarm },
 ];
 const WEEKLY_CHALLENGES = [
   { id:'all-sessions', title:'Complete every planned session this week', purpose:'Showing up for the whole plan is the foundation of progress.', check: (S, ws) => { const w = weekStats(S, ws); return { done: w.done >= w.target && w.target > 0, progress: Math.min(w.done, w.target), target: w.target }; } },
@@ -1517,7 +1575,7 @@ const WEEKLY_CHALLENGES = [
   { id:'sleep-5', title:'Log your sleep on 5 nights this week', purpose:'Five nights of data is enough to spot a sleep pattern.', check: (S, ws) => { let n = 0; for (let i = 0; i < 7; i++){ const h = (S.habits || {})[addDays(ws, i)]; if (h && h.sleep != null) n++; } return { done: n >= 5, progress: Math.min(n, 5), target: 5 }; } },
 ];
 function eligibleChallenges(S, c){
-  return DAILY_CHALLENGES.filter(ch => (ch.when === 'any' || (ch.when === 'train') === c.training) && (!ch.needsTargets || c.T));
+  return DAILY_CHALLENGES.filter(ch => (!ch.archery || c.shooting) && (ch.when === 'any' || (ch.when === 'train') === c.training) && (!ch.needsTargets || c.T));
 }
 function dailyChallenge(S, date, uidSeed){
   const c = dayContext(S, date); const rec = dailyRecord(S, date);
@@ -1542,6 +1600,7 @@ function dailyGoals(S, date, uidSeed){
   add('water', !!c.T, c.T && c.water >= c.T.water, c.T ? `${c.water} / ${c.T.water} ml` : '');
   add('move', c.plannedCardio || !c.training, c.moved, c.training ? 'Optional cardio finisher' : 'Rest day: 20-min walk or mobility');
   add('sleep', true, c.hab.sleep != null, c.hab.sleep != null ? `${c.hab.sleep} h recorded` : 'Not recorded yet');
+  add('archery', c.shooting, c.archeryWarm, c.archeryWarm ? 'Warm-up done' : 'Shooting day: 10-minute shoulder warm-up');
   add('tip', true, !!rec.tipRead, rec.tipRead ? 'Read' : 'One minute');
   const ch = dailyChallenge(S, date, uidSeed); add('challenge', true, ch.done, ch.title);
   const done = g.filter(x => x.done).length;
@@ -1622,11 +1681,13 @@ const GOAL_WORDS = { muscle_gain:'building muscle', fat_loss:'losing fat', stren
 function rankFeed(items, profile, prefs, now){
   profile = profile || {}; prefs = prefs || {}; now = now || isoDate();
   const gw = GOAL_TOPICS[profile.goal] || {};
-  return items.filter(a => prefs[a.category] !== 'hide' && !a.hidden).map(a => {
+  const archer = typeof archeryOn === 'function' && archeryOn(profile);
+  return items.filter(a => prefs[a.category] !== 'hide' && !a.hidden && (a.category !== 'archery' || archer || prefs.archery === 'more')).map(a => {
     let score = 1, reason = null, best = 0;
     const g = gw[a.category] || 0; if (g){ score += g; if (g > best){ best = g; reason = `Because you're focusing on ${GOAL_WORDS[profile.goal]}`; } }
     if (profile.experience === 'beginner' && (a.category === 'beginner' || a.category === 'technique')){ score += 2; if (2 > best){ best = 2; reason = 'Good for building your foundations'; } }
     if (profile.experience === 'advanced' && (a.category === 'research' || a.kind === 'research')){ score += 1.5; if (1.5 > best){ best = 1.5; reason = 'Recent research for experienced lifters'; } }
+    if (archer && a.category === 'archery'){ score += 3; if (3 > best){ best = 3; reason = 'For your archery'; } }
     if (prefs[a.category] === 'more'){ score += 2.5; if (2.5 > best){ best = 2.5; reason = 'A topic you follow'; } }
     const age = a.published ? daysBetween(a.published.slice(0, 10), now) : 9999;
     if (a.kind === 'research' || a.kind === 'news'){ const fresh = Math.max(0, 1.5 - age / 40); score += fresh; if (age <= 14 && fresh > best){ best = fresh; reason = 'New in the last two weeks'; } }
@@ -1785,7 +1846,7 @@ const ICON_PATHS = {
   edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>', star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', scale:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 9a5 5 0 018 0l-3 3"/>',
   pause:'<path d="M8 5v14M16 5v14"/>', flame:'<path d="M12 3c1 4 6 6 6 11a6 6 0 01-12 0c0-3 2-4 3-7 1 2 2 3 3 3 0-3-1-5 0-7z"/>',
-  bolt:'<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>', daily:'<path d="M2 20h20"/><path d="M4 20l5.5-8 3 4 2.5-3 5 7"/><circle cx="16.5" cy="6.5" r="2.5"/><path d="M16.5 1.5v1M21.5 6.5h-1M20 3l-.7.7"/>', link:'<path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/>',
+  bolt:'<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>', target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>', daily:'<path d="M2 20h20"/><path d="M4 20l5.5-8 3 4 2.5-3 5 7"/><circle cx="16.5" cy="6.5" r="2.5"/><path d="M16.5 1.5v1M21.5 6.5h-1M20 3l-.7.7"/>', link:'<path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/>',
 };
 const I = (n, cls) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i ${cls||''}">${ICON_PATHS[n]||''}</svg>`;
 
@@ -2563,8 +2624,8 @@ function prPhotos(){
   after(() => { document.querySelectorAll('img[data-photo]').forEach(async img => { const src = await Store.getPhoto(img.dataset.photo); if (src) img.src = src; else img.alt = 'Photo unavailable on this device'; }); });
   return `<div class="note">${I('info')}<div class="small">Photos are stored privately in your account, resized to save space. They're never sent to the AI coach. Same light, pose and time of day makes comparisons fair.</div></div>
     <div class="card"><div class="between"><h3 style="margin:0">Progress photos</h3><label class="btn primary sm" style="cursor:pointer">${I('camera')} Add photo<input type="file" accept="image/*" hidden data-chg="photo-up"></label></div>
-      ${ph.length ? `<p class="small muted" style="margin:8px 0">Tap two photos to compare them side by side.</p><div class="photos">${ph.map(p => `<button class="${selc.includes(p.id) ? 'on' : ''}" data-act="photo-sel" data-id="${p.id}" aria-pressed="${selc.includes(p.id)}"><img data-photo="${p.id}" alt="Progress photo ${fmtDate(p.date)}"><span>${fmtDate(p.date, { day:'numeric', month:'short', year:'2-digit' })}</span></button>`).join('')}</div>` : `<div class="empty small">${I('camera')}<div>No photos yet. Front, side and back every 2-4 weeks works well.</div></div>`}</div>
-    ${selc.length === 2 ? (() => { const [a, b] = selc.map(id => ph.find(p => p.id === id)).sort((x,y) => x.date < y.date ? -1 : 1); return `<div class="card"><div class="between"><h3 style="margin:0">Compare</h3><span class="small muted">${daysBetween(a.date, b.date)} days apart</span></div><div class="compare" style="margin-top:10px"><figure style="margin:0"><img data-photo="${a.id}" alt="Earlier photo"><figcaption class="small muted">${fmtDate(a.date)}</figcaption></figure><figure style="margin:0"><img data-photo="${b.id}" alt="Later photo"><figcaption class="small muted">${fmtDate(b.date)}</figcaption></figure></div></div>`; })() : ''}
+      ${ph.length ? `<p class="small muted" style="margin:8px 0">Tap two photos to compare them.</p><div class="photos">${ph.map(p => `<button class="${selc.includes(p.id) ? 'on' : ''}" data-act="photo-sel" data-id="${p.id}" aria-pressed="${selc.includes(p.id)}"><img data-photo="${p.id}" alt="Progress photo ${fmtDate(p.date)}"><span>${fmtDate(p.date, { day:'numeric', month:'short', year:'2-digit' })}</span></button>`).join('')}</div>` : `<div class="empty small">${I('camera')}<div>No photos yet. Front, side and back every 2-4 weeks works well.</div></div>`}</div>
+    ${selc.length === 2 ? (() => { const [a, b] = selc.map(id => ph.find(p => p.id === id)).sort((x,y) => x.date < y.date ? -1 : 1); return photoCompare(a, b); })() : ''}
     ${selc.length === 1 ? `<div class="row"><button class="btn sm danger" data-act="photo-del" data-id="${selc[0]}">${I('trash')} Delete selected photo</button></div>` : ''}`;
 }
 ACTIONS['photo-sel'] = el => { let s = sub.cmp ? sub.cmp.split(',') : []; s = s.includes(el.dataset.id) ? s.filter(x => x !== el.dataset.id) : s.concat(el.dataset.id).slice(-2); sub.cmp = s.join(','); render(); };
@@ -2698,9 +2759,10 @@ VIEWS.settings = arg => {
     <div class="card"><div class="between"><div><h3 style="margin:0">${esc(P.name || 'Your profile')}</h3><p class="small muted">${[P.age && P.age + ' yrs', P.heightCm && P.heightCm + ' cm', P.weightKg && 'started at ' + P.weightKg + ' kg'].filter(Boolean).join(' · ')}</p></div><button class="btn sm primary" data-act="edit-profile">${I('edit')} Edit profile & goals</button></div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:12px;gap:10px">${[['Goal', (GOALS.find(g => g[0]===P.goal)||[])[1]], ['Target', P.targetWeight ? P.targetWeight + ' kg' + (P.targetDate ? ' by ' + fmtDate(P.targetDate) : '') : '–'], ['Experience', P.experience], ['Schedule', `${P.daysPerWeek} days · ${P.duration} min`], ['Equipment', { full:'Full gym', dumbbell:'Dumbbells at home', bodyweight:'Bodyweight' }[P.equipment]], ['Protecting', (P.limitations||[]).map(l => (LIMITS.find(x => x[0]===l)||[0,l])[1]).join(', ') || 'Nothing'], ['Diet', (P.diet||{}).pref === 'none' ? 'No restrictions' : (P.diet||{}).pref], ['Daily targets', T ? `${fmtNum(T.kcal)} kcal · ${T.p} g protein` : 'Add body details']].map(([k,v]) => `<div><div class="eyebrow">${k}</div><div class="small" style="text-transform:${k==='Experience'||k==='Diet'?'capitalize':'none'}">${esc(v)}</div></div>`).join('')}</div></div>
     ${typeof accountCard === 'function' ? accountCard() : ''}
+    ${typeof extraSettings === 'function' ? extraSettings() : ''}
     <div class="card"><h3>Appearance</h3><div class="seg">${[['dark','Dark'],['light','Light'],['system','Match device']].map(([k,l]) => `<button class="${(S.settings.theme||'dark')===k?'on':''}" data-act="set-theme" data-v="${k}">${l}</button>`).join('')}</div></div>
     <div class="card"><h3>Workout & coach</h3><div class="list">${tog('sound','Rest timer sound', S.settings.sound !== false, 'Plays when rest ends (phone must not be on silent)')}${tog('useAI','Use Claude for coach answers', S.settings.useAI !== false, 'Uses your own Claude account. Off = built-in rules only')}</div></div>
-    <div class="card"><h3>Reminders</h3><p class="small muted" style="margin-bottom:6px">Reminders appear on your Today screen when you open the app. Pages pinned from Claude can't send phone notifications.</p><div class="list">${tog('r.workout','Scheduled workouts', R.workout !== false)}${tog('r.weighin','Weekly weigh-in', R.weighin !== false)}${tog('r.water','Water intake (after 2 pm)', R.water !== false)}${tog('r.meals','Weekly meal planning', R.meals !== false)}${tog('r.review','Sunday weekly review', R.review !== false)}</div></div>
+    <div class="card"><h3>On-screen reminders</h3><p class="small muted" style="margin-bottom:6px">These appear on your Today screen when you open the app.${typeof CLOUD !== 'undefined' && CLOUD ? ' Phone notifications are set up above.' : ''}</p><div class="list">${tog('r.workout','Scheduled workouts', R.workout !== false)}${tog('r.weighin','Weekly weigh-in', R.weighin !== false)}${tog('r.water','Water intake (after 2 pm)', R.water !== false)}${tog('r.meals','Weekly meal planning', R.meals !== false)}${tog('r.review','Sunday weekly review', R.review !== false)}</div></div>
     <div class="card"><h3>Your data</h3><div class="list">
       <div class="li"><div class="grow"><div class="t">Storage</div><div class="small muted">${typeof CLOUD !== 'undefined' && CLOUD ? 'Private to your DrukFit account, with an offline copy on this device.' : Store.status === 'local' ? 'This device only. Open from your Claude link while signed in to sync.' : 'Private to your Claude account, with an offline copy on this device.'}</div></div></div>
       <div class="li"><div class="grow"><div class="t">Export everything</div><div class="small muted">JSON file with workouts, food, measurements and settings (photos not included)</div></div><button class="btn sm" data-act="export">Export</button></div>
@@ -3066,7 +3128,7 @@ function renderCompare(a, b){
 /* ===== DrukFit Daily: Daily Check · Discover · Challenges ===== */
 const FEED_FALLBACK = {"items": [{"id": "ev-cdc-adult-activity", "kind": "guidance", "category": "beginner", "title": "How much activity do adults need?", "source": "Centers for Disease Control and Prevention (CDC)", "source_title": "Adult Activity: An Overview", "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html", "last_reviewed": "2023-12-20", "checked_on": "2026-10-13", "summary": "CDC's guidance for adults is about 150 minutes of moderate-intensity activity each week, plus muscle-strengthening activity on at least 2 days a week.", "why": "Your DrukFit lifting days cover the strength part. Walks, cardio finishers and active rest days help with the rest.", "apply": "workouts"}, {"id": "ev-nhlbi-sleep", "kind": "guidance", "category": "recovery", "title": "How much sleep is enough?", "source": "National Heart, Lung, and Blood Institute (NHLBI), NIH", "source_title": "How Much Sleep Is Enough?", "url": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep", "last_reviewed": "2022-03-24", "checked_on": "2026-10-13", "summary": "NHLBI says experts recommend that adults sleep between 7 and 9 hours a night, and notes that adults who regularly sleep less than 7 hours may have more health problems.", "why": "Sleep is when your body recovers from training. Logging it in DrukFit shows how it relates to how your sessions feel.", "apply": "recovery"}, {"id": "ev-who-activity", "kind": "guidance", "category": "motivation", "title": "Why regular physical activity matters", "source": "World Health Organization (WHO)", "source_title": "Physical activity (fact sheet)", "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity", "published": "2024-06-26", "checked_on": "2026-10-13", "summary": "WHO's fact sheet sets out the health benefits of regular physical activity and the risks of inactivity, and notes that muscle strengthening benefits everyone.", "why": "A useful reminder of why showing up for your plan matters beyond how you look.", "apply": "workouts"}, {"id": "ev-morton-2018-protein", "kind": "research", "category": "nutrition", "established": true, "title": "Does extra protein add to the gains from lifting?", "source": "British Journal of Sports Medicine", "source_title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults", "authors": "Morton RW, et al.", "study_type": "Systematic review and meta-analysis", "url": "https://doi.org/10.1136/bjsports-2017-097608", "doi": "10.1136/bjsports-2017-097608", "pubmed": "https://pubmed.ncbi.nlm.nih.gov/28698222/", "published_year": 2018, "checked_on": "2026-10-13", "summary": "This meta-analysis pooled randomised trials in healthy adults doing resistance training. Protein supplementation produced modestly larger gains in muscle mass and strength, and the extra benefit levelled off at around 1.6 g of protein per kg of body weight per day.", "limitations": ["Pools many smaller trials with different protocols, so individual results vary.", "The ~1.6 g/kg/day figure is an average; the confidence interval extended higher, so some people may benefit from more."], "why": "Your DrukFit protein target is set within this range for muscle-focused goals.", "apply": "nutrition"}, {"id": "ev-schoenfeld-2017-volume", "kind": "research", "category": "strength", "established": true, "title": "More weekly sets, more muscle? What the 2017 volume meta-analysis found", "source": "Journal of Sports Sciences", "source_title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis", "authors": "Schoenfeld BJ, Ogborn D, Krieger JW", "study_type": "Systematic review and meta-analysis", "url": "https://doi.org/10.1080/02640414.2016.1210197", "doi": "10.1080/02640414.2016.1210197", "published_year": 2017, "checked_on": "2026-10-13", "summary": "Pooling earlier studies, the authors found a graded dose-response: performing more weekly sets per muscle group tended to be associated with greater increases in muscle size.", "limitations": ["Based on a limited number of studies, many with small samples.", "Shows how results trended across studies; it doesn't set an exact best number of sets for any one person."], "why": "DrukFit adds load and reps before sets. If you plateau, adding a set to a lagging muscle is a reasonable next step.", "apply": "history"}, {"id": "ed-reps-before-weight", "kind": "editorial", "category": "technique", "title": "Why DrukFit adds reps before it adds weight", "source": "DrukFit editorial", "source_title": "How DrukFit's progression rules work", "url": "https://doi.org/10.1080/02640414.2016.1210197", "source_note": "Supporting research: Schoenfeld, Ogborn & Krieger, J Sports Sci 2017", "checked_on": "2026-10-13", "summary": "DrukFit suggests a heavier weight only once you hit the top of your rep range on every set at a manageable effort. Until then it asks for one more rep. Each small step is progress, and technique stays clean.", "why": "Knowing the rule makes the suggestions on your workout screen easier to trust.", "apply": "history"}, {"id": "mo-missed-session", "kind": "motivation", "category": "motivation", "title": "Missed a workout? Do the next one, not two", "source": "DrukFit editorial", "source_title": "Consistency over perfection", "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html", "source_note": "Weekly activity targets: CDC", "checked_on": "2026-10-13", "summary": "Weekly targets matter more than any single day. If a session slips, DrukFit moves it to your next training day, so you never need to cram two into one.", "why": "Guilt-free consistency is what keeps a plan going for months.", "apply": "workouts"}]}; // hand-checked evergreen library, embedded at build time
 const FEED_KEY = 'drukfit:feed';
-const DAILY_ACCENT = { strength:'#f5b83d', technique:'#3cc2b6', research:'#64a3ff', nutrition:'#41d39a', recovery:'#9d8cff', tech:'#4cc9f0', motivation:'#ff7a1a', beginner:'#e8c26a' };
+const DAILY_ACCENT = { strength:'#f5b83d', technique:'#3cc2b6', research:'#64a3ff', nutrition:'#41d39a', recovery:'#9d8cff', tech:'#4cc9f0', motivation:'#ff7a1a', beginner:'#e8c26a', archery:'#e0584a' };
 const safeUrl = u => /^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : null;
 function dailySeed(){ return (typeof CLOUD !== 'undefined' && CLOUD && Auth.user && Auth.user.id) || 'local'; }
 function relTime(ts){
@@ -3138,6 +3200,7 @@ const ART_ALT = {
   recovery:'Illustration: a crescent moon and stars over night-time mountains, for sleep and recovery articles',
   tech:'Illustration: a fitness watch above mountain ridges, for fitness technology articles',
   motivation:'Illustration: a rising sun and prayer flags over the mountains, for motivation and consistency',
+  archery:'Illustration: a drawn bow and arrow aimed across a mountain valley, for archery articles',
   beginner:'Illustration: a winding path to a flag on a summit, for beginner fitness basics',
 };
 function dArt(a, cls){
@@ -3154,6 +3217,7 @@ function dArt(a, cls){
     recovery:`<path d="M330 32 a34 34 0 1 0 32 50 a27 27 0 1 1 -32 -50z" fill="#f2efff" opacity=".95"/><g fill="#f2efff">${[0,1,2,3,4,5].map(() => `<circle cx="${(20 + rnd() * 250).toFixed(0)}" cy="${(14 + rnd() * 60).toFixed(0)}" r="${(1 + rnd() * 1.6).toFixed(1)}" opacity=".7"/>`).join('')}</g>`,
     tech:`<g fill="none" stroke="#e8fbff" stroke-width="4" opacity=".92"><rect x="282" y="40" width="48" height="58" rx="14"/><path d="M292 40 l4 -18 h20 l4 18 M292 98 l4 18 h20 l4 -18"/><circle cx="306" cy="69" r="13" stroke-width="3"/></g><g fill="none" stroke="#e8fbff" stroke-width="2" opacity=".35"><circle cx="306" cy="69" r="40"/><circle cx="306" cy="69" r="56"/></g>`,
     motivation:`<circle cx="312" cy="96" r="38" fill="#fff1e0" opacity=".9"/><path d="M0 70 Q 200 120 400 64" fill="none" stroke="#fff1e0" stroke-width="1.5" opacity=".7"/>${['#2f6fd6','#fff1e0','#d93a2b','#41a35c','#f5b83d','#2f6fd6','#fff1e0','#d93a2b','#41a35c','#f5b83d'].map((c, i) => { const x = 22 + i * 38; const y = 70 + Math.sin(i / 9 * Math.PI) * 22 - i * .6; return `<path d="M${x} ${y.toFixed(0)} l16 1 l-2 18 l-14 -1z" fill="${c}" opacity=".85"/>`; }).join('')}`,
+    archery:`<g fill="none" stroke="#fff3ee" stroke-linecap="round" opacity=".95"><path d="M300 22 Q 250 72 300 122" stroke-width="5"/><path d="M300 22 L 300 122" stroke-width="1.5" opacity=".8"/><path d="M216 72 L 378 72" stroke-width="3"/><path d="M366 64 L 380 72 L 366 80" stroke-width="3" stroke-linejoin="round"/><path d="M222 66 l-8 6 l8 6 M230 66 l-8 6 l8 6" stroke-width="2"/></g>`,
     beginner:`<path d="M60 230 C 140 200, 120 160, 210 150 S 300 110, 318 70" fill="none" stroke="#fff8e6" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" opacity=".85"/><path d="M318 70 v-38" stroke="#fff8e6" stroke-width="3"/><path d="M318 32 l26 8 l-26 9z" fill="#ff7a1a"/>`,
   }[cat];
   const gid = 'g' + (a.id || cat).replace(/[^a-z0-9]/gi, '').slice(-10);
@@ -3200,7 +3264,7 @@ function dCheck(){
     return `<div class="li dgoal ${g.done ? 'done' : ''} ${dPop === g.id ? 'pop' : ''}">
       ${canTick ? `<button class="dtick" data-act="dg-toggle" data-id="${g.id}" aria-pressed="${g.done}" aria-label="${g.done ? 'Untick' : 'Tick'}: ${esc(g.label)}">${I('check')}</button>` : `<span class="dtick ${g.done ? '' : 'locked'}" aria-hidden="true">${I(g.done ? 'check' : g.icon)}</span>`}
       <div class="grow"><div class="t">${esc(g.label)}</div><div class="small muted">${esc(g.detail || '')}</div>${sug ? `<div class="small dsug">${I('info')} ${esc(sug)}</div>` : ''}</div>
-      <div class="dgoal-r">${how}${!g.done && g.route && g.id !== 'tip' ? `<a class="btn sm ghost" href="#${g.route}">${g.id === 'challenge' ? 'View' : 'Go'}</a>` : ''}</div></div>`;
+      <div class="dgoal-r">${how}${!g.done && g.id === 'archery' ? `<button class="btn sm" data-act="arch-warm">Start</button>` : ''}${!g.done && g.route && g.id !== 'tip' && g.id !== 'archery' ? `<a class="btn sm ghost" href="#${g.route}">${g.id === 'challenge' ? 'View' : 'Go'}</a>` : ''}</div></div>`;
   };
   dPop = null;
   const tipSrc = tip.source && safeUrl(tip.source.url);
@@ -3400,6 +3464,197 @@ function dailyDashCard(){
     ${ringSvg(dg.pct, dg.pct === 100 ? 'var(--good)' : 'var(--accent)', 70, '', dg.done + '/' + dg.total)}
     <div class="grow"><div class="eyebrow">${I('daily')} DrukFit Daily</div><div class="t">${dg.pct === 100 ? 'Every goal done today' : next ? 'Next: ' + esc(next.label) : 'Your daily check'}</div><div class="small muted">Challenge: ${esc(dg.challenge.title)}${dg.challenge.done ? ' ✓' : ''}</div></div>${I('down', 'faint rot')}</a>`;
 }
+/* ===== Phone notifications, Apple Health Shortcut, archery, photo comparison ===== */
+const NOTIFY_KINDS = [
+  ['workout', 'Workout reminder', 'Training days, if you haven\'t trained yet', '17:30'],
+  ['sleep', 'Log your sleep', 'Mornings, if last night isn\'t logged', '08:30'],
+  ['food', 'Food check', 'Afternoons, if no meals are logged or protein is well behind', '15:00'],
+  ['daily', 'Daily Check', 'Evenings, if goals are still open', '20:00'],
+  ['weighin', 'Weekly weigh-in', 'Mondays, if there\'s no weight this week', '07:30'],
+];
+const NOTIFY_DEFAULTS = Object.fromEntries(NOTIFY_KINDS.map(k => [k[0], k[3]]));
+const isCloud = () => typeof CLOUD !== 'undefined' && !!CLOUD;
+const myTz = () => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Australia/Melbourne'; } catch(e){ return 'Australia/Melbourne'; } };
+const notifyCfg = () => ({ ...NOTIFY_DEFAULTS, ...((S.settings || {}).notify || {}) });
+function patchNotify(p){ patchSettings({ notify: { ...notifyCfg(), tz: myTz(), ...p } }); }
+function deviceName(){ const u = navigator.userAgent; return /iPhone/.test(u) ? 'iPhone' : /iPad/.test(u) ? 'iPad' : /Android/.test(u) ? 'Android phone' : /Mac/.test(u) ? 'Mac' : /Windows/.test(u) ? 'Windows PC' : 'Browser'; }
+function pushSupport(){
+  const ua = navigator.userAgent; const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  if (ios && !standalone) return 'install';
+  if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) return 'unsupported';
+  if (!CLOUD || !CLOUD.vapid) return 'unsupported';
+  return Notification.permission === 'denied' ? 'denied' : 'ok';
+}
+function b64uToBytes(s){ const b = atob(s.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - s.length % 4) % 4)); return Uint8Array.from(b, c => c.charCodeAt(0)); }
+const PUSH = { sub: undefined };
+async function pushRefresh(){
+  try { const reg = await navigator.serviceWorker.getRegistration(); PUSH.sub = reg ? await reg.pushManager.getSubscription() : null; } catch(e){ PUSH.sub = null; }
+  const el = document.getElementById('push-box'); if (el) el.innerHTML = pushBox();
+}
+
+/* ---------- Settings cards ---------- */
+function extraSettings(){ return (isCloud() ? notifyCard() + shortcutCard() : '') + archeryCard(); }
+function pushBox(){
+  const sup = pushSupport();
+  if (sup === 'install') return `<div class="note warn">${I('info')}<div class="small"><b>Add DrukFit to your Home Screen first.</b> On iPhone, notifications only work when DrukFit is opened from its Home Screen icon: tap Share → Add to Home Screen, open it from there, then come back to this page.</div></div>`;
+  if (sup === 'unsupported') return `<div class="note">${I('info')}<div class="small">This browser can't receive DrukFit notifications. Open DrukFit from your iPhone Home Screen, or use Chrome, Edge, Firefox or Safari on a computer.</div></div>`;
+  if (sup === 'denied') return `<div class="note warn">${I('info')}<div class="small">Notifications are blocked for DrukFit. On iPhone, go to Settings → Notifications → DrukFit and turn on Allow Notifications, then return here.</div></div>`;
+  if (PUSH.sub === undefined) return `<div class="small muted">Checking this device…</div>`;
+  if (!PUSH.sub) return `<div class="row"><button class="btn primary" data-act="push-on">${I('bolt')} Turn on notifications for this ${esc(deviceName())}</button></div>`;
+  return `<div class="row"><span class="chip good">${I('check')} On for this ${esc(deviceName())}</span><button class="btn sm ghost" data-act="push-test">Show a test notification</button><button class="btn sm ghost" data-act="push-off">Turn off here</button></div>`;
+}
+function notifyCard(){
+  const N = notifyCfg(); after(pushRefresh);
+  const email = Auth.user ? Auth.user.email : '';
+  return `<div class="card" id="notify-card"><h3>Notifications</h3>
+    <p class="small muted" style="margin-bottom:10px">Friendly nudges on your phone, only when something is still open, never more than once a day each. They can arrive up to about 15 minutes after the time you set.</p>
+    <div id="push-box">${pushBox()}</div>
+    <div class="list" style="margin-top:8px">${NOTIFY_KINDS.map(([k, label, sub_]) => `<div class="li ntrow"><div class="grow"><div class="t">${label}</div><div class="small muted">${sub_}</div></div>
+      <input class="in ntime" type="time" value="${esc(N[k] || NOTIFY_DEFAULTS[k])}" data-chg="nt-time" data-k="${k}" aria-label="${label} time" ${N[k] ? '' : 'disabled'}>
+      <input type="checkbox" class="dswitch" ${N[k] ? 'checked' : ''} data-chg="nt-on" data-k="${k}" aria-label="${label}"></div>`).join('')}
+      <label class="li" style="cursor:pointer"><div class="grow"><div class="t">Pause all phone reminders</div><div class="small muted">Handy for holidays. Your settings are kept.</div></div><input type="checkbox" class="dswitch" ${N.paused ? 'checked' : ''} data-chg="nt-flag" data-k="paused"></label>
+    </div>
+    <h3 style="margin-top:14px">Sunday email</h3>
+    <div class="list"><label class="li" style="cursor:pointer"><div class="grow"><div class="t">Weekly report by email</div><div class="small muted">Your week's summary and next steps, Sundays around 6 pm${email ? ', to ' + esc(email) : ''}</div></div><input type="checkbox" class="dswitch" ${N.weeklyEmail ? 'checked' : ''} data-chg="nt-flag" data-k="weeklyEmail"></label>
+      <label class="li" style="cursor:pointer"><div class="grow"><div class="t">Weekly backup by email</div><div class="small muted">A backup file of all your records (photos not included) attached to the same email. Restore it with Import a backup below.</div></div><input type="checkbox" class="dswitch" ${N.backupEmail ? 'checked' : ''} data-chg="nt-flag" data-k="backupEmail"></label></div>
+  </div>`;
+}
+CHANGES['nt-on'] = el => { const k = el.dataset.k; patchNotify({ [k]: el.checked ? (NOTIFY_DEFAULTS[k]) : '' }); toast(el.checked ? 'Reminder on' : 'Reminder off'); render(); };
+CHANGES['nt-time'] = el => { if (!/^\d{2}:\d{2}$/.test(el.value)) return; patchNotify({ [el.dataset.k]: el.value }); toast('Saved'); };
+CHANGES['nt-flag'] = el => { patchNotify({ [el.dataset.k]: el.checked }); toast('Saved'); };
+ACTIONS['push-on'] = async btn => {
+  btn.disabled = true; btn.textContent = 'Turning on…';
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted'){ toast(perm === 'denied' ? 'Notifications are blocked. Allow them in your phone settings.' : 'Notifications weren\'t allowed'); return; }
+    const reg = await navigator.serviceWorker.ready;
+    let s = await reg.pushManager.getSubscription();
+    if (!s) s = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uToBytes(CLOUD.vapid) });
+    const j = s.toJSON();
+    await Auth.api('/rest/v1/rpc/save_push_subscription', { method:'POST', json:{ p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth, p_tz: myTz(), p_device: deviceName() } });
+    if (!(S.settings || {}).notify) patchNotify({});
+    PUSH.sub = s; toast('Notifications are on for this device');
+  } catch(e){ console.warn('push', e); toast(e && e.name === 'NotAllowedError' ? 'Notifications weren\'t allowed on this device.' : 'Couldn\'t turn on notifications. Check your connection and try again.'); }
+  finally { const el = document.getElementById('push-box'); if (el) el.innerHTML = pushBox(); else render(); }
+};
+ACTIONS['push-off'] = async () => {
+  try { const reg = await navigator.serviceWorker.ready; const s = await reg.pushManager.getSubscription();
+    if (s){ try { await Auth.api('/rest/v1/push_subscriptions?endpoint=eq.' + encodeURIComponent(s.endpoint), { method:'DELETE' }); } catch(e){} await s.unsubscribe(); }
+  } catch(e){}
+  PUSH.sub = null; toast('Notifications off for this device'); const el = document.getElementById('push-box'); if (el) el.innerHTML = pushBox();
+};
+ACTIONS['push-test'] = async () => {
+  try { const reg = await navigator.serviceWorker.ready; await reg.showNotification('DrukFit', { body:'Notifications work on this device. Reminders will look like this.', icon:'icons/icon-192.png', badge:'icons/icon-192.png', tag:'drukfit-test' }); }
+  catch(e){ toast('Couldn\'t show a notification here'); }
+};
+
+/* ---------- Apple Health via an iPhone Shortcut ---------- */
+const SC = { info: undefined, newKey: null };
+async function shortcutRefresh(){
+  try { const r = await Auth.api('/rest/v1/shortcut_keys?select=created_at,last_used'); SC.info = (r && r[0]) || null; } catch(e){ SC.info = 'error'; }
+  const el = document.getElementById('sc-box'); if (el) el.innerHTML = shortcutBox();
+}
+function copyRow(label, value, id){ return `<div class="scrow"><span class="tiny faint">${label}</span><div class="row" style="flex-wrap:nowrap"><code class="sccode" id="${id}">${esc(value)}</code><button class="btn sm" data-act="sc-copy" data-src="${id}">Copy</button></div></div>`; }
+function shortcutGuide(key){
+  const url = CLOUD.url + '/rest/v1/rpc/shortcut_log';
+  return `<ol class="small scsteps">
+    <li>Open the <b>Shortcuts</b> app → <b>+</b> to make a new shortcut. Name it <b>DrukFit Health</b>.</li>
+    <li>Add <b>Find Health Samples</b>: type <b>Steps</b>, Start Date <b>is today</b>. Then add <b>Calculate Statistics</b> → <b>Sum</b>. This is your step count.</li>
+    <li>Add <b>Find Health Samples</b>: type <b>Sleep Analysis</b>, Start Date <b>is in the last 1 day</b>, Value <b>is Asleep</b> (on newer iPhones: Core, Deep and REM all count). Then add <b>Calculate Statistics</b> → <b>Sum</b> of <b>Duration</b>, and <b>Convert</b> it to <b>hours</b>.</li>
+    <li>Add <b>Format Date</b>: Current Date, Custom format <code>yyyy-MM-dd</code>.</li>
+    <li>Add <b>Get Contents of URL</b> with the details below: Method <b>POST</b>, two <b>Headers</b>, and a <b>JSON</b> Request Body with four fields. Pick the matching result from the earlier steps for each field.</li>
+    <li>In the <b>Automation</b> tab, tap <b>+</b> → <b>Time of Day</b> (for example 9:00 am, daily) → <b>Run Immediately</b> → choose <b>DrukFit Health</b>.</li></ol>
+    <div class="stack" style="gap:8px">${copyRow('URL', url, 'sc-u')}${copyRow('Header: apikey', CLOUD.key, 'sc-a')}${copyRow('Header: Content-Type', 'application/json', 'sc-c')}
+      ${key ? copyRow('Body field p_key (Text): your personal key', key, 'sc-k') : `<div class="small muted">Body field <b>p_key</b>: your personal key (create a new one above if you didn't save it).</div>`}
+      <div class="small">Other body fields: <b>p_date</b> (Text: the formatted date), <b>p_steps</b> (Number: the step sum), <b>p_sleep</b> (Number: the sleep hours).</div></div>
+    <p class="tiny faint">Steps and sleep are saved to today's entry, just like typing them on the dashboard. Shortcut menus vary a little between iOS versions; if a name differs, choose the closest match.</p>`;
+}
+function shortcutBox(){
+  if (SC.newKey) return `<div class="note good">${I('check')}<div class="small"><b>Your key is ready. Copy it now.</b> For your security it's shown only once. Treat it like a password: anyone with it can add steps and sleep to your log (but can't read anything).</div></div>${shortcutGuide(SC.newKey)}<button class="btn sm" data-act="sc-done">I've saved it</button>`;
+  if (SC.info === undefined) return `<div class="small muted">Checking…</div>`;
+  if (SC.info === 'error') return `<div class="small muted">Couldn't check right now. <button class="link btnlink" data-act="sc-retry">Try again</button></div>`;
+  if (!SC.info) return `<button class="btn primary" data-act="sc-create">${I('link')} Set up the Shortcut</button>`;
+  return `<div class="row"><span class="chip good">${I('check')} Key active</span><span class="small muted">created ${fmtDate(SC.info.created_at.slice(0, 10))}${SC.info.last_used ? ' · last used ' + relTime(SC.info.last_used) : ' · not used yet'}</span></div>
+    <details style="margin-top:8px"><summary class="small link">Show setup steps</summary>${shortcutGuide(null)}</details>
+    <div class="row" style="margin-top:8px"><button class="btn sm" data-act="sc-create">Replace key</button><button class="btn sm ghost" data-act="sc-revoke">Turn off</button></div>`;
+}
+function shortcutCard(){
+  after(() => { if (SC.info === undefined) shortcutRefresh(); });
+  return `<div class="card"><h3>Apple Health (iPhone Shortcut)</h3><p class="small muted" style="margin-bottom:10px">Home Screen apps can't read Apple Health directly. A Shortcut on your iPhone can send each day's steps and sleep to DrukFit automatically, so those goals tick themselves.</p><div id="sc-box">${shortcutBox()}</div></div>`;
+}
+ACTIONS['sc-create'] = async btn => {
+  btn.disabled = true;
+  try { const k = await Auth.api('/rest/v1/rpc/create_shortcut_key', { method:'POST', json:{} }); SC.newKey = typeof k === 'string' ? k : (k && k.create_shortcut_key) || null; if (!SC.newKey) throw new Error('no key'); }
+  catch(e){ toast('Couldn\'t create a key. Please try again.'); }
+  const el = document.getElementById('sc-box'); if (el) el.innerHTML = shortcutBox();
+};
+ACTIONS['sc-done'] = () => { SC.newKey = null; SC.info = undefined; shortcutRefresh(); };
+ACTIONS['sc-retry'] = () => { SC.info = undefined; shortcutRefresh(); };
+ACTIONS['sc-revoke'] = () => confirmSheet('Turn off the Shortcut?', 'Your key stops working straight away. Steps and sleep already saved stay in your log.', 'Turn off', async () => { try { await Auth.api('/rest/v1/rpc/revoke_shortcut_key', { method:'POST', json:{} }); } catch(e){} SC.info = null; const el = document.getElementById('sc-box'); if (el) el.innerHTML = shortcutBox(); toast('Shortcut key turned off'); });
+ACTIONS['sc-copy'] = async el => { const t = (document.getElementById(el.dataset.src) || {}).textContent || ''; try { await navigator.clipboard.writeText(t); toast('Copied'); } catch(e){ const r = document.createRange(); r.selectNodeContents(document.getElementById(el.dataset.src)); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selected. Tap Copy.'); } };
+
+/* ---------- Traditional archery ---------- */
+const DOW_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function archeryCard(){
+  const sp = (S.profile && S.profile.sport) || {}; const on = !!sp.archery;
+  return `<div class="card"><div class="between"><h3 style="margin:0">${I('target')} Traditional archery</h3><input type="checkbox" class="dswitch" ${on ? 'checked' : ''} data-chg="arch-on" aria-label="I do traditional archery"></div>
+    <p class="small muted" style="margin:6px 0 0">For archers: shoulder-health and upper-back work in your plan, a 10-minute warm-up for shooting days, and archery research in DrukFit Daily.</p>
+    ${on ? `<div class="stack" style="gap:12px;margin-top:12px">
+      <div><div class="eyebrow" style="margin-bottom:6px">Drawing hand</div><div class="seg" style="max-width:280px">${[['right','Right'],['left','Left']].map(([k, l]) => `<button class="${(sp.hand || 'right') === k ? 'on' : ''}" data-act="arch-hand" data-v="${k}">${l}</button>`).join('')}</div></div>
+      <div><div class="eyebrow" style="margin-bottom:6px">Shooting days</div><div class="dchips" style="margin:0;padding:0">${[1,2,3,4,5,6,0].map(d => `<button class="dchip ${(sp.days || []).includes(d) ? 'on' : ''}" data-act="arch-day" data-d="${d}" aria-pressed="${(sp.days || []).includes(d)}">${DOW_SHORT[d]}</button>`).join('')}</div></div>
+      <label class="li" style="cursor:pointer;border-top:0;padding:0"><div class="grow"><div class="t">Archery work in my plan</div><div class="small muted">${S.plan && S.plan.archery ? 'On: 2-3 short shoulder and upper-back exercises in each workout (about 8 minutes).' : 'Adds 2-3 short shoulder and upper-back exercises to each workout.'}</div></div><input type="checkbox" class="dswitch" ${S.plan && S.plan.archery ? 'checked' : ''} data-chg="arch-plan"></label>
+      <button class="btn" data-act="arch-warm">${I('play')} Start archery warm-up</button></div>` : ''}</div>`;
+}
+function saveSport(p){ const prof = JSON.parse(JSON.stringify(S.profile)); prof.sport = { archery:false, hand:'right', days:[6, 0], ...(prof.sport || {}), ...p }; saveDoc('profile', prof); }
+CHANGES['arch-on'] = el => {
+  if (el.checked){ saveSport({ archery:true }); toast('Archery on. Pick your shooting days.'); render(); return; }
+  saveSport({ archery:false }); if (S.plan && S.plan.archery){ saveDoc('plan', applyArchery(S.plan, S.profile, false)); toast('Archery work removed from your plan'); } render();
+};
+ACTIONS['arch-hand'] = el => { saveSport({ hand: el.dataset.v }); render(); };
+ACTIONS['arch-day'] = el => { const d = +el.dataset.d; const days = ((S.profile.sport || {}).days || []).slice(); const i = days.indexOf(d); if (i >= 0) days.splice(i, 1); else days.push(d); saveSport({ days }); render(); };
+CHANGES['arch-plan'] = el => {
+  if (!el.checked){ saveDoc('plan', applyArchery(S.plan, S.profile, false)); toast('Archery exercises removed. Everything else is unchanged.'); render(); return; }
+  el.checked = false;
+  const preview = applyArchery(S.plan, S.profile, true);
+  const added = preview.workouts.map(w => ({ name: w.name, ex: w.exercises.filter(e => e.archery).map(e => EXERCISES[e.exId].name) })).filter(x => x.ex.length);
+  confirmSheet('Add archery work to your plan?', `These short exercises are added at the end of each workout. Your existing exercises, weights and history don't change, and you can remove them any time.<ul class="small dul" style="margin-top:8px">${added.map(x => `<li><b>${esc(x.name)}:</b> ${esc(x.ex.join(', '))}</li>`).join('')}</ul>`, 'Add to my plan', () => { saveDoc('plan', applyArchery(S.plan, S.profile, true)); toast('Archery work added to your plan'); render(); });
+};
+ACTIONS['arch-warm'] = () => {
+  const hand = ((S.profile.sport || {}).hand) || 'right'; const other = hand === 'right' ? 'left' : 'right';
+  openSheet(`<div class="stack"><h2>${I('target')} Archery warm-up</h2><p class="small muted">About 10 minutes. Slow and pain-free. Do the same on both sides: draw with your ${hand} hand, then repeat with your ${other}.</p>
+    <div class="list">${ARCHERY_WARMUP.map((m, i) => { const ex = m.exId ? EXERCISES[m.exId] : null; return `<label class="li" style="cursor:pointer"><input type="checkbox" class="dswitch aw-tick" data-i="${i}"><div class="grow"><div class="t">${esc(ex ? ex.name : m.name)}</div><div class="small muted">${esc(m.dose)}${ex ? ' · ' + esc(ex.cues[0]) : ''}</div></div>${ex ? `<button class="btn sm ghost" type="button" data-act="ex-info" data-ex="${ex.id}" aria-label="How to do ${esc(ex.name)}">${I('info')}</button>` : ''}</label>`; }).join('')}</div>
+    <button class="btn primary" data-act="arch-warm-done">${I('check')} Finish warm-up</button>
+    <p class="tiny faint">Stop any movement that causes pain, and see a physio about ongoing shoulder or elbow pain.</p></div>`);
+};
+ACTIONS['arch-warm-done'] = () => {
+  const ticks = [...document.querySelectorAll('.aw-tick')]; const n = ticks.filter(t => t.checked).length;
+  if (n < Math.ceil(ticks.length / 2)){ toast(`Tick the moves you did (${n} of ${ticks.length} so far)`); return; }
+  saveDaily(isoDate(), { archeryWarmup: true }); closeSheet(); toast('Warm-up done. Shoot well!'); render();
+};
+
+/* ---------- Progress photo comparison: slider with measurements ---------- */
+function nearestBody(field, date){
+  const s = bodySeries(S, field); let best = null;
+  s.forEach(x => { const d = Math.abs(daysBetween(x.date, date)); if (d <= 10 && (!best || d < best.d)) best = { ...x, d }; });
+  return best;
+}
+function photoCompare(a, b){
+  const mode = sub.cmpm || 'slide';
+  const stat = (field, label, unit) => { const x = nearestBody(field, a.date), y = nearestBody(field, b.date); if (!x && !y) return '';
+    const diff = x && y ? Math.round((y.v - x.v) * 10) / 10 : null;
+    return `<div class="pstat"><span class="tiny faint">${label}</span><b class="num small">${x ? x.v + ' ' + unit : '–'} → ${y ? y.v + ' ' + unit : '–'}</b>${diff != null ? `<span class="tiny ${diff === 0 ? 'faint' : ''}">${diff === 0 ? 'no change' : (diff > 0 ? '+' : '') + diff + ' ' + unit}</span>` : ''}</div>`; };
+  const stats = stat('weight', 'Weight', 'kg') + stat('waist', 'Waist', 'cm');
+  const body = mode === 'side'
+    ? `<div class="compare" style="margin-top:10px"><figure style="margin:0"><img data-photo="${a.id}" alt="Earlier photo, ${fmtDate(a.date)}"><figcaption class="small muted">${fmtDate(a.date)}</figcaption></figure><figure style="margin:0"><img data-photo="${b.id}" alt="Later photo, ${fmtDate(b.date)}"><figcaption class="small muted">${fmtDate(b.date)}</figcaption></figure></div>`
+    : `<div class="pslide" style="--pos:50%;margin-top:10px"><img data-photo="${b.id}" alt="Later photo, ${fmtDate(b.date)}"><div class="pslide-a"><img data-photo="${a.id}" alt="Earlier photo, ${fmtDate(a.date)}"></div><i class="pslide-line" aria-hidden="true"></i>
+        <span class="pslide-tag l">${fmtDate(a.date, { day:'numeric', month:'short' })}</span><span class="pslide-tag r">${fmtDate(b.date, { day:'numeric', month:'short' })}</span>
+        <input type="range" min="0" max="100" value="50" data-inp="pslide" aria-label="Drag to compare the earlier and later photo"></div>`;
+  return `<div class="card"><div class="between"><h3 style="margin:0">Compare</h3><span class="small muted">${daysBetween(a.date, b.date)} days apart</span></div>
+    <div class="seg" style="margin-top:10px;max-width:320px">${[['slide','Slider'],['side','Side by side']].map(([k, l]) => `<button class="${mode === k ? 'on' : ''}" data-act="sub" data-key="cmpm" data-val="${k}">${l}</button>`).join('')}</div>
+    ${body}${stats ? `<div class="pstats">${stats}</div><p class="tiny faint" style="margin-top:6px">Measurements logged within 10 days of each photo.</p>` : `<p class="tiny faint" style="margin-top:8px">Log weight or waist around your photo days to see them here.</p>`}</div>`;
+}
+INPUTS['pslide'] = el => { const w = el.closest('.pslide'); if (w) w.style.setProperty('--pos', el.value + '%'); };
 /* ===== DrukFit accounts: Supabase Auth + Postgres (row-level security) + private Storage =====
    Active only when the page defines window.DRUKFIT_CONFIG = { url, key } (the website build).
    The key is Supabase's public "anon"/"publishable" key; access control is enforced by the
@@ -3940,7 +4195,7 @@ function legalView(which){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "40cb66f7c7";
+window.DRUKFIT_VERSION = "a279aa9d63";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {

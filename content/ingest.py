@@ -118,11 +118,12 @@ WHY = {
     'tech': 'Tracking tools only help if what they measure is accurate and useful.',
     'motivation': 'Staying consistent for months matters more than any single workout.',
     'beginner': 'Clear basics make every later step easier and safer.',
+    'archery': 'Strong, balanced shoulders and upper back support a steady draw, end after end.',
 }
 
 # --------------------------------------------------------------------------- sources
 def europepmc(src, fetch, settings, log):
-    to = now_utc().date(); frm = to - datetime.timedelta(days=settings.get('research_window_days', 120))
+    to = now_utc().date(); frm = to - datetime.timedelta(days=src.get('window_days') or settings.get('research_window_days', 120))
     q = (f'({src["query"]}) AND (PUB_TYPE:"randomized controlled trial" OR PUB_TYPE:"meta-analysis" OR PUB_TYPE:"systematic review" OR PUB_TYPE:"review") '
          f'AND HAS_ABSTRACT:y AND LANG:eng AND SRC:MED AND FIRST_PDATE:[{frm.isoformat()} TO {to.isoformat()}]')
     url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?' + urllib.parse.urlencode({'query': q, 'format': 'json', 'resultType': 'core', 'pageSize': settings.get('per_query', 6)})
@@ -261,7 +262,10 @@ def run(root=ROOT, fetch=None, now=None):
         source_state[src['id']] = {**source_state.get(src['id'], {}), **st}
     # retention: drop very old research, cap size (newest first)
     max_age = settings.get('max_research_age_days', 400); today = (now or now_utc()).date()
-    kept = [i for i in items.values() if not (i.get('kind') == 'research' and i.get('published') and (today - datetime.date.fromisoformat(i['published'])).days > max_age)]
+    cat_age = {}
+    for src in cfg.get('sources', []):
+        if src.get('window_days'): cat_age[src.get('category')] = max(cat_age.get(src.get('category'), 0), src['window_days'] + 30)
+    kept = [i for i in items.values() if not (i.get('kind') == 'research' and i.get('published') and (today - datetime.date.fromisoformat(i['published'])).days > max(max_age, cat_age.get(i.get('category'), 0)))]
     kept.sort(key=lambda i: i.get('published') or '', reverse=True); kept = kept[: settings.get('max_items', 150)]
     # evergreen (hand-checked) + manual (admin-published) items
     for e in evergreen.get('items', []):

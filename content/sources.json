@@ -1,23 +1,88 @@
 {
-  "_help": "Admin: set \"enabled\": false to pause a source. Changes apply at the next scheduled refresh (or run the workflow manually in GitHub → Actions → DrukFit Daily content → Run workflow).",
-  "contact_email": "",
-  "sources": [
-    { "id": "epmc-strength", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "strength",
-      "query": "(\"resistance training\" OR \"strength training\") AND (hypertrophy OR \"muscle strength\" OR \"muscle mass\")" },
-    { "id": "epmc-technique", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "technique",
-      "query": "(\"resistance training\" OR \"strength training\") AND (\"range of motion\" OR \"training to failure\" OR \"rest interval\" OR \"repetition velocity\" OR \"exercise technique\")" },
-    { "id": "epmc-nutrition", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "nutrition",
-      "query": "(\"dietary protein\" OR \"protein intake\" OR \"protein supplementation\" OR \"energy intake\") AND (\"resistance training\" OR \"exercise\")" },
-    { "id": "epmc-recovery", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "recovery",
-      "query": "(sleep OR recovery OR \"muscle soreness\") AND (\"resistance training\" OR \"exercise performance\")" },
-    { "id": "epmc-research", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "research",
-      "query": "(\"concurrent training\" OR \"training volume\" OR \"training frequency\" OR \"periodization\") AND (adults OR athletes)" },
-    { "id": "epmc-tech", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "tech",
-      "query": "(\"wearable\" OR \"activity tracker\" OR \"fitness app\" OR \"smartphone app\") AND (\"physical activity\" OR \"exercise\")" },
-    { "id": "epmc-motivation", "enabled": true, "type": "europepmc", "name": "Europe PMC", "category": "motivation",
-      "query": "(\"exercise adherence\" OR \"habit formation\" OR \"physical activity maintenance\") AND (adults)" },
-    { "id": "nih-newsinhealth", "enabled": true, "type": "nih_news_in_health", "name": "NIH News in Health", "category": "beginner",
-      "url": "https://newsinhealth.nih.gov/rss" }
-  ],
-  "settings": { "research_window_days": 120, "per_query": 6, "max_items": 150, "max_research_age_days": 400, "request_delay_seconds": 1.0, "timeout_seconds": 25, "retries": 3 }
+ "_help": "Admin: set \"enabled\": false to pause a source. Changes apply at the next scheduled refresh (or run the workflow manually in GitHub \u2192 Actions \u2192 DrukFit Daily content \u2192 Run workflow).",
+ "contact_email": "",
+ "sources": [
+  {
+   "id": "epmc-strength",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "strength",
+   "query": "(\"resistance training\" OR \"strength training\") AND (hypertrophy OR \"muscle strength\" OR \"muscle mass\")"
+  },
+  {
+   "id": "epmc-technique",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "technique",
+   "query": "(\"resistance training\" OR \"strength training\") AND (\"range of motion\" OR \"training to failure\" OR \"rest interval\" OR \"repetition velocity\" OR \"exercise technique\")"
+  },
+  {
+   "id": "epmc-nutrition",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "nutrition",
+   "query": "(\"dietary protein\" OR \"protein intake\" OR \"protein supplementation\" OR \"energy intake\") AND (\"resistance training\" OR \"exercise\")"
+  },
+  {
+   "id": "epmc-recovery",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "recovery",
+   "query": "(sleep OR recovery OR \"muscle soreness\") AND (\"resistance training\" OR \"exercise performance\")"
+  },
+  {
+   "id": "epmc-research",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "research",
+   "query": "(\"concurrent training\" OR \"training volume\" OR \"training frequency\" OR \"periodization\") AND (adults OR athletes)"
+  },
+  {
+   "id": "epmc-tech",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "tech",
+   "query": "(\"wearable\" OR \"activity tracker\" OR \"fitness app\" OR \"smartphone app\") AND (\"physical activity\" OR \"exercise\")"
+  },
+  {
+   "id": "epmc-motivation",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "motivation",
+   "query": "(\"exercise adherence\" OR \"habit formation\" OR \"physical activity maintenance\") AND (adults)"
+  },
+  {
+   "id": "nih-newsinhealth",
+   "enabled": true,
+   "type": "nih_news_in_health",
+   "name": "NIH News in Health",
+   "category": "beginner",
+   "url": "https://newsinhealth.nih.gov/rss"
+  },
+  {
+   "id": "epmc-archery",
+   "enabled": true,
+   "type": "europepmc",
+   "name": "Europe PMC",
+   "category": "archery",
+   "window_days": 1095,
+   "query": "(archery OR archer OR archers) AND (shoulder OR training OR performance OR injury OR strength OR posture)"
+  }
+ ],
+ "settings": {
+  "research_window_days": 120,
+  "per_query": 6,
+  "max_items": 150,
+  "max_research_age_days": 400,
+  "request_delay_seconds": 1.0,
+  "timeout_seconds": 25,
+  "retries": 3
+ }
 }

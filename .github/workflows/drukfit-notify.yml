@@ -1,0 +1,37 @@
+name: DrukFit reminders
+
+# Checks every 15 minutes whether any member has a reminder or weekly email due, and sends it.
+# GitHub can start scheduled runs a few minutes late; reminders are never sent early.
+# Secrets (Settings → Secrets and variables → Actions):
+#   DRUKFIT_JOB_SECRET  required  lets this job call DrukFit's reminder functions (only its hash is stored in Supabase)
+#   VAPID_PRIVATE_KEY   required  signs phone notifications
+#   RESEND_API_KEY      optional  needed only for the weekly email report and emailed backups
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: drukfit-notify
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: notify
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Send what's due
+        env:
+          DRUKFIT_JOB_SECRET: ${{ secrets.DRUKFIT_JOB_SECRET }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: node notify/notify.js

@@ -1,0 +1,8 @@
+{
+  "supabaseUrl": "https://nwfsnitpqcsnhywktoyb.supabase.co",
+  "supabaseKey": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-",
+  "vapidPublicKey": "BN6jXYP67cnZzPUrnmgTOTQomzqMLpxBmFCJ5zbWpYo-frDKkHj7jp9XaKhSQWFp9dkR09pYjFedHKgbVLrNpNs",
+  "vapidSubject": "https://drukfit.app",
+  "emailFrom": "DrukFit <no-reply@drukfit.app>",
+  "appUrl": "https://drukfit.app/"
+}
