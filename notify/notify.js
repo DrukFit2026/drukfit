@@ -124,7 +124,7 @@ function api(env, fetchImpl){
 async function run(opts){
   opts = opts || {}; const env = opts.env || process.env; const now = opts.now || new Date(); const f = opts.fetch || fetch;
   const rpc = api(env, f); const stats = { members:0, pushSent:0, pushFailed:0, removed:0, emails:0, emailSkipped:0, errors:0 };
-  if (!env.DRUKFIT_JOB_SECRET || !env.VAPID_PRIVATE_KEY) throw new Error('DRUKFIT_JOB_SECRET and VAPID_PRIVATE_KEY secrets are required');
+  if (!env.DRUKFIT_JOB_SECRET || !env.VAPID_PRIVATE_KEY){ console.log('Waiting for setup: add the DRUKFIT_JOB_SECRET and VAPID_PRIVATE_KEY secrets. Nothing sent.'); stats.notReady = true; return stats; }
   const vapid = { publicKey: CFG.vapidPublicKey, privateKey: env.VAPID_PRIVATE_KEY, subject: CFG.vapidSubject };
   let members;
   try { members = await rpc('notify_batch', {}); }
