@@ -517,6 +517,22 @@ span.dtick.locked{ color:var(--faint); border-style:dashed; }
 .pslide input[type=range]{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0; }
 .pstats{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
 .pstat{ display:flex; flex-direction:column; gap:2px; background:var(--raised); border-radius:12px; padding:9px 12px; min-width:140px; }
+
+/* ---- daily fuel plan ---- */
+.fuel-head h3{ font-size:1.35rem; }
+.fuel-target{ display:flex; flex-direction:column; align-items:flex-end; gap:1px; } .fuel-target b{ font-size:1.6rem; font-family:var(--f-display); color:var(--accent); }
+.fuel-line{ display:flex; flex-direction:column; gap:12px; position:relative; }
+.fuel-item{ display:grid; grid-template-columns:48px 14px 1fr; gap:8px; align-items:start; }
+.fuel-time{ font-size:.85rem; font-weight:600; color:var(--muted); padding-top:16px; text-align:right; }
+.fuel-dot{ width:12px; height:12px; border-radius:50%; background:var(--raised); border:2px solid var(--line); margin-top:19px; position:relative; }
+.fuel-item.wk .fuel-dot{ background:var(--accent-soft); border-color:var(--accent); }
+.fuel-item.done .fuel-dot{ background:var(--good); border-color:var(--good); }
+.fuel-item.done .fuel-card{ opacity:.8; }
+.fuel-item.wk .fuel-card{ border-color:color-mix(in srgb,var(--accent) 35%,var(--line)); }
+.fuel-foods{ list-style:none; margin:8px 0 4px; padding:0; display:flex; flex-direction:column; gap:3px; font-size:.9rem; }
+.fuel-foods li{ display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed var(--line); padding-bottom:3px; }
+.supp a{ display:inline-flex; gap:5px; align-items:center; margin-top:6px; } .supp a svg{ width:13px; height:13px; }
+@media (max-width:400px){ .fuel-item{ grid-template-columns:40px 12px 1fr; gap:6px; } .fuel-time{ font-size:.78rem; } }
 </style>
 <script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-", "vapid": "BN6jXYP67cnZzPUrnmgTOTQomzqMLpxBmFCJ5zbWpYo-frDKkHj7jp9XaKhSQWFp9dkR09pYjFedHKgbVLrNpNs"};</script></head><body><div id="app"></div>
 <script>
@@ -1486,6 +1502,114 @@ function applyArchery(plan, profile, on){
   return p;
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { applyArchery, archeryOn, shootingDay, ARCHERY_WARMUP });
+/* ===== Daily fuel plan: protein spread, pre/post-workout meals, optional supplements (no DOM) =====
+   Built for beginners: simple times, real foods from the DrukFit food list, amounts scaled to the member's own
+   protein target. Supplements are optional, off by default, and come with who-should-not-take-them notes. */
+const FUEL_SOURCES = {
+  protein: { name:'ISSN position stand: protein and exercise (Jäger et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0177-8' },
+  timing:  { name:'ISSN position stand: nutrient timing (Kerksick et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0189-4' },
+  creatine:{ name:'ISSN position stand: creatine supplementation (Kreider et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0173-z' },
+  caffeine:{ name:'ISSN position stand: caffeine and exercise performance (Guest et al., 2021)', url:'https://doi.org/10.1186/s12970-020-00383-4' },
+  caffeineLimit:{ name:'US FDA: Spilling the Beans: How Much Caffeine Is Too Much?', url:'https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much' },
+  ais:     { name:'Australian Institute of Sport: Supplements', url:'https://www.ausport.gov.au/ais/nutrition/supplements' },
+};
+// Each option: the first item is the main protein food and is scaled to the meal's protein target.
+const FUEL_OPTIONS = {
+  breakfast: [
+    { name:'Oats with milk and a scoop of protein', items:[['whey', 30], ['oats', 60], ['milk', 250], ['berries', 80]], scale:[20, 40] },
+    { name:'Greek yoghurt bowl', items:[['greek-yoghurt', 250], ['oats', 40], ['berries', 100]], scale:[150, 350] },
+    { name:'Eggs on wholegrain toast', items:[['egg', 150], ['wholegrain-bread', 80], ['spinach', 40]], scale:[100, 200] },
+    { name:'Tofu scramble on toast', items:[['tofu', 200], ['wholegrain-bread', 80], ['capsicum', 60]], scale:[150, 300] },
+  ],
+  lunch: [
+    { name:'Chicken, rice and salad', items:[['chicken-breast', 140], ['rice-cooked', 180], ['salad-mix', 120]], scale:[100, 220] },
+    { name:'Tuna wrap', items:[['tuna', 95], ['wrap', 70], ['salad-mix', 100], ['avocado', 30]], scale:[70, 190] },
+    { name:'Lentil and quinoa bowl', items:[['lentils', 250], ['quinoa-cooked', 120], ['spinach', 40], ['hummus', 30]], scale:[200, 350] },
+    { name:'Tempeh stir-fry with rice', items:[['tempeh', 150], ['rice-cooked', 180], ['stir-fry-veg', 150]], scale:[100, 220] },
+  ],
+  pre: [
+    { name:'Banana and Greek yoghurt', items:[['greek-yoghurt', 170], ['banana', 120]], scale:[120, 250] },
+    { name:'Toast with peanut butter and a glass of milk', items:[['milk', 300], ['wholegrain-bread', 80], ['peanut-butter', 15]], scale:[200, 400] },
+    { name:'Rice cakes with cottage cheese and honey', items:[['cottage-cheese', 150], ['rice-cakes', 30], ['honey', 10]], scale:[100, 250] },
+    { name:'Soy milk smoothie with banana and oats', items:[['soy-milk', 350], ['banana', 120], ['oats', 30]], scale:[250, 500] },
+  ],
+  post: [
+    { name:'Protein shake with milk and a banana', items:[['whey', 30], ['milk', 300], ['banana', 120]], scale:[25, 45] },
+    { name:'Chicken and sweet potato', items:[['chicken-breast', 130], ['sweet-potato', 200], ['broccoli', 100]], scale:[100, 200] },
+    { name:'Greek yoghurt, berries and honey', items:[['greek-yoghurt', 250], ['berries', 100], ['honey', 15]], scale:[170, 400] },
+    { name:'Plant protein shake with soy milk and a banana', items:[['pea-protein', 30], ['soy-milk', 300], ['banana', 120]], scale:[25, 45] },
+  ],
+  snack: [
+    { name:'Cottage cheese with fruit', items:[['cottage-cheese', 200], ['apple', 150]], scale:[150, 300] },
+    { name:'Greek yoghurt and almonds', items:[['greek-yoghurt', 200], ['almonds', 20]], scale:[150, 300] },
+    { name:'Edamame and an orange', items:[['edamame', 150], ['orange', 150]], scale:[100, 250] },
+    { name:'Protein bar and fruit', items:[['protein-bar', 60], ['apple', 150]], scale:[60, 60] },
+  ],
+  dinner: [
+    { name:'Salmon, sweet potato and greens', items:[['salmon', 150], ['sweet-potato', 200], ['broccoli', 120]], scale:[110, 220] },
+    { name:'Lean beef pasta', items:[['beef-mince', 140], ['pasta-cooked', 180], ['tomato-passata', 120], ['spinach', 40]], scale:[100, 220] },
+    { name:'Fish, rice and vegetables', items:[['white-fish', 170], ['rice-cooked', 180], ['mixed-veg', 150]], scale:[120, 250] },
+    { name:'Tofu and vegetable curry with rice', items:[['tofu', 220], ['rice-cooked', 180], ['mixed-veg', 150]], scale:[150, 320] },
+  ],
+};
+const FUEL_FEED_TEXT = {
+  breakfast:{ title:'Breakfast', why:'Starts your protein for the day.' },
+  lunch:{ title:'Lunch', why:'Spreading protein over 3-4 meals, roughly 3-4 hours apart, works better than one big serve.' },
+  snack:{ title:'Afternoon snack', why:'Keeps protein coming between lunch and dinner.' },
+  pre:{ title:'Pre-workout', why:'An easy-to-digest meal with carbs and some protein, eaten 1-2 hours before training, fuels your session. Keep fat and fibre lower so it sits comfortably.' },
+  post:{ title:'Post-workout', why:'Protein plus carbs within about 2 hours of training supports recovery. If dinner is soon after, it can be your post-workout meal.' },
+  dinner:{ title:'Dinner', why:'Rounds out your protein and helps you recover overnight.' },
+};
+const hmToMin = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m ? +m[1] * 60 + +m[2] : null; };
+const minToHm = m => { m = ((Math.round(m / 15) * 15) % 1440 + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+function fuelSettings(profile){ return { on:false, time:'17:30', supps:{}, ...((profile && profile.fuel) || {}) }; }
+function fuelOption(slot, targetP, profile, pick){
+  const pool = FUEL_OPTIONS[slot].filter(o => mealAllowed(o, profile));
+  if (!pool.length) return null;
+  const o = pool[((pick || 0) % pool.length + pool.length) % pool.length];
+  const [mainId, baseG] = o.items[0]; const per100 = FOODS[mainId].p;
+  const others = itemsMacros(o.items.slice(1)).p;
+  let g = Math.round(Math.max(0, targetP - others) / per100 * 100 / 5) * 5;
+  g = Math.max(o.scale[0], Math.min(o.scale[1], g || baseG));
+  if (mainId === 'egg') g = Math.max(100, Math.round(g / 50) * 50);           // whole eggs
+  if (mainId === 'protein-bar') g = 60;
+  let items = [[mainId, g], ...o.items.slice(1)];
+  let m = itemsMacros(items);
+  if (m.p > targetP * 1.12 && targetP > 0){ // smaller appetite / lower target: shrink the whole meal a little
+    const k = Math.max(0.6, targetP / m.p);
+    items = items.map(([id, gg]) => [id, id === 'egg' ? Math.max(50, Math.round(gg * k / 50) * 50) : id === 'protein-bar' ? gg : Math.max(5, Math.round(gg * k / 5) * 5)]);
+    m = itemsMacros(items);
+  }
+  return { name: o.name, items, p: Math.round(m.p), kcal: Math.round(m.kcal), c: Math.round(m.c), count: pool.length, index: pool.indexOf(o) };
+}
+function fuelPlan(S, date){
+  const P = S.profile || {}; const T = nutritionTargets(P); if (!T) return null;
+  const cfg = fuelSettings(P); const today = isoDate(); const kg = P.weightKg || 70;
+  let training = false, w = null;
+  if (date === today){ const tp = todayPlan(S); training = !!(tp && (tp.workoutId || (tp.done && tp.done.length))); w = tp && tp.workoutId ? workoutById(S, tp.workoutId) : null; }
+  else { const p = projectSchedule(S, today, Math.max(1, daysBetween(today, date) + 1)).find(x => x.date === date); training = !!(p && p.workoutId); w = p && p.workoutId ? workoutById(S, p.workoutId) : null; }
+  const start = hmToMin(cfg.time) ?? 1050; const dur = w ? estimateDuration(w) : 60;
+  const picks = ((S.daily || {})[date] || {}).fuelPick || {};
+  let slots;
+  if (!training) slots = [['breakfast', 480, 0.25], ['lunch', 750, 0.25], ['snack', 960, 0.2], ['dinner', 1140, 0.3]];
+  else if (start < 600) slots = [['pre', start - 45, 0.12], ['post', start + dur + 30, 0.28], ['lunch', 780, 0.25], ['snack', 990, 0.12], ['dinner', 1140, 0.23]];   // early-morning training
+  else if (start < 900) slots = [['breakfast', 450, 0.22], ['pre', start - 90, 0.15], ['post', start + dur + 30, 0.25], ['snack', 1000, 0.13], ['dinner', 1140, 0.25]];
+  else slots = [['breakfast', 450, 0.22], ['lunch', 750, 0.23], ['pre', start - 90, 0.13], ['post', start + dur + 30, 0.25], ['dinner', Math.max(1170, start + dur + 120), 0.17]];
+  // a post-workout meal close to dinner time becomes the dinner
+  const feeds = slots.map(([slot, t, share]) => {
+    const target = Math.round(T.p * share / 5) * 5; const opt = fuelOption(slot, target, P, picks[slot] || 0);
+    return { slot, time: minToHm(t), target, option: opt, ...FUEL_FEED_TEXT[slot] };
+  }).sort((a, b) => hmToMin(a.time) - hmToMin(b.time));
+  const supps = [];
+  const minor = (P.age || 30) < 18;
+  if (cfg.supps.protein) supps.push({ id:'protein', title:'Protein powder (optional)', when:'Only on days your meals fall short of your protein target, usually as the post-workout shake.', dose:'1 scoop (about 25-30 g of powder, roughly 20-25 g protein). Check your product\'s label.', who:'Choose a plant protein if you avoid dairy. Food first: powder is a convenience, not a requirement.', source: FUEL_SOURCES.protein });
+  if (cfg.supps.creatine && !minor) supps.push({ id:'creatine', title:'Creatine monohydrate', when:'Once a day, any time that is easy to remember, with water or a meal. Training and rest days.', dose:'3-5 g a day. No loading phase needed.', who:'The most researched supplement for strength training. A small rise in body weight from water in the muscles is normal. Skip it and ask your doctor first if you have kidney problems, take regular medication, or are pregnant or breastfeeding.', source: FUEL_SOURCES.creatine });
+  if (cfg.supps.caffeine && !minor && training) supps.push({ id:'caffeine', title:'Caffeine before training (optional)', when:'30-60 minutes before your workout.' + (start >= 900 ? ' Your session is in the afternoon: caffeine late in the day can disturb sleep, so consider skipping it.' : ''), dose:`Beginners: start with one regular coffee. Research doses for performance are 3-6 mg per kg, about ${Math.round(kg * 3)}-${Math.round(kg * 6)} mg for you, but more is not needed to start. Count all coffee, tea, energy drinks and pre-workout products, and stay under 400 mg a day in total.`, who:'Skip it if you are pregnant, have a heart condition or high blood pressure, get anxious or jittery with coffee, or are sensitive to caffeine.', source: FUEL_SOURCES.caffeine, source2: FUEL_SOURCES.caffeineLimit });
+  return { date, training, workout: w, start: training ? minToHm(start) : null, end: training ? minToHm(start + dur) : null, T, feeds, supps, minor,
+    water: training ? `Drink ${Math.round(T.water / 1000 * 10) / 10} L across the day, including a glass or two in the 1-2 hours before training and sips during your session.` : `Drink about ${Math.round(T.water / 1000 * 10) / 10} L across the day.`,
+    total: feeds.reduce((a, f) => a + (f.option ? f.option.p : 0), 0) };
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { fuelPlan, fuelOption, fuelSettings, FUEL_OPTIONS, FUEL_SOURCES });
 /* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
    Completion is only ever derived from what the member actually recorded, or from an explicit
    tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
@@ -1509,6 +1633,7 @@ const DAILY_GOAL_DEFS = {
   water:    { label:'Reach your water target',           icon:'drop',     route:'dashboard' },
   move:     { label:'Cardio, walk or mobility',          icon:'trend',    route:'train' },
   sleep:    { label:'Record last night\'s sleep',        icon:'moon',     route:'dashboard' },
+  fuel:     { label:'Pre- and post-workout fuel',       icon:'food',     route:'nutrition' },
   archery:  { label:'Warm up before shooting',          icon:'target',   route:'daily' },
   tip:      { label:'Read today\'s coaching tip',        icon:'info',     route:'daily' },
   challenge:{ label:'Complete today\'s challenge',       icon:'star',     route:'daily/challenges' },
@@ -1600,6 +1725,7 @@ function dailyGoals(S, date, uidSeed){
   add('water', !!c.T, c.T && c.water >= c.T.water, c.T ? `${c.water} / ${c.T.water} ml` : '');
   add('move', c.plannedCardio || !c.training, c.moved, c.training ? 'Optional cardio finisher' : 'Rest day: 20-min walk or mobility');
   add('sleep', true, c.hab.sleep != null, c.hab.sleep != null ? `${c.hab.sleep} h recorded` : 'Not recorded yet');
+  const fz = rec.fuel || {}; add('fuel', c.training && typeof fuelSettings === 'function' && fuelSettings(S.profile).on, fz.pre && fz.post, fz.pre && fz.post ? 'Both done' : fz.pre ? 'Pre-workout done, post-workout next' : 'From your fuel plan');
   add('archery', c.shooting, c.archeryWarm, c.archeryWarm ? 'Warm-up done' : 'Shooting day: 10-minute shoulder warm-up');
   add('tip', true, !!rec.tipRead, rec.tipRead ? 'Read' : 'One minute');
   const ch = dailyChallenge(S, date, uidSeed); add('challenge', true, ch.done, ch.title);
@@ -2486,9 +2612,9 @@ function mealDayIndex(){ const mp = S.mealplan; if (!mp) return -1; const i = da
 function macroLine(m){ return `<span class="num">${fmtNum(m.kcal)} kcal · P ${fmtNum(m.p)} · C ${fmtNum(m.c)} · F ${fmtNum(m.f)}</span>`; }
 VIEWS.nutrition = () => {
   const tab = sub.nu || 'today'; const T = nutritionTargets(S.profile);
-  const seg = `<div class="seg" role="tablist">${[['today','Today'],['week','Weekly meal plan'],['grocery','Grocery list']].map(([k,l]) => `<button role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" data-act="sub" data-key="nu" data-val="${k}">${l}</button>`).join('')}</div>`;
+  const seg = `<div class="seg" role="tablist">${[['today','Today'],['fuel','Daily plan'],['week','Weekly meal plan'],['grocery','Grocery list']].map(([k,l]) => `<button role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" data-act="sub" data-key="nu" data-val="${k}">${l}</button>`).join('')}</div>`;
   if (!T) return topbar('Nutrition') + `<div class="stack">${seg}<div class="card empty">${I('food')}<div>Add your age, height and weight to get calorie and macro targets and meal plans.</div><a class="btn primary" href="#settings/edit">Add details</a></div>${tab === 'today' ? diaryCard(isoDate()) : ''}</div>`;
-  return topbar('Nutrition') + `<div class="stack">${seg}${tab === 'today' ? nuToday(T) : tab === 'week' ? nuWeek(T) : nuGrocery()}</div>`;
+  return topbar('Nutrition') + `<div class="stack">${seg}${tab === 'today' ? nuToday(T) : tab === 'fuel' ? nuFuel(T) : tab === 'week' ? nuWeek(T) : nuGrocery()}</div>`;
 };
 function nuToday(T){
   const d = sub.nud || isoDate(); const fd = getFoodDay(d); const t = foodDayTotals(fd); const di = d === isoDate() ? mealDayIndex() : -1;
@@ -3655,6 +3781,62 @@ function photoCompare(a, b){
     ${body}${stats ? `<div class="pstats">${stats}</div><p class="tiny faint" style="margin-top:6px">Measurements logged within 10 days of each photo.</p>` : `<p class="tiny faint" style="margin-top:8px">Log weight or waist around your photo days to see them here.</p>`}</div>`;
 }
 INPUTS['pslide'] = el => { const w = el.closest('.pslide'); if (w) w.style.setProperty('--pos', el.value + '%'); };
+
+/* ---------- Daily fuel plan (Nutrition → Daily plan) ---------- */
+const FUEL_SLOT_LOG = { breakfast:'breakfast', lunch:'lunch', dinner:'dinner', snack:'snack', pre:'snack', post:'snack' };
+function saveFuel(p){ const prof = JSON.parse(JSON.stringify(S.profile)); prof.fuel = { ...fuelSettings(prof), ...p }; saveDoc('profile', prof); }
+function nuFuel(T){
+  const cfg = fuelSettings(S.profile); const today = isoDate();
+  if (!cfg.on) return `<div class="card fuel-intro"><span class="eyebrow">${I('food')} Daily plan</span><h2 style="margin:6px 0 8px">Your daily protein and workout fuel plan</h2>
+    <p class="muted">A simple plan to follow each day: when to eat, what to eat before and after training, and how to spread your <b>${T.p} g protein target</b> across the day. It uses foods from your DrukFit food list and fits your diet preferences.</p>
+    <ul class="small dul" style="margin:12px 0"><li>Times built around your training time</li><li>Swap any meal for another idea with the same protein</li><li>Log a meal with one tap</li><li>Optional supplement guide (protein powder, creatine, caffeine), with who should skip them</li></ul>
+    <button class="btn primary" data-act="fuel-start">${I('play')} Start my daily plan</button></div>`;
+  const f = fuelPlan(S, today); const rec = (S.daily || {})[today] || {}; const fz = rec.fuel || {}; const taken = rec.supp || {};
+  const logged = new Set((getFoodDay(today).entries || []).map(e => e.fuelSlot).filter(Boolean));
+  const name = id => (FOODS[id] || { name:id }).name;
+  const feed = x => { const o = x.option; const isWk = x.slot === 'pre' || x.slot === 'post'; const done = logged.has(x.slot) || (isWk && fz[x.slot]);
+    return `<div class="fuel-item ${done ? 'done' : ''} ${isWk ? 'wk' : ''}"><div class="fuel-time num">${x.time}</div><div class="fuel-dot" aria-hidden="true"></div>
+      <div class="card fuel-card"><div class="between"><div><span class="eyebrow">${esc(x.title)}${isWk ? ' · ' + (x.slot === 'pre' ? '1-2 h before' : 'within 2 h after') : ''}</span><div class="t" style="font-weight:700;margin-top:2px">${o ? esc(o.name) : 'No option fits your diet settings'}</div></div><span class="chip ${done ? 'good' : 'accent'} num">${done ? I('check') + ' Done' : '~' + (o ? o.p : x.target) + ' g protein'}</span></div>
+        ${o ? `<ul class="fuel-foods">${o.items.map(([id, g]) => `<li><span>${esc(name(id))}</span><span class="num faint">${g} ${id === 'milk' || id === 'soy-milk' ? 'ml' : 'g'}</span></li>`).join('')}</ul><div class="tiny muted num">${o.p} g protein · ${o.c} g carbs · ${o.kcal} kcal (estimates)</div>` : ''}
+        <p class="small muted" style="margin-top:6px">${esc(x.why)}</p>
+        <div class="row" style="margin-top:8px">${o && !logged.has(x.slot) ? `<button class="btn sm" data-act="fuel-log" data-slot="${x.slot}">${I('plus')} Log this meal</button>` : ''}${o && o.count > 1 && !logged.has(x.slot) ? `<button class="btn sm ghost" data-act="fuel-swap" data-slot="${x.slot}">${I('swap')} Another idea</button>` : ''}${isWk && !logged.has(x.slot) ? `<label class="btn sm ghost" style="cursor:pointer"><input type="checkbox" class="dswitch" style="width:18px;height:18px" data-chg="fuel-tick" data-slot="${x.slot}" ${fz[x.slot] ? 'checked' : ''}> Ate something else</label>` : ''}</div></div></div>`; };
+  const supps = f.supps.map(s => `<div class="card supp"><div class="between"><b>${esc(s.title)}</b>${['creatine','caffeine','protein'].includes(s.id) ? `<label class="small" style="display:flex;gap:6px;align-items:center;cursor:pointer"><input type="checkbox" class="dswitch" style="width:18px;height:18px" data-chg="supp-tick" data-id="${s.id}" ${taken[s.id] ? 'checked' : ''}> Taken today</label>` : ''}</div>
+      <div class="small" style="margin-top:6px"><b>When:</b> ${esc(s.when)}</div><div class="small"><b>How much:</b> ${esc(s.dose)}</div><div class="small muted" style="margin-top:4px">${esc(s.who)}</div>
+      <a class="tiny link" href="${s.source.url}" target="_blank" rel="noopener">${I('link')} ${esc(s.source.name)}</a>${s.source2 ? `<br><a class="tiny link" href="${s.source2.url}" target="_blank" rel="noopener">${I('link')} ${esc(s.source2.name)}</a>` : ''}</div>`).join('');
+  return `<div class="card fuel-head"><div class="between"><div><span class="eyebrow">${fmtDate(today, { weekday:'long', day:'numeric', month:'long' })}</span><h3 style="margin:4px 0 2px">${f.training ? 'Training day' : 'Rest day'} plan</h3>
+      <div class="small muted">${f.training ? `Workout ${f.start}-${f.end}${f.workout ? ' · ' + esc(f.workout.name) : ''}` : 'Spread your protein evenly. No pre- or post-workout meals today.'}</div></div>
+      <div class="fuel-target"><b class="num">${T.p} g</b><span class="tiny muted">protein today</span><span class="tiny muted num">plan ≈ ${f.total} g</span></div></div>
+    ${f.training ? `<label class="f" style="margin-top:12px;max-width:220px" for="fuel-time">My usual training time<input class="in" id="fuel-time" type="time" value="${esc(cfg.time)}" data-chg="fuel-time"></label>` : ''}</div>
+    <div class="fuel-line">${f.feeds.map(feed).join('')}</div>
+    <div class="note">${I('drop')}<div class="small"><b>Water:</b> ${esc(f.water)}</div></div>
+    <section class="stack" style="gap:10px"><div class="between"><h3 style="margin:0">Supplements</h3><button class="btn sm ghost" data-act="fuel-supps">${I('edit')} Choose</button></div>
+      ${supps || `<div class="card small muted">${f.minor ? 'Supplements like creatine and caffeine aren\'t recommended under 18. Food covers everything you need.' : 'None selected. Most beginners don\'t need supplements: regular meals that hit your protein target do the job. Tap Choose to add protein powder, creatine or caffeine guidance.'}</div>`}</section>
+    <p class="tiny faint">General guidance from sports nutrition research, not personal medical or dietary advice. For a plan tailored to you, see an Accredited Practising Dietitian. Sources: <a class="link" href="${FUEL_SOURCES.protein.url}" target="_blank" rel="noopener">protein</a>, <a class="link" href="${FUEL_SOURCES.timing.url}" target="_blank" rel="noopener">nutrient timing</a>, <a class="link" href="${FUEL_SOURCES.ais.url}" target="_blank" rel="noopener">AIS supplements</a>.</p>
+    <button class="btn sm ghost" data-act="fuel-stop" style="align-self:flex-start">Turn off daily plan</button>`;
+}
+ACTIONS['fuel-start'] = () => { saveFuel({ on:true, time: ((S.settings || {}).notify || {}).workout || '17:30' }); toast('Your daily plan is ready'); render(); };
+ACTIONS['fuel-stop'] = () => confirmSheet('Turn off the daily plan?', 'The plan and its Daily Check goal are hidden. Your food log isn\'t changed. Turn it back on any time.', 'Turn off', () => { saveFuel({ on:false }); render(); });
+CHANGES['fuel-time'] = el => { if (/^\d{2}:\d{2}$/.test(el.value)){ saveFuel({ time: el.value }); render(); } };
+ACTIONS['fuel-swap'] = el => { const d = isoDate(); const rec = (S.daily || {})[d] || {}; const picks = { ...(rec.fuelPick || {}) }; picks[el.dataset.slot] = (picks[el.dataset.slot] || 0) + 1; saveDaily(d, { fuelPick: picks }); render(); };
+ACTIONS['fuel-log'] = el => {
+  const d = isoDate(); const x = fuelPlan(S, d).feeds.find(f => f.slot === el.dataset.slot); if (!x || !x.option) return;
+  const m = itemsMacros(x.option.items); const fd = getFoodDay(d);
+  fd.entries = (fd.entries || []).concat({ id: uid(), slot: FUEL_SLOT_LOG[x.slot], name: x.option.name, grams: x.option.items.reduce((s, [, g]) => s + g, 0), ...roundM(m), fuelSlot: x.slot });
+  saveFoodDay(d, fd);
+  if (x.slot === 'pre' || x.slot === 'post'){ const rec = (S.daily || {})[d] || {}; saveDaily(d, { fuel: { ...(rec.fuel || {}), [x.slot]: true } }); }
+  toast('Logged ' + x.option.name); render();
+};
+CHANGES['fuel-tick'] = el => { const d = isoDate(); const rec = (S.daily || {})[d] || {}; saveDaily(d, { fuel: { ...(rec.fuel || {}), [el.dataset.slot]: el.checked } }); render(); };
+CHANGES['supp-tick'] = el => { const d = isoDate(); const rec = (S.daily || {})[d] || {}; saveDaily(d, { supp: { ...(rec.supp || {}), [el.dataset.id]: el.checked } }); toast(el.checked ? 'Noted' : 'Unticked'); };
+ACTIONS['fuel-supps'] = () => {
+  const cfg = fuelSettings(S.profile); const minor = (S.profile.age || 30) < 18;
+  const row = (id, label, sub_, disabled) => `<label class="li" style="cursor:pointer;${disabled ? 'opacity:.5' : ''}"><div class="grow"><div class="t">${label}</div><div class="small muted">${sub_}</div></div><input type="checkbox" class="dswitch" data-chg="supp-on" data-id="${id}" ${cfg.supps[id] && !disabled ? 'checked' : ''} ${disabled ? 'disabled' : ''}></label>`;
+  openSheet(`<div class="stack"><h2>Supplements</h2><p class="small muted">All optional. Food comes first, and most beginners make great progress without any supplements. Only add what you actually use, so your plan shows when and how much.</p>
+    <div class="list">${row('protein', 'Protein powder', 'Handy when meals fall short of your protein target')}${row('creatine', 'Creatine monohydrate', minor ? 'Not recommended under 18' : 'The most researched supplement for strength training', minor)}${row('caffeine', 'Caffeine before training', minor ? 'Not recommended under 18' : 'Optional, for a little extra energy', minor)}</div>
+    <div class="note warn">${I('info')}<div class="small"><b>Not needed for beginners:</b> fat burners, testosterone boosters and BCAAs (if you reach your protein target). Supplements aren't tested like medicines; choose products that are third-party tested, and talk to your doctor or pharmacist if you take medication or have a health condition. <a class="link" href="${FUEL_SOURCES.ais.url}" target="_blank" rel="noopener">AIS guidance</a></div></div>
+    <button class="btn primary" data-act="close-sheet">Done</button></div>`);
+};
+CHANGES['supp-on'] = el => { const cfg = fuelSettings(S.profile); saveFuel({ supps: { ...cfg.supps, [el.dataset.id]: el.checked } }); render(); };
 /* ===== DrukFit accounts: Supabase Auth + Postgres (row-level security) + private Storage =====
    Active only when the page defines window.DRUKFIT_CONFIG = { url, key } (the website build).
    The key is Supabase's public "anon"/"publishable" key; access control is enforced by the
@@ -4195,7 +4377,7 @@ function legalView(which){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "a279aa9d63";
+window.DRUKFIT_VERSION = "c46b6cc75d";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {

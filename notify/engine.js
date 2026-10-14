@@ -963,6 +963,114 @@ function applyArchery(plan, profile, on){
   return p;
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { applyArchery, archeryOn, shootingDay, ARCHERY_WARMUP });
+/* ===== Daily fuel plan: protein spread, pre/post-workout meals, optional supplements (no DOM) =====
+   Built for beginners: simple times, real foods from the DrukFit food list, amounts scaled to the member's own
+   protein target. Supplements are optional, off by default, and come with who-should-not-take-them notes. */
+const FUEL_SOURCES = {
+  protein: { name:'ISSN position stand: protein and exercise (Jäger et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0177-8' },
+  timing:  { name:'ISSN position stand: nutrient timing (Kerksick et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0189-4' },
+  creatine:{ name:'ISSN position stand: creatine supplementation (Kreider et al., 2017)', url:'https://doi.org/10.1186/s12970-017-0173-z' },
+  caffeine:{ name:'ISSN position stand: caffeine and exercise performance (Guest et al., 2021)', url:'https://doi.org/10.1186/s12970-020-00383-4' },
+  caffeineLimit:{ name:'US FDA: Spilling the Beans: How Much Caffeine Is Too Much?', url:'https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much' },
+  ais:     { name:'Australian Institute of Sport: Supplements', url:'https://www.ausport.gov.au/ais/nutrition/supplements' },
+};
+// Each option: the first item is the main protein food and is scaled to the meal's protein target.
+const FUEL_OPTIONS = {
+  breakfast: [
+    { name:'Oats with milk and a scoop of protein', items:[['whey', 30], ['oats', 60], ['milk', 250], ['berries', 80]], scale:[20, 40] },
+    { name:'Greek yoghurt bowl', items:[['greek-yoghurt', 250], ['oats', 40], ['berries', 100]], scale:[150, 350] },
+    { name:'Eggs on wholegrain toast', items:[['egg', 150], ['wholegrain-bread', 80], ['spinach', 40]], scale:[100, 200] },
+    { name:'Tofu scramble on toast', items:[['tofu', 200], ['wholegrain-bread', 80], ['capsicum', 60]], scale:[150, 300] },
+  ],
+  lunch: [
+    { name:'Chicken, rice and salad', items:[['chicken-breast', 140], ['rice-cooked', 180], ['salad-mix', 120]], scale:[100, 220] },
+    { name:'Tuna wrap', items:[['tuna', 95], ['wrap', 70], ['salad-mix', 100], ['avocado', 30]], scale:[70, 190] },
+    { name:'Lentil and quinoa bowl', items:[['lentils', 250], ['quinoa-cooked', 120], ['spinach', 40], ['hummus', 30]], scale:[200, 350] },
+    { name:'Tempeh stir-fry with rice', items:[['tempeh', 150], ['rice-cooked', 180], ['stir-fry-veg', 150]], scale:[100, 220] },
+  ],
+  pre: [
+    { name:'Banana and Greek yoghurt', items:[['greek-yoghurt', 170], ['banana', 120]], scale:[120, 250] },
+    { name:'Toast with peanut butter and a glass of milk', items:[['milk', 300], ['wholegrain-bread', 80], ['peanut-butter', 15]], scale:[200, 400] },
+    { name:'Rice cakes with cottage cheese and honey', items:[['cottage-cheese', 150], ['rice-cakes', 30], ['honey', 10]], scale:[100, 250] },
+    { name:'Soy milk smoothie with banana and oats', items:[['soy-milk', 350], ['banana', 120], ['oats', 30]], scale:[250, 500] },
+  ],
+  post: [
+    { name:'Protein shake with milk and a banana', items:[['whey', 30], ['milk', 300], ['banana', 120]], scale:[25, 45] },
+    { name:'Chicken and sweet potato', items:[['chicken-breast', 130], ['sweet-potato', 200], ['broccoli', 100]], scale:[100, 200] },
+    { name:'Greek yoghurt, berries and honey', items:[['greek-yoghurt', 250], ['berries', 100], ['honey', 15]], scale:[170, 400] },
+    { name:'Plant protein shake with soy milk and a banana', items:[['pea-protein', 30], ['soy-milk', 300], ['banana', 120]], scale:[25, 45] },
+  ],
+  snack: [
+    { name:'Cottage cheese with fruit', items:[['cottage-cheese', 200], ['apple', 150]], scale:[150, 300] },
+    { name:'Greek yoghurt and almonds', items:[['greek-yoghurt', 200], ['almonds', 20]], scale:[150, 300] },
+    { name:'Edamame and an orange', items:[['edamame', 150], ['orange', 150]], scale:[100, 250] },
+    { name:'Protein bar and fruit', items:[['protein-bar', 60], ['apple', 150]], scale:[60, 60] },
+  ],
+  dinner: [
+    { name:'Salmon, sweet potato and greens', items:[['salmon', 150], ['sweet-potato', 200], ['broccoli', 120]], scale:[110, 220] },
+    { name:'Lean beef pasta', items:[['beef-mince', 140], ['pasta-cooked', 180], ['tomato-passata', 120], ['spinach', 40]], scale:[100, 220] },
+    { name:'Fish, rice and vegetables', items:[['white-fish', 170], ['rice-cooked', 180], ['mixed-veg', 150]], scale:[120, 250] },
+    { name:'Tofu and vegetable curry with rice', items:[['tofu', 220], ['rice-cooked', 180], ['mixed-veg', 150]], scale:[150, 320] },
+  ],
+};
+const FUEL_FEED_TEXT = {
+  breakfast:{ title:'Breakfast', why:'Starts your protein for the day.' },
+  lunch:{ title:'Lunch', why:'Spreading protein over 3-4 meals, roughly 3-4 hours apart, works better than one big serve.' },
+  snack:{ title:'Afternoon snack', why:'Keeps protein coming between lunch and dinner.' },
+  pre:{ title:'Pre-workout', why:'An easy-to-digest meal with carbs and some protein, eaten 1-2 hours before training, fuels your session. Keep fat and fibre lower so it sits comfortably.' },
+  post:{ title:'Post-workout', why:'Protein plus carbs within about 2 hours of training supports recovery. If dinner is soon after, it can be your post-workout meal.' },
+  dinner:{ title:'Dinner', why:'Rounds out your protein and helps you recover overnight.' },
+};
+const hmToMin = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m ? +m[1] * 60 + +m[2] : null; };
+const minToHm = m => { m = ((Math.round(m / 15) * 15) % 1440 + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+function fuelSettings(profile){ return { on:false, time:'17:30', supps:{}, ...((profile && profile.fuel) || {}) }; }
+function fuelOption(slot, targetP, profile, pick){
+  const pool = FUEL_OPTIONS[slot].filter(o => mealAllowed(o, profile));
+  if (!pool.length) return null;
+  const o = pool[((pick || 0) % pool.length + pool.length) % pool.length];
+  const [mainId, baseG] = o.items[0]; const per100 = FOODS[mainId].p;
+  const others = itemsMacros(o.items.slice(1)).p;
+  let g = Math.round(Math.max(0, targetP - others) / per100 * 100 / 5) * 5;
+  g = Math.max(o.scale[0], Math.min(o.scale[1], g || baseG));
+  if (mainId === 'egg') g = Math.max(100, Math.round(g / 50) * 50);           // whole eggs
+  if (mainId === 'protein-bar') g = 60;
+  let items = [[mainId, g], ...o.items.slice(1)];
+  let m = itemsMacros(items);
+  if (m.p > targetP * 1.12 && targetP > 0){ // smaller appetite / lower target: shrink the whole meal a little
+    const k = Math.max(0.6, targetP / m.p);
+    items = items.map(([id, gg]) => [id, id === 'egg' ? Math.max(50, Math.round(gg * k / 50) * 50) : id === 'protein-bar' ? gg : Math.max(5, Math.round(gg * k / 5) * 5)]);
+    m = itemsMacros(items);
+  }
+  return { name: o.name, items, p: Math.round(m.p), kcal: Math.round(m.kcal), c: Math.round(m.c), count: pool.length, index: pool.indexOf(o) };
+}
+function fuelPlan(S, date){
+  const P = S.profile || {}; const T = nutritionTargets(P); if (!T) return null;
+  const cfg = fuelSettings(P); const today = isoDate(); const kg = P.weightKg || 70;
+  let training = false, w = null;
+  if (date === today){ const tp = todayPlan(S); training = !!(tp && (tp.workoutId || (tp.done && tp.done.length))); w = tp && tp.workoutId ? workoutById(S, tp.workoutId) : null; }
+  else { const p = projectSchedule(S, today, Math.max(1, daysBetween(today, date) + 1)).find(x => x.date === date); training = !!(p && p.workoutId); w = p && p.workoutId ? workoutById(S, p.workoutId) : null; }
+  const start = hmToMin(cfg.time) ?? 1050; const dur = w ? estimateDuration(w) : 60;
+  const picks = ((S.daily || {})[date] || {}).fuelPick || {};
+  let slots;
+  if (!training) slots = [['breakfast', 480, 0.25], ['lunch', 750, 0.25], ['snack', 960, 0.2], ['dinner', 1140, 0.3]];
+  else if (start < 600) slots = [['pre', start - 45, 0.12], ['post', start + dur + 30, 0.28], ['lunch', 780, 0.25], ['snack', 990, 0.12], ['dinner', 1140, 0.23]];   // early-morning training
+  else if (start < 900) slots = [['breakfast', 450, 0.22], ['pre', start - 90, 0.15], ['post', start + dur + 30, 0.25], ['snack', 1000, 0.13], ['dinner', 1140, 0.25]];
+  else slots = [['breakfast', 450, 0.22], ['lunch', 750, 0.23], ['pre', start - 90, 0.13], ['post', start + dur + 30, 0.25], ['dinner', Math.max(1170, start + dur + 120), 0.17]];
+  // a post-workout meal close to dinner time becomes the dinner
+  const feeds = slots.map(([slot, t, share]) => {
+    const target = Math.round(T.p * share / 5) * 5; const opt = fuelOption(slot, target, P, picks[slot] || 0);
+    return { slot, time: minToHm(t), target, option: opt, ...FUEL_FEED_TEXT[slot] };
+  }).sort((a, b) => hmToMin(a.time) - hmToMin(b.time));
+  const supps = [];
+  const minor = (P.age || 30) < 18;
+  if (cfg.supps.protein) supps.push({ id:'protein', title:'Protein powder (optional)', when:'Only on days your meals fall short of your protein target, usually as the post-workout shake.', dose:'1 scoop (about 25-30 g of powder, roughly 20-25 g protein). Check your product\'s label.', who:'Choose a plant protein if you avoid dairy. Food first: powder is a convenience, not a requirement.', source: FUEL_SOURCES.protein });
+  if (cfg.supps.creatine && !minor) supps.push({ id:'creatine', title:'Creatine monohydrate', when:'Once a day, any time that is easy to remember, with water or a meal. Training and rest days.', dose:'3-5 g a day. No loading phase needed.', who:'The most researched supplement for strength training. A small rise in body weight from water in the muscles is normal. Skip it and ask your doctor first if you have kidney problems, take regular medication, or are pregnant or breastfeeding.', source: FUEL_SOURCES.creatine });
+  if (cfg.supps.caffeine && !minor && training) supps.push({ id:'caffeine', title:'Caffeine before training (optional)', when:'30-60 minutes before your workout.' + (start >= 900 ? ' Your session is in the afternoon: caffeine late in the day can disturb sleep, so consider skipping it.' : ''), dose:`Beginners: start with one regular coffee. Research doses for performance are 3-6 mg per kg, about ${Math.round(kg * 3)}-${Math.round(kg * 6)} mg for you, but more is not needed to start. Count all coffee, tea, energy drinks and pre-workout products, and stay under 400 mg a day in total.`, who:'Skip it if you are pregnant, have a heart condition or high blood pressure, get anxious or jittery with coffee, or are sensitive to caffeine.', source: FUEL_SOURCES.caffeine, source2: FUEL_SOURCES.caffeineLimit });
+  return { date, training, workout: w, start: training ? minToHm(start) : null, end: training ? minToHm(start + dur) : null, T, feeds, supps, minor,
+    water: training ? `Drink ${Math.round(T.water / 1000 * 10) / 10} L across the day, including a glass or two in the 1-2 hours before training and sips during your session.` : `Drink about ${Math.round(T.water / 1000 * 10) / 10} L across the day.`,
+    total: feeds.reduce((a, f) => a + (f.option ? f.option.p : 0), 0) };
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { fuelPlan, fuelOption, fuelSettings, FUEL_OPTIONS, FUEL_SOURCES });
 /* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
    Completion is only ever derived from what the member actually recorded, or from an explicit
    tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
@@ -986,6 +1094,7 @@ const DAILY_GOAL_DEFS = {
   water:    { label:'Reach your water target',           icon:'drop',     route:'dashboard' },
   move:     { label:'Cardio, walk or mobility',          icon:'trend',    route:'train' },
   sleep:    { label:'Record last night\'s sleep',        icon:'moon',     route:'dashboard' },
+  fuel:     { label:'Pre- and post-workout fuel',       icon:'food',     route:'nutrition' },
   archery:  { label:'Warm up before shooting',          icon:'target',   route:'daily' },
   tip:      { label:'Read today\'s coaching tip',        icon:'info',     route:'daily' },
   challenge:{ label:'Complete today\'s challenge',       icon:'star',     route:'daily/challenges' },
@@ -1077,6 +1186,7 @@ function dailyGoals(S, date, uidSeed){
   add('water', !!c.T, c.T && c.water >= c.T.water, c.T ? `${c.water} / ${c.T.water} ml` : '');
   add('move', c.plannedCardio || !c.training, c.moved, c.training ? 'Optional cardio finisher' : 'Rest day: 20-min walk or mobility');
   add('sleep', true, c.hab.sleep != null, c.hab.sleep != null ? `${c.hab.sleep} h recorded` : 'Not recorded yet');
+  const fz = rec.fuel || {}; add('fuel', c.training && typeof fuelSettings === 'function' && fuelSettings(S.profile).on, fz.pre && fz.post, fz.pre && fz.post ? 'Both done' : fz.pre ? 'Pre-workout done, post-workout next' : 'From your fuel plan');
   add('archery', c.shooting, c.archeryWarm, c.archeryWarm ? 'Warm-up done' : 'Shooting day: 10-minute shoulder warm-up');
   add('tip', true, !!rec.tipRead, rec.tipRead ? 'Read' : 'One minute');
   const ch = dailyChallenge(S, date, uidSeed); add('challenge', true, ch.done, ch.title);
