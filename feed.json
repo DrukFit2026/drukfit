@@ -1,7 +1,7 @@
 {
- "version": 6,
- "generated": "2026-10-14T02:40:05Z",
- "checked": "2026-10-14T02:40:05Z",
+ "version": 7,
+ "generated": "2026-10-14T02:42:08Z",
+ "checked": "2026-10-14T02:42:08Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 5,
    "last_added": 5
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 6,
    "last_added": 6
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 6,
    "last_added": 6
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 5,
    "last_added": 4
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 3,
    "last_added": 3
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 3,
    "last_added": 3
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-14T02:40:05Z",
+   "last_success": "2026-10-14T02:42:08Z",
    "last_found": 1,
    "last_added": 1
   },
@@ -97,9 +97,9 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-14T02:40:05Z",
-   "last_found": 1,
-   "last_added": 1
+   "last_success": "2026-10-14T02:42:08Z",
+   "last_found": 6,
+   "last_added": 6
   }
  },
  "items": [
@@ -636,6 +636,34 @@
    "status": "auto-checked"
   },
   {
+   "id": "doi-10-1177-19417381261474013",
+   "kind": "research",
+   "category": "archery",
+   "title": "Femoral Cartilage Morphology in Collegiate Archery, Badminton, and Taekwondo Athletes and Nonathletes: A 12-month Prospective Cohort Study",
+   "source": "Sports health",
+   "source_title": "Femoral Cartilage Morphology in Collegiate Archery, Badminton, and Taekwondo Athletes and Nonathletes: A 12-month Prospective Cohort Study",
+   "via": "Europe PMC",
+   "authors": "Lee S, Kim S, Lim J, Park J.",
+   "study_type": "observational study",
+   "participants": null,
+   "url": "https://doi.org/10.1177/19417381261474013",
+   "record_url": "https://europepmc.org/article/MED/42634474",
+   "doi": "10.1177/19417381261474013",
+   "pmid": "42634474",
+   "published": "2026-08-23",
+   "summary": "Observational study, published in Sports health in August 2026. The study's title: \"Femoral Cartilage Morphology in Collegiate Archery, Badminton, and Taekwondo Athletes and Nonathletes: A 12-month Prospective Cohort Study.\" Read the source for its methods and full results.",
+   "quote": "Collegiate athletes demonstrate sport-specific adaptations and time-dependent changes in femoral cartilage morphology. Badminton and Taekwondo athletes exhibited greater CSA and thickness than archery athletes and/or nonathletes, with reductions observed after a 12-month follow-up. Clinical relevance Sport-specific evaluations may help clinicians…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": false,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
    "id": "doi-10-3389-fnut-2026-1860234",
    "kind": "research",
    "category": "nutrition",
@@ -829,6 +857,34 @@
     "Pools earlier studies: it is only as strong as the studies it includes."
    ],
    "why": "Technique details decide how much of each rep your target muscles actually do.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3389-fphys-2026-1880932",
+   "kind": "research",
+   "category": "archery",
+   "title": "Do archery athletes' hand dexterity, strength, and cognition exceed those of age-matched athletes and non-athletes? A cross-sectional study",
+   "source": "Frontiers in physiology",
+   "source_title": "Do archery athletes' hand dexterity, strength, and cognition exceed those of age-matched athletes and non-athletes? A cross-sectional study",
+   "via": "Europe PMC",
+   "authors": "Gao X, Hong F, Hou J, Gao Y, Han Q, Li M.",
+   "study_type": "observational study",
+   "participants": 114,
+   "url": "https://doi.org/10.3389/fphys.2026.1880932",
+   "record_url": "https://europepmc.org/article/MED/42528632",
+   "doi": "10.3389/fphys.2026.1880932",
+   "pmid": "42528632",
+   "published": "2026-07-15",
+   "summary": "Observational study with 114 participants, published in Frontiers in physiology in July 2026. The study's title: \"Do archery athletes' hand dexterity, strength, and cognition exceed those of age-matched athletes and non-athletes? A cross-sectional study.\" Read the source for its methods and full results.",
+   "quote": "Findings indicate sport-specific adaptations: archery training is associated with superior fine motor control and movement stability, whereas basketball training is linked to enhanced neuromuscular strength and higher global cognitive screening scores (MoCA), together with better performance on a Stroop interference…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
    "open_access": true,
    "imported": "2026-10-14",
    "link_checked": "2026-10-14",
@@ -1034,29 +1090,113 @@
    "status": "auto-checked"
   },
   {
-   "id": "doi-10-1016-j-jbmt-2024-05-023",
+   "id": "doi-10-3390-brainsci16050459",
    "kind": "research",
    "category": "archery",
-   "title": "Effect of physical training on target accuracy of archer athletes - A systematic review",
-   "source": "Journal of bodywork and movement therapies",
-   "source_title": "Effect of physical training on target accuracy of archer athletes - A systematic review",
+   "title": "The Effects of Mental Fatigue on Psychophysiological Responses, Mood States, and Archery Shooting Performance Under a Simulated Archery Competition: A Randomized Cross-Over Study",
+   "source": "Brain sciences",
+   "source_title": "The Effects of Mental Fatigue on Psychophysiological Responses, Mood States, and Archery Shooting Performance Under a Simulated Archery Competition: A Randomized Cross-Over Study",
    "via": "Europe PMC",
-   "authors": "Jogi R, Kaur J, Saini M, Malik M.",
-   "study_type": "systematic review",
+   "authors": "Soylu S, Arslan E, Kilit B, Soylu Y.",
+   "study_type": "randomised trial",
    "participants": null,
-   "url": "https://doi.org/10.1016/j.jbmt.2024.05.023",
-   "record_url": "https://europepmc.org/article/MED/39593666",
-   "doi": "10.1016/j.jbmt.2024.05.023",
-   "pmid": "39593666",
-   "published": "2024-05-29",
-   "summary": "Systematic review, published in Journal of bodywork and movement therapies in May 2024. The study's title: \"Effect of physical training on target accuracy of archer athletes - A systematic review.\" Read the source for its methods and full results.",
-   "quote": "Physical training or exercises improve the accuracy of archery athletes. The maximum literature is available on the upper extremity and overall fitness training. Archery-specific strengthening exercise is the most used form of exercise.",
+   "url": "https://doi.org/10.3390/brainsci16050459",
+   "record_url": "https://europepmc.org/article/MED/42192772",
+   "doi": "10.3390/brainsci16050459",
+   "pmid": "42192772",
+   "published": "2026-04-24",
+   "summary": "Randomised trial, published in Brain sciences in April 2026. The study's title: \"The Effects of Mental Fatigue on Psychophysiological Responses, Mood States, and Archery Shooting Performance Under a Simulated Archery Competition: A Randomized Cross-Over Study.\" Read the source for its methods and full results.",
+   "quote": "Acute MF significantly degrades fine motor accuracy in precision sports. The pronounced dissociation between elevated RPE and stable peripheral physiological strain suggests that performance decline is driven by top-down cognitive burden rather than physiological limitations. Therefore, systematic monitoring of cognitive…",
    "quote_from": "the study's abstract",
    "limitations": [
-    "Pools earlier studies: it is only as strong as the studies it includes."
+    "A single study: one result is a data point, not a final answer."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-1109-tvcg-2025-3648732",
+   "kind": "research",
+   "category": "archery",
+   "title": "Eliciting Pleasantness With Haptic Feedback: The Role of Physical and Pseudo-Haptic Resistance in Virtual Archery",
+   "source": "IEEE transactions on visualization and computer graphics",
+   "source_title": "Eliciting Pleasantness With Haptic Feedback: The Role of Physical and Pseudo-Haptic Resistance in Virtual Archery",
+   "via": "Europe PMC",
+   "authors": "Ujitoko Y, Ban Y.",
+   "study_type": "study",
+   "participants": null,
+   "url": "https://doi.org/10.1109/tvcg.2025.3648732",
+   "record_url": "https://europepmc.org/article/MED/41452696",
+   "doi": "10.1109/tvcg.2025.3648732",
+   "pmid": "41452696",
+   "published": "2026-03-01",
+   "summary": "Study, published in IEEE transactions on visualization and computer graphics in March 2026. The study's title: \"Eliciting Pleasantness With Haptic Feedback: The Role of Physical and Pseudo-Haptic Resistance in Virtual Archery.\" Read the source for its methods and full results.",
+   "quote": "These findings provide valuable insights for designing pleasant interactions involving continuous force feedback, highlighting the distinct roles of physical and pseudo-haptic cues.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "A single study: one result is a data point, not a final answer."
    ],
    "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
    "open_access": false,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-1038-s41598-026-36151-8",
+   "kind": "research",
+   "category": "archery",
+   "title": "Relationships between nutrition, training frequency, and anthropometric characteristics in elite archers",
+   "source": "Scientific reports",
+   "source_title": "Relationships between nutrition, training frequency, and anthropometric characteristics in elite archers",
+   "via": "Europe PMC",
+   "authors": "Uršulin-Trstenjak N, Mlinarić A, Šarkanj B, Šarkanj ID, Herak I, Filipec M.",
+   "study_type": "study",
+   "participants": 51,
+   "url": "https://doi.org/10.1038/s41598-026-36151-8",
+   "record_url": "https://europepmc.org/article/MED/41530449",
+   "doi": "10.1038/s41598-026-36151-8",
+   "pmid": "41530449",
+   "published": "2026-01-13",
+   "summary": "Study with 51 participants, published in Scientific reports in January 2026. The study's title: \"Relationships between nutrition, training frequency, and anthropometric characteristics in elite archers.\" Read the source for its methods and full results.",
+   "quote": "This study has limitations, including a small sample size and the use of self-reported data.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "A single study: one result is a data point, not a final answer."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
+   "imported": "2026-10-14",
+   "link_checked": "2026-10-14",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3390-sports13090310",
+   "kind": "research",
+   "category": "archery",
+   "title": "Associations of Scoring Accuracy with Postural Stability and Strength Measures in Archers on a Standard Archery Site",
+   "source": "Sports (Basel, Switzerland)",
+   "source_title": "Associations of Scoring Accuracy with Postural Stability and Strength Measures in Archers on a Standard Archery Site",
+   "via": "Europe PMC",
+   "authors": "Fan CH, Liao CN, Hsu WH.",
+   "study_type": "study",
+   "participants": null,
+   "url": "https://doi.org/10.3390/sports13090310",
+   "record_url": "https://europepmc.org/article/MED/41003616",
+   "doi": "10.3390/sports13090310",
+   "pmid": "41003616",
+   "published": "2025-09-08",
+   "summary": "Study, published in Sports (Basel, Switzerland) in September 2025. The study's title: \"Associations of Scoring Accuracy with Postural Stability and Strength Measures in Archers on a Standard Archery Site.\" Read the source for its methods and full results.",
+   "quote": "Our findings highlight the need for discipline-specific training strategies, such as enhancing bow-side stability for recurve archers and drawing-side control for compound archers.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "A single study: one result is a data point, not a final answer."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": true,
    "imported": "2026-10-14",
    "link_checked": "2026-10-14",
    "status": "auto-checked"
@@ -1199,6 +1339,32 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-14T02:42:08Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 5 new",
+    "epmc-technique": "ok: 5 found, 5 new",
+    "epmc-nutrition": "ok: 6 found, 6 new",
+    "epmc-recovery": "ok: 6 found, 6 new",
+    "epmc-research": "ok: 5 found, 4 new",
+    "epmc-tech": "ok: 3 found, 3 new",
+    "epmc-motivation": "ok: 3 found, 3 new",
+    "nih-newsinhealth": "ok: 1 found, 1 new",
+    "epmc-archery": "ok: 6 found, 6 new"
+   },
+   "added": 39,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
+    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P"
+   ]
+  },
   {
    "at": "2026-10-14T02:40:05Z",
    "sources": {
