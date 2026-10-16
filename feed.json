@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-16T08:19:09Z",
- "checked": "2026-10-16T08:19:09Z",
+ "generated": "2026-10-16T20:10:40Z",
+ "checked": "2026-10-16T20:10:40Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,8 +22,8 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
-   "last_found": 5,
+   "last_success": "2026-10-16T20:10:40Z",
+   "last_found": 4,
    "last_added": 0
   },
   "epmc-nutrition": {
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,9 +77,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
-   "last_found": 3,
-   "last_added": 0
+   "last_success": "2026-10-16T20:10:40Z",
+   "last_found": 4,
+   "last_added": 1
   },
   "nih-newsinhealth": {
    "name": "NIH News in Health",
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,12 +97,40 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-16T08:19:09Z",
+   "last_success": "2026-10-16T20:10:40Z",
    "last_found": 6,
    "last_added": 1
   }
  },
  "items": [
+  {
+   "id": "doi-10-1080-02640414-2026-2720309",
+   "kind": "research",
+   "category": "archery",
+   "title": "Evaluation of postural control during quiet standing and aiming tasks in professional and novice archers",
+   "source": "Journal of sports sciences",
+   "source_title": "Evaluation of postural control during quiet standing and aiming tasks in professional and novice archers",
+   "via": "Europe PMC",
+   "authors": "Panday SB, Choi J, Park C, Pathak P.",
+   "study_type": "study",
+   "participants": null,
+   "url": "https://doi.org/10.1080/02640414.2026.2720309",
+   "record_url": "https://europepmc.org/article/MED/42831775",
+   "doi": "10.1080/02640414.2026.2720309",
+   "pmid": "42831775",
+   "published": "2026-10-05",
+   "summary": "Study, published in Journal of sports sciences in October 2026. The study's title: \"Evaluation of postural control during quiet standing and aiming tasks in professional and novice archers.\" Read the source for its methods and full results.",
+   "quote": "These findings indicate that archery training enhances both the consistency and temporal regularity of postural control during aiming, suggesting that COP complexity provides novel insights into skill-specific balance adaptations.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "A single study: one result is a data point, not a final answer."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": false,
+   "imported": "2026-10-16",
+   "link_checked": "2026-10-16",
+   "status": "auto-checked"
+  },
   {
    "id": "doi-10-1186-s40798-026-01116-8",
    "kind": "research",
@@ -779,6 +807,34 @@
    "status": "auto-checked"
   },
   {
+   "id": "doi-10-1111-ijn-70177",
+   "kind": "research",
+   "category": "motivation",
+   "title": "The Rehabilitative Effects of Online Pelvic Floor Muscle Exercises on Female Urinary Incontinence Across Various Life Stages: A Systematic Review and Meta-Analysis",
+   "source": "International journal of nursing practice",
+   "source_title": "The Rehabilitative Effects of Online Pelvic Floor Muscle Exercises on Female Urinary Incontinence Across Various Life Stages: A Systematic Review and Meta-Analysis",
+   "via": "Europe PMC",
+   "authors": "Wang Y, Zhang H, Wang J, Feng W, Sun Z, Chen Y.",
+   "study_type": "meta-analysis",
+   "participants": null,
+   "url": "https://doi.org/10.1111/ijn.70177",
+   "record_url": "https://europepmc.org/article/MED/42543255",
+   "doi": "10.1111/ijn.70177",
+   "pmid": "42543255",
+   "published": "2026-08-01",
+   "summary": "Meta-analysis, published in International journal of nursing practice in August 2026. The study's title: \"The Rehabilitative Effects of Online Pelvic Floor Muscle Exercises on Female Urinary Incontinence Across Various Life Stages: A Systematic Review and Meta-Analysis.\" Read the source for its methods and full results.",
+   "quote": "Online pelvic floor muscle exercise may improve urinary incontinence outcomes across different life stages. In postpartum women, it reduces incontinence incidence, alleviates symptom severity and enhances training compliance, whereas in elderly patients, its benefit is limited to improved compliance.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Staying consistent for months matters more than any single workout.",
+   "open_access": false,
+   "imported": "2026-10-16",
+   "link_checked": "2026-10-16",
+   "status": "auto-checked"
+  },
+  {
    "id": "doi-10-3389-fpubh-2026-1871682",
    "kind": "research",
    "category": "tech",
@@ -1311,6 +1367,32 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-16T20:10:40Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 4 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 1 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 1 new"
+   },
+   "added": 2,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
+   ]
+  },
   {
    "at": "2026-10-16T08:19:09Z",
    "sources": {
