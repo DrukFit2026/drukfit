@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-16T20:10:40Z",
- "checked": "2026-10-16T20:10:40Z",
+ "generated": "2026-10-17T08:14:07Z",
+ "checked": "2026-10-17T08:14:07Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 4,
    "last_added": 1
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,12 +97,40 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-16T20:10:40Z",
+   "last_success": "2026-10-17T08:14:07Z",
    "last_found": 6,
-   "last_added": 1
+   "last_added": 0
   }
  },
  "items": [
+  {
+   "id": "doi-10-2196-97392",
+   "kind": "research",
+   "category": "motivation",
+   "title": "Feasibility, Acceptability, and Appropriateness of an 8-Week Supervised Aerobic Exercise Intervention for Adults With Epilepsy: Pilot Randomized Controlled Trial",
+   "source": "JMIR formative research",
+   "source_title": "Feasibility, Acceptability, and Appropriateness of an 8-Week Supervised Aerobic Exercise Intervention for Adults With Epilepsy: Pilot Randomized Controlled Trial",
+   "via": "Europe PMC",
+   "authors": "Churchill S, Lansing J, Brellenthin A, Phillips A, Stegemöller E, Meyer J.",
+   "study_type": "randomised controlled trial",
+   "participants": 36,
+   "url": "https://doi.org/10.2196/97392",
+   "record_url": "https://europepmc.org/article/MED/42855145",
+   "doi": "10.2196/97392",
+   "pmid": "42855145",
+   "published": "2026-10-09",
+   "summary": "Randomised controlled trial with 36 participants, published in JMIR formative research in October 2026. The study's title: \"Feasibility, Acceptability, and Appropriateness of an 8-Week Supervised Aerobic Exercise Intervention for Adults With Epilepsy: Pilot Randomized Controlled Trial.\" Read the source for its methods and full results.",
+   "quote": "The results of this Phase IIb pilot study suggest that a supervised aerobic exercise intervention for adults with epilepsy is feasible, acceptable, and appropriate to implement among participants who enroll. Recruitment remains the primary challenge to progressing this line of…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Preliminary or pilot findings: needs confirming in larger studies."
+   ],
+   "why": "Staying consistent for months matters more than any single workout.",
+   "open_access": false,
+   "imported": "2026-10-17",
+   "link_checked": "2026-10-17",
+   "status": "auto-checked"
+  },
   {
    "id": "doi-10-1080-02640414-2026-2720309",
    "kind": "research",
@@ -1367,6 +1395,32 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-17T08:14:07Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 4 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 1 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 1,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
+   ]
+  },
   {
    "at": "2026-10-16T20:10:40Z",
    "sources": {
