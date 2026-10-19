@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-19T08:28:19Z",
- "checked": "2026-10-19T08:28:19Z",
+ "generated": "2026-10-19T20:18:30Z",
+ "checked": "2026-10-19T20:18:30Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,9 +11,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 5,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-technique": {
    "name": "Europe PMC",
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,9 +55,9 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 5,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-tech": {
    "name": "Europe PMC",
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,7 +97,7 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-19T08:28:19Z",
+   "last_success": "2026-10-19T20:18:30Z",
    "last_found": 6,
    "last_added": 0
   }
@@ -129,6 +129,63 @@
    "open_access": false,
    "imported": "2026-10-17",
    "link_checked": "2026-10-17",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-1590-0001-3765202620240672",
+   "kind": "research",
+   "category": "strength",
+   "title": "Time-restricted feeding with resistance training is not superior to conventional feeding for body composition and muscle strength: a systematic review and meta-analysis",
+   "source": "Anais da Academia Brasileira de Ciencias",
+   "source_title": "Time-restricted feeding with resistance training is not superior to conventional feeding for body composition and muscle strength: a systematic review and meta-analysis",
+   "via": "Europe PMC",
+   "authors": "Verdi AMOH, Soares JM, Andrade MJ, Mazur CE, Gonçalves DC.",
+   "study_type": "meta-analysis",
+   "participants": 120,
+   "url": "https://doi.org/10.1590/0001-3765202620240672",
+   "record_url": "https://europepmc.org/article/MED/42879592",
+   "doi": "10.1590/0001-3765202620240672",
+   "pmid": "42879592",
+   "published": "2026-10-09",
+   "summary": "Meta-analysis, published in Anais da Academia Brasileira de Ciencias in October 2026. The study's title: \"Time-restricted feeding with resistance training is not superior to conventional feeding for body composition and muscle strength: a systematic review and meta-analysis.\" Read the source for its methods and full results.",
+   "quote": "Contrary to the initial hypothesis, the findings do not provide statistically significant evidence that TRF increases fat-free mass.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Research like this shapes how training plans balance load, sets and reps.",
+   "open_access": false,
+   "imported": "2026-10-19",
+   "link_checked": "2026-10-19",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-7717-peerj-21807",
+   "kind": "research",
+   "category": "research",
+   "title": "Effects of high-intensity resistance training within concurrent training programs on athletic performance in elite athletes: a systematic review",
+   "source": "PeerJ",
+   "source_title": "Effects of high-intensity resistance training within concurrent training programs on athletic performance in elite athletes: a systematic review",
+   "via": "Europe PMC",
+   "authors": "Wang T, Ng YG, Amri S, Kamalden TF, Gao Z, Yuan Q.",
+   "study_type": "systematic review",
+   "participants": null,
+   "url": "https://doi.org/10.7717/peerj.21807",
+   "record_url": "https://europepmc.org/article/MED/42866183",
+   "doi": "10.7717/peerj.21807",
+   "pmid": "42866183",
+   "published": "2026-10-09",
+   "summary": "Systematic review, published in PeerJ in October 2026. The study's title: \"Effects of high-intensity resistance training within concurrent training programs on athletic performance in elite athletes: a systematic review.\" Read the source for its methods and full results.",
+   "quote": "The available evidence suggests that HIRT may be an effective training component for improving strength, power, and selected performance outcomes in elite athletes when integrated into concurrent sport-specific training programs. The strongest support was observed for maximal strength and neuromuscular…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Preliminary or pilot findings: needs confirming in larger studies.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "New training research is how coaching advice gets refined over time.",
+   "open_access": false,
+   "imported": "2026-10-19",
+   "link_checked": "2026-10-19",
    "status": "auto-checked"
   },
   {
@@ -1395,6 +1452,31 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-10-19T20:18:30Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 1 new",
+    "epmc-technique": "ok: 5 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 1 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 2,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Feasibility of High-Intensity Interval Exercise in Young Adult Survivo"
+   ]
+  },
   {
    "at": "2026-10-19T08:28:19Z",
    "sources": {
