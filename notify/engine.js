@@ -85,6 +85,13 @@ const EX_RAW = [
   ['row-erg','Rowing Machine','cardio','machine','Conditioning, Back','back',0,0,['Legs, then body, then arms','Reverse on the way back'],['bike','incline-walk'],0],
   ['incline-walk','Incline Treadmill Walk','cardio','machine','Conditioning','',0,0,['Brisk pace you can talk at','Do not hold the rails'],['bike','brisk-walk'],0],
   ['brisk-walk','Brisk Walk / Jog','cardio','bodyweight','Conditioning','',0,0,['Conversational pace','Build duration before speed'],['bike'],0],
+  // 5-Day Split extras
+  ['preacher-curl','Preacher Curl','biceps','barbell','Biceps','elbow',0.22,2.5,['Armpits snug on the top of the pad','Lower until the elbows are almost straight, under control','No bouncing at the bottom'],['bb-curl','db-curl','cable-curl'],0],
+  ['bb-curl-straight','Barbell Curl','biceps','barbell','Biceps, Forearms','elbow wrist',0.3,2.5,['Grip just outside the hips, elbows at your sides','Curl without leaning back','Lower slowly over 2 seconds'],['bb-curl','db-curl','cable-curl'],0],
+  ['adductor','Adductor Machine','adductor','machine','Inner thighs (adductors)','hip',0.6,5,['Sit tall against the back pad','Squeeze the pads together and pause','Open slowly; only as wide as is comfortable'],['split-squat','goblet-squat'],0],
+  ['lying-leg-curl','Lying Leg Curl','ham-iso','machine','Hamstrings','',0.3,2.5,['Pad just above the heels, knees just off the bench','Keep hips pressed into the bench','Curl up, pause, lower slowly'],['leg-curl','swiss-curl','nordic'],0],
+  ['rev-pec-deck','Reverse Pec Fly (machine)','rear-iso','machine','Rear delts, Upper back','',0.3,2.5,['Chest against the pad, handles at shoulder height','Sweep the arms back with soft elbows','Squeeze the shoulder blades, then return slowly'],['rear-fly','face-pull','band-pullapart'],0],
+  ['front-raise','Dumbbell Front Raise','delt-iso','dumbbell','Front delts','shoulder',0.07,1,['Thumbs up or palms down, slight bend in the elbows','Raise to shoulder height, no higher','No swinging: control the way down'],['lat-raise','db-ohp'],0],
   // Archery support (shoulder health, upper back, both-sides balance)
   ['band-er','Band External Rotation','prehab','bodyweight','Rotator cuff','',0,0,['Elbow tucked to your side, towel under the arm','Rotate out slowly, keep the elbow still','Equal reps on both arms'],['face-pull','band-pullapart'],0],
   ['ytw','Prone Y-T-W Raise','prehab','bodyweight','Lower traps, Rear delts','',0,0,['Lie face down on an incline bench or the floor','Thumbs up, lift into a Y, then T, then W','Small, slow and pain-free; no weight needed at first'],['band-pullapart','face-pull'],0],
@@ -1071,6 +1078,45 @@ function fuelPlan(S, date){
     total: feeds.reduce((a, f) => a + (f.option ? f.option.p : 0), 0) };
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { fuelPlan, fuelOption, fuelSettings, FUEL_OPTIONS, FUEL_SOURCES });
+/* ===== 5-Day Split: Chest & Triceps · Back & Biceps · Full Leg · Isolated Shoulder · Biceps & Triceps (no DOM) =====
+   Every exercise is 3 sets of 10-12 reps. Members pick which day to do each day; DrukFit suggests the next one. */
+const SPLIT_DAYS = [
+  { id:'split-1', n:1, name:'Chest & Triceps', color:'#ff7a1a', focus:'Chest, Triceps', ex:['bench','incline-bench','pec-deck','pushdown','oh-ext','skullcrusher'] },
+  { id:'split-2', n:2, name:'Back & Biceps', color:'#3cc2b6', focus:'Back, Biceps', ex:['bb-row','cable-row','lat-pulldown','preacher-curl','hammer-curl','bb-curl-straight'] },
+  { id:'split-3', n:3, name:'Full Leg', color:'#64a3ff', focus:'Quads, Hamstrings, Adductors', ex:['hack-squat','leg-ext','adductor','lying-leg-curl','leg-curl','leg-press'] },
+  { id:'split-4', n:4, name:'Isolated Shoulder', color:'#f5b83d', focus:'Front, side and rear delts', ex:['rev-pec-deck','front-raise','lat-raise','db-ohp'] },
+  { id:'split-5', n:5, name:'Biceps & Triceps', color:'#9d8cff', focus:'Arms', ex:['pushdown','oh-ext','skullcrusher','bb-curl-straight','hammer-curl','preacher-curl'] },
+];
+const SPLIT_NOTES = { 'pec-deck':'Flyes: machine, or cable fly if the machine is busy', 'db-ohp':'Military press, seated with dumbbells', 'cable-row':'Wide grip', 'lat-pulldown':'Wide grip', 'pushdown':'Rope attachment' };
+function splitDay(id){ return SPLIT_DAYS.find(d => d.id === id) || null; }
+function isSplitId(id){ return /^split-[1-5]$/.test(id || ''); }
+function splitWorkout(id, profile){
+  const d = splitDay(id); if (!d) return null;
+  return { id: d.id, tpl:'split', name:`Day ${d.n} · ${d.name}`, focus: d.focus, split: true,
+    exercises: d.ex.map(exId => { const ex = EXERCISES[exId]; return { exId, sets:3, repMin:10, repMax:12, rest: ex.compound ? 90 : 60, start: startingWeight(ex, profile || {}, 12) }; }) };
+}
+/* Which split days were done this week, and which day comes next (the one after the last split day done). */
+function splitStatus(S, date){
+  date = date || isoDate(); const ws = weekStart(date);
+  const done = S.sessions.filter(s => s.end && isSplitId(s.workoutId));
+  const week = new Set(done.filter(s => s.date >= ws && s.date <= addDays(ws, 6)).map(s => s.workoutId));
+  const last = done.length ? done[done.length - 1] : null;
+  const nextN = last ? (splitDay(last.workoutId).n % 5) + 1 : 1;
+  const chosen = ((S.daily || {})[date] || {}).split || null;
+  const doneToday = done.filter(s => s.date === date).map(s => s.workoutId);
+  return { week, last, next: 'split-' + nextN, chosen: isSplitId(chosen) ? chosen : null, doneToday, today: doneToday[0] || (isSplitId(chosen) ? chosen : null) };
+}
+/* Turn the split into the weekly plan (old plan kept so it can be restored). */
+function splitPlan(prevPlan, profile){
+  const days = prevPlan && prevPlan.trainDays && prevPlan.trainDays.length === 5 ? prevPlan.trainDays.slice() : [1,2,3,4,5];
+  const prev = prevPlan && prevPlan.split === 'drukfit5' ? prevPlan.prev : prevPlan;
+  return { split:'drukfit5', splitLabel:'5-Day Split', workouts: SPLIT_DAYS.map(d => splitWorkout(d.id, profile)), rotation: SPLIT_DAYS.map(d => d.id), trainDays: days, pointer: 0, generatedAt: Date.now(), version: 1, prev: prev || null };
+}
+function splitLimitNotes(id, profile){
+  const lim = new Set(profile && profile.limitations || []); const d = splitDay(id); if (!d || !lim.size) return [];
+  return d.ex.filter(x => (EXERCISES[x].stress || []).some(t => lim.has(t))).map(x => EXERCISES[x]);
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { SPLIT_DAYS, splitWorkout, splitStatus, splitPlan, splitDay, isSplitId, splitLimitNotes });
 /* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
    Completion is only ever derived from what the member actually recorded, or from an explicit
    tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
@@ -1113,8 +1159,11 @@ function dayContext(S, date){
   let plannedId = null;
   if (date === today){ const tp = todayPlan(S); plannedId = tp && tp.workoutId; }
   else if (date > today){ const p = projectSchedule(S, today, daysBetween(today, date) + 1).find(x => x.date === date); plannedId = p && p.workoutId; }
-  const training = !!plannedId || lifting.length > 0 || (date < today && isTrainingDay(S, date));
-  const planned = plannedId ? workoutById(S, plannedId) : (lifting[0] && workoutById(S, lifting[0].workoutId));
+  const chosenSplit = typeof isSplitId === 'function' && isSplitId(((S.daily || {})[date] || {}).split) ? S.daily[date].split : null;
+  const training = !!plannedId || !!chosenSplit || lifting.length > 0 || (date < today && isTrainingDay(S, date));
+  let planned = plannedId ? workoutById(S, plannedId) : (lifting[0] && workoutById(S, lifting[0].workoutId));
+  if (chosenSplit && !lifting.length) planned = workoutById(S, chosenSplit) || splitWorkout(chosenSplit, S.profile);
+  if (!planned && lifting[0] && typeof isSplitId === 'function' && isSplitId(lifting[0].workoutId)) planned = splitWorkout(lifting[0].workoutId, S.profile);
   const P = S.profile || {}; const T = S.profile ? nutritionTargets(P) : null;
   const fd = (S.food || {})[date] || {}; const ft = foodDayTotals(fd); const entries = (fd.entries || []).length;
   const hab = (S.habits || {})[date] || {};

@@ -1,5 +1,5 @@
-/* DrukFit service worker: offline-first app shell. Version c46b6cc75d */
-const CACHE = 'drukfit-c46b6cc75d';
+/* DrukFit service worker: offline-first app shell. Version d1798c91fd */
+const CACHE = 'drukfit-d1798c91fd';
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/favicon-32.png", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/maskable-512.png"];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL.map(u => new Request(u, { cache:'reload' }))))); });
 const FONTS = 'drukfit-fonts'; // kept across updates so the app's fonts never disappear after an update

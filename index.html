@@ -533,6 +533,41 @@ span.dtick.locked{ color:var(--faint); border-style:dashed; }
 .fuel-foods li{ display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed var(--line); padding-bottom:3px; }
 .supp a{ display:inline-flex; gap:5px; align-items:center; margin-top:6px; } .supp a svg{ width:13px; height:13px; }
 @media (max-width:400px){ .fuel-item{ grid-template-columns:40px 12px 1fr; gap:6px; } .fuel-time{ font-size:.78rem; } }
+
+/* ---- 5-Day Split ---- */
+.split-head h2{ font-size:1.6rem; }
+.split-week{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.split-week i{ width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-weight:700; font-size:.85rem; border:2px solid color-mix(in srgb,var(--sc) 55%,var(--line)); color:var(--muted); }
+.split-week i.on{ background:var(--sc); border-color:var(--sc); color:#111; } .split-week i svg{ width:15px; height:15px; }
+.split-days{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(200px,1fr); gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; margin-inline:-16px; padding:2px 16px 6px; scrollbar-width:none; }
+.split-days::-webkit-scrollbar{ display:none; }
+.split-day{ scroll-snap-align:start; display:flex; gap:10px; align-items:center; text-align:left; padding:10px; border-radius:16px; border:1px solid var(--line); background:var(--surface); color:inherit; cursor:pointer; position:relative; overflow:hidden; box-shadow:var(--shadow); }
+.split-day::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--sc); }
+.split-day.on{ border-color:var(--sc); background:color-mix(in srgb,var(--sc) 12%,var(--surface)); }
+.split-thumb{ width:52px; height:64px; border-radius:10px; object-fit:cover; flex:none; background:#fff; }
+.split-thumb.ph{ display:grid; place-items:center; background:color-mix(in srgb,var(--sc) 22%,var(--raised)); color:var(--sc); font-family:var(--f-display); font-size:1.6rem; font-weight:700; }
+.split-day-b{ display:flex; flex-direction:column; gap:2px; min-width:0; } .split-day-b b{ font-family:var(--f-display); font-size:1.1rem; line-height:1.1; }
+.split-tags{ display:flex; gap:4px; flex-wrap:wrap; } .split-tags em{ font-style:normal; font-size:.66rem; font-weight:700; padding:2px 6px; border-radius:6px; background:var(--raised); color:var(--muted); }
+.split-tags em.good{ background:var(--good-soft); color:var(--good); } .split-tags em.acc{ background:var(--accent-soft); color:var(--accent); }
+.split-detail{ display:grid; gap:14px; grid-template-columns:1fr; align-items:start; }
+@media (min-width:900px){ .split-detail{ grid-template-columns:minmax(280px,.9fr) 1.1fr; } }
+.split-pic-col{ display:flex; flex-direction:column; gap:8px; }
+.split-pic{ display:block; width:100%; padding:0; border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#fff; cursor:zoom-in; box-shadow:var(--shadow); }
+.split-pic img{ display:block; width:100%; height:auto; }
+.split-pic.empty{ cursor:pointer; background:radial-gradient(120% 100% at 100% 0%, color-mix(in srgb,var(--sc) 26%,transparent), transparent 60%), var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; aspect-ratio:4/3; text-align:center; padding:20px; }
+.split-pic-n{ font-family:var(--f-display); font-size:.9rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sc); font-weight:700; }
+.split-pic-t{ font-family:var(--f-display); font-size:1.9rem; font-weight:700; text-transform:uppercase; line-height:1; }
+.split-ex{ border-top:4px solid var(--sc); }
+.split-list{ list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; }
+.split-list li{ display:flex; gap:12px; align-items:center; padding:11px 0; border-top:1px solid var(--line); }
+.split-num{ width:30px; height:30px; border-radius:50%; flex:none; display:grid; place-items:center; font-weight:700; font-size:.85rem; background:color-mix(in srgb,var(--sc) 18%,var(--raised)); color:var(--sc); }
+.split-name{ background:none; border:0; padding:0; text-align:left; cursor:pointer; color:inherit; font:inherit; font-weight:600; }
+.split-name:hover{ color:var(--sc); }
+.split-dose{ display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex:none; text-align:right; }
+.split-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.split-full{ width:100%; height:auto; border-radius:12px; background:#fff; }
+.split-mini .split-chips{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.split-mini .dchip.on{ background:var(--sc); border-color:var(--sc); color:#111; }
 </style>
 <script>window.DRUKFIT_CONFIG = {"url": "https://nwfsnitpqcsnhywktoyb.supabase.co", "key": "sb_publishable_zA4RIin3AerqSxf0jyn6Ag_YwDbEIJ-", "vapid": "BN6jXYP67cnZzPUrnmgTOTQomzqMLpxBmFCJ5zbWpYo-frDKkHj7jp9XaKhSQWFp9dkR09pYjFedHKgbVLrNpNs"};</script></head><body><div id="app"></div>
 <script>
@@ -624,6 +659,13 @@ const EX_RAW = [
   ['row-erg','Rowing Machine','cardio','machine','Conditioning, Back','back',0,0,['Legs, then body, then arms','Reverse on the way back'],['bike','incline-walk'],0],
   ['incline-walk','Incline Treadmill Walk','cardio','machine','Conditioning','',0,0,['Brisk pace you can talk at','Do not hold the rails'],['bike','brisk-walk'],0],
   ['brisk-walk','Brisk Walk / Jog','cardio','bodyweight','Conditioning','',0,0,['Conversational pace','Build duration before speed'],['bike'],0],
+  // 5-Day Split extras
+  ['preacher-curl','Preacher Curl','biceps','barbell','Biceps','elbow',0.22,2.5,['Armpits snug on the top of the pad','Lower until the elbows are almost straight, under control','No bouncing at the bottom'],['bb-curl','db-curl','cable-curl'],0],
+  ['bb-curl-straight','Barbell Curl','biceps','barbell','Biceps, Forearms','elbow wrist',0.3,2.5,['Grip just outside the hips, elbows at your sides','Curl without leaning back','Lower slowly over 2 seconds'],['bb-curl','db-curl','cable-curl'],0],
+  ['adductor','Adductor Machine','adductor','machine','Inner thighs (adductors)','hip',0.6,5,['Sit tall against the back pad','Squeeze the pads together and pause','Open slowly; only as wide as is comfortable'],['split-squat','goblet-squat'],0],
+  ['lying-leg-curl','Lying Leg Curl','ham-iso','machine','Hamstrings','',0.3,2.5,['Pad just above the heels, knees just off the bench','Keep hips pressed into the bench','Curl up, pause, lower slowly'],['leg-curl','swiss-curl','nordic'],0],
+  ['rev-pec-deck','Reverse Pec Fly (machine)','rear-iso','machine','Rear delts, Upper back','',0.3,2.5,['Chest against the pad, handles at shoulder height','Sweep the arms back with soft elbows','Squeeze the shoulder blades, then return slowly'],['rear-fly','face-pull','band-pullapart'],0],
+  ['front-raise','Dumbbell Front Raise','delt-iso','dumbbell','Front delts','shoulder',0.07,1,['Thumbs up or palms down, slight bend in the elbows','Raise to shoulder height, no higher','No swinging: control the way down'],['lat-raise','db-ohp'],0],
   // Archery support (shoulder health, upper back, both-sides balance)
   ['band-er','Band External Rotation','prehab','bodyweight','Rotator cuff','',0,0,['Elbow tucked to your side, towel under the arm','Rotate out slowly, keep the elbow still','Equal reps on both arms'],['face-pull','band-pullapart'],0],
   ['ytw','Prone Y-T-W Raise','prehab','bodyweight','Lower traps, Rear delts','',0,0,['Lie face down on an incline bench or the floor','Thumbs up, lift into a Y, then T, then W','Small, slow and pain-free; no weight needed at first'],['band-pullapart','face-pull'],0],
@@ -1610,6 +1652,45 @@ function fuelPlan(S, date){
     total: feeds.reduce((a, f) => a + (f.option ? f.option.p : 0), 0) };
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { fuelPlan, fuelOption, fuelSettings, FUEL_OPTIONS, FUEL_SOURCES });
+/* ===== 5-Day Split: Chest & Triceps · Back & Biceps · Full Leg · Isolated Shoulder · Biceps & Triceps (no DOM) =====
+   Every exercise is 3 sets of 10-12 reps. Members pick which day to do each day; DrukFit suggests the next one. */
+const SPLIT_DAYS = [
+  { id:'split-1', n:1, name:'Chest & Triceps', color:'#ff7a1a', focus:'Chest, Triceps', ex:['bench','incline-bench','pec-deck','pushdown','oh-ext','skullcrusher'] },
+  { id:'split-2', n:2, name:'Back & Biceps', color:'#3cc2b6', focus:'Back, Biceps', ex:['bb-row','cable-row','lat-pulldown','preacher-curl','hammer-curl','bb-curl-straight'] },
+  { id:'split-3', n:3, name:'Full Leg', color:'#64a3ff', focus:'Quads, Hamstrings, Adductors', ex:['hack-squat','leg-ext','adductor','lying-leg-curl','leg-curl','leg-press'] },
+  { id:'split-4', n:4, name:'Isolated Shoulder', color:'#f5b83d', focus:'Front, side and rear delts', ex:['rev-pec-deck','front-raise','lat-raise','db-ohp'] },
+  { id:'split-5', n:5, name:'Biceps & Triceps', color:'#9d8cff', focus:'Arms', ex:['pushdown','oh-ext','skullcrusher','bb-curl-straight','hammer-curl','preacher-curl'] },
+];
+const SPLIT_NOTES = { 'pec-deck':'Flyes: machine, or cable fly if the machine is busy', 'db-ohp':'Military press, seated with dumbbells', 'cable-row':'Wide grip', 'lat-pulldown':'Wide grip', 'pushdown':'Rope attachment' };
+function splitDay(id){ return SPLIT_DAYS.find(d => d.id === id) || null; }
+function isSplitId(id){ return /^split-[1-5]$/.test(id || ''); }
+function splitWorkout(id, profile){
+  const d = splitDay(id); if (!d) return null;
+  return { id: d.id, tpl:'split', name:`Day ${d.n} · ${d.name}`, focus: d.focus, split: true,
+    exercises: d.ex.map(exId => { const ex = EXERCISES[exId]; return { exId, sets:3, repMin:10, repMax:12, rest: ex.compound ? 90 : 60, start: startingWeight(ex, profile || {}, 12) }; }) };
+}
+/* Which split days were done this week, and which day comes next (the one after the last split day done). */
+function splitStatus(S, date){
+  date = date || isoDate(); const ws = weekStart(date);
+  const done = S.sessions.filter(s => s.end && isSplitId(s.workoutId));
+  const week = new Set(done.filter(s => s.date >= ws && s.date <= addDays(ws, 6)).map(s => s.workoutId));
+  const last = done.length ? done[done.length - 1] : null;
+  const nextN = last ? (splitDay(last.workoutId).n % 5) + 1 : 1;
+  const chosen = ((S.daily || {})[date] || {}).split || null;
+  const doneToday = done.filter(s => s.date === date).map(s => s.workoutId);
+  return { week, last, next: 'split-' + nextN, chosen: isSplitId(chosen) ? chosen : null, doneToday, today: doneToday[0] || (isSplitId(chosen) ? chosen : null) };
+}
+/* Turn the split into the weekly plan (old plan kept so it can be restored). */
+function splitPlan(prevPlan, profile){
+  const days = prevPlan && prevPlan.trainDays && prevPlan.trainDays.length === 5 ? prevPlan.trainDays.slice() : [1,2,3,4,5];
+  const prev = prevPlan && prevPlan.split === 'drukfit5' ? prevPlan.prev : prevPlan;
+  return { split:'drukfit5', splitLabel:'5-Day Split', workouts: SPLIT_DAYS.map(d => splitWorkout(d.id, profile)), rotation: SPLIT_DAYS.map(d => d.id), trainDays: days, pointer: 0, generatedAt: Date.now(), version: 1, prev: prev || null };
+}
+function splitLimitNotes(id, profile){
+  const lim = new Set(profile && profile.limitations || []); const d = splitDay(id); if (!d || !lim.size) return [];
+  return d.ex.filter(x => (EXERCISES[x].stress || []).some(t => lim.has(t))).map(x => EXERCISES[x]);
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { SPLIT_DAYS, splitWorkout, splitStatus, splitPlan, splitDay, isSplitId, splitLimitNotes });
 /* ===== DrukFit Daily: goals, checklist, challenges, streaks, feed ranking (no DOM) =====
    Completion is only ever derived from what the member actually recorded, or from an explicit
    tap ("Mark as read", "I did this", manual check). Opening a page never completes anything. */
@@ -1652,8 +1733,11 @@ function dayContext(S, date){
   let plannedId = null;
   if (date === today){ const tp = todayPlan(S); plannedId = tp && tp.workoutId; }
   else if (date > today){ const p = projectSchedule(S, today, daysBetween(today, date) + 1).find(x => x.date === date); plannedId = p && p.workoutId; }
-  const training = !!plannedId || lifting.length > 0 || (date < today && isTrainingDay(S, date));
-  const planned = plannedId ? workoutById(S, plannedId) : (lifting[0] && workoutById(S, lifting[0].workoutId));
+  const chosenSplit = typeof isSplitId === 'function' && isSplitId(((S.daily || {})[date] || {}).split) ? S.daily[date].split : null;
+  const training = !!plannedId || !!chosenSplit || lifting.length > 0 || (date < today && isTrainingDay(S, date));
+  let planned = plannedId ? workoutById(S, plannedId) : (lifting[0] && workoutById(S, lifting[0].workoutId));
+  if (chosenSplit && !lifting.length) planned = workoutById(S, chosenSplit) || splitWorkout(chosenSplit, S.profile);
+  if (!planned && lifting[0] && typeof isSplitId === 'function' && isSplitId(lifting[0].workoutId)) planned = splitWorkout(lifting[0].workoutId, S.profile);
   const P = S.profile || {}; const T = S.profile ? nutritionTargets(P) : null;
   const fd = (S.food || {})[date] || {}; const ft = foodDayTotals(fd); const entries = (fd.entries || []).length;
   const hab = (S.habits || {})[date] || {};
@@ -2319,10 +2403,10 @@ function addBodyEntry(e){ const b = JSON.parse(JSON.stringify(S.body)); b.entrie
 /* ===== My Workouts ===== */
 VIEWS.workouts = () => {
   const tab = sub.wk || 'week';
-  const tabs = [['week','This week'],['plan','Plan'],['cal','Calendar'],['hist','History'],['lib','Exercises']];
+  const tabs = [['week','This week'],['split','5-Day Split'],['plan','Plan'],['cal','Calendar'],['hist','History'],['lib','Exercises']];
   const seg = `<div class="seg" role="tablist">${tabs.map(([k,l]) => `<button role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" data-act="sub" data-key="wk" data-val="${k}">${l}</button>`).join('')}</div>`;
   let body = '';
-  if (tab === 'week') body = wkWeek(); else if (tab === 'plan') body = wkPlan(); else if (tab === 'cal') body = wkCal(); else if (tab === 'hist') body = wkHist(); else body = wkLib();
+  if (tab === 'week') body = wkWeek(); else if (tab === 'plan') body = wkPlan(); else if (tab === 'cal') body = wkCal(); else if (tab === 'split') body = splitView(); else if (tab === 'hist') body = wkHist(); else body = wkLib();
   return topbar('My Workouts') + `<div class="stack">${seg}${body}</div>`;
 };
 function wkWeek(){
@@ -2436,7 +2520,7 @@ ACTIONS['ex-info'] = el => {
 const MOBILITY = { id:'mobility', name:'Mobility & Recovery', focus:'Active recovery', exercises:[{ exId:'mobility', sets:1, repMin:15, repMax:15, rest:0, start:0 }], cardio:{ exId:'brisk-walk', minutes:15 } };
 function startWorkout(wid){
   if (S.active){ go('train'); return; }
-  const w = wid === 'mobility' ? MOBILITY : wid === 'empty' ? { id:'empty', name:'Custom workout', focus:'', exercises:[] } : workoutById(S, wid);
+  const w = wid === 'mobility' ? MOBILITY : wid === 'empty' ? { id:'empty', name:'Custom workout', focus:'', exercises:[] } : (workoutById(S, wid) || (isSplitId(wid) ? splitWorkout(wid, S.profile) : null));
   if (!w) return;
   const deload = S.sched.deloadWeek === weekStart(isoDate());
   const sess = { id:uid(), workoutId:w.id, name:w.name + (deload ? ' (deload)' : ''), date:isoDate(), start:Date.now(), pausedMs:0, pausedAt:null, deload, warmup: w.exercises.length ? warmupFor(w) : [], warmDone:false,
@@ -2464,6 +2548,7 @@ VIEWS.train = () => {
     const tp = todayPlan(S); const rec = tp && tp.workoutId;
     return topbar('Start Workout') + `<div class="stack">
       ${rec ? `<div class="hero stack"><div class="eyebrow">Recommended today</div><h2>${esc(workoutById(S, tp.workoutId).name)}</h2><p class="muted">${esc(workoutById(S, tp.workoutId).focus)} · ~${estimateDuration(workoutById(S, tp.workoutId))} min</p><div><button class="btn primary big" data-act="start-workout" data-wid="${tp.workoutId}">${I('play')} Start</button></div></div>` : `<div class="note">${I('moon')}<div>Today is a rest day in your plan. You can still train, or do the mobility flow.</div></div>`}
+      ${splitTrainCard()}
       <div class="section-h"><h3>Or choose a workout</h3></div>
       <div class="grid">${S.plan.workouts.filter(w => w.id !== (rec && tp.workoutId)).map(w => `<div class="card"><h3 style="margin:0">${esc(w.name)}</h3><p class="small muted" style="margin:4px 0 12px">${esc(w.focus)} · ${w.exercises.length} exercises · ~${estimateDuration(w)} min</p><button class="btn block" data-act="start-workout" data-wid="${w.id}">Start ${esc(w.name)}</button></div>`).join('')}
         <div class="card"><h3 style="margin:0">Mobility & recovery</h3><p class="small muted" style="margin:4px 0 12px">15 min flow plus an easy walk</p><button class="btn block" data-act="start-workout" data-wid="mobility">Start mobility</button></div>
@@ -2559,7 +2644,7 @@ function finishWorkout(){
   delete a.rest; a.volume = sessionVolume(a); a.avgRpe = avg(a.exercises.flatMap(e => e.sets.map(s => s.rpe)));
   a.prs = detectPRs(S, a);
   saveSession(a);
-  if (S.plan){ const idx = S.plan.rotation.indexOf(a.workoutId); if (idx >= 0) saveDoc('plan', { ...S.plan, pointer: S.plan.pointer + 1 }); }
+  if (S.plan){ const idx = S.plan.rotation.indexOf(a.workoutId); if (idx >= 0) saveDoc('plan', { ...S.plan, pointer: S.plan.split === 'drukfit5' ? idx + 1 : S.plan.pointer + 1 }); }
   saveDoc('active', {}); releaseWake(); go('summary/' + a.id);
 }
 VIEWS.summary = id => {
@@ -2943,13 +3028,14 @@ VIEWS.dashboard = () => {
   const daysLeft = P.targetDate ? daysBetween(isoDate(), P.targetDate) : null;
   const nds = nudges();
   let hero;
+  const csp = splitStatus(S); const pickW = csp.chosen && !csp.doneToday.length ? (workoutById(S, csp.chosen) || splitWorkout(csp.chosen, P)) : null;
   if (S.active){
     hero = `<div class="hero2"><div class="eyebrow">In progress · ${mmss(elapsed(S.active))}</div><h2>${esc(S.active.name)}</h2><p class="muted">${S.active.exercises.filter(e => e.sets.length && e.sets.every(s => s.done)).length} of ${S.active.exercises.length} exercises done</p><a class="btn primary big" href="#train">${I('play')} Resume workout</a></div>`;
-  } else if (tp && tp.workoutId){
-    const w = workoutById(S, tp.workoutId);
+  } else if (pickW || (tp && tp.workoutId && !(tp.done && tp.done.length))){
+    const w = pickW || workoutById(S, tp.workoutId);
     hero = `<div class="hero2"><div class="hero-mark" aria-hidden="true">${logoSvg(150)}</div><div class="eyebrow">Today's workout</div><h2>${esc(w.name)}</h2><p class="muted">${esc(w.focus)} · ${w.exercises.length} exercises · ~${estimateDuration(w)} min</p>
       <div class="exchips">${w.exercises.slice(0, 5).map(e => `<span>${esc(EXERCISES[e.exId].name)}</span>`).join('')}${w.exercises.length > 5 ? `<span>+${w.exercises.length - 5}</span>` : ''}</div>
-      <button class="btn primary big" data-act="start-workout" data-wid="${w.id}">${I('play')} Start workout</button></div>`;
+      <div class="row"><button class="btn primary big" data-act="start-workout" data-wid="${w.id}">${I('play')} Start workout</button><button class="btn ghost" data-act="split-open">${pickW ? 'Change day' : '5-Day Split'}</button></div></div>`;
   } else if (tp && tp.done && tp.done.length){
     const s = tp.done[0];
     hero = `<div class="hero2 done"><div class="eyebrow">Today · complete ✓</div><h2>${esc(s.name)}</h2><p class="muted">${s.durationMin} min · ${fmtNum(s.volume)} kg volume${(s.prs||[]).length ? ` · ${s.prs.length} PR${s.prs.length > 1 ? 's' : ''}` : ''}</p><a class="btn big" href="#summary/${s.id}">See summary</a></div>`;
@@ -3837,6 +3923,84 @@ ACTIONS['fuel-supps'] = () => {
     <button class="btn primary" data-act="close-sheet">Done</button></div>`);
 };
 CHANGES['supp-on'] = el => { const cfg = fuelSettings(S.profile); saveFuel({ supps: { ...cfg.supps, [el.dataset.id]: el.checked } }); render(); };
+/* ===== 5-Day Split: choose today's day, see the exercises and your own picture for each day ===== */
+const SPLIT_PIC = id => 'splitday' + id.split('-')[1];
+const splitPics = () => Store.get('splitpics') || {};
+function splitLast(exId){
+  const h = exerciseHistory(S, exId)[0]; if (!h) return null;
+  const best = (h.sets || []).filter(s => s.done).sort((a, b) => (b.w || 0) - (a.w || 0) || b.r - a.r)[0];
+  return best ? { w: best.w, r: best.r, date: h.date } : null;
+}
+function splitPicBox(d, big){
+  const has = !!splitPics()[d.id];
+  if (has) return `<button class="split-pic ${big ? 'big' : ''}" data-act="split-view" data-id="${d.id}" aria-label="View the Day ${d.n} picture full screen"><img data-photo="${SPLIT_PIC(d.id)}" alt="Day ${d.n}: ${esc(d.name)} exercise guide"></button>`;
+  return `<label class="split-pic empty ${big ? 'big' : ''}" style="--sc:${d.color}"><span class="split-pic-n">Day ${d.n}</span><span class="split-pic-t">${esc(d.name)}</span>
+    <span class="btn sm">${I('camera')} Add your picture for this day</span><span class="tiny faint">Saved privately to your account</span>
+    <input type="file" accept="image/*" hidden data-chg="split-pic" data-id="${d.id}"></label>`;
+}
+function splitView(){
+  const st = splitStatus(S); const sel = splitDay(sub.splitSel) || splitDay(st.today) || splitDay(st.next);
+  const w = splitWorkout(sel.id, S.profile); const pics = splitPics(); const lim = splitLimitNotes(sel.id, S.profile);
+  const isPlan = S.plan && S.plan.split === 'drukfit5'; const doneToday = st.doneToday.includes(sel.id); const chosen = st.chosen === sel.id;
+  after(() => document.querySelectorAll('img[data-photo^="splitday"]').forEach(async img => { const src = await Store.getPhoto(img.dataset.photo); if (src) img.src = src; }));
+  return `<section class="card split-head"><div class="between"><div><span class="eyebrow">${I('dumbbell')} 5-Day Split</span><h2 style="margin:4px 0 2px">Choose today's workout</h2>
+      <p class="small muted">Every exercise is 3 sets of 10-12 reps. DrukFit suggests the next day in order, but you can pick any day.</p></div>
+      <div class="split-week" aria-label="Split days done this week">${SPLIT_DAYS.map(d => `<i class="${st.week.has(d.id) ? 'on' : ''}" style="--sc:${d.color}" title="Day ${d.n}${st.week.has(d.id) ? ': done this week' : ''}">${st.week.has(d.id) ? I('check') : d.n}</i>`).join('')}<span class="tiny muted">${st.week.size} of 5 this week</span></div></div></section>
+    <div class="split-days" role="tablist" aria-label="Split days">${SPLIT_DAYS.map(d => `<button role="tab" aria-selected="${d.id === sel.id}" class="split-day ${d.id === sel.id ? 'on' : ''}" style="--sc:${d.color}" data-act="split-sel" data-id="${d.id}">
+        ${pics[d.id] ? `<img data-photo="${SPLIT_PIC(d.id)}" alt="" class="split-thumb">` : `<span class="split-thumb ph">${d.n}</span>`}
+        <span class="split-day-b"><span class="tiny faint">Day ${d.n}</span><b>${esc(d.name)}</b><span class="split-tags">${st.doneToday.includes(d.id) ? '<em class="good">Done today</em>' : st.chosen === d.id ? '<em class="acc">Today</em>' : d.id === st.next ? '<em>Next</em>' : ''}${st.week.has(d.id) && !st.doneToday.includes(d.id) ? '<em class="good">✓ This week</em>' : ''}</span></span></button>`).join('')}</div>
+    <section class="split-detail" style="--sc:${sel.color}">
+      <div class="split-pic-col">${splitPicBox(sel, true)}
+        ${pics[sel.id] ? `<div class="row" style="justify-content:center"><label class="btn sm ghost" style="cursor:pointer">${I('camera')} Change picture<input type="file" accept="image/*" hidden data-chg="split-pic" data-id="${sel.id}"></label><button class="btn sm ghost" data-act="split-pic-del" data-id="${sel.id}">${I('trash')} Remove</button></div>` : ''}</div>
+      <div class="card split-ex"><div class="between"><div><span class="eyebrow" style="color:var(--sc)">Day ${sel.n}</span><h3 style="margin:2px 0 0;font-size:1.5rem">${esc(sel.name)}</h3><div class="small muted">${w.exercises.length} exercises · 3 × 10-12 · about ${estimateDuration(w)} min</div></div>
+        ${doneToday ? `<span class="chip good">${I('check')} Done today</span>` : chosen ? `<span class="chip accent">Today's pick</span>` : ''}</div>
+        ${lim.length ? `<div class="note warn" style="margin-top:10px">${I('info')}<div class="small">You've marked areas to protect. Go light and pain-free on ${esc(lim.map(x => x.name).join(', '))}, or tap an exercise to see alternatives.</div></div>` : ''}
+        <ol class="split-list">${w.exercises.map((e, i) => { const ex = EXERCISES[e.exId]; const last = splitLast(e.exId);
+          return `<li><span class="split-num">${i + 1}</span><div class="grow"><button class="t split-name" data-act="ex-info" data-ex="${e.exId}">${esc(ex.name)}</button>${SPLIT_NOTES[e.exId] ? `<div class="tiny muted">${esc(SPLIT_NOTES[e.exId])}</div>` : ''}<div class="tiny muted">${esc(ex.muscles)}</div></div>
+            <div class="split-dose"><b class="num">3 × 10-12</b><span class="tiny ${last ? '' : 'faint'} num">${last ? `Last ${fmtKg(last.w)} × ${last.r}` : e.start ? `Start ~${fmtKg(e.start)}` : 'Bodyweight'}</span></div></li>`; }).join('')}</ol>
+        <div class="split-actions">${S.active ? `<a class="btn primary big" href="#train">${I('play')} Resume your workout</a>` : `<button class="btn primary big" data-act="start-workout" data-wid="${sel.id}">${I('play')} Start Day ${sel.n} now</button>`}
+          ${doneToday ? '' : chosen ? `<button class="btn ghost" data-act="split-pick" data-id="">Unpick for today</button>` : `<button class="btn ghost" data-act="split-pick" data-id="${sel.id}">${I('cal')} Pick for today</button>`}</div>
+        <p class="tiny faint" style="margin-top:8px">Weights come from your last session, or a cautious estimate the first time. Leave 1-3 reps in the tank and keep every rep pain-free.</p></div>
+    </section>
+    <section class="card"><label class="li" style="cursor:pointer;border-top:0;padding:0"><div class="grow"><div class="t">Use the 5-Day Split as my weekly plan</div>
+      <div class="small muted">${isPlan ? `On. Training days: ${S.plan.trainDays.map(d => DAY_NAMES[d]).join(', ')}. Turn off to go back to your previous plan.` : 'Your schedule, reminders, reports and progress then follow Day 1 to Day 5 in order. Your current plan is kept so you can switch back.'}</div></div>
+      <input type="checkbox" class="dswitch" data-chg="split-plan" ${isPlan ? 'checked' : ''}></label></section>`;
+}
+ACTIONS['split-sel'] = el => { sub.splitSel = el.dataset.id; render(); };
+ACTIONS['split-pick'] = el => { saveDaily(isoDate(), { split: el.dataset.id || null }); toast(el.dataset.id ? `Day ${splitDay(el.dataset.id).n} picked for today` : 'Unpicked'); render(); };
+ACTIONS['split-view'] = async el => {
+  const d = splitDay(el.dataset.id); const src = await Store.getPhoto(SPLIT_PIC(d.id)); if (!src) return;
+  openSheet(`<div class="stack"><h2>Day ${d.n} · ${esc(d.name)}</h2><img class="split-full" src="${src}" alt="Day ${d.n} exercise guide"><button class="btn" data-act="close-sheet">Close</button></div>`);
+};
+CHANGES['split-pic'] = el => {
+  const file = el.files && el.files[0]; const id = el.dataset.id; if (!file) return;
+  if (!file.type.startsWith('image/')){ toast('Choose an image file'); return; }
+  const rd = new FileReader();
+  rd.onload = () => { const img = new Image(); img.onload = async () => {
+      const max = 1400, sc = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas'); c.width = Math.round(img.width * sc); c.height = Math.round(img.height * sc);
+      const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      const url = c.toDataURL('image/jpeg', 0.86); toast('Saving picture…');
+      delete Store.photoCache[SPLIT_PIC(id)];
+      if (!(await Store.putPhoto(SPLIT_PIC(id), url))){ toast('Couldn\'t save the picture. Storage may be full.'); return; }
+      saveDoc('splitpics', { ...splitPics(), [id]: { t: Date.now() } }); toast('Picture saved'); render(); };
+    img.onerror = () => toast('That image couldn\'t be read'); img.src = rd.result; };
+  rd.readAsDataURL(file);
+};
+ACTIONS['split-pic-del'] = el => confirmSheet('Remove this picture?', 'Only the picture is removed. The workout stays.', 'Remove', async () => { await Store.delPhoto(SPLIT_PIC(el.dataset.id)); const p = { ...splitPics() }; delete p[el.dataset.id]; saveDoc('splitpics', p); render(); });
+CHANGES['split-plan'] = el => {
+  const on = el.checked; el.checked = !on;
+  if (on) confirmSheet('Use the 5-Day Split as your plan?', 'Your schedule follows Day 1 to Day 5 in order on 5 training days a week. Your workout history stays exactly as it is, and your current plan is kept so you can switch back any time.', 'Use the split', () => { saveDoc('plan', splitPlan(S.plan, S.profile)); toast('5-Day Split is now your plan'); render(); });
+  else confirmSheet('Go back to your previous plan?', 'Your split workouts stay in history and you can still pick any split day here.', 'Switch back', () => { const prev = S.plan && S.plan.prev; saveDoc('plan', prev || generatePlan(S.profile)); toast('Back to your previous plan'); render(); });
+};
+/* Compact chooser for the Train screen */
+function splitTrainCard(){
+  const st = splitStatus(S); const d = splitDay(st.today || st.next);
+  return `<div class="card split-mini"><div class="between"><div><span class="eyebrow">${I('dumbbell')} 5-Day Split</span><div class="t" style="font-weight:700;margin-top:2px">${st.doneToday.length ? 'Done today: ' : st.chosen ? 'Today: ' : 'Next: '}Day ${d.n} · ${esc(d.name)}</div><div class="small muted">${st.week.size} of 5 days done this week</div></div>
+    <a class="btn sm ghost" href="#workouts" data-act="split-open">Choose a day</a></div>
+    <div class="split-chips">${SPLIT_DAYS.map(x => `<button class="dchip ${x.id === d.id ? 'on' : ''}" style="--sc:${x.color}" data-act="split-open" data-id="${x.id}">${st.week.has(x.id) ? '✓ ' : ''}${x.n} · ${esc(x.name)}</button>`).join('')}</div>
+    ${S.active ? '' : `<button class="btn primary block" style="margin-top:10px" data-act="start-workout" data-wid="${d.id}">${I('play')} Start Day ${d.n}</button>`}</div>`;
+}
+ACTIONS['split-open'] = el => { sub.wk = 'split'; if (el.dataset.id) sub.splitSel = el.dataset.id; go('workouts'); };
 /* ===== DrukFit accounts: Supabase Auth + Postgres (row-level security) + private Storage =====
    Active only when the page defines window.DRUKFIT_CONFIG = { url, key } (the website build).
    The key is Supabase's public "anon"/"publishable" key; access control is enforced by the
@@ -4377,7 +4541,7 @@ function legalView(which){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "c46b6cc75d";
+window.DRUKFIT_VERSION = "d1798c91fd";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
