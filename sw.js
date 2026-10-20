@@ -1,6 +1,6 @@
-/* DrukFit service worker: offline-first app shell. Version d1798c91fd */
-const CACHE = 'drukfit-d1798c91fd';
-const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/favicon-32.png", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/maskable-512.png"];
+/* DrukFit service worker: offline-first app shell. Version 0e5f81e9b1 */
+const CACHE = 'drukfit-0e5f81e9b1';
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/favicon-32.png", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/maskable-512.png", "./split/day1.jpg", "./split/day2.jpg", "./split/day3.jpg", "./split/day4.jpg", "./split/day5.jpg"];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL.map(u => new Request(u, { cache:'reload' }))))); });
 const FONTS = 'drukfit-fonts'; // kept across updates so the app's fonts never disappear after an update
 async function keepFonts(ks){ // move fonts saved by older versions into the permanent font cache

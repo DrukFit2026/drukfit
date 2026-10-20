@@ -544,7 +544,7 @@ span.dtick.locked{ color:var(--faint); border-style:dashed; }
 .split-day{ scroll-snap-align:start; display:flex; gap:10px; align-items:center; text-align:left; padding:10px; border-radius:16px; border:1px solid var(--line); background:var(--surface); color:inherit; cursor:pointer; position:relative; overflow:hidden; box-shadow:var(--shadow); }
 .split-day::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--sc); }
 .split-day.on{ border-color:var(--sc); background:color-mix(in srgb,var(--sc) 12%,var(--surface)); }
-.split-thumb{ width:52px; height:64px; border-radius:10px; object-fit:cover; flex:none; background:#fff; }
+.split-thumb{ width:52px; height:64px; border-radius:10px; object-fit:cover; object-position:top; flex:none; background:#fff; }
 .split-thumb.ph{ display:grid; place-items:center; background:color-mix(in srgb,var(--sc) 22%,var(--raised)); color:var(--sc); font-family:var(--f-display); font-size:1.6rem; font-weight:700; }
 .split-day-b{ display:flex; flex-direction:column; gap:2px; min-width:0; } .split-day-b b{ font-family:var(--f-display); font-size:1.1rem; line-height:1.1; }
 .split-tags{ display:flex; gap:4px; flex-wrap:wrap; } .split-tags em{ font-style:normal; font-size:.66rem; font-weight:700; padding:2px 6px; border-radius:6px; background:var(--raised); color:var(--muted); }
@@ -3924,7 +3924,9 @@ ACTIONS['fuel-supps'] = () => {
 };
 CHANGES['supp-on'] = el => { const cfg = fuelSettings(S.profile); saveFuel({ supps: { ...cfg.supps, [el.dataset.id]: el.checked } }); render(); };
 /* ===== 5-Day Split: choose today's day, see the exercises and your own picture for each day ===== */
+const SPLIT_BUILTIN = {"split-1": "split/day1.jpg?v=4d926b88", "split-2": "split/day2.jpg?v=9497ba86", "split-3": "split/day3.jpg?v=e0bc7127", "split-4": "split/day4.jpg?v=f60459d5", "split-5": "split/day5.jpg?v=b3e1c3e0"}; // DrukFit's own day pictures (designed by the owner)
 const SPLIT_PIC = id => 'splitday' + id.split('-')[1];
+const splitBuiltin = id => (typeof SPLIT_BUILTIN === 'object' && SPLIT_BUILTIN[id]) || null;
 const splitPics = () => Store.get('splitpics') || {};
 function splitLast(exId){
   const h = exerciseHistory(S, exId)[0]; if (!h) return null;
@@ -3933,6 +3935,7 @@ function splitLast(exId){
 }
 function splitPicBox(d, big){
   const has = !!splitPics()[d.id];
+  if (!has && splitBuiltin(d.id)) return `<button class="split-pic ${big ? 'big' : ''}" data-act="split-view" data-id="${d.id}" aria-label="View the Day ${d.n} picture full screen"><img src="${splitBuiltin(d.id)}" alt="Day ${d.n}: ${esc(d.name)}: ${esc(splitDay(d.id).ex.map(x => EXERCISES[x].name).join(', '))}, 3 sets of 10 to 12" loading="lazy" decoding="async"></button>`;
   if (has) return `<button class="split-pic ${big ? 'big' : ''}" data-act="split-view" data-id="${d.id}" aria-label="View the Day ${d.n} picture full screen"><img data-photo="${SPLIT_PIC(d.id)}" alt="Day ${d.n}: ${esc(d.name)} exercise guide"></button>`;
   return `<label class="split-pic empty ${big ? 'big' : ''}" style="--sc:${d.color}"><span class="split-pic-n">Day ${d.n}</span><span class="split-pic-t">${esc(d.name)}</span>
     <span class="btn sm">${I('camera')} Add your picture for this day</span><span class="tiny faint">Saved privately to your account</span>
@@ -3947,11 +3950,11 @@ function splitView(){
       <p class="small muted">Every exercise is 3 sets of 10-12 reps. DrukFit suggests the next day in order, but you can pick any day.</p></div>
       <div class="split-week" aria-label="Split days done this week">${SPLIT_DAYS.map(d => `<i class="${st.week.has(d.id) ? 'on' : ''}" style="--sc:${d.color}" title="Day ${d.n}${st.week.has(d.id) ? ': done this week' : ''}">${st.week.has(d.id) ? I('check') : d.n}</i>`).join('')}<span class="tiny muted">${st.week.size} of 5 this week</span></div></div></section>
     <div class="split-days" role="tablist" aria-label="Split days">${SPLIT_DAYS.map(d => `<button role="tab" aria-selected="${d.id === sel.id}" class="split-day ${d.id === sel.id ? 'on' : ''}" style="--sc:${d.color}" data-act="split-sel" data-id="${d.id}">
-        ${pics[d.id] ? `<img data-photo="${SPLIT_PIC(d.id)}" alt="" class="split-thumb">` : `<span class="split-thumb ph">${d.n}</span>`}
+        ${pics[d.id] ? `<img data-photo="${SPLIT_PIC(d.id)}" alt="" class="split-thumb">` : splitBuiltin(d.id) ? `<img src="${splitBuiltin(d.id)}" alt="" class="split-thumb" loading="lazy" decoding="async">` : `<span class="split-thumb ph">${d.n}</span>`}
         <span class="split-day-b"><span class="tiny faint">Day ${d.n}</span><b>${esc(d.name)}</b><span class="split-tags">${st.doneToday.includes(d.id) ? '<em class="good">Done today</em>' : st.chosen === d.id ? '<em class="acc">Today</em>' : d.id === st.next ? '<em>Next</em>' : ''}${st.week.has(d.id) && !st.doneToday.includes(d.id) ? '<em class="good">✓ This week</em>' : ''}</span></span></button>`).join('')}</div>
     <section class="split-detail" style="--sc:${sel.color}">
       <div class="split-pic-col">${splitPicBox(sel, true)}
-        ${pics[sel.id] ? `<div class="row" style="justify-content:center"><label class="btn sm ghost" style="cursor:pointer">${I('camera')} Change picture<input type="file" accept="image/*" hidden data-chg="split-pic" data-id="${sel.id}"></label><button class="btn sm ghost" data-act="split-pic-del" data-id="${sel.id}">${I('trash')} Remove</button></div>` : ''}</div>
+        ${pics[sel.id] || splitBuiltin(sel.id) ? `<div class="row" style="justify-content:center"><label class="btn sm ghost" style="cursor:pointer">${I('camera')} ${pics[sel.id] ? 'Change' : 'Use my own'} picture<input type="file" accept="image/*" hidden data-chg="split-pic" data-id="${sel.id}"></label>${pics[sel.id] ? `<button class="btn sm ghost" data-act="split-pic-del" data-id="${sel.id}">${I('trash')} ${splitBuiltin(sel.id) ? 'Use original' : 'Remove'}</button>` : ''}</div>` : ''}</div>
       <div class="card split-ex"><div class="between"><div><span class="eyebrow" style="color:var(--sc)">Day ${sel.n}</span><h3 style="margin:2px 0 0;font-size:1.5rem">${esc(sel.name)}</h3><div class="small muted">${w.exercises.length} exercises · 3 × 10-12 · about ${estimateDuration(w)} min</div></div>
         ${doneToday ? `<span class="chip good">${I('check')} Done today</span>` : chosen ? `<span class="chip accent">Today's pick</span>` : ''}</div>
         ${lim.length ? `<div class="note warn" style="margin-top:10px">${I('info')}<div class="small">You've marked areas to protect. Go light and pain-free on ${esc(lim.map(x => x.name).join(', '))}, or tap an exercise to see alternatives.</div></div>` : ''}
@@ -3969,7 +3972,7 @@ function splitView(){
 ACTIONS['split-sel'] = el => { sub.splitSel = el.dataset.id; render(); };
 ACTIONS['split-pick'] = el => { saveDaily(isoDate(), { split: el.dataset.id || null }); toast(el.dataset.id ? `Day ${splitDay(el.dataset.id).n} picked for today` : 'Unpicked'); render(); };
 ACTIONS['split-view'] = async el => {
-  const d = splitDay(el.dataset.id); const src = await Store.getPhoto(SPLIT_PIC(d.id)); if (!src) return;
+  const d = splitDay(el.dataset.id); const src = (splitPics()[d.id] && await Store.getPhoto(SPLIT_PIC(d.id))) || splitBuiltin(d.id); if (!src) return;
   openSheet(`<div class="stack"><h2>Day ${d.n} · ${esc(d.name)}</h2><img class="split-full" src="${src}" alt="Day ${d.n} exercise guide"><button class="btn" data-act="close-sheet">Close</button></div>`);
 };
 CHANGES['split-pic'] = el => {
@@ -3986,7 +3989,7 @@ CHANGES['split-pic'] = el => {
     img.onerror = () => toast('That image couldn\'t be read'); img.src = rd.result; };
   rd.readAsDataURL(file);
 };
-ACTIONS['split-pic-del'] = el => confirmSheet('Remove this picture?', 'Only the picture is removed. The workout stays.', 'Remove', async () => { await Store.delPhoto(SPLIT_PIC(el.dataset.id)); const p = { ...splitPics() }; delete p[el.dataset.id]; saveDoc('splitpics', p); render(); });
+ACTIONS['split-pic-del'] = el => confirmSheet(splitBuiltin(el.dataset.id) ? 'Go back to the original picture?' : 'Remove this picture?', 'Your own picture is removed. The workout stays.', splitBuiltin(el.dataset.id) ? 'Use original' : 'Remove', async () => { await Store.delPhoto(SPLIT_PIC(el.dataset.id)); const p = { ...splitPics() }; delete p[el.dataset.id]; saveDoc('splitpics', p); render(); });
 CHANGES['split-plan'] = el => {
   const on = el.checked; el.checked = !on;
   if (on) confirmSheet('Use the 5-Day Split as your plan?', 'Your schedule follows Day 1 to Day 5 in order on 5 training days a week. Your workout history stays exactly as it is, and your current plan is kept so you can switch back any time.', 'Use the split', () => { saveDoc('plan', splitPlan(S.plan, S.profile)); toast('5-Day Split is now your plan'); render(); });
@@ -4541,7 +4544,7 @@ function legalView(which){
   window.addEventListener('pagehide', () => Store.flush());
 })();
 </script><script>
-window.DRUKFIT_VERSION = "d1798c91fd";
+window.DRUKFIT_VERSION = "0e5f81e9b1";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
