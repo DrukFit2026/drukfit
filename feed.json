@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-24T20:08:01Z",
- "checked": "2026-10-24T20:08:01Z",
+ "generated": "2026-10-25T08:14:58Z",
+ "checked": "2026-10-25T08:14:58Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,9 +11,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 5,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-technique": {
    "name": "Europe PMC",
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,9 +55,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 5,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-tech": {
    "name": "Europe PMC",
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-24T08:16:42Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,7 +97,7 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-24T20:08:01Z",
+   "last_success": "2026-10-25T08:14:58Z",
    "last_found": 6,
    "last_added": 0,
    "last_error": "OSError: HTTP 503",
@@ -244,6 +244,62 @@
    "open_access": false,
    "imported": "2026-10-19",
    "link_checked": "2026-10-19",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3389-fnut-2026-1936660",
+   "kind": "research",
+   "category": "strength",
+   "title": "Optimizing health outcomes for older adults with sarcopenic obesity: a scoping review of nutrition, exercise and combined interventions",
+   "source": "Frontiers in nutrition",
+   "source_title": "Optimizing health outcomes for older adults with sarcopenic obesity: a scoping review of nutrition, exercise and combined interventions",
+   "via": "Europe PMC",
+   "authors": "Li Z, Wang J, Han X, Tian Y, Zhu X, Li Y, Liu L, Xu Y.",
+   "study_type": "systematic review",
+   "participants": null,
+   "url": "https://doi.org/10.3389/fnut.2026.1936660",
+   "record_url": "https://europepmc.org/article/MED/42909333",
+   "doi": "10.3389/fnut.2026.1936660",
+   "pmid": "42909333",
+   "published": "2026-10-07",
+   "summary": "Systematic review, published in Frontiers in nutrition in October 2026. The study's title: \"Optimizing health outcomes for older adults with sarcopenic obesity: a scoping review of nutrition, exercise and combined interventions.\" Read the source for its methods and full results.",
+   "quote": "This review systematically organized the classification of intervention measures and the distribution of outcome measures in studies on nutrition, exercise, and combined interventions for SO older adults, revealing the fragmented state of this field characterized by diverse intervention protocols and…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Research like this shapes how training plans balance load, sets and reps.",
+   "open_access": true,
+   "imported": "2026-10-25",
+   "link_checked": "2026-10-25",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3389-fphys-2026-1893020",
+   "kind": "research",
+   "category": "research",
+   "title": "Effects of different velocity loss thresholds during resistance training on jump and sprint performance in trained populations: a systematic review and three-level meta-analysis",
+   "source": "Frontiers in physiology",
+   "source_title": "Effects of different velocity loss thresholds during resistance training on jump and sprint performance in trained populations: a systematic review and three-level meta-analysis",
+   "via": "Europe PMC",
+   "authors": "Zhang J, Zhang S, Cui Y, Huang Y, Dan Y, Wu X, Ye X, Zeng H, Wu B, Yin M.",
+   "study_type": "systematic review",
+   "participants": null,
+   "url": "https://doi.org/10.3389/fphys.2026.1893020",
+   "record_url": "https://europepmc.org/article/MED/42903080",
+   "doi": "10.3389/fphys.2026.1893020",
+   "pmid": "42903080",
+   "published": "2026-10-06",
+   "summary": "Systematic review, published in Frontiers in physiology in October 2026. The study's title: \"Effects of different velocity loss thresholds during resistance training on jump and sprint performance in trained populations: a systematic review and three-level meta-analysis.\" Read the source for its methods and full results.",
+   "quote": "Lower VL thresholds may confer small favorable effects on jump and sprint performance in trained populations, with clearer evidence for countermovement jump and selected sprint outcomes. However, the effects were not consistent across all outcomes, and the certainty of evidence…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "New training research is how coaching advice gets refined over time.",
+   "open_access": true,
+   "imported": "2026-10-25",
+   "link_checked": "2026-10-25",
    "status": "auto-checked"
   },
   {
@@ -1539,6 +1595,31 @@
  ],
  "log": [
   {
+   "at": "2026-10-25T08:14:58Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 1 new",
+    "epmc-technique": "ok: 5 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 1 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 2,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
+    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
+   ]
+  },
+  {
    "at": "2026-10-24T20:08:01Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 0 new",
@@ -2236,30 +2317,6 @@
   },
   {
    "at": "2026-10-13T05:15:14Z",
-   "sources": {
-    "epmc-strength": "ok: 5 found, 5 new",
-    "epmc-technique": "ok: 5 found, 5 new",
-    "epmc-nutrition": "ok: 6 found, 5 new",
-    "epmc-recovery": "ok: 6 found, 6 new",
-    "epmc-research": "ok: 5 found, 4 new",
-    "epmc-tech": "ok: 3 found, 3 new",
-    "epmc-motivation": "ok: 4 found, 4 new",
-    "nih-newsinhealth": "ok: 1 found, 1 new"
-   },
-   "added": 33,
-   "notes": [
-    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
-    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
-    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
-    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
-    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
-    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
-   ]
-  },
-  {
-   "at": "2026-10-13T05:13:27Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 5 new",
     "epmc-technique": "ok: 5 found, 5 new",
