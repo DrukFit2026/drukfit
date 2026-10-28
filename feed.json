@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-27T20:24:11Z",
- "checked": "2026-10-27T20:24:11Z",
+ "generated": "2026-10-28T08:36:46Z",
+ "checked": "2026-10-28T08:36:46Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,7 +55,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,9 +97,9 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-27T20:24:11Z",
+   "last_success": "2026-10-28T08:36:46Z",
    "last_found": 6,
-   "last_added": 0,
+   "last_added": 1,
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-27T08:29:38Z"
   }
@@ -131,6 +131,34 @@
    "open_access": false,
    "imported": "2026-10-21",
    "link_checked": "2026-10-21",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3390-life16101719",
+   "kind": "research",
+   "category": "archery",
+   "title": "The Relationship Between Sleep Quality and Shooting Accuracy in Female Archers: A Cross-Sectional Study",
+   "source": "Life (Basel, Switzerland)",
+   "source_title": "The Relationship Between Sleep Quality and Shooting Accuracy in Female Archers: A Cross-Sectional Study",
+   "via": "Europe PMC",
+   "authors": "Daiyrova A, Demirhan B, Abdyrakhmanova D, Genç A, Asim ZY, Rakhymzhanov A, Tunç AÇ.",
+   "study_type": "observational study",
+   "participants": null,
+   "url": "https://doi.org/10.3390/life16101719",
+   "record_url": "https://europepmc.org/article/MED/42942305",
+   "doi": "10.3390/life16101719",
+   "pmid": "42942305",
+   "published": "2026-10-14",
+   "summary": "Observational study, published in Life (Basel, Switzerland) in October 2026. The study's title: \"The Relationship Between Sleep Quality and Shooting Accuracy in Female Archers: A Cross-Sectional Study.\" Read the source for its methods and full results.",
+   "quote": "Given the small sample size and the wide confidence intervals, larger prospective studies incorporating objective and session-specific sleep measures are needed to clarify the relationship between sleep quality and precision performance in archery.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect."
+   ],
+   "why": "Strong, balanced shoulders and upper back support a steady draw, end after end.",
+   "open_access": false,
+   "imported": "2026-10-28",
+   "link_checked": "2026-10-28",
    "status": "auto-checked"
   },
   {
@@ -1623,6 +1651,30 @@
  ],
  "log": [
   {
+   "at": "2026-10-28T08:36:46Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 5 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 5 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 1 new"
+   },
+   "added": 1,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh"
+   ]
+  },
+  {
    "at": "2026-10-27T20:24:11Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 0 new",
@@ -2326,34 +2378,6 @@
     "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
     "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
     "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P"
-   ]
-  },
-  {
-   "at": "2026-10-14T02:40:05Z",
-   "sources": {
-    "epmc-strength": "ok: 5 found, 5 new",
-    "epmc-technique": "ok: 5 found, 5 new",
-    "epmc-nutrition": "ok: 6 found, 6 new",
-    "epmc-recovery": "ok: 6 found, 6 new",
-    "epmc-research": "ok: 5 found, 4 new",
-    "epmc-tech": "ok: 3 found, 3 new",
-    "epmc-motivation": "ok: 3 found, 3 new",
-    "nih-newsinhealth": "ok: 1 found, 1 new",
-    "epmc-archery": "ok: 1 found, 1 new"
-   },
-   "added": 34,
-   "notes": [
-    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
-    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
-    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
-    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
-    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
-    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
-    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P",
-    "epmc-archery: skipped clinical or off-topic study: Impact of cannabidiol on myocardial recovery in patients with acute my",
-    "epmc-archery: skipped clinical or off-topic study: Efficacy in patients with EGFR -positive non-small-cell lung cancer tr"
    ]
   }
  ],
