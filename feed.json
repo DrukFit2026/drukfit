@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-30T08:40:34Z",
- "checked": "2026-10-30T08:40:34Z",
+ "generated": "2026-10-30T20:24:20Z",
+ "checked": "2026-10-30T20:24:20Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -33,7 +33,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,9 +55,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 5,
-   "last_added": 0
+   "last_added": 2
   },
   "epmc-tech": {
    "name": "Europe PMC",
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,7 +77,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,7 +97,7 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-30T08:40:34Z",
+   "last_success": "2026-10-30T20:24:20Z",
    "last_found": 6,
    "last_added": 0,
    "last_error": "OSError: HTTP 503",
@@ -105,6 +105,34 @@
   }
  },
  "items": [
+  {
+   "id": "doi-10-3390-sports14100464",
+   "kind": "research",
+   "category": "research",
+   "title": "Power Training Methods Across the Load-Velocity Continuum: Mechanisms, Applications, and Periodization",
+   "source": "Sports (Basel, Switzerland)",
+   "source_title": "Power Training Methods Across the Load-Velocity Continuum: Mechanisms, Applications, and Periodization",
+   "via": "Europe PMC",
+   "authors": "Pinto M, Crisóstomo J, Silva R, Kirk C, Abián-Vicén J, Monteiro L.",
+   "study_type": "review",
+   "participants": null,
+   "url": "https://doi.org/10.3390/sports14100464",
+   "record_url": "https://europepmc.org/article/MED/42931601",
+   "doi": "10.3390/sports14100464",
+   "pmid": "42931601",
+   "published": "2026-10-20",
+   "summary": "Review, published in Sports (Basel, Switzerland) in October 2026. The study's title: \"Power Training Methods Across the Load-Velocity Continuum: Mechanisms, Applications, and Periodization.\" Read the source for its methods and full results.",
+   "quote": "Overall, the evidence supports integrating complementary resistance training methods within a periodized program tailored to the athlete's training status, sport-specific demands, and competitive calendar to maximize power development.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "New training research is how coaching advice gets refined over time.",
+   "open_access": true,
+   "imported": "2026-10-30",
+   "link_checked": "2026-10-30",
+   "status": "auto-checked"
+  },
   {
    "id": "doi-10-1093-bioinformatics-btag783",
    "kind": "research",
@@ -440,6 +468,34 @@
    "open_access": true,
    "imported": "2026-10-22",
    "link_checked": "2026-10-22",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3390-sports14100422",
+   "kind": "research",
+   "category": "research",
+   "title": "Considerations for Swimmers with Type 1 Diabetes: A Narrative Review",
+   "source": "Sports (Basel, Switzerland)",
+   "source_title": "Considerations for Swimmers with Type 1 Diabetes: A Narrative Review",
+   "via": "Europe PMC",
+   "authors": "Djuranovic A, Higl S, Cirkovic Higl T, Antic M, Korolija Mrdjanov G, Batinic D, Maletic M, Ristic J, Jakovljevic V.",
+   "study_type": "review",
+   "participants": null,
+   "url": "https://doi.org/10.3390/sports14100422",
+   "record_url": "https://europepmc.org/article/MED/42931559",
+   "doi": "10.3390/sports14100422",
+   "pmid": "42931559",
+   "published": "2026-10-01",
+   "summary": "Review, published in Sports (Basel, Switzerland) in October 2026. The study's title: \"Considerations for Swimmers with Type 1 Diabetes: A Narrative Review.\" Read the source for its methods and full results.",
+   "quote": "Swimmers and their team members should be aware of the specific considerations for T1D in swimming for safe sports participation, as presented in this review.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "New training research is how coaching advice gets refined over time.",
+   "open_access": true,
+   "imported": "2026-10-30",
+   "link_checked": "2026-10-30",
    "status": "auto-checked"
   },
   {
@@ -1679,6 +1735,31 @@
  ],
  "log": [
   {
+   "at": "2026-10-30T20:24:20Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 4 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 2 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 5 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 2,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-technique: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh"
+   ]
+  },
+  {
    "at": "2026-10-30T08:40:34Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 0 new",
@@ -2343,32 +2424,6 @@
   },
   {
    "at": "2026-10-16T08:19:09Z",
-   "sources": {
-    "epmc-strength": "ok: 5 found, 0 new",
-    "epmc-technique": "ok: 5 found, 0 new",
-    "epmc-nutrition": "ok: 6 found, 0 new",
-    "epmc-recovery": "ok: 6 found, 0 new",
-    "epmc-research": "ok: 5 found, 0 new",
-    "epmc-tech": "ok: 3 found, 0 new",
-    "epmc-motivation": "ok: 3 found, 0 new",
-    "nih-newsinhealth": "ok: 1 found, 0 new",
-    "epmc-archery": "ok: 6 found, 1 new"
-   },
-   "added": 1,
-   "notes": [
-    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
-    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
-    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
-    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
-    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
-    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
-    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P"
-   ]
-  },
-  {
-   "at": "2026-10-15T20:14:44Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 0 new",
     "epmc-technique": "ok: 5 found, 0 new",
