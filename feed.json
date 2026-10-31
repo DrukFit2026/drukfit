@@ -1,7 +1,7 @@
 {
  "version": 7,
- "generated": "2026-10-30T20:24:20Z",
- "checked": "2026-10-30T20:24:20Z",
+ "generated": "2026-10-31T08:31:40Z",
+ "checked": "2026-10-31T08:31:40Z",
  "last_run_ok": true,
  "sources": {
   "epmc-strength": {
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -33,9 +33,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 6,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-recovery": {
    "name": "Europe PMC",
@@ -44,7 +44,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -55,9 +55,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 5,
-   "last_added": 2
+   "last_added": 0
   },
   "epmc-tech": {
    "name": "Europe PMC",
@@ -66,7 +66,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -77,9 +77,9 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-10-30T20:24:20Z",
-   "last_found": 5,
-   "last_added": 0
+   "last_success": "2026-10-31T08:31:40Z",
+   "last_found": 4,
+   "last_added": 1
   },
   "nih-newsinhealth": {
    "name": "NIH News in Health",
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -97,7 +97,7 @@
    "category": "archery",
    "enabled": true,
    "status": "ok",
-   "last_success": "2026-10-30T20:24:20Z",
+   "last_success": "2026-10-31T08:31:40Z",
    "last_found": 6,
    "last_added": 0,
    "last_error": "OSError: HTTP 503",
@@ -105,6 +105,35 @@
   }
  },
  "items": [
+  {
+   "id": "doi-10-1080-15502783-2026-2752317",
+   "kind": "research",
+   "category": "nutrition",
+   "title": "Is plant-based protein supplementation as effective as whey protein? A systematic review and meta-analysis in untrained adults undergoing resistance training",
+   "source": "Journal of the International Society of Sports Nutrition",
+   "source_title": "Is plant-based protein supplementation as effective as whey protein? A systematic review and meta-analysis in untrained adults undergoing resistance training",
+   "via": "Europe PMC",
+   "authors": "Callegari IOM, Silva GM, Oliveira AG.",
+   "study_type": "meta-analysis",
+   "participants": null,
+   "url": "https://doi.org/10.1080/15502783.2026.2752317",
+   "record_url": "https://europepmc.org/article/MED/42954267",
+   "doi": "10.1080/15502783.2026.2752317",
+   "pmid": "42954267",
+   "published": "2026-10-29",
+   "summary": "Meta-analysis, published in Journal of the International Society of Sports Nutrition in October 2026. The study's title: \"Is plant-based protein supplementation as effective as whey protein? A systematic review and meta-analysis in untrained adults undergoing resistance training.\" Read the source for its methods and full results.",
+   "quote": "Thus, soy- and pea-based protein supplements may support favorable body composition changes in adults initiating RT and could be considered practical nutritional options for individuals seeking alternatives to whey protein. Regarding chia-based protein, the available evidence is currently limited to…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "What and how much you eat changes how well you adapt to training.",
+   "open_access": false,
+   "imported": "2026-10-31",
+   "link_checked": "2026-10-31",
+   "status": "auto-checked"
+  },
   {
    "id": "doi-10-3390-sports14100464",
    "kind": "research",
@@ -187,6 +216,34 @@
    "open_access": false,
    "imported": "2026-10-28",
    "link_checked": "2026-10-28",
+   "status": "auto-checked"
+  },
+  {
+   "id": "doi-10-3389-fpubh-2026-1960282",
+   "kind": "research",
+   "category": "motivation",
+   "title": "Effects of exercise snacks combining resistance training and Wuqinxi on older adults with possible sarcopenia in nursing homes: protocol for a randomized controlled trial",
+   "source": "Frontiers in public health",
+   "source_title": "Effects of exercise snacks combining resistance training and Wuqinxi on older adults with possible sarcopenia in nursing homes: protocol for a randomized controlled trial",
+   "via": "Europe PMC",
+   "authors": "Wang J, Ji T, Dong X, Shao X, Zhang Y, Wang Y, Zhang X.",
+   "study_type": "randomised controlled trial",
+   "participants": null,
+   "url": "https://doi.org/10.3389/fpubh.2026.1960282",
+   "record_url": "https://europepmc.org/article/MED/42952831",
+   "doi": "10.3389/fpubh.2026.1960282",
+   "pmid": "42952831",
+   "published": "2026-10-14",
+   "summary": "Randomised controlled trial, published in Frontiers in public health in October 2026. The study's title: \"Effects of exercise snacks combining resistance training and Wuqinxi on older adults with possible sarcopenia in nursing homes: protocol for a randomized controlled trial.\" Read the source for its methods and full results.",
+   "quote": "This trial will provide evidence regarding the feasibility, safety and effectiveness of a Fogg Behaviour Model-based exercise-snack intervention for improving physical function among older adults with possible sarcopenia in nursing homes.",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Preliminary or pilot findings: needs confirming in larger studies."
+   ],
+   "why": "Staying consistent for months matters more than any single workout.",
+   "open_access": true,
+   "imported": "2026-10-31",
+   "link_checked": "2026-10-31",
    "status": "auto-checked"
   },
   {
@@ -1735,6 +1792,32 @@
  ],
  "log": [
   {
+   "at": "2026-10-31T08:31:40Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 4 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 1 new",
+    "epmc-recovery": "ok: 6 found, 0 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 1 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 2,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-technique: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: The influence of outcome expectations on adherence to exercise in adul",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh"
+   ]
+  },
+  {
    "at": "2026-10-30T20:24:20Z",
    "sources": {
     "epmc-strength": "ok: 5 found, 0 new",
@@ -2420,32 +2503,6 @@
     "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
     "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
     "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa"
-   ]
-  },
-  {
-   "at": "2026-10-16T08:19:09Z",
-   "sources": {
-    "epmc-strength": "ok: 5 found, 0 new",
-    "epmc-technique": "ok: 5 found, 0 new",
-    "epmc-nutrition": "ok: 6 found, 0 new",
-    "epmc-recovery": "ok: 6 found, 0 new",
-    "epmc-research": "ok: 5 found, 0 new",
-    "epmc-tech": "ok: 3 found, 0 new",
-    "epmc-motivation": "ok: 3 found, 0 new",
-    "nih-newsinhealth": "ok: 1 found, 0 new",
-    "epmc-archery": "ok: 6 found, 1 new"
-   },
-   "added": 1,
-   "notes": [
-    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
-    "epmc-technique: skipped clinical or off-topic study: Does postoperative exercise after hip arthroplasty improve strength an",
-    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
-    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
-    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh",
-    "epmc-motivation: skipped clinical or off-topic study: Facilitators, barriers, and interventions for exercise adherence in pa",
-    "epmc-motivation: skipped clinical or off-topic study: Effectiveness of Telerehabilitation for Chronic Nonspecific Low Back P"
    ]
   }
  ],
