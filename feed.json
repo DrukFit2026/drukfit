@@ -1,8 +1,8 @@
 {
  "version": 7,
- "generated": "2026-11-05T08:47:24Z",
- "checked": "2026-11-05T08:47:24Z",
- "last_run_ok": false,
+ "generated": "2026-11-05T20:33:54Z",
+ "checked": "2026-11-05T20:33:54Z",
+ "last_run_ok": true,
  "sources": {
   "epmc-strength": {
    "name": "Europe PMC",
@@ -11,7 +11,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-11-05T08:47:24Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -22,7 +22,7 @@
    "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-10-28T20:26:34Z",
-   "last_success": "2026-11-05T08:47:24Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -30,10 +30,10 @@
    "name": "Europe PMC",
    "category": "nutrition",
    "enabled": true,
-   "status": "error",
+   "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-11-05T08:47:24Z",
-   "last_success": "2026-11-04T20:38:30Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 6,
    "last_added": 0
   },
@@ -41,21 +41,21 @@
    "name": "Europe PMC",
    "category": "recovery",
    "enabled": true,
-   "status": "error",
+   "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-11-05T08:47:24Z",
-   "last_success": "2026-11-04T20:38:30Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 6,
-   "last_added": 0
+   "last_added": 1
   },
   "epmc-research": {
    "name": "Europe PMC",
    "category": "research",
    "enabled": true,
-   "status": "error",
+   "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-11-05T08:47:24Z",
-   "last_success": "2026-11-04T20:38:30Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 5,
    "last_added": 0
   },
@@ -63,10 +63,10 @@
    "name": "Europe PMC",
    "category": "tech",
    "enabled": true,
-   "status": "error",
+   "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-11-05T08:47:24Z",
-   "last_success": "2026-11-04T20:38:30Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 3,
    "last_added": 0
   },
@@ -74,10 +74,10 @@
    "name": "Europe PMC",
    "category": "motivation",
    "enabled": true,
-   "status": "error",
+   "status": "ok",
    "last_error": "OSError: HTTP 503",
    "last_error_at": "2026-11-05T08:47:24Z",
-   "last_success": "2026-11-04T20:38:30Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 4,
    "last_added": 0
   },
@@ -88,7 +88,7 @@
    "status": "ok",
    "last_error": "OSError: first scheduled refresh has not run yet",
    "last_error_at": "2026-10-13T05:07:38Z",
-   "last_success": "2026-11-05T08:47:24Z",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 1,
    "last_added": 0
   },
@@ -96,8 +96,8 @@
    "name": "Europe PMC",
    "category": "archery",
    "enabled": true,
-   "status": "error",
-   "last_success": "2026-11-04T20:38:30Z",
+   "status": "ok",
+   "last_success": "2026-11-05T20:33:54Z",
    "last_found": 6,
    "last_added": 0,
    "last_error": "OSError: HTTP 503",
@@ -1162,6 +1162,35 @@
    "status": "auto-checked"
   },
   {
+   "id": "doi-10-3389-fnut-2026-1857527",
+   "kind": "research",
+   "category": "recovery",
+   "title": "Comparative effects of plant-derived anthocyanin- and flavanol-rich supplements on recovery outcomes after exercise-induced muscle damage: a systematic review and network meta-analysis",
+   "source": "Frontiers in nutrition",
+   "source_title": "Comparative effects of plant-derived anthocyanin- and flavanol-rich supplements on recovery outcomes after exercise-induced muscle damage: a systematic review and network meta-analysis",
+   "via": "Europe PMC",
+   "authors": "Xu KX, Chang J, Wu YJ, Chen HW, Zheng JW, Liu C.",
+   "study_type": "systematic review",
+   "participants": 595,
+   "url": "https://doi.org/10.3389/fnut.2026.1857527",
+   "record_url": "https://europepmc.org/article/MED/42666369",
+   "doi": "10.3389/fnut.2026.1857527",
+   "pmid": "42666369",
+   "published": "2026-08-14",
+   "summary": "Systematic review, published in Frontiers in nutrition in August 2026. The study's title: \"Comparative effects of plant-derived anthocyanin- and flavanol-rich supplements on recovery outcomes after exercise-induced muscle damage: a systematic review and network meta-analysis.\" Read the source for its methods and full results.",
+   "quote": "Plant-derived polyphenol supplements did not provide consistent benefits across all recovery outcomes after EIMD. Their main potential value appears to lie in reducing DOMS, with tart cherry showing the most consistent favorable pattern and pomegranate showing potential benefit. These supplements…",
+   "quote_from": "the study's abstract",
+   "limitations": [
+    "Shows an association, not proof of cause and effect.",
+    "Pools earlier studies: it is only as strong as the studies it includes."
+   ],
+   "why": "Recovery is when the adaptations from training actually happen.",
+   "open_access": true,
+   "imported": "2026-11-05",
+   "link_checked": "2026-11-05",
+   "status": "auto-checked"
+  },
+  {
    "id": "doi-10-3389-fnut-2026-1860234",
    "kind": "research",
    "category": "nutrition",
@@ -1837,6 +1866,32 @@
   }
  ],
  "log": [
+  {
+   "at": "2026-11-05T20:33:54Z",
+   "sources": {
+    "epmc-strength": "ok: 5 found, 0 new",
+    "epmc-technique": "ok: 4 found, 0 new",
+    "epmc-nutrition": "ok: 6 found, 0 new",
+    "epmc-recovery": "ok: 6 found, 1 new",
+    "epmc-research": "ok: 5 found, 0 new",
+    "epmc-tech": "ok: 3 found, 0 new",
+    "epmc-motivation": "ok: 4 found, 0 new",
+    "nih-newsinhealth": "ok: 1 found, 0 new",
+    "epmc-archery": "ok: 6 found, 0 new"
+   },
+   "added": 1,
+   "notes": [
+    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
+    "epmc-technique: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
+    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
+    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
+    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
+    "epmc-motivation: skipped clinical or off-topic study: The influence of outcome expectations on adherence to exercise in adul",
+    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh"
+   ]
+  },
   {
    "at": "2026-11-05T08:47:24Z",
    "sources": {
@@ -2523,30 +2578,6 @@
     "epmc-archery": "ok: 6 found, 0 new"
    },
    "added": 1,
-   "notes": [
-    "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
-    "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
-    "epmc-research: skipped clinical or off-topic study: Optimal exercise dose for resistance training to improve HbA1c levels ",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technologies for Risk Factor Management and Secondary P",
-    "epmc-tech: skipped clinical or off-topic study: Effects of Telerehabilitation With Exercise as the Core Component on P",
-    "epmc-tech: skipped clinical or off-topic study: Digital Health Technology for Improving Physical Function in Adults Wi",
-    "epmc-motivation: skipped clinical or off-topic study: Strategies to improve adherence to exercise-based phase II cardiac reh"
-   ]
-  },
-  {
-   "at": "2026-10-21T20:15:36Z",
-   "sources": {
-    "epmc-strength": "ok: 5 found, 0 new",
-    "epmc-technique": "ok: 5 found, 0 new",
-    "epmc-nutrition": "ok: 6 found, 0 new",
-    "epmc-recovery": "ok: 6 found, 0 new",
-    "epmc-research": "ok: 5 found, 0 new",
-    "epmc-tech": "ok: 3 found, 0 new",
-    "epmc-motivation": "ok: 5 found, 0 new",
-    "nih-newsinhealth": "ok: 1 found, 0 new",
-    "epmc-archery": "ok: 6 found, 0 new"
-   },
-   "added": 0,
    "notes": [
     "epmc-strength: skipped clinical or off-topic study: Effects of elastic-band resistance training on glycemic control, muscl",
     "epmc-technique: skipped clinical or off-topic study: Comparative effectiveness of non-surgical interventions and their comb",
